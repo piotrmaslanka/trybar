@@ -1,0 +1,1 @@
+from trybar.photo.models import Photo

@@ -1,0 +1,258 @@
+#inside {
+	position: relative;
+	display: block;
+	width: 980px;
+	height: auto;
+	overflow: auto;
+}
+
+#header_top {
+	position: relative;
+	margin-top: 25px;
+	display: block;
+	font-size: 14px;
+	color: #FFD100;
+	font-weight: bold;
+	border-bottom: 1px solid #4e3608;
+}
+
+.header {
+	display: block;
+	font-size: 14px;
+	color: #FFD100;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+	.header > a {
+		float: right;
+		font-size: 12px;
+		color: #a88905;
+		font-weight: normal;
+		text-decoration: none;
+	}
+
+	.header > a:hover {
+		color: #6f550b;
+		text-decoration: underline;
+	}
+	
+#my_acc {
+    float: left;
+	display: block;
+	margin-top: 20px;
+	padding: 10px;
+    width: 280px;
+    height: 230px;
+    background: url('../gfx/profil/my_acc_bg.png');
+}
+
+	#my_acc > #info {
+		display: block;
+		width: 280px;
+		height: auto;
+		overflow: auto;
+	}
+
+		#my_acc > #info > img {
+			float: left;
+			width: 128px;
+			height: 128px;
+			margin-right: 12px;
+		}
+
+		#my_acc > #info > #stats {
+			float: left;
+			width: 140px;
+			height: 140px;
+			font-size: 12px;
+			color: #EED100;
+		}
+		
+			#my_acc > #info > #stats  > div {
+				display: block;
+				width: auto;
+				height: 20px;
+				overflow: auto;
+			}
+				#my_acc > #info > #stats  > div > span {
+					float: right;
+				}
+				
+	#my_acc > #buttons {
+		display: block;
+		width: 280px;
+		height: auto;
+		overflow: auto;
+	}
+		
+	#my_acc > #buttons > img{
+		margin: 2px;
+		float: left;
+		cursor: pointer;
+	}
+	
+#target_acc {
+    float: left;
+	display: block;
+	margin-top: 20px;
+	margin-left: 65px;
+	padding: 20px;
+    width: 575px;
+    height: 172px;
+    background: url('../gfx/profil/target_acc_bg.png');
+}
+
+	#target_acc > #name {
+		float: left;
+		width: 95px;
+		height: 142px;
+	}
+	
+		#target_acc > #name > #big{
+			display: block;
+			font-weight: bold;
+			font-size: 14px;
+			color: #EED100;
+		}
+	
+		#target_acc > #name > #small{
+			display: block;
+			color: #650;
+			font-size: 12px;
+		}
+	
+	#target_acc > #details {
+		float: left;
+		display: block;
+		padding: 20px;
+		width: 278px;
+		height: 142px;
+		border-right:1px solid #523b09;
+		border-left: 1px solid #523b09;
+	}
+
+		#target_acc > #details > #info {
+			display: block;
+			width: 280px;
+			height: auto;
+			overflow: auto;
+		}
+
+			#target_acc > #details > #info > img {
+				float: left;
+				width: 128px;
+				height: 128px;
+				margin-right: 12px;
+			}
+
+			#target_acc > #details > #info > #stats {
+				float: left;
+				width: 140px;
+				height: 140px;
+				font-size: 12px;
+				color: #EED100;
+			}
+			
+				#target_acc > #details > #info > #stats  > div {
+					display: block;
+					width: auto;
+					height: 20px;
+					overflow: auto;
+				}
+					#target_acc > #details > #info > #stats  > div > span {
+						float: right;
+					}
+	#target_acc > #buttons {
+		float: left;
+		padding: 0 20px;
+		width: 120px;
+		height: auto;
+		overflow: auto;
+	}
+			
+	#target_acc > #buttons > img{
+		display: block;
+		width: 120px;
+		height: 23px;
+		margin: 2px auto;
+		cursor: pointer;
+	}
+	
+#shadow {
+	position: fixed;
+	visibility: hidden;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: url('../gfx/shadow.png');
+}
+
+#msg_box {
+	position: relative;
+	display: block;
+	padding: 20px;
+	width: 575px;
+	height: 459px;
+	margin: 150px auto;
+	background: url('../gfx/profil/msg_bg.png');
+}
+	
+	#msg_box > form > #inputs{
+		position: relative;
+		display: block;
+		font-size: 12px;
+		color: #EED100;
+	}
+	
+	#msg_box > form > #inputs > span{
+		position: relative;
+		display: block;
+		font-size: 14px;
+		color: #870;
+		text-align: center;
+		margin: 15px auto 0 auto;
+	}
+	
+	#msg_box > form > #inputs > .small_input {
+		position: relative;
+		display: block;
+		font-size: 12px;
+		color: #EED100;
+		width: 285px;
+		height: 34px;
+		margin: 2px auto;
+		background: url('../gfx/profil/pole_tekstowe_male.png');
+		border: none;
+		padding: 0;
+		text-align: center;
+	}
+	
+	#msg_box > form > #inputs > #msg_contents {
+		position: relative;
+		display: block;
+		font-size: 12px;
+		color: #EED100;
+		padding: 20px;
+		width: 530px;
+		height: 224px;
+		margin: 2px auto;
+		background: url('../gfx/profil/pole_tekstowe_duze.png');
+		border: none;
+	}
+	
+	#msg_box > #b_send{
+		display: block;
+		margin: 10px auto;
+		cursor: pointer;
+	}
+	
+	#msg_box > #cancel{
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 16px;
+		height: 16px;
+		cursor: pointer;
+	}

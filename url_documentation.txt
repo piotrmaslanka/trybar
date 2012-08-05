@@ -1,0 +1,62 @@
+Strona lokalu								-           /bar/ojou-sama/
+Formularz dodawania zdjęć do lokalu         -           /bar/ojou-sama/add_photo/
+Lista stałych bywalców                      -           /bar/ojou-sama/patrons/
+Galeri gości                                -           /bar/ojou-sama/guests/
+
+Strona imprezy                              -           /bar/ojou-sama/ostrzenie-mieczy/
+Formularz dodawania zdjęć do imprezy        -           /bar/ojou-sama/ostrzenie-mieczy/add_photo/
+Lista uczestników                           -           /bar/ojou-sama/ostrzenie-mieczy/partakers/
+
+Formularz dodawania lokalu                  -           /bar/add/
+
+Aktualności                                 -           /now/
+Lista lokali, w których użytkownik jest stałym bywalcem -   /profile/23/patron_in/
+Lista znajomych użytkownika                             -   /profile/23/familiars/
+Skrzynka odbiorcza                                      -   /profile/inbox/
+Formularz wysyłania wiadomości                          -   /profile/send/
+Lista dodanych przez użytkownika lokala                 -   /profile/bars/
+Formularz edycji profilu                                -   /profile/edit/
+Galeria użytkownika                                     -   /profile/gallery/
+Formularz dodawania zdjęć do galerii użytkownika        -   /profile/add_photo/
+Strona zarządzania lokalem                              -   /bar/ojou-sama/manage/
+
+Profil użytkownika                                      -   /profile/
+
+Strona newsa                                            -   /news/trybal-czysci-buty/
+Lista wszystkich newsów                                 -   /news/
+
+Formularz logowania się                                 -   /login/
+Formularz przypominania hasła                           -   /login/remind/
+
+Ranking użytkowników                                    -   /ranking/users/
+Ranking lokali                                          -   /ranking/bars/
+
+Formularz rejestracji                                   -   /login/register/
+Aktywacja konta                                         -   /login/register/activate/
+
+Strona główna                                           -   /
+
+Strona konkursu                                         -   /prizes/
+
+Strony opisu idei portalu "Czym jest Trybar?"           -   /what-is-trybar/
+
+Wyszukiwarka użytkowników                               -   /search/users/
+Wyszukiwarka lokali                                     -   /search/bars/
+
+Formularz kontaktowy                                    -   /contact-us/
+Regulamin                                               -   /regulations/
+
+
+
+Panel administracyjny                                   -   /admin/
+
+
+Panel zarządzania lokalami                              -   /admin/bars/
+Panel zarządzania imprezami                             -   /admin/events/
+Panel zarządzania nadużyciami                           -   /admin/abuse/
+Panel zarządzania nowo-dodanymi elementami na stronie   -   /admin/new_stuff/
+Panel zarządzania użytkownikami                         -   /admin/users/
+Panel zarządzania komentarzami                          -   /admin/comments/
+Panel zarządzania reklamami                             -   /admin/ads/
+Panel zarządzania nagrodami                             -   /admin/prizes/
+Panel zarządzania newsami                               -   /admin/news/

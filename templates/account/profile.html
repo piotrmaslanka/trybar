@@ -1,0 +1,71 @@
+# coding=UTF-8
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/profil.css">
+{% endblock %}
+
+{% block body %}
+<div style="inside">
+	<div id="my_acc">
+		<span class="header">MOJE KONTO<a href="#" onclick="my_acc_edit();">Edytuj profil >></a></span>
+		<div id="info">
+			<img src="/uploads/awatar.jpg" alt="awatar">
+			<div id="stats">
+				<div>Ranking: <span>{{ request.user.rank }}</span></div>
+				<div>Punkty: <span>{{ request.user.score }}</span></div>
+				<div>Stały bywalec: <span>0</span></div>
+				<div>Znajomi: <span>0</span></div>
+				<div>Poczta: <span>0</span></div>
+				<div>Lokale: <span>0</span></div>
+			</div>
+		</div>
+		<div id="buttons">
+			<img id="b_mygal" src="/media/gfx/profil/b_mygal.png" onmouseover='img_hover("b_mygal", "_h");' onmouseout='img_hover("b_mygal", "");'>
+			<img id="b_foto" src="/media/gfx/profil/b_foto.png" onmouseover='img_hover("b_foto", "_h");' onmouseout='img_hover("b_foto", "");'>
+			<img id="b_msg" src="/media/gfx/profil/b_msg.png" onmouseover='img_hover("b_msg", "_h");' onmouseout='img_hover("b_msg", "");' onclick='msg();'>
+			<img id="b_places" src="/media/gfx/profil/b_places.png" onmouseover='img_hover("b_places", "_h");' onmouseout='img_hover("b_places", "");'>
+		</div>
+	</div>
+	<div id="target_acc">
+		<div id="name">
+			<span id="big">Cudzes</span>
+			<span id="small">Cudzesowo</span>
+		</div>
+		<div id="details">
+			<div id="info">
+				<img src="gfx/profil/awatar.jpg" alt="awatar">
+				<div id="stats">
+					<div>Ranking: <span>1</span></div>
+					<div>Punkty: <span>100</span></div>
+					<div>Stały bywalec: <span>0</span></div>
+					<div>Znajomi: <span>0</span></div>
+					<div>Poczta: <span>0</span></div>
+					<div>Lokale: <span>0</span></div>
+				</div>
+			</div>
+		</div>
+		<div id="buttons">
+			<img id="b_gal" src="/media/gfx/profil/b_gal.png" onmouseover='img_hover("b_gal", "_h");' onmouseout='img_hover("b_gal", "");'>
+			<img id="b_msgto" src="/media/gfx/profil/b_msgto.png" onmouseover='img_hover("b_msgto", "_h");' onmouseout='img_hover("b_msgto", "");' onclick='msg_to("Yoozek");'>
+			<img id="b_del" src="/media/gfx/profil/b_del.png" onmouseover='img_hover("b_del", "_h");' onmouseout='img_hover("b_del", "");'>
+		</div>
+	</div>
+</div>
+<div id="shadow">
+	<div id="msg_box">
+		<img id="cancel" src="/media/gfx/profil/cancel.png" onmouseover='img_hover("cancel", "_h");' onmouseout='img_hover("cancel", "");' onclick='hide();'>
+		<form action="??" method="post" enctype="multipart/form-data">
+			<div id="inputs">
+				<span>Osoba, do której chcesz wysłać wiadomość:</span>
+				<input class="small_input" id="msg_target" type="text" name="target" value="">
+				<span>Temat:</span>
+				<input class="small_input" id="msg_topic" type="text" name="topic" value="">
+				<span>Treść:</span>
+				<textarea id="msg_contents" type="text" name="contents"></textarea>
+			</div>
+		</form>
+		<img id="b_send" src="gfx/profil/b_send.png" onmouseover='img_hover("b_send", "_h");' onmouseout='img_hover("b_send", "");'>
+	</div>
+</div>
+{% endblock %}

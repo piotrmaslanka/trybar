@@ -1,0 +1,113 @@
+#inside {
+	display: block;
+	width: 980px;
+	height: 1000px;
+	overflow: auto;
+	background: url('../gfx/index/decor.png') 240px 25px no-repeat;
+}
+
+.header {
+	display: block;
+	margin-left: 20px;
+	font-size: 14px;
+	color: #FFD100;
+	font-weight: bold;
+}
+	
+#searchbox {
+    position: relative;
+	margin: 85px 0 18px 0;
+    width: 523px;
+    height: 92px;
+    background: url('../gfx/index/searchbox.png');
+}
+
+	#searchbox input {
+		border: none;
+		padding: 0;
+		margin: 21px 0 0 72px;
+		width: 309px;
+		height: 26px;
+		background-color: transparent;
+		color: #ffd100;
+		font-size: 12px;
+	}
+
+	#searchbox div {
+		float: left;
+	}
+	
+	#searchbox img {
+		float: left;
+		margin: 25px 0 0 29px;
+	}
+
+#top_places {
+	position: relative;
+	margin: 13px 0 0 20px;
+	width: 406px;
+	height: auto;
+	overflow: hidden;
+}
+
+	#top_places > .elem {
+		display: block;
+		width: 406px;
+		height: 117px;
+	}
+	
+	#top_places > .elem > .numbers { float: left; width: 36px; height: 35px; }	
+	
+	#top_places > .elem > .el_img { 
+		float: left;
+		width: 142px;
+		height: 113px;
+		background: url('../gfx/index/topplaces_shade.png') bottom center no-repeat;
+	}
+	
+	#top_places > .elem > .el_img > img{ 
+		display: block;
+		width: 92px;
+		height: 92px;
+		margin: auto;
+		border: 1px solid #000;
+	}
+	
+		#top_places > .elem > .right { 
+			position: relative;
+		
+			float: right;
+			padding: 8px 5px 5px 10px;
+			width: 196px;			
+			height: 85px;
+			background: url('../gfx/index/topplaces_desc_bg.png');
+		}		
+			#top_places > .elem > .right > .title {
+				font-size: 14px;
+				margin-bottom: 5px;
+			}
+            #top_places > .elem > .right > .title > a {
+				color: #a88905;
+				font-weight: bold;
+                text-decoration: none;
+            }
+			#top_places > .elem > .right > .title > a:hover { text-decoration: underline; }
+			#top_places > .elem > .right > .text {
+				font-size: 11px;
+				color: #6f550b;
+			}
+			#top_places > .elem > .right > .text:hover { text-decoration: underline; }
+			#top_places > .elem > .right > .more {
+				position: absolute;
+				bottom: 5px;
+				right: 5px;
+				width: 22px;
+				height: 23px;
+				background: url('../gfx/index/button_rarrow.png');
+			}
+                #top_places > .elem > .right > .more > a {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+			#top_places > .elem > .right > .more:hover { background: url('../gfx/index/button_rarrow_p.png'); }

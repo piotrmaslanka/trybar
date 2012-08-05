@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/login.css">
+{% endblock %}
+
+{% block body %}
+<span id="header_top">LOGOWANIE</span>
+<div id="kontener">
+    <form action="/login/" method="post">
+    <table class="formtab">
+        {% for error in form.non_field_errors %}        {# error referring to the entire form #}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+
+
+        {% for error in form.login.errors %}            {# login-field errors #}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td class="label">Login<span class="star">*</span>:</td>
+            <td class="field">{{ form.login }}</td>
+            <td class="alert">{% if form.login.errors %}<div class="sign"></div>{% endif %}
+            </td>
+        </tr>
+
+        {% for error in form.password.errors %}             {# password-field errors #}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td class="label">Hasło<span class="star">*</span>:</td>
+            <td class="field">{{ form.password }}</td>
+            <td class="alert">{% if form.password.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td class="button">
+                <input type="submit" class="submit" value="">
+                <div class="forgot_password">
+                    <a href="#">Zapomniałem hasła</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    </form>
+    <div id="obrazek">
+        <img src="/media/gfx/login/decor.png">
+    </div>
+</div>
+
+{% endblock %}

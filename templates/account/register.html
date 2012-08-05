@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block head %}
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>  
+    <link rel="stylesheet" type="text/css" href="/media/css/register.css">
+{% endblock %}
+{% block body %}
+    <div id="form_box">
+    <div class="header">
+        REJESTRACJA
+    </div>
+    
+    <div class="infobox">
+        <div class="bold">
+            Rejestracja daje ci możliwość dodawania, komentowania i oceniania
+            barów. Możesz też zapraszać znajomych, wysyłać wiadomości, dodawać
+            zdjęcia z najlepszych imprez. Po rejestracji masz możliwość stworzenia
+            swojej listy życzeń. Wygraj nagrody na które masz ochotę
+        </div>
+        
+            <br><br>
+        
+            Pola oznaczone gwiazdką sa obowiązkowe. Uwaga: nie wprowadzenie 
+            imienia i nazwiska spowoduje, że Twoi znajomi bedą mieć problem
+            z odnalezieniem Twojego profilu w katalogu użytkowników. Mimo to,
+            pola te nie są obowiązkowe.
+    </div>
+    <form action="/login/register/" method="post">
+    <table class="formtab">
+        {% for error in form.non_field_errors %}        {# error referring to the entire form #}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Imię:</td>
+            <td class="field">{{ form.name }}</td>
+            <td class="alert">{% if form.name.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.name.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Nazwisko:</td>
+            <td class="field">{{ form.surname }}</td>
+            <td class="alert">{% if form.surname.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.surname.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">Login<span class="star">*</span>:</td>
+            <td class="field">{{ form.login }}</td>
+            <td class="alert">{% if form.login.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.login.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">Hasło<span class="star">*</span>:</td>
+            <td class="field">{{ form.password }}</td>
+            <td class="alert">{% if form.password.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.password.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">Powtórz hasło<span class="star">*</span>:</td>
+            <td class="field">{{ form.password2 }}</td>
+            <td class="alert">{% if form.password2.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.password2.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">Miejscowość<span class="star">*</span>:</td>
+            <td class="field">{{ form.city }}</td>
+            <td class="alert">{% if form.city.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.city.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">Województwo<span class="star">*</span>:</td>
+            <td class="field">{{ form.voivodeship }}</td>
+            <td class="alert">{% if form.voivodeship.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.voivodeship.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">E-mail<span class="star">*</span>:</td>
+            <td class="field">{{ form.email }}</td>
+            <td class="alert">{% if form.email.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.email.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">Gadu-Gadu:</td>
+            <td class="field">{{ form.gadu }}</td>
+            <td class="alert">{% if form.gadu.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.gadu.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td class="label">Telefon:</td>
+            <td class="field">{{ form.phone }}</td>
+            <td class="alert">{% if form.phone.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>               
+        {% for error in form.phone.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td></td>
+            <td class="regu_k">
+                {{ form.regulamin }}
+                Akceptuję regulamin znajdujący się <a href="#">TUTAJ</a>
+            </td>
+        </tr>
+        {% for error in form.regulamin.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}        
+        <tr>
+            <td></td>
+            <td class="button">
+                <input type="submit" class="submit" value=""> <br><br>
+                Wypełnij wszystkie obowiązkowe pola
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $('.formtab input[type="text"]').focus(highlight_input);
+    $('.formtab input[type="text"]').blur(unhighlight_input);
+    $(function(){$(".selectbox").selectbox({width:278});});
+    </script>    
+</script>
+{% endblock %}

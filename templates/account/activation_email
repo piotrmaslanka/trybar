@@ -1,0 +1,14 @@
+Twoje konto {{ login }} zostało pomyślnie zarejestrowane na portalu Trybar. By je aktywować kliknij w poniższy link.
+
+http://127.0.0.1:8000/login/register/activate/?login={{ login }}&code={{ hash_code }}
+
+Następnie możesz się już zalogować.
+Twój login to: {{ login }}
+Twoje hasło to: {{ password }}
+
+Nie usuwaj tej wiadomości gdyż może Ci się przydać gdy zapomnisz swoich danych dostępu.
+
+Jeśli ta wiadomość Cię nie dotyczy to po prostu ją zignoruj.
+
+Pozdrawiamy
+Zespół Trybar

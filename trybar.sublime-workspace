@@ -1,0 +1,249 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"activat",
+				"activation_get_hash"
+			],
+			[
+				"render",
+				"render_to_string"
+			],
+			[
+				"mu",
+				"must_be_sysadmin"
+			],
+			[
+				"must",
+				"must_be_logged"
+			],
+			[
+				"re",
+				"render_to_response"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "# coding=UTF-8\n# Our own settings for trybar\n\nUPLOAD_ROOT = 'd:/projects/trybar/uploads/'     # needs to have trailing slash\nUPLOAD_PATH = '/uploads/'   # needs to have trailing slash\n\nMAIL_FROM = 'kontakt@trybar.pl'\nMAIL_FRIENDLY_FROM = 'Trybar'\nMAIL_USER = 'kontakt@trybar.pl'\nMAIL_PASS = 'maslana'\nMAIL_SERVER = 'mail.trybar.linuxpl.info'\nMAIL_PORT = 587\nit\n# Django settings for trybar project.\n\nDEBUG = True\nTEMPLATE_DEBUG = DEBUG\n\nADMINS = (\n    # ('Your Name', 'your_email@example.com'),\n)\n\nMANAGERS = ADMINS\n\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': 'trybar',             \n        'USER': 'postgres',                   \n        'PASSWORD': 'bohrok2405',             \n        'HOST': '',                \n        'PORT': '',                \n    }\n}\n\n\nTIME_ZONE = 'Europe/Warsaw'\nLANGUAGE_CODE = 'pl'\n\nSITE_ID = 1\n\nUSE_I18N = True\nUSE_L10N = True\n\n# Absolute filesystem path to the directory that will hold user-uploaded files.\n# Example: \"/home/media/media.lawrence.com/media/\"\nMEDIA_ROOT = ''\n\n# URL that handles the media served from MEDIA_ROOT. Make sure to use a\n# trailing slash.\n# Examples: \"http://media.lawrence.com/media/\", \"http://example.com/media/\"\nMEDIA_URL = ''\n\n# Absolute path to the directory static files should be collected to.\n# Don't put anything in this directory yourself; store your static files\n# in apps' \"static/\" subdirectories and in STATICFILES_DIRS.\n# Example: \"/home/media/media.lawrence.com/static/\"\nSTATIC_ROOT = 'd:/projects/trybar/media/'\n\n# URL prefix for static files.\n# Example: \"http://media.lawrence.com/static/\"\nSTATIC_URL = '/static/'\n\n# URL prefix for admin static files -- CSS, JavaScript and images.\n# Make sure to use a trailing slash.\n# Examples: \"http://foo.com/static/admin/\", \"/static/admin/\".\nADMIN_MEDIA_PREFIX = '/static/admin/'\n\n# Additional locations of static files\nSTATICFILES_DIRS = (\n    # Put strings here, like \"/home/html/static\" or \"C:/www/django/static\".\n    # Always use forward slashes, even on Windows.\n    # Don't forget to use absolute paths, not relative paths.\n)\n\n# List of finder classes that know how to find static files in\n# various locations.\nSTATICFILES_FINDERS = (\n    'django.contrib.staticfiles.finders.FileSystemFinder',\n    'django.contrib.staticfiles.finders.AppDirectoriesFinder',\n#    'django.contrib.staticfiles.finders.DefaultStorageFinder',\n)\n\n# Make this unique, and don't share it with anybody.\nSECRET_KEY = 'z-n4r*ee+x#xc(7y)0qi9vzmw4f&#pyf(f-lq)!8@$x549fer9'\n\n# List of callables that know how to import templates from various sources.\nTEMPLATE_LOADERS = (\n    'django.template.loaders.filesystem.Loader',\n    'django.template.loaders.app_directories.Loader',\n#     'django.template.loaders.eggs.Loader',\n)\n\nMIDDLEWARE_CLASSES = (\n    'django.middleware.common.CommonMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    #    'django.contrib.messages.middleware.MessageMiddleware',\n    'trybar.account.middleware.AuthenticationManagementMiddleware',\n)\n\nROOT_URLCONF = 'trybar.urls'\n\nTEMPLATE_DIRS = (\n    # Put strings here, like \"/home/html/django_templates\" or \"C:/www/django/templates\".\n    # Always use forward slashes, even on Windows.\n    # Don't forget to use absolute paths, not relative paths.\n    'D:/projects/trybar/templates/',\n)\n\nINSTALLED_APPS = (\n    'django.contrib.sessions',\n    'trybar.account',\n    'trybar.bar',\n    'trybar.photo'\n#    'django.contrib.messages',\n    # Uncomment the next line to enable the admin:\n    # 'django.contrib.admin',\n    # Uncomment the next line to enable admin documentation:\n    # 'django.contrib.admindocs',\n)\n\n# A sample logging configuration. The only tangible logging\n# performed by this configuration is to send an email to\n# the site admins on every HTTP 500 error.\n# See http://docs.djangoproject.com/en/dev/topics/logging for\n# more details on how to customize your logging configuration.\nLOGGING = {\n    'version': 1,\n    'disable_existing_loggers': False,\n    'handlers': {\n        'mail_admins': {\n            'level': 'ERROR',\n            'class': 'django.utils.log.AdminEmailHandler'\n        }\n    },\n    'loggers': {\n        'django.request': {\n            'handlers': ['mail_admins'],\n            'level': 'ERROR',\n            'propagate': True,\n        },\n    }\n}",
+			"file": "settings.py",
+			"file_size": 4458,
+			"file_write_time": 129883263061756599,
+			"settings":
+			{
+				"buffer_size": 4318,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/projects/trybar/account/register.py",
+		"/D/projects/trybar/account/models.py",
+		"/D/projects/trybar/urls.py",
+		"/D/projects/trybar/templates/account/activation_email",
+		"/D/projects/trybar/templates/account/register.html",
+		"/D/projects/trybar/settings.py",
+		"/D/projects/trybar/account/views.py",
+		"/D/projects/trybar/core/mail.py",
+		"/D/projects/trybar/media/js/form_highlighter.js",
+		"/D/projects/trybar/media/css/register.css",
+		"/D/projects/trybar/core/fixtures.py",
+		"/D/projects/trybar/account/scoring.py",
+		"/D/projects/trybar/templates/base.html",
+		"/D/projects/trybar/templates/account/login.html",
+		"/D/projects/trybar/templates/main/index.html",
+		"/D/projects/trybar/templates/account/profile.html",
+		"/D/projects/trybar/media/css/login.css",
+		"/D/projects/trybar/bar/models.py",
+		"/D/projects/trybar/cron/actions.py",
+		"/D/projects/trybar/bar/__init__.py",
+		"/D/projects/trybar/url_documentation.txt",
+		"/C/Users/Henrietta/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/D/projects/trybar/trybar.sublime-project",
+		"/D/projects/trybar/templates/account/index.html",
+		"/D/projects/trybar/photo/upload.py",
+		"/D/projects/trybar/core/__init__.py",
+		"/D/projects/trybar/photo/models.py",
+		"/D/projects/trybar/account/middleware.py",
+		"/D/projects/hydra/fwupdater.py",
+		"/D/projects/iga/matrix/mogs.py",
+		"/C/Users/Henrietta/Desktop/manual.txt",
+		"/D/projects/iga/kesequencer/netloops.py",
+		"/D/projects/iga/kesequencer/netbase.py",
+		"/D/projects/iga/kesequencer/protoobjs.py",
+		"/D/projects/iga/matrix/world.py",
+		"/D/projects/iga/kunoichi/__init__.py",
+		"/D/projects/iga/framedragger/framedragger.py",
+		"/D/projects/iga/kesequencer/sequencer.py",
+		"/D/projects/iga/kesequencer/keorders.py",
+		"/D/projects/hydra/overseas/sysadmin/make_setup.py",
+		"/D/projects/hydra/overseas/archive/draw.py",
+		"/D/projects/hydra/overseas/templates/sysadmin/index.html",
+		"/D/projects/hydra/overseas/sysadmin/kb.py",
+		"/D/projects/hydra/overseas/urls.py",
+		"/D/projects/hydra/overseas/templates/sysadmin/kb.html",
+		"/D/projects/hydra/overseas/templates/front/index.html",
+		"/D/projects/hydra/overseas/front/models.py",
+		"/D/projects/hydra/overseas/templates/sysadmin/kb_list.html",
+		"/D/projects/hydra/overseas/sysadmin/users.py",
+		"/D/projects/hydra/overseas/sysadmin/devices.py",
+		"/D/projects/hydra/semanta/parser/__init__.py"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"field",
+			"href",
+			"src",
+			"CachedBarOpts",
+			"/\n",
+			"pack"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "settings.py",
+					"settings":
+					{
+						"buffer_size": 4318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								164,
+								165
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 171.0,
+	"status_bar_visible": true
+}

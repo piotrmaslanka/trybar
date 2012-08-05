@@ -1,0 +1,170 @@
+html {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: Arial;
+	background: url('../gfx/background.png') center top no-repeat;
+    background-color: #140b04;
+}
+
+body {
+	display: block;
+    margin: 0 auto;
+    width: 980px;
+    min-height: 100%;
+	background: url('../gfx/background.png') center top no-repeat;
+}
+
+#menu_top1 {
+	float: right;
+	display: block;
+	width: 414px;
+	height: 82px;
+	overflow: hidden;
+	margin: 10px 30px 0 0;
+	line-height: 82px;
+	font-size: 13px;
+	color: #ffc300;
+	font-family: Arial;"
+}
+
+#before_lock {
+	float: left;
+	width: 254px;
+	height: 82px;
+	text-align: right;
+ }
+ 
+ .dark {
+	color: #8F6A03;
+ }
+ 
+#lock {
+	float: left;
+	width: 160px;
+	height: 82px;
+	background: url('../gfx/login_box.png') center top no-repeat;
+ }
+ 
+ #lock > a {
+	margin-left: 80px;
+ }
+ 
+ #unlock {
+	float: left;
+	width: 160px;
+	height: 82px;
+	background: url('../CHANGEME/unlock.png') center top no-repeat;
+ }
+ 
+ #unlock > a {
+	margin-left: 75px;
+ }
+ 
+#top {
+	display: block;
+	width: 980px;
+	height: auto;
+	overflow: hidden;
+}
+
+#banner {
+	display: block;
+	position: static;
+	width: 980px;
+	height: 100px;
+	background-color: green;
+	margin-top: 67px;
+}
+
+.links1:link, .links1:visited {
+	color: #FFC300;
+	text-decoration: none;
+}
+
+.links1:hover {
+	text-decoration: underline;
+}
+
+#bar_menu {
+	display: block;
+	float: left;
+	width: 750px;
+	height: 37px;
+	margin: 19px 25px 0 205px;
+}
+
+#bar_menu a:link, #bar_menu a:visited {
+	float: left;
+	width: 128px;
+	height: 37px;
+	line-height: 37px;
+	font-size: 14px;
+	text-align: center;
+	color: #FC0;
+	text-decoration: none;
+	text-shadow: 1px 1px 2px #000;
+}
+
+#bar_menu a:hover {
+	background: url('../gfx/button_tlo.png');
+}
+
+#footer {
+    padding-top: 25px;
+    background: url('../gfx/footer_shadow.png') top center no-repeat;
+    width: 980px;
+}
+    #footer > .left {
+        float: left;
+        color: #63460f;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    
+    #footer > .right {
+        float: right;
+        
+        font-size: 9px; 
+    }
+        #footer > .right > a {
+            color: #b48b09;
+            font-weight: bold;
+            text-decoration: none;
+            font-family: Arial;
+            font-size: 12px;
+        }
+        #footer > .right > a:hover { text-decoration: underline; }
+        
+    #footer > .mid {
+        margin-top: 40px;
+        font-size: 11px;
+        color: #61440f;
+    }
+    
+    #footer > .logotyp {
+        display: inline-block;      
+        margin-right: 10px;
+    }
+    
+    #logotyp_goblin {
+        width: 144px;
+        height: 57px;
+        background: url('../CHANGEME/logo1.png');
+    }
+    #logotyp_trenuje {
+        width: 145px;
+        height: 23px;
+        background: url('../CHANGEME/logo2.png');
+    }
+    #logotyp_miastogier {
+        width: 145px;
+        height: 87px;
+        background: url('../CHANGEME/logo3.png');        
+    }
+
+    #footer > .logotyp a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
