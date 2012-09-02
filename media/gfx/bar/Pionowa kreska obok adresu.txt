@@ -1,0 +1,4 @@
+Kolor: #462e0c
+Wysokoœæ: 43px
+Szerokoœæ: 1px
+Odleg³oœæ: 15px od adresu po prawej i 15px od <nazwa lokalu> po lewej

@@ -1,0 +1,48 @@
+#efbf00
+
+<nazwa lokalu>
+<nazwa imprezy>
+Œrednia ocena:
+Liczba g³osów:
+<nazwa u¿ytkownika>
+
+/Format: Pogrubiony
+
+Wiêcej>>
+<œrednia ocena>
+<liczba g³osów>
+
+---------------------------------
+
+#987407
+
+<adres lokalu>
+<data komentarza>
+
+---------------------------------
+
+#ffe400
+/Format: Pogrubiony
+
+FOTO
+IMPREZY
+INFORMACJE
+OPIS
+OCENY
+STALI BYWALCY
+GALERIA GOŒCI
+KOMENTARZE
+
+---------------------------------
+
+#fae281
+
+Ca³y tekst w boxe Informacje
+<opis lokalu>
+<nazwy poszczególnych ocen>
+<wybrane oceny>
+<treœæ komentarza>
+
+/Format: Pogrubiony
+
+<œrednia poszczególnych ocen>

@@ -1,0 +1,71 @@
+#recentbox {
+    width: 300px;
+}
+    #recentbox > .header {
+        width: 100%;
+        height: 30px;
+        background: url('/media/gfx/index/bg_header.png') bottom center no-repeat;
+    }
+        #recentbox > .header > .left {
+            color: #ffd100;
+            font-size: 14px;
+            font-weight: bold;
+            float: left;
+        }
+        #recentbox > .header > .right {        
+            float: right;
+        }
+            #recentbox > .header > .right > a {
+                display: block;
+                font-size: 11px;
+                color: #956e0f;
+                text-decoration: none;
+            }
+            #recentbox > .header > .right > a:hover { text-decoration: underline; }
+    #recentbox > .first {
+        width: 100%;
+        clear: both;
+        padding-top: 10px;
+        padding-bottom: 8px;
+        background: url('/media/gfx/index/recentbox_shade.png') bottom center no-repeat;        
+    }
+        #recentbox > .first > a.header {
+            display: block;
+            color: #ffd100;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+            #recentbox > .first > .header:hover { text-decoration: underline; }
+        #recentbox > .first > .content {
+            color: #a17a0a;
+            font-size: 13px;
+            padding-bottom: 10px;
+        }
+            #recentbox > .first > .content:hover { text-decoration: underline; }
+        #recentbox > .first > .datetime {
+            color: #a17a0a;
+            font-size: 9px;      
+            margin-bottom: 10px;          
+        }        
+    #recentbox > .elem {
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 8px;
+        background: url('/media/gfx/index/recentbox_shade.png') bottom center no-repeat;        
+    }
+        #recentbox > .elem > a.header {
+            display: block;
+            text-decoration: none;
+            color: #ffd100;
+            font-size: 14px;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+            #recentbox > .elem > .header:hover { text-decoration: underline; }
+        #recentbox > .elem > .datetime {
+            color: #a17a0a;
+            font-size: 9px;      
+            margin-bottom: 10px;
+        }        

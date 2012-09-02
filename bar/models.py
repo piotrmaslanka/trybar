@@ -4,17 +4,19 @@ from django.db import models
 from django.core.validators import MinLengthValidator, RegexValidator
 from datetime import datetime
 from collections import defaultdict
-from hashlib import sha1
 from trybar.account.models import Account
+from trybar.photo.models import Photo
+from trybar.photo.upload import upload_as, RES_BARPHOTO
 
 # To be... improved. RTFM, Piotruś :)
-BAR_OPEN_HOURS = (('00:00', '00:00'), ('00:30', '00:30'), ('01:00', '01:00'), ('01:30', '01:30'), ('02:00', '02:00'), 
-                                      ('02:30', '02:30'), ('03:00', '03:00'), ('03:30', '03:30'), ('04:00', '04:00'),
-                                      ('04:30', '04:30'), ('05:00', '05:00'), ('05:30', '05:30'), ('06:00', '06:00'),
-                                      ('06:30', '06:30'), ('07:00', '07:00'), ('07:30', '07:30'), ('08:00', '08:00'),
-                                      ('08:30', '08:30'), ('09:00', '09:00'), ('09:30', '09:30'), ('10:00', '10:00'),)
+BAR_OPEN_HOURS_FROM = (('00:00', '00:00'), ('00:30', '00:30'), ('01:00', '01:00'), ('01:30', '01:30'), ('02:00', '02:00'), 
+                       ('02:30', '02:30'), ('03:00', '03:00'), ('03:30', '03:30'), ('04:00', '04:00'),
+                       ('04:30', '04:30'), ('05:00', '05:00'), ('05:30', '05:30'), ('06:00', '06:00'),
+                       ('06:30', '06:30'), ('07:00', '07:00'), ('07:30', '07:30'), ('08:00', '08:00'),
+                       ('08:30', '08:30'), ('09:00', '09:00'), ('09:30', '09:30'), ('10:00', '10:00'),)
+BAR_OPEN_HOURS_TO = BAR_OPEN_HOURS_FROM
+
 class Bar(models.Model):
-    slugname = models.SlugField(verbose_name=u'Nazwa URL')
     frontpage_type_display = models.BooleanField(default=False, verbose_name=u'Adres bezpośrednio z /')
 
     name = models.CharField(max_length=40, verbose_name=u'Nazwa baru')
@@ -27,12 +29,14 @@ class Bar(models.Model):
     handicapped = models.NullBooleanField(default=None, verbose_name=u'Udogodnienia dla niepełnosprawnych')
     website = models.CharField(max_length=40, blank=True)
     
-    openhours_5_f = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS, verbose_name=u'Otwarcie Pn-Pt')
-    openhours_5_t = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS, verbose_name=u'Zamknięcie Pn-Pt')
-    openhours_sat_f = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS, verbose_name=u'Otwarcie Sob')
-    openhours_sat_t = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS, verbose_name=u'Zamknięcie Sob')
-    openhours_sun_f = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS, verbose_name=u'Otwarcie Nie')
-    openhours_sun_t = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS, verbose_name=u'Zamknięcie Nie')
+    openhours_5_f = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS_FROM, verbose_name=u'Otwarcie Pn-Pt')
+    openhours_5_t = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS_TO, verbose_name=u'Zamknięcie Pn-Pt')
+    openhours_sat_f = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS_FROM, verbose_name=u'Otwarcie Sob')
+    openhours_sat_t = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS_TO, verbose_name=u'Zamknięcie Sob')
+    is_closed_sat = models.NullBooleanField(verbose_name=u'Zamknięty w soboty', default=None)
+    openhours_sun_f = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS_FROM, verbose_name=u'Otwarcie Nie')
+    openhours_sun_t = models.CharField(max_length=5, blank=True, null=True, choices=BAR_OPEN_HOURS_TO, verbose_name=u'Zamknięcie Nie')
+    is_closed_sun = models.NullBooleanField(verbose_name=u'Zamknięty w niedziele', default=None)
     
     is_darts = models.BooleanField(verbose_name=u'Rzutki')
     is_games = models.BooleanField(verbose_name=u'Gry')
@@ -49,12 +53,24 @@ class Bar(models.Model):
         # not null if allowed to be displayed up front
     slugname_up_front = models.SlugField(verbose_name=u'Nazwa URL /', default=None, null=True)
 
+    logo = models.ForeignKey(Photo, default=None, null=True)
+
     def delete(self):
         self.marks.delete()         # Delete all marks
         self.metadata.delete()   # Delete metadata
         super(Bar, self).delete()   # Delete self
     
+    def get_representative_photo(self):
+        """Returns a Photo object or None"""
+        photos = self.photos.all()
+        if photos.count() == 0: return None
+        try:
+            return photos.get(representative=True).photo
+        except:
+            return photos[0].photo
+
 # Mark IDs, and meaning   
+BAR_MARKS_COUNT = 14
 # 0 Wystrój wnętrza
 # 1 Wystrój na zewnątrz
 # 2 Identyfikacja
@@ -74,32 +90,37 @@ class Bar(models.Model):
     
 class BarMeta(models.Model):    
     """This table contains data about a bar that will frequently change"""
-    bar = models.OneToOneField(Bar, parent_link='metadata')
+    bar = models.OneToOneField(Bar, related_name='meta')
     rank = models.IntegerField(verbose_name=u'Pozycja w rankingu', null=True)   # if null, bar won't be displayed in ranking    
     
     # Average marks
+    mark_count = models.IntegerField(default=0)
     avg = models.FloatField(default=None, null=True)        # average from avg_o*
-    avg_o0 = models.IntegerField(default=None, null=True)
-    avg_o1 = models.IntegerField(default=None, null=True)
-    avg_o2 = models.IntegerField(default=None, null=True)
-    avg_o3 = models.IntegerField(default=None, null=True)
-    avg_o4 = models.IntegerField(default=None, null=True)
-    avg_o5 = models.IntegerField(default=None, null=True)
-    avg_o6 = models.IntegerField(default=None, null=True)
-    avg_o7 = models.IntegerField(default=None, null=True)
-    avg_o8 = models.IntegerField(default=None, null=True)
-    avg_o9 = models.IntegerField(default=None, null=True)
-    avg_o10 = models.IntegerField(default=None, null=True)
-    avg_o11 = models.IntegerField(default=None, null=True)
-    avg_o12 = models.IntegerField(default=None, null=True)
-    avg_o13 = models.IntegerField(default=None, null=True)
+
+    avg_o0 = models.IntegerField(default=None, null=True)   # Wystrój wnętrza
+    avg_o1 = models.IntegerField(default=None, null=True)   # Wystrój na zewnątrz
+    avg_o2 = models.IntegerField(default=None, null=True)   # Identyfikacja
+    avg_o3 = models.IntegerField(default=None, null=True)   # Okolica
+    avg_o4 = models.IntegerField(default=None, null=True)   # Muzyka
+    avg_o5 = models.IntegerField(default=None, null=True)   # Ceny
+    avg_o6 = models.IntegerField(default=None, null=True)   # Lokalizacja
+    avg_o7 = models.IntegerField(default=None, null=True)   # Parking
+    avg_o8 = models.IntegerField(default=None, null=True)   # Bezpieczeństwo
+    avg_o9 = models.IntegerField(default=None, null=True)   # Personel
+    avg_o10 = models.IntegerField(default=None, null=True)  # Alkohol
+    avg_o11 = models.IntegerField(default=None, null=True)  # Jedzenie
+    avg_o12 = models.IntegerField(default=None, null=True)  # Czystość
+    avg_o13 = models.IntegerField(default=None, null=True)  # Tłok
     
     def regenerate_marks(self):
-        """Loads all marks for given bar and regenerates it's avg_o* fields. Saves this instance"""
-        indices = range(0, 14)      # indices for elements
+        """Loads all marks for given bar and regenerates it's avg_o* fields. Saves this instance.
+        USED ONLY BY CRON, AND VERY VERY POSSIBLE THAT IT WILL BE EVICTED REAL SOON"""
+        indices = range(0, BAR_MARKS_COUNT)      # indices for elements
         amounts = defaultdict(lambda: 0)   # dict (indice=>amount of occurences)
         sums = defaultdict(lambda: 0)   # dict (indice=>sum of marks)
 
+
+        self.mark_count = self.bar.marks.all().count()
         # Fill-in amounts and sums
         for mark in self.bar.marks.all():
             for index in indices:
@@ -130,11 +151,38 @@ class BarMeta(models.Model):
         # Save this instance
         self.save()
     
+    def recalculate_single_category(self, cat_id):
+        """Recalculates single category. CAN BE DEPRECATED/REMOVED/RECODED. Saves instance."""
+        marks = self.bar.marks.all().only('o'+str(cat_id))
+        vsum = 0
+        vcnt = 0
+        for vmark in [mark.__dict__['o'+str(cat_id)] for mark in marks]:
+            if vmark == None: continue
+            vsum += vmark
+            vcnt += 1
+        if vcnt == 0:        # TODO: remove on debug
+            self.__dict__['avg_o'+str(cat_id)] = None
+        else:
+            self.__dict__['avg_o'+str(cat_id)] = round(vsum/vcnt)
+            
+        vsum = 0
+        vcnt = 0
+        for mark in [self.__dict__['avg_o'+str(x)] for x in xrange(0, BAR_MARKS_COUNT)]:
+            if mark != None:
+                vsum += mark
+                vcnt += 1
+        if vcnt == 0:
+            self.avg = None
+        else:
+            self.avg = vsum/vcnt
+            
+        self.save()
+    
 class SingleBarMark(models.Model):
     """Contains a single set of marks, issued by given user to a given bar"""
 
     bar = models.ForeignKey(Bar, related_name='marks')
-    account = models.ForeignKey(Account, related_name='marks_issued')
+    account = models.ForeignKey(Account, related_name='bar_marks_issued')
     
     o0 = models.IntegerField(default=None, null=True)
     o1 = models.IntegerField(default=None, null=True)
@@ -150,3 +198,38 @@ class SingleBarMark(models.Model):
     o11 = models.IntegerField(default=None, null=True)
     o12 = models.IntegerField(default=None, null=True)
     o13 = models.IntegerField(default=None, null=True)
+
+class BarPhoto(models.Model):
+    bar = models.ForeignKey(Bar, related_name='photos')
+    photo = models.ForeignKey(Photo)
+
+    representative = models.BooleanField(default=False)
+
+    @staticmethod
+    def craft(ufo, bar):
+        """@type ufo: UploadedFileObject from a PictureField
+        @type bar: bound Bar instance"""
+        pic = upload_as(ufo, RES_BARPHOTO)
+        b = BarPhoto(bar=bar, photo=pic)
+        b.save()
+        return b
+        
+class BarFrequenter(models.Model):
+    bar = models.ForeignKey(Bar, related_name='frequenters')
+    account = models.ForeignKey(Account, related_name='frequenting_at')
+    since = models.DateTimeField(default=datetime.now)
+    
+class BarAbuse(models.Model):
+    bar = models.ForeignKey(Bar, related_name='abuses')
+    account = models.ForeignKey(Account, related_name='abuses_reported')
+    reported = models.DateTimeField(default=datetime.now)
+    description = models.TextField(blank=True)
+    
+class BarComment(models.Model):
+    bar = models.ForeignKey(Bar, related_name='comments')
+    account = models.ForeignKey(Account, related_name='bar_comments_made')
+    content = models.TextField()
+    made_on = models.DateTimeField(default=datetime.now)
+    
+    class Meta:
+        ordering = ['-made_on']

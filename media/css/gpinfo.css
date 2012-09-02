@@ -1,0 +1,30 @@
+#header_top {
+	position: relative;
+	margin-top: 25px;
+	margin-left: 25px;
+	display: block;
+	font-size: 12px;
+	color: #FFD100;
+	font-weight: bold;
+	height: 18px;
+	border-bottom: 1px solid #4e3608;
+}
+
+#pole {
+	display: block;
+	width: 605px;
+	height: 131px;
+	overflow: auto;
+	margin: 15px auto;
+	background: url("/media/gfx/gpinfo/tlo.png");
+	color: #DDA200;
+	text-align: center;
+	font-size: 12px;
+	padding: 5px;
+}
+
+#guzik {
+
+	display: block;
+	margin: 0 auto 200px auto;
+}

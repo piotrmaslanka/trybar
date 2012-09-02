@@ -1,0 +1,1 @@
+Separator i <adres lokalu> jest zawsze odsuniêty w prawo o 15px od <nazwa lokalu> bez wzglêdu na jego d³ugoœæ. W przypadku braku logo, po przekroczeniu 38 znaków d³ugoœci nazwy - nazwa sk³ada siê z dwóch linijek wyœrodkowanych w pionie. W przypadku istnienia logotypu po przekroczeniu 30 znaków d³ugoœci nazwy - nazwa sk³ada siê z dwóch linijek wyœrodkowanych w pionie.

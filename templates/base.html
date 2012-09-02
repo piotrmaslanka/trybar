@@ -9,24 +9,37 @@
 </head>
 <body>
 	<div id="top">
-        <div style="float: right; display: block; width: 414px; height: 82px; overflow: hidden; margin: 10px 30px 0 0; line-height: 82px; font-size: 13px; color: #ffc300; font-family: Arial;">
+        <div style="float: right; display: block; width: 414px; height: 82px; overflow: hidden; margin: 10px 30px 0 0; line-height: 82px; font-size: 13px; color: #ffc300;">
+
             <div style="float: left; width: 254px; height: 82px;">
-                <a class="links1" href="register.php">
-                    <span>Zarejestruj się,</span> <span style="color: #8F6A03;">jeśli nie masz jeszcze konta</span>
-                </a>
-            </div>
-			<div style="float: left; width: 160px; height: 82px; background: url('gfx/login_box.png');">
-				<a class="links1" style="margin-left: 80px;" href="login.php">Zaloguj się</a>
-			</div>
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/TryBAR/142549105817938&layout=standard&show_faces=false&width=450&action=like&colorscheme=light&height=80" scrolling="no" frameborder="0" style="display: inline-block; float: left; border:none; overflow:hidden; width:75px; height:23px; margin-top: 29px; margin-right: 10px;" allowTransparency="true"></iframe> 
+
+            {% if request.user == None %}
+                    <a class="links1" href="/login/register/">
+                        <span>Zarejestruj się,</span> <span style="color: #8F6A03;">jeśli nie masz jeszcze konta</span>
+                    </a>
+                </div>
+                <div style="float: left; width: 160px; height: 82px; background: url('/media/gfx/login_box.png');">
+    				<a class="links1" style="margin-left: 80px;" href="/login/">Zaloguj się</a>
+    			</div>
+            {% else %}
+                    <a class="links1" href="#">
+                        <span>Witaj </span> <span style="color: #8F6A03;">{{ request.user.name }} {{ request.user.surname }} </span>
+                    </a>
+                </div>
+                <div style="float: left; width: 160px; height: 82px; background: url('/media/gfx/logout_box.png');">
+                    <a class="links1" style="margin-left: 80px;" href="/logout/">Wyloguj się</a>
+                </div>
+            {% endif %}
         </div>
 		<div id="bar_menu">
-			<a href="index.html">Strona główna</a>
-			<a href="index.html">Szukaj</a>
-			<a href="index.html">Konkurs</a>
-			<a href="index.html">Rankingi</a>
+			<a href="/">Strona główna</a>
+			<a href="#">Szukaj</a>
+			<a href="#">Konkurs</a>
+			<a href="/ranking/bars/">Rankingi</a>
 		</div>
 	</div>
-	<div style="display: block; position: static; width: 980px; height: 100px; background-color: green; margin-top: 67px;">
+	<div style="display: block; position: static; width: 980px; height: 150px; background-color: green; margin-top: 67px;">
 		banner
 	</div>
 	

@@ -1,0 +1,4 @@
+G³ówny kolor: #572602
+Zamienny kolor: $3c1a01
+Szerokoœæ: 207 px
+Wysokoœæ: 19px

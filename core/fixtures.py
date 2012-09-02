@@ -17,3 +17,8 @@ VOIVODESHIP_CHOICES = (
     ('greater_poland', (u'Wielkopolskie')),
     ('west_pomerania', (u'Zachodniopomorskie')),
 )
+
+YES_NO_CHOICES = (
+    (1, 'tak'),
+    (0, 'nie'),
+)

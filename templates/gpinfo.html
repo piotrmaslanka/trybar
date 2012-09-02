@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/gpinfo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <span id="header_top">INFORMACJA</span>
+    <div id="pole">
+        {{ info|safe }}
+    </div>
+    
+    <a href="{{ next_url|safe }}"><img id="guzik" src="/media/gfx/gpinfo/button_dalej.png" alt="dalej"></a>
+{% endblock %}

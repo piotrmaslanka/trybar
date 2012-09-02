@@ -3,16 +3,14 @@ from django.db import models
 from django.core.validators import MinLengthValidator, RegexValidator
 from datetime import datetime
 from hashlib import sha1
-from trybar.settings import UPLOAD_PATH
 
-
-POSSIBLE_RESOLUTIONS = ((130, 130), (84, 84), (112, None), (222, 124), ())  # empty means 'native'
+POSSIBLE_RESOLUTIONS = ((130, 130), (84, 84), (112, None), (222, 124), (137, 97), ())  # empty means 'native'
                                                                         # single None means 'any value to keep aspect ratio'
 
 class Photo(models.Model):
     created_on = models.DateTimeField(default=datetime.now)    
     
-    def __path_to(self, *resolution):
+    def path_to(self, *resolution):
         """Returns relative path to file with given resolution. It may not exist, depending on type of this photo.
         Invoke like:
             photo.path_to(130, 130)
@@ -31,9 +29,4 @@ class Photo(models.Model):
         return '%sx%s/%s.jpg' % (resolution[0], resolution[1], self.id)
  
     def save(self, *args, **kwargs):
-        if self.id == 0:
-            raise Exception, 'Cannot save null photo!'
-        super(self, Photo).save(*args, **kwargs)
-
-def get_null_photo(self):
-    return Photo(id=0)        
+        super(Photo, self).save(*args, **kwargs)

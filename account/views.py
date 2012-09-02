@@ -29,6 +29,10 @@ class LoginForm(forms.Form):
         return cleaned_data
     
 def login(request):
+    # You cannot login if logged
+    if request.user != None:
+        return redirect('/')
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():

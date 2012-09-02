@@ -1,7 +1,7 @@
 # coding=UTF-8
 from django import forms
 from django.shortcuts import redirect
-from trybar.core import render
+from trybar.core import render, gpinfo
 from trybar.core.mail import send_mail
 from trybar.account import must_be_logged
 from django.template.loader import render_to_string
@@ -12,7 +12,7 @@ from trybar.core.fixtures import VOIVODESHIP_CHOICES
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = Account
-        exclude = ('id', 'password', 'is_activated', 'created_on', 'familiar')
+        exclude = ('id', 'password', 'is_activated', 'created_on', 'familiar', 'avatar')
         widgets = {'voivodeship':forms.Select(attrs={'class':'selectbox'})}
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
@@ -53,7 +53,7 @@ def view(request):
             inst.password = sha1(data['login'].encode('utf8')+data['password'].encode('utf8')).hexdigest()
             inst.save()
 
-            AccountMeta(account=inst, rank=0, score=0).save()
+            AccountMeta(account=inst).save()
 
             mail_content = render_to_string('account/activation_email', {'login':inst.login,
                                                                          'password':data['password'],
@@ -61,15 +61,16 @@ def view(request):
 
             send_mail(inst.email, 'Rejestracja na Trybar', mail_content)
 
-            raise Exception, 'No error'
+            return gpinfo(request, u'Konto zostało zarejestrowane. Za chwilę na twoją skrzynkę powinien przyjść e-mail z linkiem potwierdzającym', '/')
     return render('account/register.html', request, form=form)
 
 def activate(request):
     acc = Account.objects.get(login=request.GET['login'])
 
-    if acc.is_activated: raise Exception
+    if acc.is_activated:
+        return gpinfo(request, u'Konto już było aktywowane!', '/')            
     if acc.activation_get_hash() != request.GET['code']: raise Exception, acc.activation_get_hash()
 
     acc.activate()
 
-    raise Exception, 'No error'
+    return gpinfo(request, u'Konto zostało aktywowane. Możesz teraz się zalogować.', '/login/')

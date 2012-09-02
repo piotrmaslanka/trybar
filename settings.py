@@ -22,12 +22,24 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'trybar',             
+#        'USER': 'postgres',                   
+#        'PASSWORD': 'bohrok2405',             
+#        'HOST': '',                
+#        'PORT': '',                
+#    }
+#}
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trybar',             
-        'USER': 'postgres',                   
-        'PASSWORD': 'bohrok2405',             
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite',             
+        'USER': '',                   
+        'PASSWORD': '',             
         'HOST': '',                
         'PORT': '',                
     }
@@ -111,7 +123,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'trybar.account',
     'trybar.bar',
-    'trybar.photo'
+    'trybar.barevent',
+    'trybar.main',
+    'trybar.photo',
+    'trybar.barevent',
+    'trybar.ranking',
+    'trybar.scoring',
+    'trybar.accnews',
 #    'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',

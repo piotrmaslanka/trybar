@@ -5,4 +5,5 @@ def render(template_path, request, **extras):
     pte.update(extras)
     return render_to_response(template_path, pte)
     
-    
+def gpinfo(request, info, url_next):
+    return render('gpinfo.html', render, info=info, next_url=url_next)    

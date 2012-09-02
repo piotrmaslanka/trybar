@@ -1,0 +1,73 @@
+#my_acc {
+	margin-top: 20px;
+	padding: 10px;
+    width: 280px;
+    height: 230px;
+    background: url('/media/gfx/profil/my_acc_bg.png');
+}
+
+#my_acc .header {
+	display: block;
+	font-size: 14px;
+	color: #FFD100;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+	#my_acc .header > a {
+		float: right;
+		font-size: 12px;
+		color: #a88905;
+		font-weight: normal;
+		text-decoration: none;
+	}
+
+	#my_acc .header > a:hover {
+		color: #6f550b;
+		text-decoration: underline;
+	}
+
+	#my_acc > .info {
+		display: block;
+		width: 280px;
+		height: auto;
+		overflow: auto;
+	}
+
+		#my_acc > .info > img {
+			float: left;
+			width: 128px;
+			height: 128px;
+			margin-right: 12px;
+		}
+
+		#my_acc > .info > .stats {
+			float: left;
+			width: 140px;
+			height: 140px;
+			font-size: 12px;
+			color: #EED100;
+		}
+		
+			#my_acc > .info > .stats  > div {
+				display: block;
+				width: auto;
+				height: 20px;
+				overflow: auto;
+			}
+				#my_acc > .info > .stats  > div > span {
+					float: right;
+				}
+				
+	#my_acc > .buttons {
+		display: block;
+		width: 280px;
+		height: auto;
+		overflow: auto;
+	}
+		
+	#my_acc > .buttons > img{
+		margin: 2px;
+		float: left;
+		cursor: pointer;
+	}
