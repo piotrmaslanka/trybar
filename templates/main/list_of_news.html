@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load ads %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/ranking.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+{% endblock %}
+{% block ad %}{{ 11|html_ad }}{% endblock %}
+
+{% block body %}
+    <div id="header">
+        <div class="left">AKTUALNOŚCI</div>
+        <div class="bottom"></div>            
+    </div>
+
+    <div id="recentbox">
+        {% for new in news %}
+            <div class="first">
+            <a class="header" href="/news/{{ new.id }}/">{{ new.title }}</a>
+                <div class="content"><a href="/news/{{ new.id }}/">{{ new.content|word_slice:":5" }} <span class="more">>></span></a></div>
+            <div class="datetime">{{ new|date:"Y.m.d H:i" }}</div>
+        </div>
+        {% endfor %}
+    </div>             
+    <div style="clear: both;"></div>
+{% endblock %}

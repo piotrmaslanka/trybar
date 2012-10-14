@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% load ads %}
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/media/css/login.css">
 {% endblock %}
+
+{% block ad %}{{ 8|html_ad }}{% endblock %}
+
 
 {% block body %}
 <span id="header_top">LOGOWANIE</span>
@@ -49,7 +53,7 @@
             <td class="button">
                 <input type="submit" class="submit" value="">
                 <div class="forgot_password">
-                    <a href="#">Zapomniałem hasła</a>
+                    <a href="/login/remind/">Zapomniałem hasła</a>
                 </div>
             </td>
         </tr>

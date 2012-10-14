@@ -1,0 +1,181 @@
+#form_box {
+    margin-top: 30px;
+    position: relative;
+}
+#form_box > .header {
+    font-size: 12px;
+    color: #ffcc00;
+    font-weight: bold;
+    width: 960px;
+    line-height: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(101, 70, 16);
+}
+#centerbox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 560px;
+    text-align: center;
+}
+
+    #centerbox .header .ln1 {
+        font-size: 25.75px;
+        color: white;
+    }
+    #centerbox .header .ln2 {
+        font-size: 60px;
+        font-weight;
+        color: #ffcc00;
+    }
+    #centerbox .header .ln3 {
+        font-size: 60px;
+        font-weight: bold;
+        color: #ffcc00;;
+    }
+    #centerbox .header .ln4 {
+        font-size: 60px;
+        color: white;
+    }
+    #centerbox .header .ln5 {
+        color: white;
+        font-size: 47.21px;
+    }
+    #centerbox .header .ln6 {
+        color: #ffcc00;
+        font-weight: bold;
+        font-size: 47.21px;
+    }
+    #centerbox .header .ln7 {
+        width: 100px;
+        height: 20px;
+    }
+    #centerbox .header .ln8 { 
+        color: white;
+        font-size: 43.78px;
+    }
+#centerbox .ln9 {
+    color: white;
+    font-size: 40.54px;
+}
+#centerbox .ln10 {
+    color: #ffcc00;
+    font-size: 40.54px;
+}
+#centerbox .ln11 {
+    font-size: 44.21px;
+    color: white;
+}
+#centerbox .ln12 {
+    font-size: 44.21px;
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: none;
+}
+    #centerbox .ln12:hover { text-decoration: underline; }
+#centerbox .ln13 {
+    font-size: 43px;
+    color: white;
+}
+#centerbox .ln14 {
+    font-size: 43px;
+    font-weight: bold;
+    color: #ffcc00;
+}
+#centerbox .ln15 {
+    font-size: 43px;
+    color: white;
+}
+#centerbox .ln16 {
+    font-size: 29.5px;
+    color: white;
+}
+#centerbox .ln17 {
+    font-size: 29.5px;
+    color: #ffcc00;
+}
+#centerbox .ln18 {
+    font-size: 12.25px;
+    color: white;
+}
+#centerbox .ln19 {
+    width: 100px;
+    height: 60px;
+}
+#centerbox .sphdr {
+    width: 280px;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;    
+    color: white;
+}
+#centerbox > a { text-decoration: none; }
+.rankingbox {
+    width: 560px;
+}    
+    .rankingbox > .header {
+        color: #FFD100;
+        font-size: 13px;
+        margin-top: 5px;
+        height: 20px;
+    }
+        .rankingbox .header > * { float: left; height: 100%; }
+        .rankingbox .header .b_toplokale { font-weight: bold; width: 150px; }
+        .rankingbox .header .b_nazwalokalu { width: 310px; text-align: left; }
+
+    .rankingbox .entry { clear: both; height: 110px; }
+        
+        .rankingbox .entry > * { float: left; }
+        .rankingbox .entry .imgbox { 
+            text-align: center;
+            width: 142px;
+            height: 100%;
+            
+        }   
+            .rankingbox .entry .imgbox.bar { background: url('/media/gfx/ranking/cien_miniaturka.png') bottom no-repeat; } 
+            .rankingbox .entry .imgbox.user { background: url('/media/gfx/ranking/awatar_cien.png') bottom center no-repeat; }
+            .rankingbox .entry .imgbox .avatar {
+                margin-top: 14px;
+            }
+        .rankingbox .entry .description {
+            width: 407px; height: 98px;
+            text-align: left;
+            background: url('/media/gfx/ranking/opis_baru_tlo.png') no-repeat top;
+            position: relative;
+        }
+            .rankingbox .entry .description .name {
+                margin-left: 10px;
+                margin-top: 8px;
+            }
+                .rankingbox .entry .description .name a {
+                    color: #a88905;
+                    text-decoration: none;
+                    font-size: 15px;
+                }
+            .rankingbox .entry .description .descr {
+                position: absolute;
+                top: 30px;
+                left: 10px;
+                right: 70px;
+            }
+                .rankingbox .entry .description .descr a {
+                    font-size: 12px;
+                    color: #a88905;
+                    text-decoration: none;
+                }
+            .rankingbox .entry .description .mpoints {
+                position: absolute;
+                top: 15px; right: 150px;
+                color: #FFD100;
+                font-size: 20px;
+            }
+            .rankingbox .entry .description .average {
+                position: absolute;
+                top: 15px; right: 10px;
+                color: #FFD100;
+                font-size: 20px;            
+            }
+                .rankingbox .entry .description .average a {
+                    color: #FFD100;
+                    font-size: 20px;
+                    text-decoration: none;
+            }    

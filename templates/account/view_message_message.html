@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
+{% load humanize %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/index.js"></script>
+    <script type="text/javascript" src="/media/js/shoutbox.js"></script>    
+    <link rel="stylesheet" type="text/css" href="/media/css/view_message.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/shoutbox.css">
+
+{% endblock %}
+
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        PROFIL UŻYTKOWNIKA
+    </div>
+
+    <div id="mbox">
+            <div class="top"></div>
+            <div class="middle">
+                <div class="als">
+                    <span class="aleft lit bold">{{ message.sender.login }}</span>
+                    <span class="lit bold">{{ message.title }}</span>
+                    <span class="aright lit">{{ message.sent_on|date:"j E Y" }}</span>
+                </div>
+                <div class="sepline"></div>
+                <div class="als">
+                    <span class="aleft dim bold">{{ message.sender.city }}</span>
+                    <span class="aright dim">{{ message.sent_on|date:"H:i" }}</span>
+                </div>
+
+                <div class="msgcontent">
+                    {{ message.content|linebreaks }}
+                </div>
+
+                <div class="sepline"></div>
+                <div class="als" style="margin-top: 5px;">
+                    <button class="usun_wiadomosc" onclick="lconfirm('Na pewno usunąć wiadomość?', '/profile/messages/remove/?m{{ message.id }}=del')">
+                    <button class="odpowiedz" onclick="window.location='/profile/message/send/?to={{ message.sender.login }}'">
+                </div>
+            </div>
+            <div class="bottom"></div>
+        </form>
+    </div>
+
+    
+    <div id="left_panel">
+       {% include "includes/profile.html" %}
+       {% include "includes/shoutbox.html" %}
+    </div>
+
+    <div class="gclear"></div>
+{% endblock %}

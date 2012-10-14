@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load ads %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/ranking.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+{% endblock %}
+{% block ad %}{{ 2|html_ad }}{% endblock %}
+
+{% block body %}
+    <div id="header">
+        <div class="right">
+            <div class="s_left"><a href="/search/bars/" class="gba">Wyszukiwarka lokali</a></div>
+            <div class="s_right bg"><a href="/search/users/" class="gba">Wyszukiwarka użytkowników</a></div>
+        </div>
+        <div class="left">WYSZUKIWARKA</div>
+        <div class="bottom"></div>            
+    </div>
+
+    <div id="leftbox">
+        {% if request.user != None %}
+             {% include "includes/profile.html" %}
+        {% endif %}
+
+        {% include "includes/news.html" %}          
+    </div>
+    <div id="rankingbox">
+
+        <div id="searchbox">
+            <div class="header">WYSZUKIWARKA</div>
+            <form action="/search/users/" method="get" id="sform">
+                {% if query %}
+                    <input type="text" name="q" value="{{ query }}">
+                {% else %}
+                    <input type="text" name="q" value="Szukaj użytkownika" onclick="this.value=''">
+                {% endif %}                
+            </form>
+            <div class="submit"><a href="#" onclick="$('#sform')[0].submit()"></a></div>
+        </div>    
+        {% if nothing_found %}
+            <div class="search_not_found">Brak wyników wyszukiwania</div>
+        {% elif page_iter != None %}
+            <div class="header">
+                <div class="b_toplokale"></div>
+                <div class="b_nazwalokalu">Nazwa</div>
+                <div style="float: right; margin-right: 10px;">Punkty</div>
+            </div>
+            {% for acc in page.object_list %}
+            <div class="entry">
+                <div class="position"></div>
+                <div class="imgbox user"><a href="/profile/{{ acc.id }}/"><img class="avatar" src="{{ acc.avatar|path:"avatar:84,84" }}"></a></div>
+                <div class="description">
+                    <div class="name"><a href="/profile/{{ acc.id }}/">{{ acc.login }}</a></div>
+                    <div class="descr"><a href="/profile/{{ acc.id }}/">{{ acc.name }} {{ acc.surname }}<br><br>{{ acc.city }}</a></div>
+                    <div class="average"><a href="#">{{ acc.meta.score }}</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="dropbar">
+                {% if page.has_previous %}
+                    <div class="left"><a href="/search/users/{{ page.previous_page_number }}/?q={{ query }}" class="gba"></a></div>
+                {% endif %}
+                <div class="center">
+                    {% for page_n in page_iter %}
+                        {% if page_n == page.number %}
+                            <div class="ico_c"><a class="gba" href="/search/users/{{ page_n }}/?q={{ query }}">{{ page_n }}</a></div>
+                        {% else %}
+                            <div class="ico_o"><a class="gba" href="/search/users/{{ page_n }}/?q={{ query }}">{{ page_n }}</a></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if page.has_next %}
+                    <div class="right"><a href="/search/users/{{ page.next_page_number }}/?q={{ query }}" class="gba"></a></div>
+                {% endif %}
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+{% endblock %}

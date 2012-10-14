@@ -1,0 +1,72 @@
+#form_box {
+    margin-top: 30px;
+}
+
+#form_box > .header {
+    font-size: 12px;
+    color: #ffcc00;
+    font-weight: bold;
+    width: 960px;
+    line-height: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(101, 70, 16);
+}
+
+#leftpanel {
+    float: left;
+    width: 300px;
+}
+
+
+#comments_box {
+    width: 626px;
+    float: right;
+    margin-right: 20px;
+}
+    #comments_box .ago {
+        text-align: right;
+        font-size: 12px;
+        color: #b18e00;
+        padding-right: 40px; 
+        margin-bottom: 2px;
+    }
+    #comments_box .box {
+        background: url('/media/gfx/myaccount/wpis_tlo.png');
+        width: 555px;
+        height: 63px;
+        
+        padding-left: 30px;
+        padding-right: 30px;
+        
+        color: #ffcc00;
+        font-size: 13px;
+        
+        padding-top: 13px;
+    }
+        #comments_box .hilit {
+            background: url('/media/gfx/myaccount/wpis_tlo_p.png') !important;
+        }
+        #comments_box .box a.imghref {
+            height: 50px;
+            display: inline-block;
+        }
+        #comments_box .box table {
+            height: 50px;
+            width: 555px;
+        }
+            #comments_box .box table td.img {
+                width: 50px;
+            }
+            #comments_box .box a {
+                text-decoration: none;
+                font-weight: bold;
+                color: #ffcc00;
+            }
+            #comments_box .box img {
+                width: 50px;
+                height: 50px;
+            }
+
+
+    
+.clear { clear: both; height: 20px; }

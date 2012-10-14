@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load ads %}
+{% load humanize %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/shoutbox.js"></script>
+    <script type="text/javascript" src="/media/js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/edit_profile.css">
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>      
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/shoutbox.css">
+{% endblock %}
+
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        EDYCJA PROFILU
+    </div>
+
+    <div id="eform">
+        <form action="/profile/edit/" method="post" enctype="multipart/form-data">
+            <table class="formtab">
+                {% for error in form.non_field_errors %}        {# error referring to the entire form #}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="label">Imię:</td>
+                    <td class="field">{{ form.name }}</td>
+                    <td class="alert">{% if form.name.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.name.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="label">Nazwisko:</td>
+                    <td class="field">{{ form.surname }}</td>
+                    <td class="alert">{% if form.surname.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.surname.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}        
+                <tr>
+                    <td class="label">Bieżące hasło:</td>
+                    <td class="field">{{ form.current_password }}</td>
+                    <td class="alert">{% if form.current_password.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.current_password.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}        
+                <tr>
+                    <td class="label">Nowe hasło:</td>
+                    <td class="field">{{ form.new_password }}</td>
+                    <td class="alert">{% if form.new_password.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.new_password.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="label">Potwórz nowe hasło:</td>
+                    <td class="field">{{ form.new_password2 }}</td>
+                    <td class="alert">{% if form.new_password2.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.new_password2.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}        
+                <tr>
+                    <td class="label">Miejscowość:</td>
+                    <td class="field">{{ form.city }}</td>
+                    <td class="alert">{% if form.city.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.city.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}        
+                <tr>
+                    <td class="label">Województwo:</td>
+                    <td class="field">{{ form.voivodeship }}</td>
+                    <td class="alert">{% if form.voivodeship.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.voivodeship.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}        
+                <tr>
+                    <td class="label">Gadu-Gadu:</td>
+                    <td class="field">{{ form.gadu }}</td>
+                    <td class="alert">{% if form.gadu.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.gadu.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}        
+                <tr>
+                    <td class="label">Telefon:</td>
+                    <td class="field">{{ form.phone }}</td>
+                    <td class="alert">{% if form.phone.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>               
+                {% for error in form.phone.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="label"></td>
+                    <td class="field" id="change_avatar_descr">Zmień awatar (wymiary 130x130 px)</td>
+                    <td class="alert"></td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <div class="fopen_container">{{ form.picture }}
+                            <div class="box"></div>
+                        </div>
+                    </td>
+                    <td class="field"><input type="button" id="send_photo_box_input"></td>
+                    <td class="alert">{% if form.picture.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.picture.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}                
+            </table>      
+            <div id="save_that_container">
+                <input type="submit" value="">
+            </div>   
+        </form>
+    </div>
+
+    
+    <div id="left_panel">
+       {% include "includes/profile.html" %}   
+       {% include "includes/shoutbox.html" %}
+    </div>
+
+    <div style="clear: both;"></div>
+
+<script type="text/javascript">
+    $('.formtab input[type="text"]').focus(highlight_input);
+    $('.formtab input[type="text"]').blur(unhighlight_input);
+    $(function(){$(".selectbox").selectbox({width:278});});
+    if (!($.browser.msie))
+        $('.fopen_container .box').click(function(e) { $("#id_picture").click(); })
+    $('#id_picture').change(function(e) { $("#send_photo_box_input").val($("#id_picture").val()); });
+    </script>
+</script>
+{% endblock %}

@@ -1,61 +1,82 @@
 {% extends "base.html" %}
- 
+{% load photo %}
+{% load core %}
+{% load ads %}
+
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/media/css/index.css">
 {% endblock %}
+{% block ad %}{{ 0|html_ad }}{% endblock %}
 
 {% block body %}
-<div id="inside">
-    <div id="searchbox">
-        <div>
-            <span class="header">WYSZUKIWARKA</span>
-            <form action="#" method="post">
-                <input type="text" name="keyword" value="Szukaj baru lub lokalu..." onclick="this.value=''">
-            </form>
-        </div>
-        <img style="cursor: pointer;" src="/media/gfx/index/searchbar_b.png" onmouseover="this.src='gfx/index/searchbar_b_p.png'" onmouseout="this.src='gfx/index/searchbar_b.png'" alt="szukaj">
-    </div>
-    <span class="header">TOP LOKALE</span>
+<div id="content">
+    <div id="decoration"></div>
+
     <div id="top_places">
-        <div class="elem">
-            <div class="numbers" id="elem1"></div>
-            <div class="el_img">
-                <img src="/media/gfx/places/no-image.jpg" alt="no-img">
-            </div>
-            <div class="right">
-                <div class="title"><a href="#">OJOU-SAMA</a></div>
-                <div class="text">
-                    Bar do którego przychodzisz z własną kataną. Jak nie masz to pożycz od sąsiada.
+        <div class="header">TOP LOKALE</div>
+
+        {% for bar in top_3_bars %}
+            <div class="elem">
+                <div class="left"><div class="elem{{ forloop.counter }}"></div></div>
+                <div class="center">
+                    <a class="gba" href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a>
                 </div>
-                <div class="more"><a href="#"></a></div>
-            </div>
-        </div>
-        <div class="elem">
-            <div class="numbers" id="elem2"></div>
-            <div class="el_img">
-                <img src="/media/gfx/places/no-image.jpg" alt="no-img">
-            </div>
-            <div class="right">
-                <div class="title"><a href="#">OJOU-SAMA</a></div>
-                <div class="text">
-                    Bar do którego przychodzisz z własną kataną. Jak nie masz to pożycz od sąsiada.
+                <div class="right">
+                    <div class="title"><a href="/bar/{{ bar.slugname }}/">{{ bar.name }}</a></div>
+                    <div class="text">
+                        <a href="/bar/{{ bar.slugname }}/">{{ bar.description|word_slice:":10" }}</a>
+                    </div>
                 </div>
-                <div class="more"><a href="#"></a></div>
             </div>
-        </div>
-        <div class="elem">
-            <div class="numbers" id="elem3"></div>
-            <div class="el_img">
-                <img src="/media/gfx/places/no-image.jpg" alt="no-img">
-            </div>
-            <div class="right">
-                <div class="title"><a href="#">OJOU-SAMA</a></div>
-                <div class="text">
-                    Bar do którego przychodzisz z własną kataną. Jak nie masz to pożycz od sąsiada.
-                </div>
-                <div class="more"><a href="#"></a></div>
-            </div>
-        </div>
+            {% endfor %}
+
+        <div class="more"><a href="/ranking/bars/"></a></div>
     </div>
+    <div id="searchbox">
+        <div class="header">WYSZUKIWARKA</div>
+        <form action="/search/bars/" method="get" id="sform">
+            <input type="text" name="q" value="Szukaj miasta lub lokalu" onclick="this.value=''">
+        </form>
+        <div class="submit"><a href="#" onclick="$('#sform')[0].submit()"></a></div>
+    </div>
+       
+    <div id="recentbox">
+        <div class="header">
+            <div class="left">AKTUALNOŚCI</div>
+            <div class="right"><a href="/news/">Starsze aktualności <span class="more">»</span></a></div>
+        </div>
+        {% for news in news %}
+            {% if forloop.first %}
+                <div class="first">
+                    <a class="header" href="/news/{{ news.id }}/">{{ news.title }}</a>
+                    <div class="content"><a href="/news/{{ news.id }}/">{{ news.content|slice:":30" }} <span class="more">>></span></a></div>
+                    <div class="datetime">{{ news.published_on|date:"Y.m.d H:i" }}</div>
+                </div>
+            {% else %}
+                <div class="elem">
+                    <a class="header" href="/news/{{ news.id }}/">{{ news.title }}</a>
+                    <div class="datetime">{{ news.published_on|date:"Y.m.d H:i" }}</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div id="contestbox">
+        <div class="header">KONKURS</div>
+        <div class="cup-image"></div>
+        <div class="text">
+            Zgarniaj nagrody za zdobyte punkty podczas korzystania z portalu. Dodawaj lokale, zdjęcia i pisz komentarze... Wystarczy tak niewiele by zyskać tak wiele!
+        </div>
+        <div class="more"><a href="/building/"></a></div>
+    </div>
+    
+    <div id="whatistrybar">
+        <div class="header">CZYM JEST TRYBAR?</div>
+        <div class="elem left"><a href="/what_is_trybar/">Wyszukiwarką lokali »</a></div>
+        <div class="elem right"><a href="/what_is_trybar/">Opiniotwórczą platformą »</a></div>
+        <div class="elem left"><a href="/what_is_trybar/">Narzędziem dla właścicieli »</a></div>
+        <div class="elem right"><a href="/what_is_trybar/">Miejscem na lokalną promocję »</a></div>
+    </div>
+</div>    
 </div>
 {% endblock %}

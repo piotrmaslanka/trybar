@@ -16,4 +16,5 @@ def standard_profile_page_dict(request):
 			'profile_points':account.meta.score,
 			'profile_bars':account.meta.bar_count,
 			'profile_frequenter':account.meta.frequenter_count,
-			'profile_familiars':account.meta.familiar_count}
+			'profile_familiars':account.meta.familiar_count,
+            'profile_messages':account.mail_received.count() + account.befriendee_set.filter(confirmed=False).count()}

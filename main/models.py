@@ -17,11 +17,11 @@ class News(models.Model):
         """Returns 3 latest news"""
         return News.objects.all()[:3]
 
-    def get_summary(self):
-        """First few words of the article"""
-        return u' '.join(self.content.split(' ')[:5])
-
 class NewsComment(models.Model):
-    account = models.ForeignKey(Account, related_name='news_comments_made')    
+    account = models.ForeignKey(Account, related_name='news_comments_made')
+    made_for = models.ForeignKey(News, related_name='comments')
     content = models.TextField()
     made_on = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        ordering = ['-made_on']

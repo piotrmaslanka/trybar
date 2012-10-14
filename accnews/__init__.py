@@ -6,7 +6,11 @@ def accnews_for(account, newstype, *args):
 	if len(args) == 0:
 		args = (0, 0)
 	elif len(args) == 1:
-		args = (args[0], 0)
+		args = (args[0] if type(args[0]) == int else args[0].id, 0)
+	elif len(args) == 2:
+		args = (args[0] if type(args[0]) == int else args[0].id,
+				args[1] if type(args[1]) == int else args[1].id)
+
 	elif len(args) > 2:
 		raise Exception, 'Invalid invocation: maximum two extra-arguments expected'
 

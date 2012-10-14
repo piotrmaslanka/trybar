@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
+{% load humanize %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/what_is_trybar.css">
+{% endblock %}
+{% block ad %}{{ 10|html_ad }}{% endblock %}
+
+{% block body %}
+<div id="form_box">
+    <div class="header">CZYM JEST TRYBAR?</div>
+
+    <div id="right_selbox">
+        <a href="/">
+        <div class="skip">Pomiń <span class="sbl">»</span></div>
+        </a>
+        <div class="shr" style="display: none;">
+            <input type="checkbox" id="dont_force_whatis"> Nie pokazuj więcej tej planszy
+        </div>
+    </div>
+
+    <div class="textbox">
+        <div class="header">Jeśli jesteś klientem, <br>to TryBAR jest:</div>
+        <ul>
+            <li>- wyszukiwarką lokali pozwalającą znaleźć właściwe miejsce na wypady ze znajomymi</li>
+            <li>- opiniotwórczą platformą, dzięki której możesz zachęcić innych do odwiedzenia lokalu lub zostawić im stosowną przestrogę</li>
+            <li>- miejscem gdzie możęsz sprawdzić gdzie chodzą Twoi znajomi lub poznać osoby, które odwiedzają te same miejsca co Ty</li>
+        </ul>
+        <div class="header">Jeśli jesteś właścicielem, <br>to TryBAR jest:</div>
+        <ul>
+            <li>- narzędziem do kreowania wizerunku Twojego lokalu w sieci oraz kontaktu z klientami</li>
+            <li>- miejscem na lokalną promocję</li>
+            <li>- miejscem gdzie możesz poznać mocne i słabe strony swojego lokalu</li>
+        </ul>
+    </div>
+
+    <div id="flush_decor"></div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $('.shr').css('display', 'block');
+        $('#right_selbox a').attr('href', '#').click(function() {
+            window.location = ($('#dont_force_whatis').attr('checked')) ? '/what_is_trybar/?disable=1' : '/';
+        });
+    });
+</script>
+{% endblock %}

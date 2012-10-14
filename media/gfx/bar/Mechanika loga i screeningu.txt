@@ -1,6 +1,0 @@
-Logo mo¿na wrzuciæ tylko o wymiarach 60x60px. Mniejsze i wiêksze rozmiary bêda automatycznie skalowane. 
-Umieszczenie takiego logo przesuwa <nazwa lokalu> separator i <adres lokalu> w prawo o 60px.
-Mozna równie¿ umieœciæ logo o orienatcji pionowej nadal o wysokoœci 60px i szerokoœci do 300px. Wtedy zostaje usuwana nazwa lokalu gdy¿ wiêkszoœæ logotypów lokali zaweira jego nazwê.
-
-Szerokoœæ screeningu jest nieograniczona ze wzglêdu na du¿e i bardzo du¿e monitory.
-Wysokoœæ w dó³ równie¿ jednak przewa¿nie i tak screeningi bêd¹ o orientacji poziomej u do³u koñczone czarnym gradientem tak by ni¿ej t³o mo¿na by³o podmieniæ na czarne. 

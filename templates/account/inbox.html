@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load ads %}
+{% load humanize %}
+
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/index.js"></script>
+    <script type="text/javascript" src="/media/js/shoutbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/inbox.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/shoutbox.css">
+    <script type="text/javascript">
+        function do_submission() {
+            if (confirm('Czy na pewno chcesz usunąć zaznaczone wiadomości?'))
+                $('#inbox .menubar .left .submit')[0].submit();
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        SKRZYNKA POCZTOWA
+    </div>
+
+    <div id="inbox">
+        <form action="/profile/messages/remove/{{ page.number }}/" method="post">
+            <div class="top"></div>
+            <div class="middle">
+                <div class="sepline"></div>
+                {% for id, login, sent_on, title, idprefix, readed_yet in page.object_list %}
+                <div class="elem">
+                    <div class="clk"><input type="checkbox" name="{{ idprefix }}{{ id }}" value="del"></div>
+                    <div class="content">
+                        <div class="title"><a {% if readed_yet %}style="font-weight: normal;"{% endif %}href="/profile/message/{{ idprefix }}{{ id }}/">{{ title }}</a></div>
+                        <div class="datetime">{{ sent_on|naturaltime }}</div>
+                    </div>
+                    <div class="button"><a class="gba" href="#" onclick="lconfirm('Czy na pewno chcesz usunąć tą wiadomość?', '/profile/messages/remove/{{ page.number }}/?{{ idprefix }}{{ id }}=del')"></a></div>
+                </div>
+                <div class="sepline"></div>
+                {% endfor %}
+                <div class="menubar">
+                    <div class="right">
+                        {% for page_n in page_iter %}
+                            {% if page_n == page.number %}
+                                <div class="ico_c"><a class="gba" href="/profile/messages/{{ page_n }}/">{{ page_n }}</a></div>
+                            {% else %}
+                                <div class="ico_o"><a class="gba" href="/profile/messages/{{ page_n }}/">{{ page_n }}</a></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="left">
+                        <a onclick="$('input[type=checkbox]').attr('checked', true);">Zaznacz wszystkie</a> |
+                        <a onclick="$('input[type=checkbox]').attr('checked', false);">Odznacz wszystkie</a>
+                        <button class="submit" onclick="do_submission()">
+                    </div>
+                </div>
+            </div>
+            <div class="bottom"></div>
+        </form>
+    </div>
+
+    
+    <div id="left_panel">
+       {% include "includes/profile.html" %}     
+       {% include "includes/shoutbox.html" %}
+    </div>
+
+    <div style="clear: both"></div>
+{% endblock %}

@@ -5,9 +5,17 @@ from trybar.core import render
 from trybar.account import must_be_logged
 from trybar.bar.models import Bar, BAR_OPEN_HOURS_FROM, BAR_OPEN_HOURS_TO, BarMeta, BarPhoto
 from trybar.core.fixtures import VOIVODESHIP_CHOICES, YES_NO_CHOICES
-from django.template.defaultfilters import slugify
 from trybar.scoring import score_for, BAR_ADDED, BAR_PHOTO_ADDED
 from trybar.accnews import accnews_for, RT_ADDED_BAR
+
+def slugify(name):
+    POLISH_DIACRITIC_LOOKUP = {u'Ą':u'A', u'ą':u'a', u'Ć':u'C', u'ć':u'c', u'Ę':u'E', u'ę':u'e', u'Ż':u'Z', u'ż':u'z',
+                             u'Ź':u'Z', u'ź':u'z', u'Ó':u'O', u'ó':u'o', u'Ł':u'l', u'ł':u'l', u'Ś':u'S', u'ś':u's',
+                             u'Ń':u'N', u'ń':u'n'}      
+    for fr, t in POLISH_DIACRITIC_LOOKUP.iteritems():
+        name = name.replace(fr, t)
+    from django.template.defaultfilters import slugify as _slugify
+    return _slugify(name)
 
 class AddBarForm(forms.Form):
     name = forms.CharField(max_length=40)
@@ -16,7 +24,7 @@ class AddBarForm(forms.Form):
     voivodeship = forms.ChoiceField(choices=VOIVODESHIP_CHOICES, 
                                     widget=forms.Select(attrs={'class':'selectbox', 
                                                                'id':'wojewodztwo'}))
-    description = forms.CharField()
+    description = forms.CharField(required=False, widget=forms.Textarea())
 
     credit_card = forms.ChoiceField(choices=YES_NO_CHOICES, widget=forms.RadioSelect(), required=False)
     wifi = forms.ChoiceField(choices=YES_NO_CHOICES, widget=forms.RadioSelect(), required=False)
@@ -47,8 +55,8 @@ class AddBarForm(forms.Form):
     is_billard = forms.BooleanField(required=False)
     is_tv = forms.BooleanField(required=False)
 
-    # Following has to be called "picture" - and by extensions have id of "id_picture"
-    # Do not change, ON PAIN OF HUNTING CROSS-REFERENCES
+    # Following has to be called "picture" - and by extension have id of "id_picture"
+    # Do not change, ON PAIN OF HUNTING CROSS-REFERENCES. You have been warned.
     picture = forms.ImageField(required=False)
 
     def clean_picture(self):
@@ -70,7 +78,10 @@ class AddBarForm(forms.Form):
         credit_card = self.cleaned_data['credit_card']
         if credit_card == '': return None
         return bool(int(credit_card))
-
+    def clean_voivodeship(self):
+        if self.cleaned_data['voivodeship'] in (None, u'None'):
+            raise forms.ValidationError(u'Wybierz województwo')
+        return self.cleaned_data['voivodeship']
     def clean(self):
         cleaned_data = super(AddBarForm, self).clean()
         name = cleaned_data.get('name')
@@ -98,6 +109,7 @@ def view(request):
             data = form.cleaned_data
 
             def does_bar_exist_with_given_slugname(slugn):
+                if slugn == 'add': return True
                 try:
                     Bar.objects.get(slugname=slugn)
                 except Bar.DoesNotExist:

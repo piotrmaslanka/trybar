@@ -1,13 +1,19 @@
 {% extends "base.html" %}
+{% load ads %}
+
 {% block head %}
     <script src="/media/js/jquery.selectBox.min.js"></script>
     <script src="/media/js/form_highlighter.js"></script>  
     <link rel="stylesheet" type="text/css" href="/media/css/add_bar.css">
 {% endblock %}
+
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+
+
 {% block body %}
 <div id="form_box">
 	<div class="header">
-		REJESTRACJA
+		DODAWANIE LOKALU
 	</div>
 	
     <form action="/bar/add/" method="post" enctype="multipart/form-data">
@@ -18,7 +24,7 @@
 		
 			<br><br>
 		
-			Bezpośrednimi korzyściami płynącymi z dodawania lokali są punkty przyznawane każdorazowo automatycznie. Za dodanie jednego lokalu otrzymujesz 10 punktów, a za każde jedno zdjęcie w galerii lokalu 20 punktów. Dzięki zdobywanym punktom możesz piąć się w rankingu użytkowników oraz walczyć o ciekawe nagrody. Więcej o nagrodach tutaj <tu link do strony konkursu>
+			Bezpośrednimi korzyściami płynącymi z dodawania lokali są punkty przyznawane każdorazowo automatycznie. Za dodanie jednego lokalu otrzymujesz 10 punktów, a za każde jedno zdjęcie w galerii lokalu 20 punktów. Dzięki zdobywanym punktom możesz piąć się w rankingu użytkowników oraz walczyć o ciekawe nagrody. Więcej o nagrodach <a href="/building/">tutaj</a>.
 	</div>
 	<table class="formtab">
         {% for error in form.non_field_errors %}
@@ -72,8 +78,8 @@
         </tr>
         {% endfor %}
 		<tr>
-			<td class="label">Opis<span class="star">*</span>:</td>
-			<td class="field">{{ form.description }}</td>
+			<td class="label">Opis:</td>
+			<td class="field nobg">{{ form.description }}</td>
 			<td class="alert">{% if form.description.errors %}<div class="sign"></div>{% endif %}</td>
 		</tr>
         {% for error in form.description.errors %}
@@ -202,6 +208,10 @@
             </div>
         </div>
         <div class="subshare_subdescript">
+            {% for error in form.picture.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+            Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
             Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
         </div>
         <div class="subshade_shade"></div>

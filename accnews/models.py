@@ -32,3 +32,13 @@ class AccNews(models.Model):
 
     arg1 = models.PositiveIntegerField(default=0)
     arg2 = models.PositiveIntegerField(default=0)
+
+    readed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-when']
+
+    def was_readed(self):
+        self.readed = True
+        self.save()
+        return u''

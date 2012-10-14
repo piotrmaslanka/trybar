@@ -1,5 +1,6 @@
 # coding=UTF-8
 VOIVODESHIP_CHOICES = (
+    (None, (u'Wybierz województwo')),
     ('lower_silesia', (u'Dolnośląskie')),
     ('kuyavia-pomerania', (u'Kujawsko-pomorskie')),
     ('lublin', (u'Lubelskie')),

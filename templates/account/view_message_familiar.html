@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
+{% load humanize %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/shoutbox.js"></script>
+    <script type="text/javascript" src="/media/js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/view_message.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/shoutbox.css">
+
+{% endblock %}
+
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        PROFIL UŻYTKOWNIKA
+    </div>
+
+    <div id="mbox">
+            <div class="top"></div>
+            <div class="middle" style="height: 150px;">
+                <div class="als">
+                    <span class="aleft lit bold">{{ invitation.befriender.login }}</span>
+                    <span class="lit bold">Zaproszenie</span>
+                    <span class="aright lit">{{ invitation.made_on|date:"j E Y"}}</span>
+                </div>
+                <div class="sepline"></div>
+                <div class="als">
+                    <span class="aleft dim bold">{{ invitation.befriender.city }}</span>
+                    <span class="aright dim">{{ invitation.made_on|date:"H:i" }}</span>
+                </div>
+
+                <div class="msgcontent">
+                    <img src="{{ invitation.befriender.avatar|path:"avatar:84,84" }}">
+                    <div class="als">{{ invitation.befriender.login }} wysłał Ci zaproszenie do grona znajomych</div>
+                    <div class="als m20">
+                        <button class="akceptuj_zaproszenie" onclick="window.location='/profile/message/f{{ invitation.id }}/?accept=1'">
+                        <button class="odrzuc_zaproszenie" onclick="window.location='/profile/messages/remove/?f{{ invitation.id }}=del'">
+                    </div>
+                </div>
+                <div class="gclear"></div>
+            </div>
+            <div class="bottom"></div>
+        </form>
+    </div>
+
+    
+    <div id="left_panel">
+        {% include "includes/profile.html" %}      
+
+        {% include "includes/shoutbox.html" %}
+    </div>
+
+    <div class="gclear"></div>
+{% endblock %}

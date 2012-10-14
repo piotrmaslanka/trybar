@@ -1,6 +1,10 @@
 /* Generic purpose stuff */
 .gclear { clear: both; }
 .gba { width: 100%; height: 100%; display: block; }
+.nflt { float: none !important; } 
+
+a > img { border: none; }
+textarea { font-family: Arial; }
 
 /* site-stuff */
 
@@ -9,8 +13,7 @@ html {
     padding: 0;
     margin: 0;
     font-family: Arial;
-	background: url('../gfx/background.png') center top no-repeat;
-    background-color: #140b04;
+	background: url('/media/gfx/tlo.png') rgb(20, 11, 4) center top no-repeat;
 }
 
 body {
@@ -18,7 +21,6 @@ body {
     margin: 0 auto;
     width: 980px;
     min-height: 100%;
-	background: url('../gfx/background.png') center top no-repeat;
 }
 
 #menu_top1 {
@@ -95,9 +97,9 @@ body {
 #bar_menu {
 	display: block;
 	float: left;
-	width: 750px;
+	width: 768px;
 	height: 37px;
-	margin: 19px 25px 0 205px;
+	margin: 19px 16px 0 196px;
 }
 
 #bar_menu a:link, #bar_menu a:visited {
@@ -113,13 +115,14 @@ body {
 }
 
 #bar_menu a:hover {
-	background: url('../gfx/button_tlo.png');
+	background: url('/media/gfx/button_tlo.png') no-repeat;
 }
 
 #footer {
     padding-top: 25px;
     background: url('../gfx/footer_shadow.png') top center no-repeat;
     width: 980px;
+    z-index: 2;
 }
     #footer > .left {
         float: left;
@@ -154,20 +157,16 @@ body {
     }
     
     #logotyp_goblin {
-        width: 144px;
-        height: 57px;
-        background: url('../CHANGEME/logo1.png');
+        width: 125px;
+        height: 125px;
+        background: url('/media/gfx/ft_partners/goblin.png');
     }
-    #logotyp_trenuje {
-        width: 145px;
-        height: 23px;
-        background: url('../CHANGEME/logo2.png');
+    #logotyp_vidmofonica {
+        width: 125px;
+        height: 125px;
+        background: url('/media/gfx/ft_partners/vidmofonica.png');
     }
-    #logotyp_miastogier {
-        width: 145px;
-        height: 87px;
-        background: url('../CHANGEME/logo3.png');        
-    }
+
 
     #footer > .logotyp a {
         display: block;

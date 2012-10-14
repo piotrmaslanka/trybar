@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load ads %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/http_errors.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+{% endblock %}
+{% block ad %}{{ 12|html_ad }}{% endblock %}
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        BŁĄD
+    </div>
+
+    <div id="decor_right" class="h500"></div>
+    <div id="box_left">
+        <div class="ups">UPS!</div>
+        <div class="text">
+            Wystąpił błąd serwera. Spróbuj ponownie wykonać operacje którą wykonujesz. Administratorzy zostali powiadomieni o błędzie.
+        </div>
+    </div>
+    <div class="gclear"></div>
+</div>
+{% endblock %}

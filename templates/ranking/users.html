@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% load photo %}
+{% load ads %}
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/media/css/ranking.css">
     <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
-    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/contest.css">
 {% endblock %}
+{% block ad %}{{ 1|html_ad }}{% endblock %}
 
 {% block body %}
     <div id="header">
         <div class="right">
-            <div class="left bg"><a href="/ranking/bars/" class="gba">Ranking lokali</a></div>
-            <div class="right"><a href="/ranking/users/" class="gba">Ranking użytkowników</a></div>
+            <div class="left"><a href="/ranking/bars/" class="gba">Ranking lokali</a></div>
+            <div class="right bg"><a href="/ranking/users/" class="gba">Ranking użytkowników</a></div>
         </div>
         <div class="left">RANKING</div>
         <div class="bottom"></div>            
@@ -19,61 +21,38 @@
 
     <div id="leftbox">
         {% if request.user != None %}
-        <div id="my_acc">
-            <span class="header">MOJE KONTO<a href="#">Edytuj profil >></a></span>
-            <div class="info">
-                <img src="{{ request.user.avatar|path:"avatar:84,84" }}" alt="awatar">
-                <div class="stats">
-                    <div>Ranking: <span>{{ profile_ranking }}</span></div>
-                    <div>Punkty: <span>{{ profile_points }}</span></div>
-                    <div>Stały bywalec: <span>{{ profile_frequenter }}</span></div>
-                    <div>Znajomi: <span>{{ profile_familiars }}</span></div>
-                    <div>Poczta: <span>NI</span></div>
-                    <div>Lokale: <span>{{ profile_bars }}</span></div>
-                </div>
-            </div>
-            <div class="buttons">
-                <img id="b_mygal" src="/media/gfx/profil/b_mygal.png" onmouseover='img_hover("b_mygal", "_h");' onmouseout='img_hover("b_mygal", "");'>
-                <img id="b_foto" src="/media/gfx/profil/b_foto.png" onmouseover='img_hover("b_foto", "_h");' onmouseout='img_hover("b_foto", "");'>
-                <img id="b_msg" src="/media/gfx/profil/b_msg.png" onmouseover='img_hover("b_msg", "_h");' onmouseout='img_hover("b_msg", "");' onclick='msg();'>
-                <img id="b_places" src="/media/gfx/profil/b_places.png" onmouseover='img_hover("b_places", "_h");' onmouseout='img_hover("b_places", "");'>
-            </div>
-        </div>  
+            {% include "includes/profile.html" %}
         {% endif %}
 
         <div style="height: 30px; width: 100%;"></div>
 
-        <div id="recentbox">
-            <div class="header">
-                <div class="left">AKTUALNOŚCI</div>
-                <div class="right"><a href="#">Starsze aktualności <span class="more">>></span></a></div>
+        <div id="contestbox">
+            <div class="header">KONKURS</div>
+            <div class="cup-image"></div>
+            <div class="text">
+                Zgarniaj nagrody za zdobyte punkty podczas korzystania z portalu. Dodawaj lokale, zdjęcia i pisz komentarze... Wystarczy tak niewiele by zyskać tak wiele!
             </div>
-            {% for news in newsbar %}
-                {% if forloop.first %}<div class="first">{% else %}<div class="elem">{% endif %}
+            <div class="more"><a href="#"></a></div>
+        </div>
 
-                <a class="header" href="#">{{ news.title }}</a>
-                {% if forloop.first %}
-                    <div class="content">{{ news.get_summary}} <span class="more">>></span></div>
-                {% endif %}
-                <div class="datetime">{{ news|date:"Y.m.d H:i" }}</div>
-            </div>
-            {% endfor %}
-        </div>             
+
     </div>
     <div id="rankingbox">
         <div class="header">
-            <div class="toplokale">TOP LOKALE</div>
-            <div class="nazwalokalu">Nazwa lokalu</div>
-            <div>Średnia ocen</div>
+            <div class="u_topuserzy">TOP UŻYTKOWNICY</div>
+            <div class="u_nazwausera">Nazwa użytkownika</div>
+            <div class="u_obecnymies">Pkt. obecny mies.</div>
+            <div>Pkt. wszystkie</div>
         </div>
-        {% for bar in page.object_list %}
+        {% for account in page.object_list %}
         <div class="entry">
-            <div class="position">{{ bar.meta.rank }}</div>
-            <div class="imgbox"><a href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
+            <div class="position">{{ account.meta.rank }}</div>
+            <div class="imgbox user"><a href="/profile/{{ account.id }}/"><img class="avatar" src="{{ account.avatar|path:"avatar:84,84" }}"></a></div>
             <div class="description">
-                <div class="name"><a href="#">{{ bar.name }}</a></div>
-                <div class="descr"><a href="#">{{ bar.description|slice:":160" }}</a></div>
-                <div class="average"><a href="#">{{ bar.meta.avg }}</a></div>
+                <div class="name"><a href="/profile/{{ account.id }}/">{{ account.login }}</a></div>
+                <div class="descr"><a href="/profile/{{ account.id }}/">{{ account.city }}</a></div>
+                <div class="mpoints">{{ account.last_months_score }}</div>
+                <div class="average">{{ account.meta.score }}</div>
             </div>
         </div>
         {% endfor %}

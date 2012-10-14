@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load ads %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/password_remind.css">
+{% endblock %}
+
+{% block ad %}{{ 8|html_ad }}{% endblock %}
+
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        ODZYSKIWANIE HASŁA
+    </div>
+    
+    <div class="decor"></div>
+    <form action="/login/remind/" method="post">
+    <table class="formtab">
+        {% for error in form.non_field_errors %}        {# error referring to the entire form #}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td class="prompt" colspan="2">
+                Wypełnij poniższe pola aby odzyskać hasło:
+            </td>
+        </tr>
+        <tr>
+            <td class="label">Login<span class="star">*</span>:</td>
+            <td class="field">{{ form.login }}</td>
+            <td class="alert"></td>
+        </tr>
+        <tr>
+            <td class="label">E-mail<span class="star">*</span>:</td>
+            <td class="field">{{ form.email }}</td>
+            <td class="alert"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="miniprompt" colspan="2">
+                Wypełnij poniższe pola aby odzyskać hasło:
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="button">
+                <input type="submit" class="submit" value="">
+            </td>
+        </tr>
+        <td></td>
+        <td class="miniprompt" colspan="2">
+            <span class="star">*</span> Wypełnij wszystkie obowiązkowe pola
+        </td>               
+    </table>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $('.formtab input[type="text"]').focus(highlight_input);
+    $('.formtab input[type="text"]').blur(unhighlight_input);
+</script>
+{% endblock %}

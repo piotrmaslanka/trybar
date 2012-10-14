@@ -1,71 +1,78 @@
-# coding=UTF-8
 {% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/media/css/profil.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <script type="text/javascript" src="/media/js/profil.js"></script>
 {% endblock %}
+
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
 
 {% block body %}
 <div style="inside">
-	<div id="my_acc">
-		<span class="header">MOJE KONTO<a href="#" onclick="my_acc_edit();">Edytuj profil >></a></span>
-		<div id="info">
-			<img src="/uploads/awatar.jpg" alt="awatar">
-			<div id="stats">
-				<div>Ranking: <span>{{ request.user.rank }}</span></div>
-				<div>Punkty: <span>{{ request.user.score }}</span></div>
-				<div>Stały bywalec: <span>0</span></div>
-				<div>Znajomi: <span>0</span></div>
-				<div>Poczta: <span>0</span></div>
-				<div>Lokale: <span>0</span></div>
-			</div>
-		</div>
-		<div id="buttons">
-			<img id="b_mygal" src="/media/gfx/profil/b_mygal.png" onmouseover='img_hover("b_mygal", "_h");' onmouseout='img_hover("b_mygal", "");'>
-			<img id="b_foto" src="/media/gfx/profil/b_foto.png" onmouseover='img_hover("b_foto", "_h");' onmouseout='img_hover("b_foto", "");'>
-			<img id="b_msg" src="/media/gfx/profil/b_msg.png" onmouseover='img_hover("b_msg", "_h");' onmouseout='img_hover("b_msg", "");' onclick='msg();'>
-			<img id="b_places" src="/media/gfx/profil/b_places.png" onmouseover='img_hover("b_places", "_h");' onmouseout='img_hover("b_places", "");'>
-		</div>
+
+	<div id="leftbar">
+        {% if request.user != None %}
+            {% include "includes/profile.html" %}  
+        {% else %}
+            <div style="width: 100%; height: 20px;"></div>
+        {% endif %}
+        {% include "includes/news.html" %}        
 	</div>
+
 	<div id="target_acc">
 		<div id="name">
-			<span id="big">Cudzes</span>
-			<span id="small">Cudzesowo</span>
+			<span id="big">{{ account.login }} - <span class="notbold">{{ account.name }} {{ account.surname }}</span></span>
+			<span id="small">{{ account.city }}</span>
 		</div>
 		<div id="details">
 			<div id="info">
-				<img src="gfx/profil/awatar.jpg" alt="awatar">
+				<img src="{{ account.avatar|path:"avatar:130,130" }}" alt="awatar">
 				<div id="stats">
-					<div>Ranking: <span>1</span></div>
-					<div>Punkty: <span>100</span></div>
-					<div>Stały bywalec: <span>0</span></div>
-					<div>Znajomi: <span>0</span></div>
-					<div>Poczta: <span>0</span></div>
-					<div>Lokale: <span>0</span></div>
+					<div>Ranking: <span>{{ account.meta.rank }}</span></div>
+					<div>Punkty: <span>{{ account.meta.score }}</span></div>
+					<div>Stały bywalec: <span>{{ account.meta.frequenter_count }}</span></div>
+					<div><a href="/profile/{{ account.id }}/familiars/">Znajomi: </a><span><a href="/profile/{{ account.id }}/familiars/">{{ account.meta.familiar_count }}</a></span></div>
+					<div><a href="/profile/{{ account.id }}/bars/">Lokale: </a><span><a href="/profile/{{ account.id }}/bars/">{{ account.meta.bar_count }}</a></span></div>
 				</div>
 			</div>
 		</div>
 		<div id="buttons">
-			<img id="b_gal" src="/media/gfx/profil/b_gal.png" onmouseover='img_hover("b_gal", "_h");' onmouseout='img_hover("b_gal", "");'>
-			<img id="b_msgto" src="/media/gfx/profil/b_msgto.png" onmouseover='img_hover("b_msgto", "_h");' onmouseout='img_hover("b_msgto", "");' onclick='msg_to("Yoozek");'>
-			<img id="b_del" src="/media/gfx/profil/b_del.png" onmouseover='img_hover("b_del", "_h");' onmouseout='img_hover("b_del", "");'>
+			<img id="b_gal" src="/media/gfx/profil/b_gal.png" onmouseover='img_hover("b_gal", "_h");' onmouseout='img_hover("b_gal", "");' onclick="window.location='/building/'">
+            {% if request.user != None %}
+                {% if request.user != account %}
+        			<img id="b_msgto" src="/media/gfx/profil/b_msgto.png" onmouseover='img_hover("b_msgto", "_h");' onmouseout='img_hover("b_msgto", "");' onclick='msg_to("{{ account.login }}");'>
+                    {% if certainly_not_friend %}
+                        <img id="b_add" src="/media/gfx/profil/b_add.png" onmouseover='img_hover("b_add", "_h");' onmouseout='img_hover("b_add", "");' onclick="window.location='/profile/{{ account.id }}/?op=befriend'">
+                    {% endif %}
+                    {% if is_friend and not certainly_not_friend %}
+            			<img id="b_del" src="/media/gfx/profil/b_del.png" onmouseover='img_hover("b_del", "_h");' onmouseout='img_hover("b_del", "");' onclick="window.location='/profile/{{ account.id }}/?op=unfriend'">
+                    {% endif %}
+                {% endif %}
+            {% endif %}
 		</div>
 	</div>
 </div>
 <div id="shadow">
 	<div id="msg_box">
 		<img id="cancel" src="/media/gfx/profil/cancel.png" onmouseover='img_hover("cancel", "_h");' onmouseout='img_hover("cancel", "");' onclick='hide();'>
-		<form action="??" method="post" enctype="multipart/form-data">
+		<form action="/profile/message/send/" method="post" id="form1">
 			<div id="inputs">
 				<span>Osoba, do której chcesz wysłać wiadomość:</span>
-				<input class="small_input" id="msg_target" type="text" name="target" value="">
+				<input class="small_input" id="msg_target" type="text" name="send_to" value="">
 				<span>Temat:</span>
-				<input class="small_input" id="msg_topic" type="text" name="topic" value="">
+				<input class="small_input" id="msg_topic" type="text" name="title" value="">
 				<span>Treść:</span>
-				<textarea id="msg_contents" type="text" name="contents"></textarea>
+				<textarea id="msg_contents" name="content"></textarea>
 			</div>
 		</form>
-		<img id="b_send" src="gfx/profil/b_send.png" onmouseover='img_hover("b_send", "_h");' onmouseout='img_hover("b_send", "");'>
+		<img id="b_send" src="/media/gfx/profil/b_send.png" onmouseover='img_hover("b_send", "_h");' onmouseout='img_hover("b_send", "");' onclick="$('#form1')[0].submit()">
 	</div>
 </div>
+	<div style="clear: both;"></div>
 {% endblock %}

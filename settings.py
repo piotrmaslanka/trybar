@@ -13,7 +13,7 @@ MAIL_PORT = 587
 
 # Django settings for trybar project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -121,12 +121,16 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'django.contrib.sessions',
+    'django.contrib.humanize',
     'trybar.account',
     'trybar.bar',
+    'trybar.adverts',
     'trybar.barevent',
     'trybar.main',
+    'trybar.core',
     'trybar.photo',
     'trybar.barevent',
+    'trybar.search',
     'trybar.ranking',
     'trybar.scoring',
     'trybar.accnews',

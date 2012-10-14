@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
+{% load humanize %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/shoutbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/regulamin.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/shoutbox.css">
+{% endblock %}
+{% block ad %}{{ 10|html_ad }}{% endblock %}
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        REGULAMIN
+    </div>
+
+    <div id="regulamin">
+        <div class="header">§1 Wstęp</div>
+        <ol>
+            <li>Niniejszy Regulamin został sporządzony w oparciu o przepisy prawa obowiązujące na terytorium Rzeczpospolitej Polskiej i określa zasady działania platformy komunikacyjnej (serwisu społecznościowego) funkcjonującej pod domeną www.trybar.pl oraz świadczenia i korzystania z Usług. Regulamin określa prawa i obowiązki Użytkowników.</li>
+            <li>Warunkiem korzystania z Usług jest dokładne zapoznanie się z treścią Regulaminu.</li>
+            <li>Nazwa Serwisu, jego koncepcja, wygląd graficzny, logo, elementy grafiki, oprogramowanie oraz baza danych podlegają ochronie prawnej.</li>
+        </ol>
+        <div class="header">§2 Definicje</div>
+        Użyte w Regulaminie pojęcia oznaczają:
+        <p>Baza Kont - zbiór Danych lub Danych Osobowych zamieszczonych w Serwisie przez Użytkowników, które za zgodą Użytkowników są gromadzone, przetwarzane w uporządkowany sposób w systemie informatycznym, w ramach Usług świadczonych przez Portal;</p>
+        <p>Baza Lokali - zbiór Danych Lokali zamieszczonych w Serwisie przez Użytkowników, które za zgodą Użytkowników są gromadzone, przetwarzane w uporządkowany sposób w systemie informatycznym, w ramach Usług świadczonych przez Portal;</p>
+        <p>Dane – treści, w szczególności informacje, zdjęcia, komentarze, które Użytkownik dobrowolnie umieszcza w Serwisie;</p>
+        <p>Dane Osobowe - zgromadzone w ramach formularza rejestracyjnego dostępnego pod adresem www.trybar.pl/login/register/ informacje dotyczące zidentyfikowania Użytkownika, przetwarzane przez Portal w celu prawidłowego świadczenia Usług określonych w szczególności w Regulaminie Serwisu trybar.pl, jak również w celach operacyjnych i statystycznych związanych z prowadzeniem Serwisu oraz w innych celach wskazanych w odpowiedniej zgodzie udzielonej przez Użytkownika;</p>
+        <p>Dane Lokali - zgromadzone w ramach formularza dodawania baru dostępnego pod adresem www.trybar.pl/bar/add/ informacje dotyczące zidentyfikowania Lokalu, przetwarzane przez Portal w celu prawidłowego świadczenia Usług określonych w szczególności w Regulaminie Serwisu trybar.pl, jak również w celach operacyjnych i statystycznych związanych z prowadzeniem Serwisu oraz w innych celach wskazanych w odpowiedniej zgodzie udzielonej przez Użytkownika;</p>
+        <p>Konto  – udostępnione przez Portal Użytkownikowi miejsce na serwerze, na które Użytkownik wprowadza Dane i w ramach którego administruje Danymi, z którymi mogą się zapoznać inni Użytkownicy, które również może wykorzystywać Portal na warunkach określonych w niniejszym Regulaminie oraz stosownych zgodach danego Użytkownika. Użytkownik decyduje o celach i środkach przetwarzania Danych w ramach jego Konta. W zakresie Konta Użytkownik, z zastrzeżeniem postanowień niniejszego Regulaminu, uzyskuje dostęp do wszystkich Usług w ramach Portalu (za wyjątkiem Usług, które wymagają dodatkowej akceptacji lub dokonania innej czynności prawnej);</p>
+        <p>Login/Nazwa Użytkownika - ciąg znaków wprowadzonych przez Użytkownika w Serwisie na etapie tworzenia Konta, umożliwiający późniejszą identyfikację Użytkownika podczas korzystania z Serwisu. Login, jako techniczny, unikalny ciąg znaków, nie ulega zmianie;</p>
+        <p>Nazwa Lokalu - ciąg znaków wprowadzonych przez Użytkownika w Serwisie na etapie dodawania Lokalu, umożliwiający późniejszą identyfikację Lokalu podczas korzystania z Serwisu. Nazwa Lokalu, jako techniczny, unikalny ciąg znaków, nie ulega zmianie;</p>
+        <p>Serwis/Portal - strona internetowa prowadzona pod domeną trybar.pl;</p>
+        <p>Shoutbox - bezpośredni komunikator internetowy dostępny dla Użytkowników służący komunikacji wewnętrznej w ramach Serwisu.</p>
+        <p>Opis lokalu - treść prezentująca charakter Lokalu, dodawana na etapie dodawania Lokalu - mogąca być w każdej chwili zmodyfikowana w stosownym do tego formularzu. </p>
+        <p>Osoba - osoba fizyczna</p>
+        <p>Lokal – osoba prawna, a także jednostka organizacyjna nieposiadająca osobowości prawnej, której przepisy prawa przyznają zdolność prawną, która została umieszczona w portalu za pośrednictwem formularzu www.trybar.pl/bar/add/;</p>
+        <p>Poczta - usługa dostępna dla Użytkowników służąca komunikacji wewnętrznej w ramach Serwisu, przystosowana do wyświetlania wiadomości;</p>
+        <p>Regulamin - niniejszy dokument określający zasady korzystania z Serwisu, w tym w szczególności prawa i obowiązki Użytkowników;</p>
+        <p>Spam - wiadomości elektroniczne (w szczególności o charakterze komercyjnym) przesyłane w ramach Portalu za pośrednictwem Poczty, Shoutboxa, Komentarzy lub Opisów Lokali jak również umieszczane w innych miejscach Portalu, na których otrzymywanie odbiorca nie wyraził uprzedniej zgody;</p>
+        <p>Komentarz – wiadomość elektroniczna przesyłana w ramach Portalu pod różnymi elementami będącymi integralną częścią portalu;</p>
+        <p>Umowa - umowa o świadczenie usług drogą elektroniczną zawarta między Użytkownikiem a Portalem z chwilą akceptacji Regulaminu przez Użytkownika, o treści odpowiadającej treści Regulaminu;</p>
+        <p>Usługa/Usługi - wszelkie świadczenia Portalu na rzecz Użytkowników lub Lokali wykonywane w ramach Umowy. Użytkownik zawierając Umowę wyraża zgodę na wyświetlanie przez Portal Usług na Koncie Użytkownika oraz ich komunikowanie za pomocą usługi Poczty;</p>
+        <p>Użytkownik - osoba posiadająca pełną zdolność do czynności prawnych, która poprzez akceptację Regulaminu uzyskała dostęp do Usług. Użytkownikiem nie może być osoba fizyczna małoletnia;</p>
+        <div class="header">§3 TECHNICZNE WARUNKI KORZYSTANIA Z SERWISU</div>     
+        <ol>
+            <li>Prowadzenie przez Portalu Trybar obejmuje przede wszystkim:
+                    <ul>
+                        <li>stworzenie Bazy Lokali, m.in. poprzez dodawanie przez Użytkowników Lokali do Bazy Lokali umożliwiającej wyszukiwanie Lokali oraz wystawianie im uwag, ocen i opinii;</li>
+                        <li>stworzenie platformy komunikacyjnej, m.in. poprzez budowanie Bazy Kont umożliwiającej wyszukiwanie Użytkowników oraz wymianę korespondencji, jak również zawieranie nowych znajomości pomiędzy Użytkownikami;</li>
+                        <li>udostępnianie przez Portal przestrzeni serwerowej w celu umieszczania w niej przez Użytkowników Danych;</li>
+                        <li>świadczenie Usług.</li>
+                    </ul>
+            <li>Niezbędnym dla korzystania z Serwisu jest posiadanie przez Użytkownika urządzenia pozwalającego na dostęp do sieci Internet, włącznie z programem służącym do przeglądania jej zasobów, akceptującym pliki cookies oraz konto poczty e-mail (z wyłączeniem tzw. tymczasowych adresów e-mail);</li>            
+            <li>W ramach Serwisu zabronione jest korzystanie z wirusów, botów, robaków bądź innych kodów komputerowych, plików lub programów (w szczególności automatyzujących procesy skryptów i aplikacji bądź innych kodów, plików lub narzędzi).</li>
+            <li>Użytkownik jest świadomy, że korzystanie z oprogramowania typu Adblock Plus lub Flashblock może spowodować nieprawidłowe funkcjonowanie Serwisu lub może całkowicie uniemożliwić korzystanie z niego.</li>
+        </ol>
+        <div class="header">§4 UCZESTNICTWO W SERWISIE</div>
+        <ol>
+            <li>Akceptując niniejszy Regulamin, Użytkownik wyraża zgodę na jego wszystkie warunki i zobowiązuje się do ich przestrzegania. Korzystanie z Serwisu jest jednoznaczne z akceptacją Regulaminu.</li>
+            <li>Serwis przeznaczony jest do korzystania przez Użytkowników.</li>
+            <li>Utworzenie i korzystanie z Konta w zakresie świadczonych przez Portal Usług i funkcjonalności w Serwisie jest dobrowolne i bezpłatne.</li>
+            <li>W przypadku śmierci Użytkownika, będącego osobą fizyczną lub likwidacji Użytkownika będącego osobą prawną lub jednostką organizacyjną nie posiadającą osobowości prawnej, Umowa wygasa natomiast Konto Użytkownika zostaje usunięte na skutek zgłoszenia okoliczności sprawy do Działu Obsługi Użytkownika za pośrednictwem formularza kontaktowego www.trybar.pl/kontakt</li>
+            <li>Procedura rejestracji polega na wypełnieniu formularza znajdującego się pod adresem www.trybar.pl/login/register/ oraz akceptacji niniejszego Regulaminu. Wraz z akceptacją niniejszego Regulaminu następuje zawarcie Umowy.</li>
+            <li>Akceptacja Regulaminu przez Użytkownika Konta jest równoznaczna ze złożeniem oświadczeń następujących treści:
+                <ul>
+                    <li>Zapoznałem się z Regulaminem i akceptuję wszystkie jego postanowienia;</li>
+                    <li>dobrowolnie przystąpiłem do korzystania z Usług Serwisu;</li>
+                    <li>wyrażam zgodę na przetwarzanie moich Danych Osobowych przez Portal, przekazanych pierwotnie w formularzu rejestracyjnym oraz ewentualnie następnie zmienionych w trakcie korzystania z Serwisu, w celu prawidłowego świadczenia Usług określonych w Regulaminie Serwisu, jak również w celach operacyjnych i statystycznych związanych z prowadzeniem Serwisu;</li>
+                    <li>zezwalam na wykorzystywanie mojego wizerunku umieszczonego w Serwisie w celu świadczenia przez Portal Usług i dostarczania funkcjonalności Serwisu, jak również oświadczam, iż Osoby, których wizerunek umieściłem w Serwisie udzieliły takiego zezwolenia;</li>
+                    <li>wyrażam zgodę na otrzymywanie na wskazany w ustawieniach Konta adres poczty elektronicznej oraz na Pocztę informacji systemowych (newsletter Portalu), wiadomości od Portalu oraz informacji o utrudnieniach, zmianach czy przerwach technicznych w działaniu Serwisu czy wiadomości o charakterze komercyjnym od partnerów Portalu;</li>
+                    <li>umieszczenie na Koncie Danych Osobowych, wizerunku oraz informacji, dotyczących innych Osób nastąpiło w sposób legalny, dobrowolny oraz za zgodą tych Osób;</li>
+                    <li>zezwalam na świadczenie przez Portal Usług w ramach mojego Konta na Portalu;</li>
+                    <li>jestem świadomy odpowiedzialności, jaka ciąży na mnie za umieszczenie w Portalu Danych, Danych Osobowych oraz wizerunku osób trzecich bez odpowiedniego zezwolenia;</li>
+                    <li>akceptuję i zobowiązuje się korzystać z Portalu zgodnie z Regulaminem oraz przeznaczeniem Portalu, wynikającym z postanowień Regulaminu;</li>
+                    <li>akceptuję i wyrażam zgodę na usunięcie przez Portal w szczególności umieszczanych przeze mnie w Portalu Danych, które naruszają dobre obyczaje;</li>
+                    <li>akceptuję i wyrażam zgodę na swobodne, w szczególności podyktowane względami technicznymi lub prawnymi, modyfikowanie lub usuwanie przez Portal wyglądu Portalu w tym wyglądu/układu, etc. mojego Konta, jak również umieszczania w ramach Portalu lub Konta (w tym również w ramach Poczty) informacji, okien, banerów, reklam;</li>
+                    <li>w trosce o jakość i poziom Serwisu, akceptuję i wyrażam zgodę na swobodne ustalanie przez Portal zawartości Serwisu, w tym także na usuwanie i modyfikowanie Danych oraz Usług w Serwisie, uniemożliwienia Użytkownikowi dostępu do Serwisu, zaprzestania prowadzenia Serwisu, a także każdej z jego Usług oraz na podjęcie wszelkich dozwolonych przez prawo czynności związanych z Serwisem. </li>
+                </ul> 
+            </li>                       
+        </ol>
+        <div class="header">§5 DANE OSOBOWE</div>
+        <ol>
+            <li>W momencie akceptacji niniejszego Regulaminu, Użytkownik wyraża zgodę na przetwarzanie jego Danych Osobowych przez Portal, zgodnie z warunkami niniejszego Regulaminu oraz określonymi w Polityce Ochrony Prywatności.</li>
+            <li>Portal przetwarza Dane Osobowe Użytkownika w zakresie niezbędnym do nawiązania, ukształtowania treści Umowy, zmiany, rozwiązania oraz prawidłowej realizacji Usług świadczonych drogą elektroniczną.</li>
+            <li>Użytkownik ma prawo wglądu do przetwarzanych Danych Osobowych w każdym czasie, jak również prawo do ich poprawiania.</li>
+            <li>Portal uprawniony jest do udostępniania Danych oraz Danych Osobowych podmiotom upoważnionym na podstawie właściwych przepisów prawa. Portal nie udostępnia wbrew prawu Danych Osobowych innym podmiotom w szczególności nieuprawionym Osobom.</li>
+            <li>Portal uprawniony jest do udostępniania Danych podmiotom współpracującym z Portalem w celach komercyjnych.</li>
+        </ol>
+        <div class="header">§6 PRAWA AUTORSKIE</div>
+        <ol>
+            <li>Użytkownik poprzez umieszczenie Danych, w szczególności wizerunku, materiałów lub wypowiedzi na Koncie własnym lub innego Użytkownika udziela Portalowi niewyłącznej licencji na wykorzystywanie, utrwalania w pamięci komputera, zmienianie, usuwanie, uzupełnianie, wykonywanie publiczne, wyświetlanie publiczne, zwielokrotnianie i rozpowszechnianie (w szczególności w Internecie) tych Danych.</li>
+        </ol>
+        <div class="header">§7 ZASADY KORZYSTANIA Z SERWISU</div>
+        <ol>
+            <li>Podawane przez Użytkownika Dane oraz Dane Osobowe są informacjami jawnymi, które mogą być podane do wiadomości publicznej w ramach Portalu. W szczególności mogą one być dostępne dla osób korzystających z sieci Internet oraz mogą być indeksowane przez wyszukiwarki, czego Użytkownik ma świadomość i na co Użytkownik wyraża zgodę.</li>
+            <li>Zakazuje się udostępniania swojego Konta innym Osobom, jak również korzystania z Kont należących do innych Osób. Zakazuje się również lawinowego, masowego (zautomatyzowanego, pół zautomatyzowanego) tworzenia Kont.</li>
+            <li>Niedopuszczalne są działania mogące w szczególności utrudniać lub destabilizować działanie Portalu lub narazić Portal na utratę renomy lub dobrego imienia. W przypadku stwierdzenia przez Portal, że Użytkownik dopuszcza się takich działań, Portal może niezwłocznie zablokować lub usunąć jego Konto/Konta. Działania Użytkownika polegające na próbie destabilizacji Serwisu mogą być również uznane za przestępstwo, w szczególności w rozumieniu przepisów kodeksu karnego.</li>
+            <li>Zawierając Umowę z Portalem, Użytkownik zobowiązuje się w szczególności do: 
+                <ul>
+                    <li>powstrzymywania się od jakichkolwiek działań mogących utrudnić lub zakłócić funkcjonowanie Portalu oraz od korzystania z Usług Serwisu w sposób uciążliwy dla innych Użytkowników;</li>
+                    <li>powstrzymywania się od jakichkolwiek działań, które naruszałyby prywatność innych Użytkowników, przede wszystkim polegających na zbieraniu, przetwarzaniu i rozpowszechnianiu informacji o innych Użytkownikach bez ich wyraźnej zgody, z wyjątkiem sytuacji, gdy czynności te są zgodne z przepisami prawa i postanowieniami niniejszego Regulaminu;</li>
+                    <li>powstrzymywania się od jakichkolwiek działań, które mogłyby utrudniać lub zakłócać funkcjonowanie Serwisu, a także działań polegających w szczególności na niszczeniu, zmianie, usuwaniu, uszkadzaniu, utrudnianiu dostępu do Kont innych Użytkowników;</li>
+                    <li>niepodejmowania jakichkolwiek działań na szkodę Portalu, Użytkowników i innych podmiotów, w szczególności poprzez zamieszczanie treści upokarzających, poniżających, szargających opinię osób trzecich, jak również poprzez wykorzystywanie nieprawdziwych lub poufnych informacji;</li>
+                    <li>powstrzymywania się od jakichkolwiek działań, które szerzą propagandę lub symbole organizacji, które w Rzeczpospolitej Polskiej są uznane za niekonstytucyjne lub nielegalne;</li>
+                    <li>powstrzymywania się od jakichkolwiek działań, które służą do podstępnego uzyskiwania od innych Użytkowników haseł i danych identyfikacyjnych, w szczególności w szeroko rozumianych celach komercyjnych lub w celach niezgodnych z prawem;</li>
+                    <li>powstrzymywania się od jakichkolwiek działań z wykorzystaniem w szczególności wirusów, botów, robaków bądź innych kodów komputerowych, plików lub programów, które przerywają, niszczą lub ograniczają działanie Portalu lub sprzętu komputerowego albo w inny sposób umożliwiają nieuprawnione korzystanie lub dostęp do komputera bądź sieci komputerowej;</li>
+                    <li>powstrzymywania się od jakiejkolwiek działalności, która wpływa na automatyzację korzystania z systemu (automatyczne dodawanie komentarzy, wyświetlanie, itp.), w tym między innymi korzystania ze skryptów w celu dodania znajomych, dodania Lokali, wysyłania komentarzy, wiadomości, aktualizacji Portalu.</li>
+                </ul>
+            </li>
+        
+                <li>Zabrania się Użytkownikom umieszczania w ramach Portalu i rozpowszechniania za jego pośrednictwem:
+                    <ul>
+                        <li>oprogramowania objętego prawami innych Osób lub firm - bez właściwego upoważnienia;</li>
+                        <li>oprogramowania przeznaczonego w szczególności do nieuprawnionego niszczenia, zmieniania, usuwania, uszkadzania, utrudniania dostępu do danych informatycznych, zakłócania lub uniemożliwiania automatycznego przetwarzania, gromadzenia i przekazywania takich danych, zakłócania pracy systemów i sieci teleinformatycznych;</li>
+                        <li>haseł komputerowych, kodów dostępu lub innych danych umożliwiających nieuprawniony dostęp do informacji przechowywanych w systemie komputerowym lub sieci teleinformatycznej.</li>
+                    </ul>
+                <li>Zamieszczanie w Serwisie treści bezprawnych, obraźliwych, nieprawdziwych, niezgodnych z prawem powszechnie obowiązującym w Polsce, propagujących przemoc, nagannych moralnie lub naruszających powszechnie uznane dobre obyczaje jest zabronione. Dostęp do ww. treści oraz Konta ich autorów może zostać uniemożliwiony, w szczególności po otrzymaniu urzędowego zawiadomienia o bezprawnym charakterze Danych lub związanej z nimi działalności.</li>
+                <li>Zabrania się Użytkownikom wykorzystywania Serwisu do działalności badawczej, w szczególności polegającej na przeprowadzaniu badań, analiz, sondaży opinii publicznej, jak również wykorzystywania Serwisu w sposób sprzeczny z niniejszym Regulaminem, tzn. w szczególności zabronione jest:
+                    <ul>
+                        <li>umieszczanie Danych, tj. treści lub zdjęć o charakterze erotycznym czy pornograficznym, jak również treści epatujących choćby częściową nagością lub sugestywnych, odnoszących się w sposób dorozumiany do ww. treści, naruszających zarówno polskie, jak i międzynarodowe normy prawne oraz moralne, obrazujących lub propagujących przemoc, nienawiść, dyskryminację (rasową, kulturową, etniczną, religijną lub filozoficzną, itp.);</li>
+                        <li>umieszczanie Danych, treści lub zdjęć naruszających dobra osobiste lub obrażających godność innych osób;</li>
+                        <li>rozsyłania spamu/niezamówionej informacji handlowej</li>
+                        <li>uprawiania działalności komercyjnej, reklamowej, promocyjnej, itp. za wyjątkiem indywidualnych uzgodnień z Portalem w ramach których postanowiono inaczej;</li>
+                        <li>wielokrotne wysłanie tej samej wiadomości lub wielu różnych wiadomości w bardzo krótkich odstępach czasu (flooding);</li>
+                    </ul>
+                <li>zabronione jest używanie słów powszechnie uznawanych za obelżywe;</li>
+        </ol>
+    </div>
+    
+    <div id="left_panel">
+        {% if request.user != None %}
+            {% include "includes/profile.html" %}
+        {% endif %}
+        {% include "includes/news.html" %}
+    </div>
+    <div class="gclear"></div>
+</div>
+{% endblock %}

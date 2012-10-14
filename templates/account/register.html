@@ -1,9 +1,15 @@
 {% extends "base.html" %}
+{% load ads %}
+
 {% block head %}
     <script src="/media/js/jquery.selectBox.min.js"></script>
     <script src="/media/js/form_highlighter.js"></script>  
     <link rel="stylesheet" type="text/css" href="/media/css/register.css">
 {% endblock %}
+
+{% block ad %}{{ 5|html_ad }}{% endblock %}
+
+
 {% block body %}
     <div id="form_box">
     <div class="header">
@@ -147,7 +153,7 @@
             <td></td>
             <td class="regu_k">
                 {{ form.regulamin }}
-                Akceptuję regulamin znajdujący się <a href="#">TUTAJ</a>
+                Akceptuję regulamin znajdujący się <a href="/rules/">TUTAJ</a>
             </td>
         </tr>
         {% for error in form.regulamin.errors %}

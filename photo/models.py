@@ -2,14 +2,29 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, RegexValidator
 from datetime import datetime
+from trybar.settings import UPLOAD_ROOT
 from hashlib import sha1
+import os
 
-POSSIBLE_RESOLUTIONS = ((130, 130), (84, 84), (112, None), (222, 124), (137, 97), ())  # empty means 'native'
-                                                                        # single None means 'any value to keep aspect ratio'
+POSSIBLE_RESOLUTIONS = ((130, 130), (84, 84), (112, None), 
+                        (222, 124), (137, 97), (None, 400), 
+                        (980, 150), ())  
+    # empty means 'native'
+    # single None means 'any value to keep aspect ratio'
 
 class Photo(models.Model):
     created_on = models.DateTimeField(default=datetime.now)    
     
+    def delete(self):
+        for resolution in POSSIBLE_RESOLUTIONS:
+            path = self.path_to(*resolution)
+            try:
+                os.unlink(UPLOAD_ROOT+path)
+            except: # It doesn't have to exist at all
+                pass
+            
+        super(Photo, self).delete()
+
     def path_to(self, *resolution):
         """Returns relative path to file with given resolution. It may not exist, depending on type of this photo.
         Invoke like:

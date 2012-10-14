@@ -48,13 +48,17 @@
         margin-top: 5px;
         height: 20px;
     }
-        #rankingbox .header * { float: left; }
-        #rankingbox .header .toplokale { font-weight: bold; width: 220px; }
-        #rankingbox .header .nazwalokalu { width: 310px; }
+        #rankingbox .header > * { float: left; height: 100%; }
+        #rankingbox .header .b_toplokale { font-weight: bold; width: 220px; }
+        #rankingbox .header .b_nazwalokalu { width: 310px; }
+
+        #rankingbox .header .u_topuserzy { font-weight: bold; width: 220px; }
+        #rankingbox .header .u_nazwausera { width: 150px; }
+        #rankingbox .header .u_obecnymies { width: 160px; }
         
-    #rankingbox .entry { clear: both; height: 117px; }
+    #rankingbox .entry { clear: both; height: 110px; }
         
-        #rankingbox .entry * { float: left; }
+        #rankingbox .entry > * { float: left; }
         #rankingbox .entry .position { width: 50px;
             height: 100%;
             color: #FFD100;
@@ -62,11 +66,17 @@
             text-align: center;
         }      
         #rankingbox .entry .imgbox { 
-            text-align: center;
             width: 142px;
             height: 100%;
-            background: url('/media/gfx/ranking/cien_miniaturka.png') bottom no-repeat;
-        }    
+            
+        }   
+            #rankingbox .entry .imgbox.bar { background: url('/media/gfx/ranking/cien_miniaturka.png') bottom center no-repeat; } 
+            #rankingbox .entry .imgbox.user { background: url('/media/gfx/ranking/awatar_cien.png') bottom center no-repeat; }
+            #rankingbox .entry .imgbox.user > a { text-align: auto; }
+            #rankingbox .entry .imgbox .avatar {
+                margin-top: 14px;
+                margin-left: 29px;
+            }
         #rankingbox .entry .description {
             margin-left: 21px;
             width: 407px; height: 98px;
@@ -75,7 +85,7 @@
         }
             #rankingbox .entry .description .name {
                 margin-left: 10px;
-                margin-top: 10px;
+                margin-top: 8px;
             }
                 #rankingbox .entry .description .name a {
                     color: #a88905;
@@ -84,7 +94,7 @@
                 }
             #rankingbox .entry .description .descr {
                 position: absolute;
-                top: 35px;
+                top: 30px;
                 left: 10px;
                 right: 70px;
             }
@@ -93,9 +103,17 @@
                     color: #a88905;
                     text-decoration: none;
                 }
+            #rankingbox .entry .description .mpoints {
+                position: absolute;
+                top: 15px; right: 150px;
+                color: #FFD100;
+                font-size: 20px;
+            }
             #rankingbox .entry .description .average {
                 position: absolute;
-                top: 20px; right: 10px;
+                top: 15px; right: 10px;
+                color: #FFD100;
+                font-size: 20px;            
             }
                 #rankingbox .entry .description .average a {
                     color: #FFD100;
@@ -156,3 +174,78 @@
                     color: rgb(80, 55, 15);
                     text-decoration: none;
                 }
+
+
+
+/* as searching is based on this layout, their CSS goes here.
+search-specific extensions follow: */
+
+#searchbox {    
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 620px;
+    position: relative;
+    height: 92px;
+    background: url('/media/gfx/index/searchbox.png') no-repeat;
+}
+    #searchbox input {
+        display: block;
+        position: absolute;
+        border: none;
+        padding: 0; margin: 0;
+        top: 37px; left: 72px;
+        width: 309px;
+        height: 26px;
+        background-color: transparent;
+        
+        color: #ffd100;
+        font-size: 12px;
+    }
+    #searchbox > .header {
+        margin-left: 20px;
+        font-size: 14px;
+        color: #ffd100;
+        font-weight: bold;
+    }
+    #searchbox > .submit {
+        position: absolute;
+        left: 410px;
+        top: 25px;
+        width: 63px;
+        height: 48px;
+        background: url('/media/gfx/index/searchbar_b.png');        
+    }
+        #searchbox > .submit > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    #searchbox > .submit:hover { background: url('/media/gfx/index/searchbar_b_p.png');  }
+
+
+
+.search_not_found {
+    color: #A88905;
+    font-size: 14px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+#header .right .s_left {
+    width: 155px;
+}
+    #header .right .s_left.bg { background: url('/media/gfx/search/lokal.png'); }
+#header .right .s_right {
+    width: 197px;            
+}        
+    #header .right .s_right.bg { background: url('/media/gfx/search/user.png'); }
+
+
+/* only for bar management list */
+        .manage_button {
+            position: absolute; right: 0px !important;
+            width: 88px; height: 23px; background: url('/media/gfx/manage_bar/zarzadzaj.png') no-repeat;
+        }
+            .manage_button:hover {
+                background: url('/media/gfx/manage_bar/zarzadzaj_p.png') no-repeat;
+            }

@@ -18,6 +18,11 @@ class RegisterForm(forms.ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput)
     regulamin = forms.BooleanField()
 
+    def clean_voivodeship(self):
+        vvs = self.cleaned_data['voivodeship']
+        if vvs in (None, u'None', 'None'):
+            raise forms.ValidationError(u'Wybierz województwo')
+        return vvs
     def clean_login(self):
         login = self.cleaned_data['login']
         try:
@@ -60,6 +65,9 @@ def view(request):
                                                                          'hash_code':inst.activation_get_hash()})
 
             send_mail(inst.email, 'Rejestracja na Trybar', mail_content)
+
+            from trybar.cron.actions import regenerate_user_ranking
+            regenerate_user_ranking(None)
 
             return gpinfo(request, u'Konto zostało zarejestrowane. Za chwilę na twoją skrzynkę powinien przyjść e-mail z linkiem potwierdzającym', '/')
     return render('account/register.html', request, form=form)

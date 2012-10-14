@@ -1,0 +1,10 @@
+Zażądano zresetowania hasła dla {{ login }} na portalu Trybar. By otrzymać nowe hasło, kliknij podany link:
+
+http://www.trybar.pl/login/recover/?&code={{ hash_code }}
+
+Link ten wysłano na adres {{ sent_to }}. Upewnij się że adres ten zgadza się z Twoim kontem pocztowy. Żądanie zresetowania hasła nadano {{ now|date:"Y.m.d H:i" }} z adresu IP {{ ip }}.
+
+Jeśli podejrzewasz atak, nie klikaj w ten link, a wiadomość tą przekaż administracji Trybar.
+
+Pozdrawiamy
+Zespół Trybar

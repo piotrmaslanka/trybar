@@ -9,12 +9,25 @@ from trybar.photo.models import Photo
 from trybar.photo.upload import upload_as, RES_BARPHOTO
 
 # To be... improved. RTFM, Piotruś :)
-BAR_OPEN_HOURS_FROM = (('00:00', '00:00'), ('00:30', '00:30'), ('01:00', '01:00'), ('01:30', '01:30'), ('02:00', '02:00'), 
-                       ('02:30', '02:30'), ('03:00', '03:00'), ('03:30', '03:30'), ('04:00', '04:00'),
-                       ('04:30', '04:30'), ('05:00', '05:00'), ('05:30', '05:30'), ('06:00', '06:00'),
-                       ('06:30', '06:30'), ('07:00', '07:00'), ('07:30', '07:30'), ('08:00', '08:00'),
-                       ('08:30', '08:30'), ('09:00', '09:00'), ('09:30', '09:30'), ('10:00', '10:00'),)
-BAR_OPEN_HOURS_TO = BAR_OPEN_HOURS_FROM
+BAR_OPEN_HOURS_FROM = [ ('', 'Nieznane'),
+ ('05:00', '05:00'), ('05:30', '05:30'), ('06:00', '06:00'), ('06:30', '06:30'),
+ ('07:00', '07:00'), ('07:30', '07:30'), ('08:00', '08:00'), ('08:30', '08:30'),
+ ('09:00', '09:00'), ('09:30', '09:30'), ('10:00', '10:00'), ('10:30', '10:30'),
+ ('11:00', '11:00'), ('11:30', '11:30'), ('12:00', '12:00'), ('12:30', '12:30'),
+ ('13:00', '13:00'), ('13:30', '13:30'), ('14:00', '14:00'), ('14:30', '14:30'),
+ ('15:00', '15:00'), ('15:30', '15:30'), ('16:00', '16:00'), ('16:30', '16:30'),
+ ('17:00', '17:00'), ('17:30', '17:30'), ('18:00', '18:00'), ('18:30', '18:30'),
+ ('19:00', '19:00'), ('19:30', '19:30'), ('20:00', '20:00'), ('20:30', '20:30'),
+ ('21:00', '21:00'), ('21:30', '21:30'), ('22:00', '22:00'), ('22:30', '22:30'),
+ ('23:00', '23:00'), ('23:30', '23:30')]
+BAR_OPEN_HOURS_TO = [ ('', 'Nieznane'),
+ ('17:00', '17:00'), ('17:30', '17:30'), ('18:00', '18:00'), ('18:30', '18:30'),
+ ('19:00', '19:00'), ('19:30', '19:30'), ('20:00', '20:00'), ('20:30', '20:30'),
+ ('21:00', '21:00'), ('21:30', '21:30'), ('22:00', '22:00'), ('22:30', '22:30'),
+ ('23:00', '23:00'), ('23:30', '23:30'), ('00:00', '00:00'), ('00:30', '00:30'),
+ ('01:00', '01:00'), ('01:30', '01:30'), ('02:00', '02:00'), ('02:30', '02:30'),
+ ('03:00', '03:00'), ('03:30', '03:30'), ('04:00', '04:00'), ('04:30', '04:30'),
+ ('05:00', '05:00'), ('05:30', '05:30'), ('06:00', '06:00')]
 
 class Bar(models.Model):
     frontpage_type_display = models.BooleanField(default=False, verbose_name=u'Adres bezpośrednio z /')
@@ -45,7 +58,7 @@ class Bar(models.Model):
     is_billard = models.BooleanField(verbose_name=u'Bilard')
     is_tv = models.BooleanField(verbose_name=u'TV')
 
-    description = models.TextField(verbose_name=u'Opis')
+    description = models.TextField(verbose_name=u'Opis', blank=True)
     
     owner = models.ForeignKey(Account, related_name='bars_owned')
 
@@ -132,7 +145,7 @@ class BarMeta(models.Model):
         # Calculate average marks, and write them to our fields
         avgmark = {}
         for index in indices:
-            if amounts[index] > 3:      # Needs at least 4 marks for a meaningful average
+            if amounts[index] > 0:      # Average can (almost) always be calculated
                 avgmark[index] = round(sums[index] / amounts[index])
             else:
                 avgmark[index] = None
@@ -143,11 +156,11 @@ class BarMeta(models.Model):
         not_null_value_table = [value for index, value in avgmark.iteritems() if value != None]
         amount_of_marks = len(not_null_value_table) # Amount of not-null averages
         
-        if amount_of_marks < 8:     # There is no meaningful average
+        if amount_of_marks < 1:     # There is no meaningful averages
             self.avg = None
         else:
             self.avg = sum(not_null_value_table) / amount_of_marks
-        
+
         # Save this instance
         self.save()
     

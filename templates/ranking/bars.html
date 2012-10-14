@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load photo %}
+{% load ads %}
+{% load core %}
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/media/css/ranking.css">
     <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
     <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
 {% endblock %}
+{% block ad %}{{ 4|html_ad }}{% endblock %}
 
 {% block body %}
     <div id="header">
@@ -19,61 +22,25 @@
 
     <div id="leftbox">
         {% if request.user != None %}
-        <div id="my_acc">
-            <span class="header">MOJE KONTO<a href="#">Edytuj profil >></a></span>
-            <div class="info">
-                <img src="{{ request.user.avatar|path:"avatar:84,84" }}" alt="awatar">
-                <div class="stats">
-                    <div>Ranking: <span>{{ profile_ranking }}</span></div>
-                    <div>Punkty: <span>{{ profile_points }}</span></div>
-                    <div>Stały bywalec: <span>{{ profile_frequenter }}</span></div>
-                    <div>Znajomi: <span>{{ profile_familiars }}</span></div>
-                    <div>Poczta: <span>NI</span></div>
-                    <div>Lokale: <span>{{ profile_bars }}</span></div>
-                </div>
-            </div>
-            <div class="buttons">
-                <img id="b_mygal" src="/media/gfx/profil/b_mygal.png" onmouseover='img_hover("b_mygal", "_h");' onmouseout='img_hover("b_mygal", "");'>
-                <img id="b_foto" src="/media/gfx/profil/b_foto.png" onmouseover='img_hover("b_foto", "_h");' onmouseout='img_hover("b_foto", "");'>
-                <img id="b_msg" src="/media/gfx/profil/b_msg.png" onmouseover='img_hover("b_msg", "_h");' onmouseout='img_hover("b_msg", "");' onclick='msg();'>
-                <img id="b_places" src="/media/gfx/profil/b_places.png" onmouseover='img_hover("b_places", "_h");' onmouseout='img_hover("b_places", "");'>
-            </div>
-        </div>  
+            {% include "includes/profile.html" %}
         {% endif %}
 
-        <div style="height: 30px; width: 100%;"></div>
-
-        <div id="recentbox">
-            <div class="header">
-                <div class="left">AKTUALNOŚCI</div>
-                <div class="right"><a href="#">Starsze aktualności <span class="more">>></span></a></div>
-            </div>
-            {% for news in newsbar %}
-                {% if forloop.first %}<div class="first">{% else %}<div class="elem">{% endif %}
-
-                <a class="header" href="#">{{ news.title }}</a>
-                {% if forloop.first %}
-                    <div class="content">{{ news.get_summary}} <span class="more">>></span></div>
-                {% endif %}
-                <div class="datetime">{{ news|date:"Y.m.d H:i" }}</div>
-            </div>
-            {% endfor %}
-        </div>             
+        {% include "includes/news.html" %}            
     </div>
     <div id="rankingbox">
         <div class="header">
-            <div class="toplokale">TOP LOKALE</div>
-            <div class="nazwalokalu">Nazwa lokalu</div>
+            <div class="b_toplokale">TOP LOKALE</div>
+            <div class="b_nazwalokalu">Nazwa lokalu</div>
             <div>Średnia ocen</div>
         </div>
         {% for bar in page.object_list %}
         <div class="entry">
             <div class="position">{{ bar.meta.rank }}</div>
-            <div class="imgbox"><a href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
+            <div class="imgbox bar"><a href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
             <div class="description">
                 <div class="name"><a href="/bar/{{ bar.slugname }}/">{{ bar.name }}</a></div>
-                <div class="descr"><a href="/bar/{{ bar.slugname }}/">{{ bar.description|slice:":160" }}</a></div>
-                <div class="average"><a href="/bar/{{ bar.slugname }}/">{{ bar.meta.avg }}</a></div>
+                <div class="descr"><a href="/bar/{{ bar.slugname }}/">{{ bar.description|word_slice:":15" }}</a></div>
+                <div class="average"><a href="/bar/{{ bar.slugname }}/">{{ bar.meta.avg|round_float:"2" }}</a></div>
             </div>
         </div>
         {% endfor %}

@@ -21,10 +21,15 @@
 	text-align: center;
 	font-size: 12px;
 	padding: 5px;
+	display: table;
+	vertical-align: middle;
 }
+	#pole div {
+		display: table-cell;
+		vertical-align: middle;
+	}
 
 #guzik {
-
 	display: block;
 	margin: 0 auto 200px auto;
 }

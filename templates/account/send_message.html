@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/fancybox.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/send_message.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/fancybox.css">
+{% endblock %}
+
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
+
+{% block forebody %}
+    <div style="display: none;">
+        <div id="friends_and_relatives">
+            {% for friend in request.user.familiar_set %}
+                <div class="froline" onclick="$('#send_to').val('{{ friend.login }}'); $.fancybox.close();">
+                    <img src="{{ friend.avatar|path:"avatar:84,84" }}"> {{ friend.login }}
+                </div>
+                <div class="sepbar"></div>
+            {% empty %}                   
+                <div class="froline">
+                    Nie masz żadnych znajomych
+                </div>                
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div id="header">
+        <div class="left">NAPISZ WIADOMOŚĆ</div>
+        <div class="bottom"></div>            
+    </div>
+
+    <div id="leftbox">
+        {% if request.user != None %}
+            {% include "includes/profile.html" %}
+        {% endif %}
+
+        {% include "includes/news.html" %}             
+    </div>
+    <div id="contentbox">
+        <form action="/profile/message/send/" method="post">
+            {% if success %}
+            <span class="success">Pomyślnie wysłano wiadomość</span><br>
+            {% endif %}
+            Wybierz osobę, do której chcesz wysłać wiadomość:
+            {% for error in form.send_to.errors %}<br><span class="error">{{ error }}</span>{% endfor %}
+            <div class="textfield" href="#friends_and_relatives" id="send_to_hook">{{ form.send_to }}</div>
+            Temat
+            {% for error in form.title.errors %}<br><span class="error">{{ error }}</span>{% endfor %}
+            <div class="textfield">{{ form.title }}</div>
+            Treść wiadomości
+            {% for error in form.content.errors %}<br><span class="error">{{ error }}</span>{% endfor %}
+            <div class="textarea">{{ form.content }}</div>
+            <input type="submit" value="" id="submit">
+        </form>
+    </div>
+    <div style="clear: both;"></div>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#send_to').click(function() { $('#send_to_hook').fancybox(); });
+        })
+    </script>
+{% endblock %}

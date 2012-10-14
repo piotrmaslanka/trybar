@@ -1,0 +1,113 @@
+#leftbox {
+    float: left;
+    width: 300px;   
+}
+
+#header {
+    margin-top: 10px;
+    color: #FFD100;
+    width: 980px;
+    border-bottom: 1px solid #463108;   
+    position: relative;
+    height: 36px;
+}
+    #header > .left {
+        font-size: 14px;
+        font-weight: bold;
+        height: 36px;
+        line-height: 36px;
+    }
+    #header .bottom { clear: both; }
+
+#contentbox {
+    margin-top: 20px;
+    width: 615px;
+    margin-left: 65px;
+    float: right;
+    background: url('/media/gfx/send_message/tlo.png') no-repeat;
+    height: 490px;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+
+    padding-top: 20px;
+}   
+    .success { color: green; font-weight: bold; }
+    .error { color: red; }
+    .textfield {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 285px;
+        height: 34px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        background: url('/media/gfx/send_message/pole_tekstowe_male.png');
+    }
+        .textfield input {
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            background-color: #4a2b16;
+            border: none;
+            color: white;
+        }
+
+        .textarea {
+            width: 570px;
+            height: 264px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            background: url('/media/gfx/send_message/pole_tekstowe_duze.png');
+        }
+        .textarea textarea {
+            position: absolute;
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            background-color: #4a2b16;
+            border: none;
+            color: white;
+            width: 558px;
+            height: 252px;
+        }
+
+        #submit {
+            width: 56px;
+            height: 24px;
+            margin-left: auto;
+            margin-right: auto;
+            border: none;
+            background: url('/media/gfx/send_message/button_wyslij.png');
+        }
+            #submit:hover { background: url('/media/gfx/send_message/button_wyslij_p.png'); }
+
+
+/* stuff for fancybox targeting */
+#friends_and_relatives {
+    background-color: #676151;
+    width: 400px;
+    height: 600px;
+    overflow: auto;
+}
+.froline {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}            
+    .froline img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        margin-left: 10px;
+        float: left;
+    }
+.sepbar {
+    border-bottom: 1px solid black;
+    width: 100;%
+    height: 1px;
+}

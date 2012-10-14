@@ -1,0 +1,114 @@
+#form_box {
+    margin-top: 30px;
+}
+
+#form_box > .header {
+    font-size: 12px;
+    color: #ffcc00;
+    font-weight: bold;
+    width: 960px;
+    line-height: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(101, 70, 16);
+}
+
+#leftpanel {
+    float: left;
+    width: 300px;
+}
+
+
+#mbox {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 615px;
+    float: right; 
+    margin-right: 20px;   
+}
+    #mbox .top {
+        height: 24px;
+        width: 100%;
+        background: url('/media/gfx/inbox/tlo_gora.png');
+    }
+    #mbox .middle {
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 575px;
+        background: url('/media/gfx/inbox/tlo_sample.png') repeat-y;
+    }
+        #mbox .bold { font-weight: bold; }
+            #mbox .bold a { font-weight: bold; }
+        #mbox .aleft { float: left; }
+        #mbox .aright { float: right; }
+        #mbox .lit { color: #FC0; }
+            #mbox .lit a { color: #FC0; text-decoration: none; } 
+        #mbox .dim { color: #A88905;}
+            #mbox .dim a { color: #A88905; text-decoration: none; }
+        #mbox .als { 
+            text-align: center;
+            font-size: 13px; 
+        }
+            #mbox .mt { margin-top: 50px !important; }
+            #mbox .m20 { margin-top: 40px;}
+
+        #mbox .msgcontent {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            font-size: 13px;
+            color: white;
+        }
+        #mbox .sepline {
+            border-bottom: 1px solid #523b0a;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            height: 1px;
+        }
+
+        #mbox .msgcontent img {
+            float: left; 
+            margin-right: 20px;
+        }
+
+        #mbox button {
+            border: none;
+        } 
+            #mbox .usun_wiadomosc {
+                width: 121px;
+                height: 24px;
+                background: url('/media/gfx/view_message/usun.png');
+            }
+                #mbox .usun_wiadomosc:hover {
+                    background: url('/media/gfx/view_message/usun_p.png');
+                }
+            #mbox .odpowiedz {
+                width: 121px;
+                height: 24px;
+                background: url('/media/gfx/view_message/odpowiedz.png');
+            }
+                #mbox .odpowiedz:hover { background: url('/media/gfx/view_message/odpowiedz_p.png'); }
+
+            #mbox .akceptuj_zaproszenie {
+                width: 89px;
+                height: 24px;
+                background: url('/media/gfx/view_message/akceptuj.png');
+            }
+                #mbox .akceptuj_zaprosze:hover {
+                    background: url('/media/gfx/view_message/akceptuj_p.png');       
+                }
+            #mbox .odrzuc_zaproszenie {
+                width: 89px;
+                height: 24px;
+                background: url('/media/gfx/view_message/odrzuc.png');
+            }
+                #mbox .odrzuc_zaproszenie:hover {
+                    background: url('/media/gfx/view_message/odrzuc_p.png');       
+                }
+
+    #mbox .bottom {
+        height: 24px;
+        width: 100%;
+        background: url('/media/gfx/inbox/tlo_dol.png');
+    }
+
+    
+.clear { clear: both; height: 20px; }

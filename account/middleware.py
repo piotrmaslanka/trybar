@@ -31,6 +31,8 @@ class AuthenticationManagementMiddleware(object):
             to log in (such as activation or bans).
             """
             request.session['Account_id'] = aobj.id
+            request.session['is_Admin'] = aobj.login in ('Dom', 'henrietta')
+
     
         request.user = None
         if 'Account_id' in request.session:

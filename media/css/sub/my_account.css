@@ -1,5 +1,6 @@
 #my_acc {
 	margin-top: 20px;
+	margin-bottom: 15px;
 	padding: 10px;
     width: 280px;
     height: 230px;
@@ -8,6 +9,7 @@
 
 #my_acc .header {
 	display: block;
+	position: relative;
 	font-size: 14px;
 	color: #FFD100;
 	font-weight: bold;
@@ -15,7 +17,8 @@
 }
 
 	#my_acc .header > a {
-		float: right;
+		position: absolute;
+		right: 0;
 		font-size: 12px;
 		color: #a88905;
 		font-weight: normal;
@@ -58,6 +61,13 @@
 				#my_acc > .info > .stats  > div > span {
 					float: right;
 				}
+			#my_acc > .info > .stats a {
+				text-decoration: none;
+				color: #EED100;		
+			}
+				#my_acc > .info > .stats a:hover {
+					text-decoration: underline;
+				}
 				
 	#my_acc > .buttons {
 		display: block;
@@ -66,8 +76,8 @@
 		overflow: auto;
 	}
 		
-	#my_acc > .buttons > img{
-		margin: 2px;
+	#my_acc > .buttons a {
+		text-decoration: none;
 		float: left;
-		cursor: pointer;
+		margin: 2px;
 	}

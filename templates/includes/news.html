@@ -1,0 +1,19 @@
+{% load photo %}
+{% load core %}
+{% load humanize %}
+<div id="recentbox">
+    <div class="header">
+        <div class="left">AKTUALNOŚCI</div>
+        <div class="right"><a href="/news/">Starsze aktualności <span class="more">»</span></a></div>
+    </div>
+    {% for news in newsbar %}
+        {% if forloop.first %}<div class="first">{% else %}<div class="elem">{% endif %}
+
+        <a class="header" href="/news/{{ news.id }}/">{{ news.title }}</a>
+        {% if forloop.first %}
+            <div class="content"><a href="/news/{{ news.id }}/">{{ news.content|word_slice:":5" }} <span class="more">»</span></a></div>
+        {% endif %}
+        <div class="datetime">{{ news|date:"Y.m.d H:i" }}</div>
+    </div>
+    {% endfor %}
+</div>     

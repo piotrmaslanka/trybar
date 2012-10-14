@@ -14,7 +14,7 @@ class Account(models.Model):
     login = models.CharField(max_length=25, verbose_name=u'Login', unique=True, validators=[MinLengthValidator(3)])
     password = models.CharField(max_length=40)  # SHA-1 hash of (login.encode('utf8')+password.encode('utf8'))
     city = models.CharField(max_length=25)
-    voivodeship = models.CharField(max_length=30, choices=VOIVODESHIP_CHOICES)
+    voivodeship = models.CharField(max_length=30, choices=VOIVODESHIP_CHOICES[1:])
     email = models.EmailField(max_length=254, verbose_name=u'Email')
     gadu = models.CharField(max_length=20, verbose_name=u'Nr GG', validators=[RegexValidator(r'\d+')], blank=True)
     phone = models.CharField(max_length=25, verbose_name=u'Nr tel.', blank=True)
@@ -50,6 +50,7 @@ class Account(models.Model):
 
     @property
     def familiar_set(self):
+        """Returns confirmed familiars - Accounts"""
         return itertools.chain(
           [acc.befriendee for acc in Familiar.objects.filter(befriender=self, confirmed=True) \
                                                     .select_related('befriendee')],
@@ -57,11 +58,54 @@ class Account(models.Model):
                                                     .select_related('befriender')]
         )
 
+    @property 
+    def last_months_score(self):
+        """KINDA TEMPORARY"""      
+        from trybar.scoring import last_monthly_score_for  
+        return last_monthly_score_for(self)
+
+class AccountMail(models.Model):
+    sender = models.ForeignKey(Account, related_name='mail_sent')
+    recipient = models.ForeignKey(Account, related_name='mail_received')
+    readed_yet = models.BooleanField(default=False)
+
+    title = models.CharField(max_length=80)
+    content = models.TextField()
+
+    sent_on = models.DateTimeField(default=datetime.now)
+
+class PasswordRecoveryToken(models.Model):
+    account = models.ForeignKey(Account)
+    token = models.CharField(max_length=40) # some SHA-1 hash, as a hexdigest
+    sent_to = models.EmailField(max_length=254)
+    ipreq = models.CharField(max_length=15)
+
+    started_on = models.DateTimeField(default=datetime.now)
+
+class Shout(models.Model):
+    sender = models.ForeignKey(Account, related_name='shouts_made')
+    recipient = models.ForeignKey(Account, related_name='shouts_to')
+    content = models.CharField(max_length=1200)
+    when_made = models.DateTimeField(default=datetime.now)
+
 class Familiar(models.Model):
     befriender = models.ForeignKey(Account, related_name='befriender_set')
     befriendee = models.ForeignKey(Account, related_name='befriendee_set')
     made_on = models.DateTimeField(default=datetime.now)
     confirmed = models.BooleanField(default=False)
+    readed_yet = models.BooleanField(default=False)     # as a message simulacrum
+
+class AccountPhoto(models.Model):
+    account = models.ForeignKey(Account, related_name='photos')
+    made_on = models.DateTimeField(default=datetime.now)
+    photo = models.ForeignKey(Photo)
+    description = models.TextField()
+
+class AccountPhotoComment(models.Model):
+    photo = models.ForeignKey(AccountPhoto, related_name='comments')
+    made_on = models.DateTimeField(default=datetime.now)
+    content = models.TextField()
+    commentor = models.ForeignKey(Account)
 
 class AccountMeta(models.Model):
     """Statistics"""
@@ -70,11 +114,13 @@ class AccountMeta(models.Model):
     rank = models.IntegerField(null=True)    # null means 'totally outta ranking'
     score = models.IntegerField(default=0)
 
+    last_ping = models.DateTimeField(default=datetime.now)
+
     @property
     def familiar_count(self):
         """Left as a property, as it may get cached in the DB in future"""
         return Familiar.objects.filter(befriender=self, confirmed=True).count() + \
-               Familiar.objects.filter(befriender=self, confirmed=True).count()
+               Familiar.objects.filter(befriendee=self, confirmed=True).count()
 
     @property
     def frequenter_count(self):
@@ -88,3 +134,4 @@ class AccountMeta(models.Model):
         """For usage by trybar.scoring"""
         self.score += score
         self.save()
+

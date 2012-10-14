@@ -1,78 +1,109 @@
 #inside {
-	display: block;
 	width: 980px;
-	height: 1000px;
-	overflow: auto;
-	background: url('../gfx/index/decor.png') 240px 25px no-repeat;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.header {
-	display: block;
-	margin-left: 20px;
-	font-size: 14px;
-	color: #FFD100;
-	font-weight: bold;
+#decoration {
+    position: absolute;
+	top: -60px;
+    left: 245px;
+    background: url('/media/gfx/index/decor.png');
+    width: 849px;
+    height: 739px;
 }
-	
+
+#content { height: 810px; width: 980px; 
+	margin-top: 60px;
+	margin-left: auto; margin-right: auto; position: relative; }
+
 #searchbox {
-    position: relative;
-	margin: 85px 0 18px 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+	
     width: 523px;
     height: 92px;
-    background: url('../gfx/index/searchbox.png');
+    background: url('/media/gfx/index/searchbox.png');
 }
-
-	#searchbox input {
-		border: none;
-		padding: 0;
-		margin: 21px 0 0 72px;
-		width: 309px;
-		height: 26px;
-		background-color: transparent;
-		color: #ffd100;
-		font-size: 12px;
-	}
-
-	#searchbox div {
-		float: left;
-	}
+    #searchbox input {
+        display: block;
+        position: absolute;
+        border: none;
+        padding: 0; margin: 0;
+        top: 37px; left: 72px;
+        width: 309px;
+        height: 26px;
+        background-color: transparent;
+        
+        color: #ffd100;
+        font-size: 12px;
+    }
+    #searchbox > .header {
+        margin-left: 20px;
+        font-size: 14px;
+        color: #ffd100;
+        font-weight: bold;
+    }
+    #searchbox > .submit {
+        position: absolute;
+        left: 410px;
+        top: 25px;
+        width: 63px;
+        height: 48px;
+        background: url('/media/gfx/index/searchbar_b.png');        
+    }
+        #searchbox > .submit > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    #searchbox > .submit:hover { background: url('/media/gfx/index/searchbar_b_p.png');  }
 	
-	#searchbox img {
-		float: left;
-		margin: 25px 0 0 29px;
-	}
-
 #top_places {
-	position: relative;
-	margin: 13px 0 0 20px;
+	position: absolute;
+	top: 110px;
+	left: 20px;
+	
 	width: 406px;
-	height: auto;
-	overflow: hidden;
 }
-
+	#top_places > .header {
+		color: #ffd100;
+		font-size: 14px;
+		margin-bottom: 10px;
+        height: 19px;
+        font-weight: bold;
+        background: url('/media/gfx/index/bg_header.png');
+	}
 	#top_places > .elem {
-		display: block;
-		width: 406px;
 		height: 117px;
 	}
-	
-	#top_places > .elem > .numbers { float: left; width: 36px; height: 35px; }	
-	
-	#top_places > .elem > .el_img { 
-		float: left;
-		width: 142px;
-		height: 113px;
-		background: url('../gfx/index/topplaces_shade.png') bottom center no-repeat;
-	}
-	
-	#top_places > .elem > .el_img > img{ 
-		display: block;
-		width: 92px;
-		height: 92px;
-		margin: auto;
-		border: 1px solid #000;
-	}
-	
+		#top_places > .elem > .left { 
+			float: left; 
+			width: 36px;
+			height: 35px;
+		}
+			#top_places > .elem > .left * { width: 36px; height: 35px; }
+			#top_places > .elem > .left > .elem1 { background: url('/media/gfx/index/1.png'); }
+			#top_places > .elem > .left > .elem1:hover { background: url('/media/gfx/index/1_p.png'); }
+			#top_places > .elem > .left > .elem2 { background: url('/media/gfx/index/2.png'); }
+			#top_places > .elem > .left > .elem2:hover { background: url('/media/gfx/index/2_p.png'); }
+			#top_places > .elem > .left > .elem3 { background: url('/media/gfx/index/3.png'); }
+			#top_places > .elem > .left > .elem3:hover { background: url('/media/gfx/index/3_p.png'); }
+			
+		#top_places > .elem > .center { 
+            float: left;
+            width: 142px;
+            height: 113px;
+            background: url('/media/gfx/index/topplaces_shade.png') bottom center no-repeat;
+        }
+            #top_places > .elem > .center > a {
+                border: none;
+            }
+            #top_places > .elem > .center > a > img {
+                border: none;
+                display: inline;
+            }
 		#top_places > .elem > .right { 
 			position: relative;
 		
@@ -80,7 +111,7 @@
 			padding: 8px 5px 5px 10px;
 			width: 196px;			
 			height: 85px;
-			background: url('../gfx/index/topplaces_desc_bg.png');
+			background: url('/media/gfx/index/topplaces_desc_bg.png');
 		}		
 			#top_places > .elem > .right > .title {
 				font-size: 14px;
@@ -92,22 +123,173 @@
                 text-decoration: none;
             }
 			#top_places > .elem > .right > .title > a:hover { text-decoration: underline; }
-			#top_places > .elem > .right > .text {
+			#top_places > .elem > .right > .text a {
 				font-size: 11px;
 				color: #6f550b;
+                text-decoration: none;
 			}
-			#top_places > .elem > .right > .text:hover { text-decoration: underline; }
-			#top_places > .elem > .right > .more {
-				position: absolute;
-				bottom: 5px;
-				right: 5px;
-				width: 22px;
-				height: 23px;
-				background: url('../gfx/index/button_rarrow.png');
-			}
-                #top_places > .elem > .right > .more > a {
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                }
-			#top_places > .elem > .right > .more:hover { background: url('../gfx/index/button_rarrow_p.png'); }
+			#top_places > .elem > .right > .text a:hover { text-decoration: underline; }
+    #top_places > .more {
+        float: right;
+        width: 146px;
+        height: 35px;
+        background: url('/media/gfx/index/topplaces_button.png');
+    }
+        #top_places > .more > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #top_places > .more:hover { background: url('/media/gfx/index/topplaces_button_p.png'); }
+#recentbox {
+    width: 403px;
+    position: absolute;
+    top: 550px;
+}
+    #recentbox > .header {
+        width: 403px;
+        height: 30px;
+        background: url('/media/gfx/index/bg_header.png') bottom center no-repeat;
+    }
+        #recentbox > .header > .left {
+            color: #ffd100;
+            font-size: 14px;
+            font-weight: bold;
+            float: left;
+        }
+        #recentbox > .header > .right {        
+            float: right;
+        }
+            #recentbox > .header > .right > a {
+                display: block;
+                font-size: 11px;
+                color: #956e0f;
+                text-decoration: none;
+            }
+            #recentbox > .header > .right > a:hover { text-decoration: underline; }
+	#recentbox > .first {
+        width: 403px;
+        padding-top: 10px;
+        padding-bottom: 8px;
+        background: url('/media/gfx/index/recentbox_shade.png') bottom center no-repeat;        
+    }
+        #recentbox > .first > a.header {
+            display: block;
+            color: #ffd100;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+            #recentbox > .first > .header:hover { text-decoration: underline; }
+        #recentbox > .first > .content {
+            padding-bottom: 10px;
+        }
+            #recentbox > .first > .content a {
+                color: #a17a0a;
+                font-size: 13px;
+                text-decoration: none;
+            }
+            #recentbox > .first > .content a:hover { text-decoration: underline; }
+        #recentbox > .first > .datetime {
+            color: #a17a0a;
+            font-size: 9px;      
+            margin-bottom: 10px;          
+        }        
+	#recentbox > .elem {
+        width: 403px;
+        padding-top: 10px;
+        padding-bottom: 8px;
+        background: url('/media/gfx/index/recentbox_shade.png') bottom center no-repeat;        
+    }
+        #recentbox > .elem > a.header {
+            display: block;
+            text-decoration: none;
+            color: #ffd100;
+            font-size: 14px;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+            #recentbox > .elem > .header:hover { text-decoration: underline; }
+        #recentbox > .elem > .datetime {
+            color: #a17a0a;
+            font-size: 9px;      
+            margin-bottom: 10px;
+        }        
+#contestbox {
+    position: absolute;
+    top: 350px;
+    right: 53px;
+    width: 475px;    
+}
+    #contestbox > .header {
+        font-size: 14px;
+        color: #ffd100;
+        font-weight: bold;
+        height: 19px;
+        background: url('/media/gfx/index/bg_header.png');        
+    }
+    #contestbox > .cup-image {
+        float: left;
+        width: 92px;
+        height: 91px;
+        padding-left: 5px;
+        background: url('/media/gfx/index/cup-image.png') center no-repeat;
+        
+    }
+    #contestbox > .text {
+        margin-top: 20px;
+        margin-left: 5px;
+        color: #ffd100;
+        font-size: 11px;
+    }
+	#contestbox > .more {
+        clear: both;
+        float: right;
+        width: 78px;
+        height: 35px;
+        background: url('/media/gfx/index/more_b.png'); 
+    }
+        #contestbox > .more > a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #contestbox > .more:hover { background: url('/media/gfx/index/more_b_p.png'); }
+        
+#whatistrybar {
+    position: absolute;
+    width: 480px;
+    top: 510px;
+    right: 53px;
+}
+    #whatistrybar > .header {
+        font-size: 12px;
+        color: #ffd100;
+        font-weight: bold;
+        height: 19px;
+        background: url('/media/gfx/index/bg_header.png');        
+    }
+    #whatistrybar > .elem {
+        width: 222px;
+        height: 49px;
+        background: url('/media/gfx/index/whatistrybar_bg.png');
+        line-height: 49px;
+        padding-left: 10px;
+        
+        font-size: 11px;
+
+        margin-top: 10px;
+    }
+        #whatistrybar > .elem > a {
+            color: #ffd100;
+            font-weight: bold;  
+            text-decoration: none;
+            
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #whatistrybar > .elem:hover { text-decoration: underline; color: #ffd100; }
+    #whatistrybar > .left { float: left; }
+    #whatistrybar > .right { float: right; }

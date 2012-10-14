@@ -42,9 +42,15 @@
         color: #987407;
         float: left;
         margin-left: 10px;
-        line-height: 20px;
-        
+        line-height: 20px;    
     }
+        #bar_header .address a {
+            text-decoration: none;
+            color: #987407;
+        }
+            #bar_header .address a:hover {
+                text-decoration: underline;
+            }
     
     #bar_header .buttons {
         float: right; 
@@ -57,37 +63,37 @@
             margin-right: 10px;
             width: 114px;
             height: 36px;
-            background: url('/media/gfx/bar/button_naduzycie.png');            
+            background: url('/media/gfx/bar/button_naduzycie.png') no-repeat;            
         }
             #bar_header #button_naduzycie:hover {
-                background: url('/media/gfx/bar/button_naduzycie_p.png');
+                background: url('/media/gfx/bar/button_naduzycie_p.png') no-repeat;
             }
         #bar_header #button_bywalec {
             margin-right: 10px;
             width: 189px;
             height: 36px;
-            background: url('/media/gfx/bar/button_bywalec.png');            
+            background: url('/media/gfx/bar/button_bywalec.png') no-repeat;
         }
             #bar_header #button_bywalec:hover {
-                background: url('/media/gfx/bar/button_bywalec_p.png');
+                background: url('/media/gfx/bar/button_bywalec_p.png') no-repeat;
             }
         #bar_header #button_niebywalec {
             margin-right: 10px;
             width: 189px;
             height: 36px;
-            background: url('/media/gfx/bar/button_niebywalec.png');            
+            background: url('/media/gfx/bar/button_niebywalec.png') no-repeat;
         }
             #bar_header #button_niebywalec:hover {
-                background: url('/media/gfx/bar/button_niebywalec_p.png');
+                background: url('/media/gfx/bar/button_niebywalec_p.png') no-repeat;
             }
         #bar_header #button_dodajzdjecie {
             margin-right: 10px;
             width: 102px;
             height: 36px;
-            background: url('/media/gfx/bar/button_dodaj.png');            
+            background: url('/media/gfx/bar/button_dodaj.png') no-repeat;
         }
             #bar_header #button_dodajzdjecie:hover {
-                background: url('/media/gfx/bar/button_dodaj_p.png');
+                background: url('/media/gfx/bar/button_dodaj_p.png') no-repeat;
             }
     #imprezy_box {
         margin-top: 10px;
@@ -343,6 +349,7 @@
             width: 319px;
             padding-top: 30px;
             height: 170px;
+            color: #FAE281;
             text-align: center;
         }
             #informacje_box .szpalta .title {
@@ -376,6 +383,7 @@
         padding: 10px 10px 10px 10px;
         background: url('/media/gfx/bar/bg_gallery.png');
         text-align: center;
+        position: relative;
     }
         .galeria_gosci_i_bywalcow .elements {
             width: 179px;
@@ -396,7 +404,8 @@
         .galeria_gosci_i_bywalcow .moar {
             width: 179px;
             text-align: center;
-            margin-top: 10px;
+            position: absolute;
+            top: 338px;
         }
             .galeria_gosci_i_bywalcow .moar a {
                 width: 179px;
@@ -423,6 +432,8 @@
             font-size: 13px;
             color: #fae281;
             text-align: justify;
+            overflow: auto;
+            height: 343px;
         }        
     
     #oceny {
@@ -487,7 +498,7 @@
                         #oceny .list td.arrow .arrow:hover ul { display: list-item; }
                         #oceny .list td.arrow .arrow ul li:hover { display: block; }
 
-                        #oceny .list td.arrow .arrow ul li a { text-decoration: none; color: #fae281; }
+                        #oceny .list td.arrow .arrow ul li a { cursor: pointer; text-decoration: none; color: #fae281; }
                         #oceny .list td.arrow .arrow ul li a:hover { text-decoration: underline; }
 
                         
@@ -579,6 +590,7 @@
                 left: 30px;
                 width: 406px;
                 height: 110px;
+                overflow: auto;
                 border: none;
                 padding: none;
                 margin: 0 0 0 0;
@@ -588,6 +600,19 @@
                 
                 background: none;
             }
+            .comment_needs_to_login {
+                height: 50px;
+                width: 100%;
+                color: white;
+                text-align: center;
+            }
+                .comment_needs_to_login a {
+                    color: white;
+                    text-decoration: none;
+                }
+                    .comment_needs_to_login a:hover {
+                        text-decoration: underline;
+                    }
             
             #odpowiedz_box .send {
                 position: absolute;

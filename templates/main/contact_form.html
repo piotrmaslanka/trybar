@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load ads %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/fancybox.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/send_message.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/fancybox.css">
+{% endblock %}
+
+{% block ad %}{{ 10|html_ad }}{% endblock %}
+
+
+{% block body %}
+    <div id="header">
+        <div class="left">NAPISZ WIADOMOŚĆ</div>
+        <div class="bottom"></div>            
+    </div>
+
+    <div id="leftbox">
+        {% if request.user != None %}
+            {% include "includes/profile.html" %}
+        {% endif %}
+
+        {% include "includes/news.html" %}             
+    </div>
+    
+    <div id="contentbox">
+        <form action="/contact/" method="post">
+            {% if success %}
+            <span class="success">Pomyślnie wysłano wiadomość</span><br>
+            {% endif %}
+            {% if request.user == None %}
+            Email
+            {% for error in form.email.errors %}<br><span class="error">{{ error }}</span>{% endfor %}
+            <div class="textfield">{{ form.email }}</div>
+            {% endif %}
+            Temat
+            {% for error in form.title.errors %}<br><span class="error">{{ error }}</span>{% endfor %}
+            <div class="textfield">{{ form.title }}</div>
+            Treść wiadomości
+            {% for error in form.content.errors %}<br><span class="error">{{ error }}</span>{% endfor %}
+            <div class="textarea">{{ form.content }}</div>
+            <input type="submit" value="" id="submit">
+        </form>
+    </div>
+    <div style="clear: both;"></div>
+{% endblock %}

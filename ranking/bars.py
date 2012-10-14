@@ -13,10 +13,12 @@ def ranking_bars(request, page=None):
     except:
         page_c = 1
 
-    p = Paginator(Bar.objects.order_by('meta__rank'), 5)
+    p = Paginator(Bar.objects.exclude(meta__rank=None).filter(meta__mark_count__gt=0).order_by('meta__rank'), 10)
     page = p.page(page_c)
 
     spdict = standard_profile_page_dict(request) if request.user != None else {}
+
+    page_c = p.num_pages
 
     if page_c < 4:
         page_start = 1

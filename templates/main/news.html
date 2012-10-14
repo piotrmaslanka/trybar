@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load ads %}
+{% load humanize %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/news.css">
+{% endblock %}
+{% block ad %}{{ 11|html_ad }}{% endblock %}
+
+{% block body %}
+<div id="form_box">
+    <div class="header">AKTUALNOŚCI</div>
+    <div id="news_box">
+        <div class="top"></div>
+        <div class="content">
+            <div class="title">
+                <div class="date">{{ news.published_on|date:"j E Y" }}</div>
+                {{ news.title }}
+            </div>
+            <div class="sepbar"></div>
+            <div class="textcontent">{{ news.content|safe|linebreaksbr }}</div>
+        </div>
+        <div class="bottom"></div>
+    </div>    
+
+    <div id="komentarze">
+        <div class="top"></div>
+        <div class="content">
+            <div class="box_header_title_fstyle">KOMENTARZE</div>            
+            <div class="entries">
+                {% for comment in news.comments.all %}
+                <div class="entry">
+                    <div class="avatar"><a href="/profile/{{ comment.account.id }}/"><img src="{{ comment.account.avatar|path:"avatar:84,84" }}"></a></div>
+                    <div class="nick"><a href="/profile/{{ comment.account.id }}/">{{ comment.account.login }}</a></div>
+                    <div class="timestamp">{{ comment.made_on|date:"d.n.Y" }}</div>
+                    <div class="content">
+                        {{ comment.content }}
+                    </div>
+                </div>
+                <div class="separator"></div>
+                {% endfor %}
+            </div>                
+            {% if request.user != None %}
+            <div id="odpowiedz_box">
+                <div class="title">Odpowiedz</div>
+                <form action="/news/{{ news.id }}/" method="post" id="comment_form">
+                    <textarea name="content" onclick="this.value=''">Napisz co myślisz o tym newsie ... </textarea>                       
+                    <button class="send" onclick="$('#comment_form')[0].submit()">
+                </form>
+            </div>
+            {% else %}
+                <div style="height: 30px; width: 100%;"></div>
+            {% endif %}
+        </div>
+        <div class="bottom"></div>
+    </div>
+
+</div>
+{% if comment_too_fast %}
+    <script type="text/javascript">
+        $(function() {
+            alert('Musi upłynąć przynajmniej 15 sekund od dodania poprzedniego komentarza!');
+        });
+    </script>
+{% endif %}
+{% endblock %}

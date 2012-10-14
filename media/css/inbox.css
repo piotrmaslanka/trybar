@@ -1,0 +1,138 @@
+#form_box {
+    margin-top: 30px;
+}
+
+#form_box > .header {
+    font-size: 12px;
+    color: #ffcc00;
+    font-weight: bold;
+    width: 960px;
+    line-height: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(101, 70, 16);
+}
+
+#leftpanel {
+    float: left;
+    width: 300px;
+}
+
+
+#inbox {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 615px;
+    float: right; 
+    margin-right: 20px;   
+}
+    #inbox .top {
+        height: 24px;
+        width: 100%;
+        background: url('/media/gfx/inbox/tlo_gora.png');
+    }
+    #inbox .middle {
+        width: 100%;
+        background: url('/media/gfx/inbox/tlo_sample.png') repeat-y;
+    }
+        #inbox .elem {
+            margin: 10px 20px 10px 20px;
+            width: 575px;
+            height: 35px;
+        }
+            #inbox .clk {
+                margin-top: 2px;
+                width: 20px;
+                float: left;
+            }
+            #inbox .content {
+                margin-left: 5px;
+                float: left;
+            }
+                #inbox .content .title a {
+                    text-decoration: none;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #FC0;
+                }
+                #inbox .content .datetime {
+                    font-size: 12px;
+                    color: #A88905;
+                }
+            #inbox .button {
+                margin-right: 10px;
+                width: 21px;
+                height: 22px;
+                float: right;
+                background: url('/media/gfx/inbox/usun.png');
+            }
+                #inbox .button:hover {
+                    background: url('/media/gfx/inbox/usun_p.png');
+                }
+        #inbox .sepline {
+            border-bottom: 1px solid #523b0a;
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 575px;
+            height: 1px;
+        }
+        #inbox .menubar {
+            margin-top: 5px;
+            margin-left: 30px;
+            margin-right: 10px;
+            width: 555px;            
+        }
+            #inbox .menubar .left {
+                line-height: 23px;
+                font-size: 13px;                
+            }
+                #inbox .menubar .left a {
+                    color: #FC0;
+                    text-decoration: none;
+                    cursor: pointer;
+                }                
+            #inbox .menubar .left .submit {
+                margin-left: 5px;
+                cursor: pointer;
+                border: none;
+                padding: 0;
+                background: url('/media/gfx/inbox/button_usun.png') no-repeat;
+                width: 117px;
+                height: 23px;
+            }
+                #inbox .menubar .left .submit:hover {
+                    background: url('/media/gfx/inbox/button_usun_p.png')  no-repeat;
+                }
+
+            #inbox .menubar .right {
+                float: right;                
+            }
+                #inbox .menubar .right > * { 
+                    display: inline-block; 
+                    line-height: 25px;
+                    height: 27px;
+                    font-size: 14px;
+                    width: 27px; 
+                    text-align: center;
+                }
+                #inbox .menubar .right .ico_o {
+                    background: url('/media/gfx/ranking/paginacja_tlo.png');
+                }
+                    #inbox .menubar .right .ico_o a {
+                        color: #FFD100;
+                        text-decoration: none;
+                    }
+                #inbox .menubar .right .ico_c {
+                    background: url('/media/gfx/ranking/paginacja_tlo_p.png');
+                }
+                    #inbox .menubar .right .ico_c a {
+                        color: rgb(80, 55, 15);
+                        text-decoration: none;
+                    }            
+    #inbox .bottom {
+        height: 24px;
+        width: 100%;
+        background: url('/media/gfx/inbox/tlo_dol.png');
+    }
+
+    
+.clear { clear: both; height: 20px; }

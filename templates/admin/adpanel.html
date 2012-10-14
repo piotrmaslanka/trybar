@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>AdPanel TryBAR</title>
+</head>
+<body>
+	Banery:
+	{% for banner in banners %}	
+		Wyświetlaj na: {{ banner.get_target_page_display }}<br>
+		Banner: <br>
+		<img src="/uploads/980x150/{{ banner.photo.id }}.jpg"><br>
+		<a href="/admin/adpanel/delete/{{ banner.id }}/">Kasuj</a>
+	{% endfor %}
+    <hr>
+    Formularz:
+    <form action="/admin/adpanel/" method="post" enctype="multipart/form-data">
+        {{ form.as_p }}
+        <input type="submit" value="Zapisz">
+    </form>
+</body>
+</html>

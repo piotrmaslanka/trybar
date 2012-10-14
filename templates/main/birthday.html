@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load ads %}
+{% load humanize %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/birthday.css">
+{% endblock %}
+
+{% block ad %}{{ 9|html_ad }}{% endblock %}
+
+
+
+{% block body %}
+<div id="form_box">
+    <div class="header">URODZINY</div>
+
+    <div id="centerbox">
+        <div class="header">
+            <div class="ln1">Z OKAZJI PIERWSZYCH URODZIN PORTALU</div>
+            <div class="ln2">12 PAŹDZIERNIKA</div>
+            <div><span class="ln3">PIWO 50%</span> <span class="ln4">TAŃSZE</span></div>
+            <div><span class="ln5">W CAŁYM</span> <span class="ln6">JAROSŁAWIU</span></div>
+            <div class="ln7"></div>
+            <div class="ln8">PROMOCJA DOSTĘPNA W</div>
+        </div>
+        <div class="rankingbox">
+            <div class="header">
+                <div class="b_toplokale"></div>
+                <div class="b_nazwalokalu">Nazwa lokalu</div>
+                <div>Średnia ocen</div>
+            </div>
+            {% for bar in promo_bary %}
+            <div class="entry">
+                <div class="imgbox bar"><a href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
+                <div class="description">
+                    <div class="name"><a href="/bar/{{ bar.slugname }}/">{{ bar.name }}</a></div>
+                    <div class="descr"><a href="/bar/{{ bar.slugname }}/">{{ bar.description|word_slice:":10" }}</a></div>
+                    <div class="average"><a href="/bar/{{ bar.slugname }}/">{{ bar.meta.avg|round_float:"2" }}</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div><span class="ln9">AFTERPARTY - </span><span class="ln10">START 21:00</span></div>
+        <div class="rankingbox">
+            {% for bar in afterparty %}
+            <div class="entry">
+                <div class="imgbox bar"><a href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
+                <div class="description">
+                    <div class="name"><a href="/bar/{{ bar.slugname }}/">{{ bar.name }}</a></div>
+                    <div class="descr"><a href="/bar/{{ bar.slugname }}/">{{ bar.description|word_slice:":10" }}</a></div>
+                    <div class="average"><a href="/bar/{{ bar.slugname }}/">{{ bar.meta.avg|round_float:"2" }}</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>        
+        <div><span class="ln11">ZAREJESTRUJ SIĘ </span><a class="ln12" href="/login/register/">TUTAJ</a></div>
+        <div><span class="ln13">A OTRZYMASZ </span><span class="ln14">15%</span><span class="ln15"> ZNIŻKI</span></div>
+        <div><span class="ln16">NA ALKOHOL W </span><span class="ln17">CARMEL CLUB CAFFE</span></div>
+        <span class="ln18">INSTRUKCJE W ZWIĄZKU Z PROMOCJĄ OTRZYMASZ MAILEM KILKA DNI PRZED URODZINAMI</span>
+        <div class="ln19"></div>
+        <div class="sphdr">SPONSORZY</div><div class="sphdr">PARTNERZY</div>
+        <a href="http://zubrzycki.osk.info.pl/" target="_blank">
+            <img src="/media/gfx/birthday/zubrzycki.png">
+        </a>
+        <a href="http://sklepgoblina.pl/" target="_blank">
+            <img src="/media/gfx/birthday/sklepgoblina.png">
+        </a>
+        <a href="http://www.vidmofonica.pl/" target="_blank">
+            <img src="/media/gfx/birthday/vidmofonica.png">
+        </a>
+        <a href="http://www.kolordruk.com.pl/" target="_blank">
+            <img src="/media/gfx/birthday/kolordruk.jpg">
+        </a>
+    </div>
+    <div class="gclear"></div>
+</div>
+{% endblock %}

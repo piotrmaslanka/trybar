@@ -1,19 +1,21 @@
 #recentbox {
+    margin-top: 15px;
     width: 300px;
 }
     #recentbox > .header {
         width: 100%;
         height: 30px;
         background: url('/media/gfx/index/bg_header.png') bottom center no-repeat;
+        position: relative;
     }
         #recentbox > .header > .left {
             color: #ffd100;
             font-size: 14px;
             font-weight: bold;
-            float: left;
         }
         #recentbox > .header > .right {        
-            float: right;
+            position: absolute;
+            right: 0; top: 0;
         }
             #recentbox > .header > .right > a {
                 display: block;
@@ -24,7 +26,7 @@
             #recentbox > .header > .right > a:hover { text-decoration: underline; }
     #recentbox > .first {
         width: 100%;
-        clear: both;
+        /* clear: right; */
         padding-top: 10px;
         padding-bottom: 8px;
         background: url('/media/gfx/index/recentbox_shade.png') bottom center no-repeat;        
@@ -39,11 +41,14 @@
         }
             #recentbox > .first > .header:hover { text-decoration: underline; }
         #recentbox > .first > .content {
-            color: #a17a0a;
-            font-size: 13px;
             padding-bottom: 10px;
         }
-            #recentbox > .first > .content:hover { text-decoration: underline; }
+            #recentbox > .first > .content a {
+                color: #a17a0a;
+                font-size: 13px;
+                text-decoration: none;
+            }
+            #recentbox > .first > .content a:hover { text-decoration: underline; }
         #recentbox > .first > .datetime {
             color: #a17a0a;
             font-size: 9px;      
@@ -69,3 +74,6 @@
             font-size: 9px;      
             margin-bottom: 10px;
         }        
+    #recentbox .more {
+        font-size: 0.8em;
+    }

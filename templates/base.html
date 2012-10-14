@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TryBAR{% block title %}{% endblock %}</title>
+    <title>{% block title %}TryBAR{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Portal prezentuje spis barów, pubów, restauracji i klubów z całej Polski. Zdjęcia, oceny i komentarze wystawiane przez użytkowników pozwalają na łatwe zdecydowanie, który lokal warto odwiedzić, a który nie.">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <link rel="icon" type="image/png" href="/media/gfx/favico.png">
     <link rel="stylesheet" type="text/css" href="/media/css/style.css">
+        <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-15488341-7']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
     {% block head %}{% endblock %}
 </head>
 <body>
+    {% block forebody %}{% endblock %}
 	<div id="top">
-        <div style="float: right; display: block; width: 414px; height: 82px; overflow: hidden; margin: 10px 30px 0 0; line-height: 82px; font-size: 13px; color: #ffc300;">
+        <div style="float: right; display: block; width: {% if request.user == None %}504{% else %}464{% endif %}px; height: 82px; overflow: hidden; margin: 10px 30px 0 0; line-height: 82px; font-size: 13px; color: #ffc300;">
 
-            <div style="float: left; width: 254px; height: 82px;">
+            <div style="float: left; width: {% if request.user == None %}344{% else %}304{% endif %}px; height: 82px;">
             <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/TryBAR/142549105817938&layout=standard&show_faces=false&width=450&action=like&colorscheme=light&height=80" scrolling="no" frameborder="0" style="display: inline-block; float: left; border:none; overflow:hidden; width:75px; height:23px; margin-top: 29px; margin-right: 10px;" allowTransparency="true"></iframe> 
 
             {% if request.user == None %}
@@ -23,8 +38,8 @@
     				<a class="links1" style="margin-left: 80px;" href="/login/">Zaloguj się</a>
     			</div>
             {% else %}
-                    <a class="links1" href="#">
-                        <span>Witaj </span> <span style="color: #8F6A03;">{{ request.user.name }} {{ request.user.surname }} </span>
+                    <a class="links1" href="/now/">
+                        <span>Witaj </span> <span style="color: #8F6A03;">{{ request.user.login }}</span>
                     </a>
                 </div>
                 <div style="float: left; width: 160px; height: 82px; background: url('/media/gfx/logout_box.png');">
@@ -34,28 +49,31 @@
         </div>
 		<div id="bar_menu">
 			<a href="/">Strona główna</a>
-			<a href="#">Szukaj</a>
-			<a href="#">Konkurs</a>
+			<a href="/search/bars/">Szukaj</a>
+			<a href="/building/">Konkurs</a>
+            {% if request.user != None %}
+                <a href="/now/">Moje konto</a>
+                <a href="/bar/add/">Dodaj lokal</a>
+            {% endif %}
 			<a href="/ranking/bars/">Rankingi</a>
 		</div>
 	</div>
-	<div style="display: block; position: static; width: 980px; height: 150px; background-color: green; margin-top: 67px;">
-		banner
-	</div>
+	<div style="display: block; position: static; width: 980px; height: 150px;  margin-top: 67px;">
+        {% block ad %}{% endblock %}
+    </div>
 	
     {% block body %}{% endblock %}   
 
     <div id="footer">
         <div class="right">
-            <a href="#">Regulamin</a> |
-            <a href="#">Kontakt</a>
+            <a href="/rules/">Regulamin</a> |
+            <a href="/contact/">Kontakt</a>
         </div>
         <div class="left">Wszelkie prawa zastrzeżone &copy; TRYBAR 2011</div>
             
         <div class="mid">Partnerzy: </div>
-        <div id="logotyp_goblin" class="logotyp"><a href="#"></a></div>
-        <div id="logotyp_miastogier" class="logotyp"><a href="#"></a></div>
-        <div id="logotyp_trenuje" class="logotyp"><a href="#"></a></div>
+        <div id="logotyp_goblin" class="logotyp"><a href="http://www.sklepgoblina.pl/" target="_blank"></a></div>
+        <div id="logotyp_vidmofonica" class="logotyp"><a href="http://www.vidmofonica.pl/" target="_blank"></a></div>
     </div>    
 </body>
 </html>

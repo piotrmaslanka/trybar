@@ -4,7 +4,9 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from trybar.account import must_be_logged
 from trybar.account.models import Account
+from datetime import datetime, timedelta
 from trybar.bar.models import SingleBarMark, Bar, BAR_MARKS_COUNT, BarFrequenter, BarAbuse, BarComment
+from trybar.bar.bar import DEFAULT_COMMENT_TEXT
 from trybar.scoring import BAR_COMMENT_ADDED, score_for
 from trybar.accnews import RT_IS_FREQUENTER, RT_NOT_FREQUENTER, RT_COMMENT_BAR, accnews_for
 import json
@@ -37,7 +39,7 @@ def op(request, id):
         except:
             return HttpResponse(status=400)
             
-        meta = bar.metadata
+        meta = bar.meta
             
         try:
             sbm = SingleBarMark.objects.filter(bar=bar).get(account=request.user)
@@ -51,9 +53,13 @@ def op(request, id):
         
         meta.recalculate_single_category(cat_id)
         
-        return HttpResponse(json.dumps((bar.metadata.avg, bar.metadata.mark_count,
+        # WARNING! TEMPORARY MEASURE FOLLOWS
+        from trybar.cron.actions import regenerate_bar_ranking
+        regenerate_bar_ranking(None)
+
+        return HttpResponse(json.dumps((meta.avg, meta.mark_count,
                                         sbm.__dict__['o'+str(cat_id)], 
-                                        bar.metadata.__dict__['avg_o'+str(cat_id)])),
+                                        meta.__dict__['avg_o'+str(cat_id)])),
                             mimetype='application/json')
     elif request.GET['op'] == 'frequent':
         try:
@@ -73,9 +79,26 @@ def op(request, id):
     elif request.GET['op'] == 'comment':
         if 'content' not in request.POST:
             return redirect('/bar/%s/' % (bar.slugname, ))
+        if request.POST['content'].strip() == DEFAULT_COMMENT_TEXT:
+            return redirect('/bar/%s/' % (bar.slugname, ))
         
+        # Limit: no faster than 15s
+        try:
+            lbc = BarComment.objects.filter(bar=bar).filter(account=request.user)[0]
+        except:
+            pass
+        else:
+            if (datetime.now() - lbc.made_on) < timedelta(0, 15):
+                # too soon, limit in effect
+                request.session['err_comment_too_fast'] = True
+                return redirect('/bar/%s/' % (bar.slugname, ))
+
         bc = BarComment(bar=bar, account=request.user, content=request.POST['content'])
-        bc.save()
-        score_for(request.user, BAR_COMMENT_ADDED, bc)
-        accnews_for(request.user, RT_COMMENT_BAR, bar)
+        try:
+            bc.save()
+        except:
+            pass
+        else:
+            score_for(request.user, BAR_COMMENT_ADDED, bc)
+            accnews_for(request.user, RT_COMMENT_BAR, bar)
         return redirect('/bar/%s/' % (bar.slugname, ))
