@@ -1,0 +1,629 @@
+.psbutton a { 
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.box_header_title_fstyle {  /* box header title font style */
+    color: #efbf00;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#user_header {
+    /* total width is 980px, so shift */
+    margin-top: 20px;
+    padding-left: 20px;
+    width: 960px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    height: 60px;
+    background: url('/media/gfx/bar/bg_barname.png');
+}
+    #bar_header * { display: inline-block; float: left; }
+    #bar_header .title {
+        height: 60px;
+        line-height: 60px;
+        margin-left: 20px;
+        
+        color: #efbf00;
+    }
+    
+    #bar_header .sep {
+        height: 60px;
+        margin-left: 10px;
+        width: 1px;
+        background: url('/media/gfx/bar/sep_barname.gif');
+    }
+    
+    #bar_header .address {
+        font-size: 13px;
+        height: 60px;
+        color: #987407;
+        float: left;
+        margin-left: 10px;
+        line-height: 20px;    
+    }
+        #bar_header .address a {
+            text-decoration: none;
+            color: #987407;
+        }
+            #bar_header .address a:hover {
+                text-decoration: underline;
+            }
+    
+    #bar_header .buttons {
+        float: right; 
+        height: 36px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+   
+        #bar_header #button_naduzycie {
+            margin-right: 10px;
+            width: 114px;
+            height: 36px;
+            background: url('/media/gfx/bar/button_naduzycie.png') no-repeat;            
+        }
+            #bar_header #button_naduzycie:hover {
+                background: url('/media/gfx/bar/button_naduzycie_p.png') no-repeat;
+            }
+        #bar_header #button_bywalec {
+            margin-right: 10px;
+            width: 189px;
+            height: 36px;
+            background: url('/media/gfx/bar/button_bywalec.png') no-repeat;
+        }
+            #bar_header #button_bywalec:hover {
+                background: url('/media/gfx/bar/button_bywalec_p.png') no-repeat;
+            }
+        #bar_header #button_niebywalec {
+            margin-right: 10px;
+            width: 189px;
+            height: 36px;
+            background: url('/media/gfx/bar/button_niebywalec.png') no-repeat;
+        }
+            #bar_header #button_niebywalec:hover {
+                background: url('/media/gfx/bar/button_niebywalec_p.png') no-repeat;
+            }
+        #bar_header #button_dodajzdjecie {
+            margin-right: 10px;
+            width: 102px;
+            height: 36px;
+            background: url('/media/gfx/bar/button_dodaj.png') no-repeat;
+        }
+            #bar_header #button_dodajzdjecie:hover {
+                background: url('/media/gfx/bar/button_dodaj_p.png') no-repeat;
+            }
+    #imprezy_box {
+        margin-top: 10px;
+        width: 252px;
+        height: 439px;
+        padding: 10px 10px 10px 10px;
+        background: url('/media/gfx/bar/bg_imprezy.png');
+        float: right;
+    }
+        #imprezy_box .box_header_title_fstyle { /* using it to do a pre-padding so that it aligns with photo box on the left */
+            margin-bottom: 4px;
+        }
+        #imprezy_box .impreza {
+            margin-bottom: 15px;
+            width: 222px;
+            height: 124px;
+            margin-left: 15px;
+            margin-right: 15px;
+            position: relative;
+        }
+            #imprezy_box .impreza img {
+                width: 222px;
+                height: 124px;
+                display: block;
+                border: none;
+            }
+                #imprezy_box .impreza img a {
+                }
+            #imprezy_box .impreza .opis {
+                position: absolute;
+                bottom: 0px; left: 0px;
+                width: 222px;
+                height: 40px;
+                background: url('/media/gfx/bar/bg_imprname.png');
+                z-index: 1;
+            }
+                #imprezy_box .impreza .opis .left {
+                    height: 40px;
+                    line-height: 40px;
+                    color: #fae281;
+                    margin-left: 5px;
+                    float: left;
+                }
+                #imprezy_box .impreza .opis .right {
+                    height: 40px;
+                    line-height: 40px;
+                    float: right;
+                    margin-right: 5px;
+                }
+                    #imprezy_box .impreza .opis .right a {
+                        color: #fae281;
+                        text-decoration: none;
+                        font-weight: bold;
+                        font-size: 12px;
+                    }
+                        #imprezy_box .impreza .opis .right a:hover { text-decoration: underline; }
+        
+        #photos_box {
+            float: left;
+            margin-top: 10px;
+            padding: 10px 10px 10px 10px;
+            width: 672px;
+            height: 441px;
+            background: url('/media/gfx/bar/bg_photos.png');
+        }
+        
+        
+                .ad-gallery {
+                  width: 670px;
+                  height: 410px;
+                  
+                }
+                .ad-gallery, .ad-gallery * {
+                  margin: 0;
+                  padding: 0;
+                }
+                  .ad-gallery .ad-image-wrapper {
+                    width: 536px;
+                    float: left;
+                    height: 410px;
+                    margin-bottom: 10px;
+                    position: relative;
+                    overflow: hidden;
+                  }
+                    .ad-gallery .ad-image-wrapper .ad-loader {
+                      position: absolute;
+                      z-index: 10;
+                      top: 48%;
+                      left: 48%;
+                      border: 1px solid #CCC;
+                    }
+                    .ad-gallery .ad-image-wrapper .ad-next {
+                      position: absolute;
+                      right: 0;
+                      top: 0;
+                      width: 25%;
+                      height: 100%;
+                      cursor: pointer;
+                      display: block;
+                      z-index: 100;
+                    }
+                    .ad-gallery .ad-image-wrapper .ad-prev {
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      width: 25%;
+                      height: 100%;
+                      cursor: pointer;
+                      display: block;
+                      z-index: 100;
+                    }
+                    .ad-gallery .ad-image-wrapper .ad-prev, .ad-gallery .ad-image-wrapper .ad-next {
+                      /* Or else IE will hide it */
+                      background: url(non-existing.jpg)\9
+                    }
+                      .ad-gallery .ad-image-wrapper .ad-prev .ad-prev-image, .ad-gallery .ad-image-wrapper .ad-next .ad-next-image {
+                        background: url(ad_prev.png);
+                        width: 30px;
+                        height: 30px;
+                        display: none;
+                        position: absolute;
+                        top: 47%;
+                        left: 0;
+                        z-index: 101;
+                      }
+                      .ad-gallery .ad-image-wrapper .ad-next .ad-next-image {
+                        background: url(ad_next.png);
+                        width: 30px;
+                        height: 30px;
+                        right: 0;
+                        left: auto;
+                      }
+                    .ad-gallery .ad-image-wrapper .ad-image {
+                      position: absolute;
+                      overflow: hidden;
+                      top: 0;
+                      left: 0;
+                      z-index: 9;
+                    }
+                      .ad-gallery .ad-image-wrapper .ad-image a img {
+                        border: 0;
+                      }
+                      .ad-gallery .ad-image-wrapper .ad-image .ad-image-description {
+                        position: absolute;
+                        bottom: 0px;
+                        left: 0px;
+                        padding: 7px;
+                        text-align: left;
+                        width: 100%;
+                        z-index: 2;
+                        background: url(opa75.png);
+                        color: #000;
+                      }
+                      * html .ad-gallery .ad-image-wrapper .ad-image .ad-image-description {
+                        background: none;
+                        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader (enabled=true, sizingMethod=scale, src='opa75.png');
+                      }
+                        .ad-gallery .ad-image-wrapper .ad-image .ad-image-description .ad-description-title {
+                          display: block;
+                        }
+                  .ad-gallery .ad-controls {
+                    display: none;
+                  }
+                    .ad-gallery .ad-info {
+                      float: left;
+                    }
+                    .ad-gallery .ad-slideshow-controls {
+                      float: right;
+                    }
+                      .ad-gallery .ad-slideshow-controls .ad-slideshow-start, .ad-gallery .ad-slideshow-controls .ad-slideshow-stop {
+                        padding-left: 5px;
+                        cursor: pointer;
+                      }
+                      .ad-gallery .ad-slideshow-controls .ad-slideshow-countdown {
+                        padding-left: 5px;
+                        font-size: 0.9em;
+                      }
+                    .ad-gallery .ad-slideshow-running .ad-slideshow-start {
+                      cursor: default;
+                      font-style: italic;
+                    }
+                  .ad-gallery .ad-nav {
+                    width: 130px;
+                    height: 410px;
+                    overflow: hidden;
+                    float: right;
+                    position: relative;
+                  }
+                    .ad-gallery .ad-forward, .ad-gallery .ad-back {
+                      height: 10px;
+                      width: 130px;
+                      z-index: 10;
+                    }
+                    .ad-gallery .ad-back {
+                      cursor: pointer;
+                      display: block;
+                    }
+                    .ad-gallery .ad-forward {
+                      position: absolute;
+                      bottom: 0;
+                      width: 135px;
+                      height: 10px;
+                      cursor: pointer;
+                    }
+                    .ad-gallery .ad-nav .ad-thumbs {
+                      position: absolute;
+                      overflow: hidden;
+                      width: 100%;
+                    }
+                      .ad-gallery .ad-thumbs .ad-thumb-list {
+                        float: left;
+                        height: 9000px;
+                        list-style: none;
+                      }
+                        .ad-gallery .ad-thumbs li {
+                          padding-right: 5px;
+                          width: 135px;
+                          display: block;
+                        }
+                          .ad-gallery .ad-thumbs li a {
+                            display: block;
+                          }
+                            .ad-gallery .ad-thumbs li a img {
+                              display: block;
+                              margin-top: 4px;
+                              margin-bottom: 4px;                              
+                            }
+                            .ad-gallery .ad-thumbs li a.ad-active img {
+                              border: 3px solid #616161;
+                            }
+                /* Can't do display none, since Opera won't load the images then */
+                .ad-preloads {
+                  position: absolute;
+                  left: -9000px;
+                  top: -9000px;
+                }        
+        
+        
+        
+            
+    #informacje_box {
+        width: 960px;
+        padding: 10px 10px 10px 10px;
+        height: 200px;
+        background: url('/media/gfx/bar/bg_info.png');
+        position: relative;
+    }
+        #informacje_box .box_header_title_fstyle {
+            position: absolute; top: 10px; left: 10px;
+        }
+        #informacje_box .szpalta {
+            float: left;
+            width: 319px;
+            padding-top: 30px;
+            height: 170px;
+            color: #FAE281;
+            text-align: center;
+        }
+            #informacje_box .szpalta .title {
+                color: #fae281;
+                font-size: 14px;
+            }
+            #informacje_box .szpalta .content {
+                font-size: 14px;
+                color: #fae281;
+                font-weight: bold;
+                text-decoration: none;      /* as it may be a hyperlink */                
+            }
+                #informacje_box .szpalta a.content:hover { text-decoration: underline; }
+            #informacje_box .szpalta .rozrywki {
+                width: 61px;
+                height: 61px;
+                margin: 5px 10px 5px 10px;
+            }
+        #informacje_box .separator {  
+            width: 1px;
+            height: 200px;
+            background: url('/media/gfx/bar/sep_info.png');
+            float: left;
+        }
+    .hard_spacer_1 { height: 10px; width: 960px; clear: both; }
+    
+    .galeria_gosci_i_bywalcow {
+        width: 179px;
+        height: 380px;
+        float: right;
+        padding: 10px 10px 10px 10px;
+        background: url('/media/gfx/bar/bg_gallery.png');
+        text-align: center;
+        position: relative;
+    }
+        .galeria_gosci_i_bywalcow .elements {
+            width: 179px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        .galeria_gosci_i_bywalcow .elem {
+            display: inline-block;
+            width: 84px;
+            height: 84px;
+            margin: 5px 1px 5px 1px;
+            border: none;
+        }
+        .galeria_gosci_i_bywalcow .elem a {
+            text-decoration: none;
+        }
+        
+        .galeria_gosci_i_bywalcow .moar {
+            width: 179px;
+            text-align: center;
+            position: absolute;
+            top: 338px;
+        }
+            .galeria_gosci_i_bywalcow .moar a {
+                width: 179px;
+                text-align: center;
+                color: #efbf00;
+                font-size: 12px;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            .galeria_gosci_i_bywalcow .moar a:hover { text-decoration: underline; }
+    .bywalcy { margin-right: 5px; }
+    
+    #opis {
+        float: right;
+        background: url('/media/gfx/bar/bg_opis.png');
+        width: 297px;
+        height: 380px;
+        padding: 10px 10px 10px 10px;
+        margin-right: 10px;
+    }
+    
+        #opis .content {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #fae281;
+            text-align: justify;
+            overflow: auto;
+            height: 343px;
+        }        
+    
+    #oceny {
+        float: right;
+        background: url('/media/gfx/bar/bg_oceny.png');
+        width: 217px;
+        height: 380px;
+        padding: 11px 10px 10px 10px;
+        margin-right: 10px;
+    }
+        #oceny .average {
+            color: #efbf00;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+            #oceny .average .v { font-weight: bold; }
+    
+        #oceny .list {      /* table with grades */
+            border-collapse: collapse;            
+            font-size: 12px;
+            width: 210px;
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+            #oceny .list tr.bg1 { background-color: #572602; }
+            #oceny .list tr.bg2 { background-color: #3c1a01; }
+            
+            #oceny .list td { 
+                height: 20px;
+                line-height: 20px;
+            }
+                #oceny .list td.caption {
+                    width: 130px;
+                    color: #fae281;
+                }
+                #oceny .list td.arrow {
+                    width: 20px;
+                    color: #fae281;
+                }
+                    #oceny .list td.arrow .arrow {
+                        width: 13px;
+                        height: 12px;
+                        margin: 4px 3px 3px 3px;
+                        background: url('/media/gfx/bar/ar_ocen.png');
+                        position: relative;
+                    }
+                        #oceny .list td.arrow .arrow ul, #oceny .list td.arrow .arrow ul li {
+                            list-style: none;
+                            width: 100px;
+                            z-index: 1;
+                            margin: 0; padding: 0;
+                        }
+                        #oceny .list td.arrow .arrow ul {
+                            position: absolute;
+                            top: 0; left; 0;
+                            display: none;
+                        }
+                        #oceny .list td.arrow .arrow li.bg1 { background-color: #572602; }
+                        #oceny .list td.arrow .arrow li.bg2 { background-color: #3c1a01; }
+                        
+                        #oceny .list td.arrow .arrow:hover ul { display: list-item; }
+                        #oceny .list td.arrow .arrow ul li:hover { display: block; }
+
+                        #oceny .list td.arrow .arrow ul li a { cursor: pointer; text-decoration: none; color: #fae281; }
+                        #oceny .list td.arrow .arrow ul li a:hover { text-decoration: underline; }
+
+                        
+                #oceny .list .current {
+                    width: 15px;
+                    color: #fae281;
+                }
+                #oceny .list .average {
+                    width: 25px;
+                    text-align: right;
+                    color: #fae281;
+                    font-weight: bold;
+                }
+    
+    #komentarze {
+        width: 977px;
+        margin-left: 1px;
+    }
+        #komentarze .top {
+            width: 977px;
+            height: 16px;
+            background: url('/media/gfx/bar/bg_comment_top.png');
+        }
+        #komentarze .bottom {
+            width: 977px;
+            height: 16px;
+            background: url('/media/gfx/bar/bg_comment_bot.png');
+        }       
+        #komentarze .content {
+            width: 957px;
+            padding: 0px 10px 0px 10px;
+            background-color: #29180c;
+        }
+            #komentarze .content .entries {
+                margin-top: 20px;
+            }
+        
+        #komentarze .content .entry {
+            clear: both;
+            min-height: 80px;
+            margin-left: 4px;
+            margin-right: 3px;
+            width: 950px;
+        }
+            #komentarze .content .entry * { float: left; }
+            #komentarze .content .entry .avatar a { text-decoration: none; }
+            #komentarze .content .entry .avatar img { border: none; text-decoration: none; }
+            #komentarze .content .entry .nick { margin-left: 10px; }
+            #komentarze .content .entry .nick a { color: #efbf00; text-decoration: none; font-weight: bold; }
+            #komentarze .content .entry .content {
+                color: #efbf00;
+                float: right;
+                margin-right: 200px;
+                font-size: 13px;
+                width: 430px;
+                text-align: justify;
+            }
+            #komentarze .content .entry .timestamp {
+                float: right; 
+                color: #987407;
+                font-size: 12px;
+            }
+        #komentarze .content .separator {
+            clear: both;
+            margin-left: 4px;
+            margin-right: 3px;
+            width: 950px;
+            height: 45px;
+            padding-top: 10px;
+            background: url('/media/gfx/bar/shade_comment.png') bottom center no-repeat;
+        }
+        
+        #odpowiedz_box {
+            margin-left: 255px;
+            margin-right: 255px;
+            width: 447px;
+            height: 184px;
+            padding: 10px 10px 10px 10px;
+            background: url('/media/gfx/bar/bg_textfield_comment.png');
+            position: relative;
+        }
+            #odpowiedz_box .title {
+                color: #efbf00;
+                font-weight: bold;
+            }
+            #odpowiedz_box textarea {
+                position: absolute;
+                top: 38px;
+                left: 30px;
+                width: 406px;
+                height: 110px;
+                overflow: auto;
+                border: none;
+                padding: none;
+                margin: 0 0 0 0;
+                
+                color: #efbf00;
+                font-size: 13px;
+                
+                background: none;
+            }
+            .comment_needs_to_login {
+                height: 50px;
+                width: 100%;
+                color: white;
+                text-align: center;
+            }
+                .comment_needs_to_login a {
+                    color: white;
+                    text-decoration: none;
+                }
+                    .comment_needs_to_login a:hover {
+                        text-decoration: underline;
+                    }
+            
+            #odpowiedz_box .send {
+                position: absolute;
+                top: 170px;
+                left: 200px;
+                width: 46px;
+                height: 23px;
+                border: none;
+                padding: none;
+                background: url('/media/gfx/bar/button_wyslij.png');
+            }
+                #odpowiedz_box .send:hover {
+                    background: url('/media/gfx/bar/button_wyslij_p.png');
+                }
