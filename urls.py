@@ -3,6 +3,8 @@ from django.conf import settings
 
 urlpatterns = patterns('trybar',
     url(r'^$', 'main.views.index'),
+    url(r'^admin/otrzesiny/$', 'admin.ephemeris.add_otrzesiny_photo'),
+    url(r'^otrzesiny/$', 'main.ephemeris.otrzesiny'),
     url(r'^building/$', 'main.static.building'),
     url(r'^rules/$', 'main.static.regulamin'),
     url(r'^contact/$', 'main.static.contact_form'),

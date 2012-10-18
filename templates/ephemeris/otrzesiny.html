@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load core %}
+{% load photo %}
+{% load ads %}
+{% block title %}TryBAR: Otrzęsiny{% endblock %}
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/ephemeris/otrzesiny.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/tooltip.css">
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>   
+    <script src="/media/js/adgallery.js"></script>  
+    <script src="/media/js/tooltip.js"></script>    
+{% endblock %}
+
+{% block body %}
+<div id="bar_header">
+    <div id="bar_logo">
+        <div class="title">
+            OTRZĘSINY
+        </div>
+    </div>
+    
+    <div class="sep"></div>
+    
+    <div class="address">
+        Otrzęsiny studentów<br class="nflt">
+        <a href="/ranking/bars/?q=Jaros%u0142aw">Jarosław</a>
+    </div>
+</div>
+
+<div id="photos_box">
+    <div class="adgallery">
+        <div class="box_header_title_fstyle">FOTO</div>
+        <div class="ad-gallery">
+        
+            <div class="ad-image-wrapper">ad-image-wrapper</div>
+            
+            <div class="ad-controls"></div>
+            <div class="ad-nav">
+                <div class="ad-thumbs">
+                    <ul class="ad-thumb-list">
+                        {% for photo in eos %}
+                        <li{# id="k1" #}>
+                            <a href="{{ photo.photo|path }}">
+                                <img src="{{ photo.photo|path:"112," }}">
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>                
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.ad-gallery').adGallery({display_next_and_prev:false, display_back_and_forward:false});
+</script>
+<div class="hard_spacer_1"></div>
+
+{% endblock %}

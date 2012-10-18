@@ -3,6 +3,7 @@ from __future__ import division
 from django.db import models
 from datetime import datetime
 from trybar.account.models import Account
+from trybar.photo.models import Photo
 
 class News(models.Model):
     title = models.CharField(max_length=80)
@@ -25,3 +26,6 @@ class NewsComment(models.Model):
 
     class Meta:
         ordering = ['-made_on']
+
+class EphemerisOtrzesiny(models.Model):
+    photo = models.ForeignKey(Photo)
