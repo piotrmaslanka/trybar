@@ -32,12 +32,12 @@ urlpatterns = patterns('trybar',
     url(r'^profile/(?P<uid>\d+?)/bars/(?P<page>\d+?)/$', 'account.lists.bars'),    
     url(r'^profile/(?P<uid>\d+?)/bars/$', 'account.lists.bars'),    
     url(r'^profile/(?P<uid>\d+?)/$', 'account.views.profile'),
+    url(r'^profile/(?P<uid>\d+?)/gallery/$', 'account.gallery.view_user_gallery'),
     url(r'^login/remind/$', 'account.views.passremind'),
     url(r'^login/recover/$', 'account.views.passrecover'),
     url(r'^login/register/$', 'account.register.view'),
     url(r'^login/register/activate/$', 'account.register.activate'),
     url(r'^bar/add/$', 'bar.add_bar.view'),
-
 
     url(r'^search/users/$', 'search.users.view'),
     url(r'^search/users/(?P<page>\d+?)/$', 'search.users.view'),

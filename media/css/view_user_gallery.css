@@ -20,21 +20,18 @@
     height: 60px;
     background: url('/media/gfx/bar/bg_barname.png');
 }
-    #bar_header * { display: inline-block; float: left; }
-    #bar_header .title {
-        height: 60px;
-        line-height: 60px;
-        margin-left: 20px;
-        
-        color: #efbf00;
+    #user_header .left {
+
     }
-    
-    #bar_header .sep {
-        height: 60px;
-        margin-left: 10px;
-        width: 1px;
-        background: url('/media/gfx/bar/sep_barname.gif');
-    }
+        #user_header .title {
+            font-size: 16px;
+            line-height: 20px;            
+            color: #efbf00;
+        }
+        #user_header .realname {
+            font-size: 12px;
+            
+        }
     
     #bar_header .address {
         font-size: 13px;

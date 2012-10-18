@@ -5,7 +5,7 @@
 {% block title %}TryBAR: {{ bar.name }}{% endblock %}
 {% block ad %}{{ 3|html_ad }}{% endblock %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="/media/css/bar.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/view_user_gallery.css">
     <link rel="stylesheet" type="text/css" href="/media/css/tooltip.css">
     <script src="/media/js/jquery.selectBox.min.js"></script>
     <script src="/media/js/form_highlighter.js"></script>   
@@ -15,21 +15,15 @@
 
 {% block body %}
 <div id="user_header">
-    <div id="bar_logo">
-        {% if bar.logo != None %}
-            <img src="{{ bar.logo|path:"barlogo:84,84" }}" alt="Logo baru">
-        {% endif %}
-        <div class="title">
-            {{ bar.name }}
-        </div>
+    <div class="title">
+        BOSHE MOY
     </div>
-    
-    <div class="sep"></div>
-    
     <div class="address">
         {{ bar.street }}<br class="nflt">
         <a href="/ranking/bars/?q={{ bar.city|urlencode }}">{{ bar.city }}</a>
     </div>
+</div>
+    
     
     <div class="buttons">        
         {% if logged_in %}
