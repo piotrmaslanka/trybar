@@ -6,48 +6,36 @@
 {% block ad %}{{ 3|html_ad }}{% endblock %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="/media/css/view_user_gallery.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
     <link rel="stylesheet" type="text/css" href="/media/css/tooltip.css">
     <script src="/media/js/jquery.selectBox.min.js"></script>
     <script src="/media/js/form_highlighter.js"></script>   
     <script src="/media/js/adgallery.js"></script>  
     <script src="/media/js/tooltip.js"></script>
+    {% if picked_photo %}
+    <script type="text/javascript">
+        var curPhotoID = {{ picked_photo.id }};
+    </script>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
 <div id="user_header">
-    <div class="title">
-        BOSHE MOY
+    <div class="ibl">
+        <div class="title">{{ user.login }}</div>
+        <div class="realname">{{ user.name }} {{ user.surname }}</div>
     </div>
-    <div class="address">
-        {{ bar.street }}<br class="nflt">
-        <a href="/ranking/bars/?q={{ bar.city|urlencode }}">{{ bar.city }}</a>
+    <div class="ibl address">
+        <a href="/ranking/bars/?q={{ user.city|urlencode }}">{{ user.city }}</a>        
     </div>
-</div>
-    
     
     <div class="buttons">        
-        {% if logged_in %}
-            <div class="psbutton" id="button_dodajzdjecie"><a href="/bar/{{ bar.slugname }}/add_photo/"></a></div>
-            <div class="psbutton" id="button_{% if is_frequenter %}nie{% endif %}bywalec">
-                <a href="/bar/{{ bar.id }}/ajax/?op=frequent"></a>
-            </div>
-            <div class="psbutton" id="button_naduzycie"><a onclick="abuse({{ bar.id }})"></a></div>
-        {% endif %}
+            {% if is_owner %}
+                <div class="psbutton" id="button_manage"><a href="/profile/gallery/manage/"></a></div>
+            {% endif %}
+            <div class="psbutton" id="button_sendmsg"><a href="/bar/{{ bar.id }}/ajax/?op=frequent"></a></div>
+            <div class="psbutton" id="button_addznajomy"><a onclick="abuse({{ bar.id }})"></a></div>
     </div>
-</div>
-
-
-<div id="imprezy_box">
-    <div class="box_header_title_fstyle">IMPREZY</div>
-        {% for event in events %}
-            <div class="impreza">
-            <a href="#"><img src="{{ event.logo|path:"222,124" }}"></a>
-                <div class="opis">
-                    <div class="left">{{ event.name }}</div>
-                    <div class="right"><a href="#">Więcej</a></div>
-                </div>
-            </div>        
-        {% endfor %}
 </div>
 
 <div id="photos_box">
@@ -61,10 +49,10 @@
             <div class="ad-nav">
                 <div class="ad-thumbs">
                     <ul class="ad-thumb-list">
-                        {% for photo in bar.photos.all %}
+                        {% for photo in photos %}
                         <li{# id="k1" #}>
                             <a href="{{ photo.photo|path }}">
-                                <img src="{{ photo.photo|path:"112," }}">
+                                <img src="{{ photo.photo|path:"112," }}" alt="{{ photo.id }}">
                             </a>
                         </li>
                         {% endfor %}
@@ -75,188 +63,60 @@
     </div>
 </div>
 
+{% include "includes/profile.html" %}
+
 <script type="text/javascript">
-    $('.ad-gallery').adGallery({display_next_and_prev:false, display_back_and_forward:false});
+    $('.ad-gallery').adGallery({display_next_and_prev:false, display_back_and_forward:false, 
+        callbacks:{
+            afterImageVisible: function() {
+                var phid = $('.ad-image-description span').html();
+                $('.ad-image-description').remove();
+                curPhotoID = phid;
+                $.ajax('/profile/gallery/comments/'+phid+'/', {
+                    success: function(data) {
+                        $('#komentarze .content').html(data);
+                    }
+                })
+            },
+        }});
 </script>
 
 <div class="hard_spacer_1"></div>
 
-<div id="informacje_box">
-    <div class="box_header_title_fstyle">INFORMACJE</div>
-    <div class="szpalta">
-        <span class="title">Akceptowalność kart płatniczych</span><br>
-        <span class="content">{{ bar.accepts_credit_cards|hThreeway:"Brak informacji" }}</span><br>
-        <br>
-        <span class="title">Dostępność sieci Wi-Fi</span><br>
-        <span class="content">{{ bar.wifi|hThreeway:"Brak informacji" }}</span><br>
-        <br>
-        <span class="title">Przystosowanie dla osób niepełnosprawnych</span><br>
-        <span class="content">{{ bar.handicapped|hThreeway:"Brak informacji" }}</span><br>
-        <br>
-        
-    </div>
-    <div class="separator"></div>
-    <div class="szpalta">
-        <span class="title">Strona internetowa</span><br>
-        {% if bar.website %}
-            <a class="content" target="_blank" href="http://{{ bar.website }}">{{ bar.website }}</a><br>
-        {% else %}
-            Brak informacji
-        {% endif %}
-        <br>
-        <span class="title">Godziny otwarcia</span><br>
-        <span class="content">PON.-PIĄ. - 
-            {% if unknown_mf %}
-                Brak informacji
-            {% else %}
-                {% if bar.openhours_5_f == None %}??{% else %}{{ bar.openhours_5_f }}{% endif %}
-                 -
-                {% if bar.openhours_5_t == None %}??{% else %}{{ bar.openhours_5_t }}{% endif %}
-            {% endif %}
-        </span><br>
-        <span class="content">SOB. - 
-            {% if bar.is_closed_sat %}
-                ZAMKNIĘTE
-            {% else %}
-                {% if unknown_sat %}
-                    Brak informacji
-                {% else %}
-                    {% if bar.openhours_sat_f == None %}??{% else %}{{ bar.openhours_sat_f }}{% endif %}
-                     -
-                    {% if bar.openhours_sat_t == None %}??{% else %}{{ bar.openhours_sat_t }}{% endif %}
-                {% endif %}
-            {% endif %}
-        </span><br>
-        <span class="content">NIE. - 
-            {% if bar.is_closed_sun %}
-                ZAMKNIĘTE
-            {% else %}
-                {% if unknown_sun %}
-                    Brak informacji
-                {% else %}
-                    {% if bar.openhours_sun_f == None %}??{% else %}{{ bar.openhours_sun_f }}{% endif %}
-                     -
-                    {% if bar.openhours_sun_t == None %}??{% else %}{{ bar.openhours_sun_t }}{% endif %}
-                {% endif %}
-            {% endif %}
-        </span><br>
-
-    </div>
-    <div class="separator"></div>
-    <div class="szpalta">
-        <span class="title">Dostępne rozrywki</span><br>
-        {% if bar.is_games %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_gry.png" alt="Gry" onmouseover="tip.show('Gry')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_darts %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_dart.png" alt="Dart"  onmouseover="tip.show('Dart')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_karaoke %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_karaoke.png" alt="Karaoke"  onmouseover="tip.show('Karaoke')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_dancing %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_dancefloor.png" alt="Dancefloor"  onmouseover="tip.show('Dancefloor')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_billard %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_billard.png" alt="Billard"  onmouseover="tip.show('Billard')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_tv %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_tv.png" alt="Tv"  onmouseover="tip.show('Tv')" onmouseout="tip.hide()">
-        {% endif %}
-    </div>            
-</div>
-
-<div class="hard_spacer_1"></div>
-
-<div class="galeria_gosci_i_bywalcow">
-    <div class="box_header_title_fstyle">GALERIA GOŚCI</div>
-    <div class="elements">
-<!--        <div class="elem"><a href="#"><img src="CHANGEME/bar_guest_avatar.jpg"></a></div> -->
-    </div>
-    <div class="moar"><a href="/building/">Więcej ››</a></div>
-</div>
-
-<div class="galeria_gosci_i_bywalcow bywalcy">
-    <div class="box_header_title_fstyle">STALI BYWALCY</div>
-    <div class="elements">
-        {% for frequenter in frequenters %}
-        <div class="elem" onmouseover="tip.show('{{ frequenter.account.login }}')" onmouseout="tip.hide()"><a href="/profile/{{ frequenter.account.id }}/"><img src="{{ frequenter.account.avatar|path:"avatar:84,84" }}"></a></div>
-        {% endfor %}
-    </div>
-    <div class="moar"><a href="/bar/{{ bar.slugname }}/frequenters/">Więcej ››</a></div>
-</div>
-
-<div id="oceny">
-    <div class="box_header_title_fstyle">OCENY</div>
-    <div class="average">
-        Średnia ocena: <span class="v" id="a_avg">{% if bar.meta.avg == None %}??{% else %}{{ bar.meta.avg|round_float:"2" }}{% endif %}</span><br>
-        Liczba głosów: <span class="v" id="a_votecount">{{ bar.meta.mark_count }}</span>
-    </div>
-    <table class="list">
-        {% for id, name, description, usermark, avgmark in CATEGORY_INFO %}
-        <tr class="bg{% cycle '1' '2' %}">                    
-            <td class="caption" onmouseover="tip.show('{{ description }}')" onmouseout="tip.hide()">{{ name }}</td>
-            <td class="arrow">
-            {% if logged_in %}
-            <div class="arrow">
-                <ul>
-                    <li class="bg1"><a class="gba" onclick="mark({{ bar.id }}, {{ id }}, 'Z')">Brak oceny</a></li>
-                    {% for i in l10r %}
-                    <li class="bg{% cycle '2' '1' %}"><a class="gba" onclick="mark({{ bar.id }}, {{ id }}, {{ i }})">{{ i }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            </td>
-            <td class="current" id="a_cur_{{ id }}">{% if usermark == None %}??{% else %}{{ usermark }}{% endif %}</td>
-            <td class="average" id="a_avg_{{ id }}">{% if avgmark == None %}??{% else %}{{ avgmark }}{% endif %}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-
-<div id="opis">
-    <div class="box_header_title_fstyle">OPIS</div>
-    <div class="content">
-        {{ bar.description }}
-    </div>
-</div>
-
-<div class="hard_spacer_1"></div>
-
-
+{% if not picked_photo %}
+{% else %}
 <div id="komentarze">
     <div class="top"></div>
     <div class="content">
-        <div class="box_header_title_fstyle">KOMENTARZE</div>            
-        <div class="entries">
-            {% for comment in bar.comments.all %}
-            <div class="entry">
-                <div class="avatar"><a href="/profile/{{ comment.account.id }}/"><img src="{{ comment.account.avatar|path:"avatar:84,84" }}"></a></div>
-                <div class="nick"><a href="/profile/{{ comment.account.id }}/">{{ comment.account.login }}</a></div>
-                <div class="timestamp">{{ comment.made_on|date:"d.n.Y" }}</div>
-                <div class="content">
-                    {{ comment.content|linebreaksbr }}
+            <div class="box_header_title_fstyle">KOMENTARZE</div>            
+            <div class="entries">
+                {% for comment in picked_photo.comments.all %}
+                <div class="entry">
+                    <div class="avatar"><a href="/profile/{{ comment.commentor.id }}/"><img src="{{ comment.commentor.avatar|path:"avatar:84,84" }}"></a></div>
+                    <div class="nick"><a href="/profile/{{ comment.commentor.id }}/">{{ comment.commentor.login }}</a></div>
+                    <div class="timestamp">{{ comment.made_on|date:"d.n.Y" }}</div>
+                    <div class="content">
+                        {{ comment.content|linebreaksbr }}
+                    </div>
                 </div>
+                <div class="separator"></div>
+                {% endfor %}
+            </div>                
+            {% if request.user != None %}
+            <div id="odpowiedz_box">
+                <div class="title">Odpowiedz</div>
+                <form action="/profile/gallery/comment/{{ picked_photo.id }}/" method="post" id="comment_form">
+                    <textarea name="content" onclick="if (this.value == '{{ default_comment_text }}') this.value=''">{{ default_comment_text }}</textarea>                       
+                    <button class="send" onclick="$('#comment_form').attr('action', '/profile/gallery/comment/'+curPhotoID+'/')[0].submit()"></button>
+                </form>
             </div>
-            <div class="separator"></div>
-            {% endfor %}
-        </div>                
-        {% if logged_in %}
-        <div id="odpowiedz_box">
-            <div class="title">Odpowiedz</div>
-            <form action="/bar/{{ bar.id }}/ajax/?op=comment" method="post" id="comment_form">
-                <textarea name="content" onclick="if (this.value == '{{ default_comment_text }}') this.value=''">{{ default_comment_text }}</textarea>                       
-                <button class="send" onclick="$('#comment_form')[0].submit()"></button>
-            </form>
-        </div>
-        {% else %}
-            <div class="comment_needs_to_login">Musisz być zalogowany/a by pisać komentarze<br style="float: none;"><a href="/login/">ZALOGUJ SIĘ</a></div>
-        {% endif %}
-    </div>
+            {% else %}
+                <div class="comment_needs_to_login">Musisz być zalogowany/a by pisać komentarze<br style="float: none;"><a href="/login/">ZALOGUJ SIĘ</a></div>
+            {% endif %}    </div>
     <div class="bottom"></div>
 </div>
-{% if comment_too_fast %}
+{% endif %}
+{% if err_comment_too_fast %}
     <script type="text/javascript">
         $(function() {
             alert('Musi upłynąć przynajmniej 15 sekund od dodania poprzedniego komentarza!');

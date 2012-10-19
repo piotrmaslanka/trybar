@@ -95,17 +95,51 @@ class Familiar(models.Model):
     confirmed = models.BooleanField(default=False)
     readed_yet = models.BooleanField(default=False)     # as a message simulacrum
 
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+
+@receiver(pre_delete)
+def delete_accountphoto(sender, instance, **kwargs):
+    if sender == AccountPhoto:
+        for comment in instance.comments.all(): comment.delete()
+        from trybar.scoring.models import AccountPhotoAdded
+        try:
+            k = AccountPhotoAdded.objects.get(accountphoto=instance)
+            c = instance.account.meta
+            c.score -= k.score
+            c.save()
+            k.delete()
+            instance.photo.delete()
+        except AccountPhotoAdded.DoesNotExist:
+            pass
+
+@receiver(pre_delete)
+def delete_accountphotocomment(sender, instance, **kwargs):
+    if sender == AccountPhotoComment:
+        from trybar.scoring.models import AccountPhotoCommentAdded
+        try:
+            k = AccountPhotoCommentAdded.objects.get(comment=instance)
+            c = instance.commentor.meta
+            c.score -= k.score
+            c.save()
+            k.delete()
+        except AccountPhotoCommentAdded.DoesNotExist:
+            pass
+
 class AccountPhoto(models.Model):
     account = models.ForeignKey(Account, related_name='photos')
     made_on = models.DateTimeField(default=datetime.now)
     photo = models.ForeignKey(Photo)
     description = models.TextField()
-
+        
 class AccountPhotoComment(models.Model):
     photo = models.ForeignKey(AccountPhoto, related_name='comments')
     made_on = models.DateTimeField(default=datetime.now)
     content = models.TextField()
     commentor = models.ForeignKey(Account)
+
+    class Meta:
+        ordering = ['-made_on']
 
 class AccountMeta(models.Model):
     """Statistics"""

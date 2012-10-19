@@ -20,142 +20,85 @@
     height: 60px;
     background: url('/media/gfx/bar/bg_barname.png');
 }
-    #user_header .left {
-
+    #user_header .ibl {
+        float: left;
     }
         #user_header .title {
-            font-size: 16px;
-            line-height: 20px;            
+            font-size: 24px;
             color: #efbf00;
         }
         #user_header .realname {
-            font-size: 12px;
-            
+            font-size: 14px;
+            color: #6F550B;            
         }
-    
-    #bar_header .address {
-        font-size: 13px;
-        height: 60px;
-        color: #987407;
-        float: left;
-        margin-left: 10px;
-        line-height: 20px;    
-    }
-        #bar_header .address a {
+        #user_header .address {
+            line-height: 60px;   
+            margin-left: 40px;         
+        }
+        #user_header .address a {
             text-decoration: none;
-            color: #987407;
+            color: #6F550B;
+            font-size: 14px;
         }
-            #bar_header .address a:hover {
+            #user_header .address a:hover {
                 text-decoration: underline;
             }
     
-    #bar_header .buttons {
+    #user_header .buttons {
         float: right; 
-        height: 36px;
-        margin-top: 12px;
-        margin-bottom: 12px;
+        height: 23px;
+        margin-top: 18px;
+        margin-bottom: 19px;
     }
-   
-        #bar_header #button_naduzycie {
+        #user_header .buttons > * { float: left; }
+        #user_header #button_manage {
             margin-right: 10px;
-            width: 114px;
-            height: 36px;
-            background: url('/media/gfx/bar/button_naduzycie.png') no-repeat;            
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/usergallery/zarzadzaj.png') no-repeat;
         }
-            #bar_header #button_naduzycie:hover {
-                background: url('/media/gfx/bar/button_naduzycie_p.png') no-repeat;
+            #user_header #button_manage:hover {
+                background: url('/media/gfx/usergallery/zarzadzaj_p.png') no-repeat;
             }
-        #bar_header #button_bywalec {
+        #user_header #button_sendmsg {
             margin-right: 10px;
-            width: 189px;
-            height: 36px;
-            background: url('/media/gfx/bar/button_bywalec.png') no-repeat;
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/profil/b_msgto.png') no-repeat;
         }
-            #bar_header #button_bywalec:hover {
-                background: url('/media/gfx/bar/button_bywalec_p.png') no-repeat;
+            #user_header #button_sendmsg:hover {
+                background: url('/media/gfx/profil/b_msgto_h.png') no-repeat;
             }
-        #bar_header #button_niebywalec {
+        #user_header #button_addznajomy {
             margin-right: 10px;
-            width: 189px;
-            height: 36px;
-            background: url('/media/gfx/bar/button_niebywalec.png') no-repeat;
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/profil/b_add.png') no-repeat;
         }
-            #bar_header #button_niebywalec:hover {
-                background: url('/media/gfx/bar/button_niebywalec_p.png') no-repeat;
+            #user_header #button_addznajomy:hover {
+                background: url('/media/gfx/profil/b_add_h.png') no-repeat;
             }
-        #bar_header #button_dodajzdjecie {
+        #user_header #button_delznajomy {
             margin-right: 10px;
-            width: 102px;
-            height: 36px;
-            background: url('/media/gfx/bar/button_dodaj.png') no-repeat;
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/profil/b_del.png') no-repeat;
         }
-            #bar_header #button_dodajzdjecie:hover {
-                background: url('/media/gfx/bar/button_dodaj_p.png') no-repeat;
+            #user_header #button_delznajomy:hover {
+                background: url('/media/gfx/profil/b_del_h.png') no-repeat;
             }
-    #imprezy_box {
-        margin-top: 10px;
-        width: 252px;
-        height: 439px;
-        padding: 10px 10px 10px 10px;
-        background: url('/media/gfx/bar/bg_imprezy.png');
-        float: right;
-    }
-        #imprezy_box .box_header_title_fstyle { /* using it to do a pre-padding so that it aligns with photo box on the left */
-            margin-bottom: 4px;
-        }
-        #imprezy_box .impreza {
-            margin-bottom: 15px;
-            width: 222px;
-            height: 124px;
-            margin-left: 15px;
-            margin-right: 15px;
-            position: relative;
-        }
-            #imprezy_box .impreza img {
-                width: 222px;
-                height: 124px;
-                display: block;
-                border: none;
-            }
-                #imprezy_box .impreza img a {
-                }
-            #imprezy_box .impreza .opis {
-                position: absolute;
-                bottom: 0px; left: 0px;
-                width: 222px;
-                height: 40px;
-                background: url('/media/gfx/bar/bg_imprname.png');
-                z-index: 1;
-            }
-                #imprezy_box .impreza .opis .left {
-                    height: 40px;
-                    line-height: 40px;
-                    color: #fae281;
-                    margin-left: 5px;
-                    float: left;
-                }
-                #imprezy_box .impreza .opis .right {
-                    height: 40px;
-                    line-height: 40px;
-                    float: right;
-                    margin-right: 5px;
-                }
-                    #imprezy_box .impreza .opis .right a {
-                        color: #fae281;
-                        text-decoration: none;
-                        font-weight: bold;
-                        font-size: 12px;
-                    }
-                        #imprezy_box .impreza .opis .right a:hover { text-decoration: underline; }
-        
+
+            body { position: relative; }
         #photos_box {
-            float: left;
+            position: absolute;
+            right: -7px;
             margin-top: 10px;
             padding: 10px 10px 10px 10px;
             width: 672px;
             height: 441px;
             background: url('/media/gfx/bar/bg_photos.png');
         }
+        #my_acc { position: relative; right: 7px; margin-top: 10px !important; }
         
         
                 .ad-gallery {
@@ -329,186 +272,9 @@
                 }        
         
         
-        
-            
-    #informacje_box {
-        width: 960px;
-        padding: 10px 10px 10px 10px;
-        height: 200px;
-        background: url('/media/gfx/bar/bg_info.png');
-        position: relative;
-    }
-        #informacje_box .box_header_title_fstyle {
-            position: absolute; top: 10px; left: 10px;
-        }
-        #informacje_box .szpalta {
-            float: left;
-            width: 319px;
-            padding-top: 30px;
-            height: 170px;
-            color: #FAE281;
-            text-align: center;
-        }
-            #informacje_box .szpalta .title {
-                color: #fae281;
-                font-size: 14px;
-            }
-            #informacje_box .szpalta .content {
-                font-size: 14px;
-                color: #fae281;
-                font-weight: bold;
-                text-decoration: none;      /* as it may be a hyperlink */                
-            }
-                #informacje_box .szpalta a.content:hover { text-decoration: underline; }
-            #informacje_box .szpalta .rozrywki {
-                width: 61px;
-                height: 61px;
-                margin: 5px 10px 5px 10px;
-            }
-        #informacje_box .separator {  
-            width: 1px;
-            height: 200px;
-            background: url('/media/gfx/bar/sep_info.png');
-            float: left;
-        }
-    .hard_spacer_1 { height: 10px; width: 960px; clear: both; }
+       
+    .hard_spacer_1 { height: 200px; width: 960px; clear: both; }
     
-    .galeria_gosci_i_bywalcow {
-        width: 179px;
-        height: 380px;
-        float: right;
-        padding: 10px 10px 10px 10px;
-        background: url('/media/gfx/bar/bg_gallery.png');
-        text-align: center;
-        position: relative;
-    }
-        .galeria_gosci_i_bywalcow .elements {
-            width: 179px;
-            margin-top: 20px;
-            margin-bottom: 15px;
-        }
-        .galeria_gosci_i_bywalcow .elem {
-            display: inline-block;
-            width: 84px;
-            height: 84px;
-            margin: 5px 1px 5px 1px;
-            border: none;
-        }
-        .galeria_gosci_i_bywalcow .elem a {
-            text-decoration: none;
-        }
-        
-        .galeria_gosci_i_bywalcow .moar {
-            width: 179px;
-            text-align: center;
-            position: absolute;
-            top: 338px;
-        }
-            .galeria_gosci_i_bywalcow .moar a {
-                width: 179px;
-                text-align: center;
-                color: #efbf00;
-                font-size: 12px;
-                font-weight: bold;
-                text-decoration: none;
-            }
-            .galeria_gosci_i_bywalcow .moar a:hover { text-decoration: underline; }
-    .bywalcy { margin-right: 5px; }
-    
-    #opis {
-        float: right;
-        background: url('/media/gfx/bar/bg_opis.png');
-        width: 297px;
-        height: 380px;
-        padding: 10px 10px 10px 10px;
-        margin-right: 10px;
-    }
-    
-        #opis .content {
-            margin-top: 10px;
-            font-size: 13px;
-            color: #fae281;
-            text-align: justify;
-            overflow: auto;
-            height: 343px;
-        }        
-    
-    #oceny {
-        float: right;
-        background: url('/media/gfx/bar/bg_oceny.png');
-        width: 217px;
-        height: 380px;
-        padding: 11px 10px 10px 10px;
-        margin-right: 10px;
-    }
-        #oceny .average {
-            color: #efbf00;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-            #oceny .average .v { font-weight: bold; }
-    
-        #oceny .list {      /* table with grades */
-            border-collapse: collapse;            
-            font-size: 12px;
-            width: 210px;
-            margin-left: 3px;
-            margin-right: 3px;
-        }
-            #oceny .list tr.bg1 { background-color: #572602; }
-            #oceny .list tr.bg2 { background-color: #3c1a01; }
-            
-            #oceny .list td { 
-                height: 20px;
-                line-height: 20px;
-            }
-                #oceny .list td.caption {
-                    width: 130px;
-                    color: #fae281;
-                }
-                #oceny .list td.arrow {
-                    width: 20px;
-                    color: #fae281;
-                }
-                    #oceny .list td.arrow .arrow {
-                        width: 13px;
-                        height: 12px;
-                        margin: 4px 3px 3px 3px;
-                        background: url('/media/gfx/bar/ar_ocen.png');
-                        position: relative;
-                    }
-                        #oceny .list td.arrow .arrow ul, #oceny .list td.arrow .arrow ul li {
-                            list-style: none;
-                            width: 100px;
-                            z-index: 1;
-                            margin: 0; padding: 0;
-                        }
-                        #oceny .list td.arrow .arrow ul {
-                            position: absolute;
-                            top: 0; left; 0;
-                            display: none;
-                        }
-                        #oceny .list td.arrow .arrow li.bg1 { background-color: #572602; }
-                        #oceny .list td.arrow .arrow li.bg2 { background-color: #3c1a01; }
-                        
-                        #oceny .list td.arrow .arrow:hover ul { display: list-item; }
-                        #oceny .list td.arrow .arrow ul li:hover { display: block; }
-
-                        #oceny .list td.arrow .arrow ul li a { cursor: pointer; text-decoration: none; color: #fae281; }
-                        #oceny .list td.arrow .arrow ul li a:hover { text-decoration: underline; }
-
-                        
-                #oceny .list .current {
-                    width: 15px;
-                    color: #fae281;
-                }
-                #oceny .list .average {
-                    width: 25px;
-                    text-align: right;
-                    color: #fae281;
-                    font-weight: bold;
-                }
     
     #komentarze {
         width: 977px;

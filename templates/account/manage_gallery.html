@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load ads %}
+{% load photo %}
+{% load core %}
+
+{% block head %}
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>  
+    <link rel="stylesheet" type="text/css" href="/media/css/manage_bar.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/add_bar.css">
+    {% if more_photos_than_6 %}
+        <script type="text/javascript">
+            var allow_animation = true;
+            function scrollup() {
+                if (!allow_animation) return;
+                if (parseInt($('.all_photos').height())+parseInt($('.all_photos').css('margin-top')) == 1224) return;
+                $('.all_photos').animate({marginTop: '-=204px'}, 300, function() { allow_animation = true;});
+                allow_animation = false;
+            }
+            function scrolldown() {
+                if (!allow_animation) return;
+                if ($('.all_photos').css('margin-top') == '0px') return;
+                $('.all_photos').animate({marginTop: '+=204px'}, 300, function() { allow_animation = true;});
+                allow_animation = false;
+            }
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        ZARZĄDZANIE GALERIĄ
+    </div>
+    
+    <form action="/profile/gallery/manage/" method="post" enctype="multipart/form-data">
+    <div id="gallerybox">
+        {% if more_photos_than_6 %}
+            <div id="scroll_top"></div>
+        {% endif %}
+        <div class="photo_sliding_window">
+            <div class="all_photos">
+                {% for photo in request.user.photos.all %}
+                <div class="photo">
+                    <img src="{{ photo.photo|path:"barphoto:137,97" }}">
+                    <span onclick="window.location='/profile/gallery/manage/?delete={{ photo.id }}'" class="delete"></span>        
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% if more_photos_than_6 %}
+            <div id="scroll_bot"></div>
+        {% endif %}
+    </div>
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Dodaj zdjęcie</span>
+        <div id="send_photo_box">
+            <div id="send_photo_container">
+                {{ form.picture }}
+                <div id="send_photo_box_input_path">
+                    <input type="text" readonly>
+                </div>
+                <input type="button" id="send_photo_box_input_button">
+            </div>
+        </div>
+        <div class="subshare_subdescript">
+            {% for error in form.picture.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+            Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
+        </div>
+        <div class="subshade_shade"></div>
+        <input type="submit" value="" id="save_button">
+        <div class="subshare_subdescript">
+            <span class="star">*</span>Wypełnij wszystkie obowiązkowe pola
+        </div>
+    </div>
+    </form>    
+</div>
+    <script type="text/javascript">
+        $(function() { 
+            $('#send_photo_box_input_button').click(function(e) { $("#id_picture").click(); })
+            $('#id_picture').change(function(e) { $("#send_photo_box_input_path input").val($("#id_picture").val()); })
+            $('.formtab input[type="text"]').focus(highlight_input);
+            $('.formtab input[type="text"]').blur(unhighlight_input);
+        {% if more_photos_than_6 %}
+            $('#scroll_top').click(scrollup);
+            $('#scroll_bot').click(scrolldown);
+        {% endif %}
+        });
+    </script>
+{% endblock %}

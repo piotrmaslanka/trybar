@@ -7,24 +7,26 @@ from hashlib import sha1
 import os
 
 POSSIBLE_RESOLUTIONS = ((130, 130), (84, 84), (112, None), 
-                        (222, 124), (137, 97), (None, 400), 
-                        (980, 150), ())  
+                        (222, 124), (137, 97), (980, 150), ())  
     # empty means 'native'
     # single None means 'any value to keep aspect ratio'
 
-class Photo(models.Model):
-    created_on = models.DateTimeField(default=datetime.now)    
-    
-    def delete(self):
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+
+@receiver(pre_delete)
+def delete_photo(sender, instance, **kwargs):
+    if sender == Photo:
         for resolution in POSSIBLE_RESOLUTIONS:
-            path = self.path_to(*resolution)
+            path = instance.path_to(*resolution)
             try:
                 os.unlink(UPLOAD_ROOT+path)
             except: # It doesn't have to exist at all
                 pass
-            
-        super(Photo, self).delete()
 
+class Photo(models.Model):
+    created_on = models.DateTimeField(default=datetime.now)    
+    
     def path_to(self, *resolution):
         """Returns relative path to file with given resolution. It may not exist, depending on type of this photo.
         Invoke like:

@@ -62,8 +62,6 @@ def last_monthly_score_for(account):
 
 	return score
 
-# TEMPORARY MEASURES FOLLOW. WILL SCREW DATABASE IF LOAD IS BIGGER
-
 def score_for(account, scoretype, *args, **kwargs):
 	kwargs['account'] = account
 	kwargs['score'] = standard_pointing[scoretype]
@@ -80,7 +78,12 @@ def score_for(account, scoretype, *args, **kwargs):
 	elif scoretype == ACCOUNT_PHOTO_COMMENT_ADDED:
 		AccountPhotoCommentAdded(comment=args[0], **kwargs).save()
 
-	from trybar.cron.actions import regenerate_user_ranking
-	regenerate_user_ranking(None)
+	ranking_dirty()
 
 	account.meta._dscore(kwargs['score'])
+
+
+def ranking_dirty():
+	# TEMPORARY MEASURES FOLLOW. WILL SCREW DATABASE IF LOAD IS BIGGER
+	from trybar.cron.actions import regenerate_user_ranking
+	regenerate_user_ranking(None)
