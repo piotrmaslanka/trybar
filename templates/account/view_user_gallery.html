@@ -34,7 +34,16 @@
                 <div class="psbutton" id="button_manage"><a href="/profile/gallery/manage/"></a></div>
             {% endif %}
             <div class="psbutton" id="button_sendmsg"><a href="/bar/{{ bar.id }}/ajax/?op=frequent"></a></div>
-            <div class="psbutton" id="button_addznajomy"><a onclick="abuse({{ bar.id }})"></a></div>
+            {% if request.user != None %}
+                {% if request.user != user %}
+                    {% if certainly_not_friend %}
+                        <div class="psbutton" id="button_addznajomy"><a href="/profile/{{ user.id }}/gallery/friendstatus/?op=befriend"></a></div>
+                    {% endif %}
+                    {% if is_friend and not certainly_not_friend %}
+                        <div class="psbutton" id="button_delznajomy"><a href="/profile/{{ user.id }}/gallery/friendstatus/?op=unfriend"></a></div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}            
     </div>
 </div>
 

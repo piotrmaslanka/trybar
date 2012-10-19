@@ -116,6 +116,30 @@ def ajax_get_comments(request, uphid):
 
     return HttpResponse(template.render(Context({'request':request, 'comments': ph.comments.all()})))
 
+@must_be_logged
+def change_friend_status(request, uid):
+    try:
+        user = Account.objects.get(id=int(uid))
+    except:
+        return Http404
+
+    if 'op' not in request.GET: return HttpResponse(status=401)
+    if request.GET['op'] == 'befriend':
+        try:
+            gfef = request.user.get_familiar_entry_for(user)
+        except:
+            pass
+        else:
+            return HttpResponse(status=412) # Precondition failed
+
+        user.invite_to_be_a_friend(request.user)
+    elif request.GET['op'] == 'unfriend':
+        try:
+            user.unfriend(request.user)
+        except:
+            return HttpResponse(status=412) # Precondition failed
+    
+    return redirect('/profile/%s/gallery/' % (user.id, ))
 
 def view_user_gallery(request, uid):
     try:
@@ -149,10 +173,30 @@ def view_user_gallery(request, uid):
     else:
         err_comment_too_fast = False   
 
+    # ascertain friend status
+    friend = None
+    if request.user != None:
+        if user.id != request.user.id:   # only here it makes sense
+            for familiar in request.user.befriender_set.all():
+                if familiar.befriendee == user:
+                    # Found this entry!
+                    friend = familiar.confirmed
+                    familiar_entry = familiar
+                    break
+            if friend == None:
+                for familiar in request.user.befriendee_set.all():
+                    if familiar.befriender == user:
+                        # Found this entry!
+                        friend = familiar.confirmed
+                        familiar_entry = familiar
+                        break
+
     return render('account/view_user_gallery.html', request, user=user,
                                                              photos=photos,
                                                              err_comment_too_fast=err_comment_too_fast,
                                                              is_owner=is_owner,
+                                                             is_friend=friend,
+                                                             certainly_not_friend=friend == None,
                                                              default_comment_text=DEFAULT_COMMENT_TEXT,
                                                              picked_photo=picked_photo,
                                                              **spdict)
