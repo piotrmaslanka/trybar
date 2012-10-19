@@ -11,7 +11,6 @@ from trybar.account import must_be_logged, standard_profile_page_dict
 from trybar.account.models import Account, PasswordRecoveryToken, Familiar
 from random import randint
 from trybar.main.models import News
-from trybar.accnews import RT_UNBECAME_FAMILIAR, accnews_for
 
 import string
 import random
@@ -90,13 +89,11 @@ def profile(request, uid):
 
         if 'op' in request.GET:
             if (request.GET['op'] == 'befriend') and (friend == None):
-                Familiar(befriender=request.user, befriendee=acc).save()
+                acc.invite_to_be_a_friend(request.user)
                 friend = False
 
             if (request.GET['op'] == 'unfriend') and (friend == True):
-                accnews_for(request.user, RT_UNBECAME_FAMILIAR, acc)
-                accnews_for(acc, RT_UNBECAME_FAMILIAR, request.user)
-                familiar_entry.delete()
+                acc.unfriend(request.user, familiar_entry=familiar_entry)
                 friend = None
 
     spdict = standard_profile_page_dict(request) if request.user != None else {}

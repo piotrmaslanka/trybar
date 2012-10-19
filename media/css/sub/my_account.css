@@ -31,7 +31,6 @@
 	}
 
 	#my_acc > .info {
-		display: block;
 		width: 280px;
 		height: auto;
 		overflow: auto;

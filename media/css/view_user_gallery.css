@@ -1,0 +1,392 @@
+.psbutton a { 
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.box_header_title_fstyle {  /* box header title font style */
+    color: #efbf00;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#user_header {
+    /* total width is 980px, so shift */
+    margin-top: 20px;
+    padding-left: 20px;
+    width: 960px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    height: 60px;
+    background: url('/media/gfx/bar/bg_barname.png');
+}
+    #user_header .ibl {
+        float: left;
+    }
+        #user_header .title {
+            font-size: 24px;
+            color: #efbf00;
+        }
+        #user_header .realname {
+            font-size: 14px;
+            color: #6F550B;            
+        }
+        #user_header .address {
+            line-height: 60px;   
+            margin-left: 40px;         
+        }
+        #user_header .address a {
+            text-decoration: none;
+            color: #6F550B;
+            font-size: 14px;
+        }
+            #user_header .address a:hover {
+                text-decoration: underline;
+            }
+    
+    #user_header .buttons {
+        float: right; 
+        height: 23px;
+        margin-top: 18px;
+        margin-bottom: 19px;
+    }
+        #user_header .buttons > * { float: left; }
+        #user_header #button_manage {
+            margin-right: 10px;
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/usergallery/zarzadzaj.png') no-repeat;
+        }
+            #user_header #button_manage:hover {
+                background: url('/media/gfx/usergallery/zarzadzaj_p.png') no-repeat;
+            }
+        #user_header #button_sendmsg {
+            margin-right: 10px;
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/profil/b_msgto.png') no-repeat;
+        }
+            #user_header #button_sendmsg:hover {
+                background: url('/media/gfx/profil/b_msgto_h.png') no-repeat;
+            }
+        #user_header #button_addznajomy {
+            margin-right: 10px;
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/profil/b_add.png') no-repeat;
+        }
+            #user_header #button_addznajomy:hover {
+                background: url('/media/gfx/profil/b_add_h.png') no-repeat;
+            }
+        #user_header #button_delznajomy {
+            margin-right: 10px;
+            width: 120px;
+            height: 23px;
+            background: url('/media/gfx/profil/b_del.png') no-repeat;
+        }
+            #user_header #button_delznajomy:hover {
+                background: url('/media/gfx/profil/b_del_h.png') no-repeat;
+            }
+
+            body { position: relative; }
+        #photos_box {
+            position: absolute;
+            right: -7px;
+            margin-top: 10px;
+            padding: 10px 10px 10px 10px;
+            width: 672px;
+            height: 441px;
+            background: url('/media/gfx/bar/bg_photos.png');
+        }
+        #my_acc { position: relative; right: 7px; margin-top: 10px !important; }
+        
+        
+                .ad-gallery {
+                  width: 670px;
+                  height: 410px;
+                  
+                }
+                .ad-gallery, .ad-gallery * {
+                  margin: 0;
+                  padding: 0;
+                }
+                  .ad-gallery .ad-image-wrapper {
+                    width: 536px;
+                    float: left;
+                    height: 410px;
+                    margin-bottom: 10px;
+                    position: relative;
+                    overflow: hidden;
+                  }
+                    .ad-gallery .ad-image-wrapper .ad-loader {
+                      position: absolute;
+                      z-index: 10;
+                      top: 48%;
+                      left: 48%;
+                      border: 1px solid #CCC;
+                    }
+                    .ad-gallery .ad-image-wrapper .ad-next {
+                      position: absolute;
+                      right: 0;
+                      top: 0;
+                      width: 25%;
+                      height: 100%;
+                      cursor: pointer;
+                      display: block;
+                      z-index: 100;
+                    }
+                    .ad-gallery .ad-image-wrapper .ad-prev {
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      width: 25%;
+                      height: 100%;
+                      cursor: pointer;
+                      display: block;
+                      z-index: 100;
+                    }
+                    .ad-gallery .ad-image-wrapper .ad-prev, .ad-gallery .ad-image-wrapper .ad-next {
+                      /* Or else IE will hide it */
+                      background: url(non-existing.jpg)\9
+                    }
+                      .ad-gallery .ad-image-wrapper .ad-prev .ad-prev-image, .ad-gallery .ad-image-wrapper .ad-next .ad-next-image {
+                        background: url(ad_prev.png);
+                        width: 30px;
+                        height: 30px;
+                        display: none;
+                        position: absolute;
+                        top: 47%;
+                        left: 0;
+                        z-index: 101;
+                      }
+                      .ad-gallery .ad-image-wrapper .ad-next .ad-next-image {
+                        background: url(ad_next.png);
+                        width: 30px;
+                        height: 30px;
+                        right: 0;
+                        left: auto;
+                      }
+                    .ad-gallery .ad-image-wrapper .ad-image {
+                      position: absolute;
+                      overflow: hidden;
+                      top: 0;
+                      left: 0;
+                      z-index: 9;
+                    }
+                      .ad-gallery .ad-image-wrapper .ad-image a img {
+                        border: 0;
+                      }
+                      .ad-gallery .ad-image-wrapper .ad-image .ad-image-description {
+                        position: absolute;
+                        bottom: 0px;
+                        left: 0px;
+                        padding: 7px;
+                        text-align: left;
+                        width: 100%;
+                        z-index: 2;
+                        background: url(opa75.png);
+                        color: #000;
+                      }
+                      * html .ad-gallery .ad-image-wrapper .ad-image .ad-image-description {
+                        background: none;
+                        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader (enabled=true, sizingMethod=scale, src='opa75.png');
+                      }
+                        .ad-gallery .ad-image-wrapper .ad-image .ad-image-description .ad-description-title {
+                          display: block;
+                        }
+                  .ad-gallery .ad-controls {
+                    display: none;
+                  }
+                    .ad-gallery .ad-info {
+                      float: left;
+                    }
+                    .ad-gallery .ad-slideshow-controls {
+                      float: right;
+                    }
+                      .ad-gallery .ad-slideshow-controls .ad-slideshow-start, .ad-gallery .ad-slideshow-controls .ad-slideshow-stop {
+                        padding-left: 5px;
+                        cursor: pointer;
+                      }
+                      .ad-gallery .ad-slideshow-controls .ad-slideshow-countdown {
+                        padding-left: 5px;
+                        font-size: 0.9em;
+                      }
+                    .ad-gallery .ad-slideshow-running .ad-slideshow-start {
+                      cursor: default;
+                      font-style: italic;
+                    }
+                  .ad-gallery .ad-nav {
+                    width: 130px;
+                    height: 410px;
+                    overflow: hidden;
+                    float: right;
+                    position: relative;
+                  }
+                    .ad-gallery .ad-forward, .ad-gallery .ad-back {
+                      height: 10px;
+                      width: 130px;
+                      z-index: 10;
+                    }
+                    .ad-gallery .ad-back {
+                      cursor: pointer;
+                      display: block;
+                    }
+                    .ad-gallery .ad-forward {
+                      position: absolute;
+                      bottom: 0;
+                      width: 135px;
+                      height: 10px;
+                      cursor: pointer;
+                    }
+                    .ad-gallery .ad-nav .ad-thumbs {
+                      position: absolute;
+                      overflow: hidden;
+                      width: 100%;
+                    }
+                      .ad-gallery .ad-thumbs .ad-thumb-list {
+                        float: left;
+                        height: 9000px;
+                        list-style: none;
+                      }
+                        .ad-gallery .ad-thumbs li {
+                          padding-right: 5px;
+                          width: 135px;
+                          display: block;
+                        }
+                          .ad-gallery .ad-thumbs li a {
+                            display: block;
+                          }
+                            .ad-gallery .ad-thumbs li a img {
+                              display: block;
+                              margin-top: 4px;
+                              margin-bottom: 4px;                              
+                            }
+                            .ad-gallery .ad-thumbs li a.ad-active img {
+                              border: 3px solid #616161;
+                            }
+                /* Can't do display none, since Opera won't load the images then */
+                .ad-preloads {
+                  position: absolute;
+                  left: -9000px;
+                  top: -9000px;
+                }        
+        
+        
+       
+    .hard_spacer_1 { height: 200px; width: 960px; clear: both; }
+    
+    
+    #komentarze {
+        width: 977px;
+        margin-left: 1px;
+    }
+        #komentarze .top {
+            width: 977px;
+            height: 16px;
+            background: url('/media/gfx/bar/bg_comment_top.png');
+        }
+        #komentarze .bottom {
+            width: 977px;
+            height: 16px;
+            background: url('/media/gfx/bar/bg_comment_bot.png');
+        }       
+        #komentarze .content {
+            width: 957px;
+            padding: 0px 10px 0px 10px;
+            background-color: #29180c;
+        }
+            #komentarze .content .entries {
+                margin-top: 20px;
+            }
+        
+        #komentarze .content .entry {
+            clear: both;
+            min-height: 80px;
+            margin-left: 4px;
+            margin-right: 3px;
+            width: 950px;
+        }
+            #komentarze .content .entry * { float: left; }
+            #komentarze .content .entry .avatar a { text-decoration: none; }
+            #komentarze .content .entry .avatar img { border: none; text-decoration: none; }
+            #komentarze .content .entry .nick { margin-left: 10px; }
+            #komentarze .content .entry .nick a { color: #efbf00; text-decoration: none; font-weight: bold; }
+            #komentarze .content .entry .content {
+                color: #efbf00;
+                float: right;
+                margin-right: 200px;
+                font-size: 13px;
+                width: 430px;
+                text-align: justify;
+            }
+            #komentarze .content .entry .timestamp {
+                float: right; 
+                color: #987407;
+                font-size: 12px;
+            }
+        #komentarze .content .separator {
+            clear: both;
+            margin-left: 4px;
+            margin-right: 3px;
+            width: 950px;
+            height: 45px;
+            padding-top: 10px;
+            background: url('/media/gfx/bar/shade_comment.png') bottom center no-repeat;
+        }
+        
+        #odpowiedz_box {
+            margin-left: 255px;
+            margin-right: 255px;
+            width: 447px;
+            height: 184px;
+            padding: 10px 10px 10px 10px;
+            background: url('/media/gfx/bar/bg_textfield_comment.png');
+            position: relative;
+        }
+            #odpowiedz_box .title {
+                color: #efbf00;
+                font-weight: bold;
+            }
+            #odpowiedz_box textarea {
+                position: absolute;
+                top: 38px;
+                left: 30px;
+                width: 406px;
+                height: 110px;
+                overflow: auto;
+                border: none;
+                padding: none;
+                margin: 0 0 0 0;
+                
+                color: #efbf00;
+                font-size: 13px;
+                
+                background: none;
+            }
+            .comment_needs_to_login {
+                height: 50px;
+                width: 100%;
+                color: white;
+                text-align: center;
+            }
+                .comment_needs_to_login a {
+                    color: white;
+                    text-decoration: none;
+                }
+                    .comment_needs_to_login a:hover {
+                        text-decoration: underline;
+                    }
+            
+            #odpowiedz_box .send {
+                position: absolute;
+                top: 170px;
+                left: 200px;
+                width: 46px;
+                height: 23px;
+                border: none;
+                padding: none;
+                background: url('/media/gfx/bar/button_wyslij.png');
+            }
+                #odpowiedz_box .send:hover {
+                    background: url('/media/gfx/bar/button_wyslij_p.png');
+                }

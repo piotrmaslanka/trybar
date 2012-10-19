@@ -64,6 +64,34 @@ class Account(models.Model):
         from trybar.scoring import last_monthly_score_for  
         return last_monthly_score_for(self)
 
+
+    def get_familiar_entry_for(self, acc):
+        """Assuming this instance and acc are in any kind of friend relation, get that
+        relation. Will throw Exception if no relation found"""
+        try:
+            familiar_entry = Familiar.objects.get(befriender=self, befriendee=acc)
+        except Familiar.DoesNotExist:
+            familiar_entry = Familiar.objects.get(befriender=acc, befriendee=self)
+        return familiar_entry
+
+    def invite_to_be_a_friend(self, invitator):
+        """@param invitator: the user who invites
+        @type invitator: Account"""
+        Familiar(befriender=invitator, befriendee=self).save()
+
+    def unfriend(self, unfriender, familiar_entry=None):
+        """@param unfriender: Account initiating the unfriending
+        @type unfriender: Account.
+        Does nothing if already not friends"""
+
+        if familiar_entry == None: familiar_entry = self.get_familiar_entry_for(unfriender)
+
+        from trybar.accnews import RT_UNBECAME_FAMILIAR, accnews_for
+        accnews_for(unfriender, RT_UNBECAME_FAMILIAR, self)
+        accnews_for(self, RT_UNBECAME_FAMILIAR, unfriender)
+        familiar_entry.delete()
+
+
 class AccountMail(models.Model):
     sender = models.ForeignKey(Account, related_name='mail_sent')
     recipient = models.ForeignKey(Account, related_name='mail_received')
@@ -95,17 +123,51 @@ class Familiar(models.Model):
     confirmed = models.BooleanField(default=False)
     readed_yet = models.BooleanField(default=False)     # as a message simulacrum
 
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+
+@receiver(pre_delete)
+def delete_accountphoto(sender, instance, **kwargs):
+    if sender == AccountPhoto:
+        for comment in instance.comments.all(): comment.delete()
+        from trybar.scoring.models import AccountPhotoAdded
+        try:
+            k = AccountPhotoAdded.objects.get(accountphoto=instance)
+            c = instance.account.meta
+            c.score -= k.score
+            c.save()
+            k.delete()
+            instance.photo.delete()
+        except AccountPhotoAdded.DoesNotExist:
+            pass
+
+@receiver(pre_delete)
+def delete_accountphotocomment(sender, instance, **kwargs):
+    if sender == AccountPhotoComment:
+        from trybar.scoring.models import AccountPhotoCommentAdded
+        try:
+            k = AccountPhotoCommentAdded.objects.get(comment=instance)
+            c = instance.commentor.meta
+            c.score -= k.score
+            c.save()
+            k.delete()
+        except AccountPhotoCommentAdded.DoesNotExist:
+            pass
+
 class AccountPhoto(models.Model):
     account = models.ForeignKey(Account, related_name='photos')
     made_on = models.DateTimeField(default=datetime.now)
     photo = models.ForeignKey(Photo)
     description = models.TextField()
-
+        
 class AccountPhotoComment(models.Model):
     photo = models.ForeignKey(AccountPhoto, related_name='comments')
     made_on = models.DateTimeField(default=datetime.now)
     content = models.TextField()
     commentor = models.ForeignKey(Account)
+
+    class Meta:
+        ordering = ['-made_on']
 
 class AccountMeta(models.Model):
     """Statistics"""

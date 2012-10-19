@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load core %}
+{% load photo %}
+{% load ads %}
+{% block title %}TryBAR: {{ bar.name }}{% endblock %}
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/view_user_gallery.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/tooltip.css">
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>   
+    <script src="/media/js/adgallery.js"></script>  
+    <script src="/media/js/tooltip.js"></script>
+    {% if picked_photo %}
+    <script type="text/javascript">
+        var curPhotoID = {{ picked_photo.id }};
+    </script>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div id="user_header">
+    <div class="ibl">
+        <div class="title">{{ user.login }}</div>
+        <div class="realname">{{ user.name }} {{ user.surname }}</div>
+    </div>
+    <div class="ibl address">
+        <a href="/ranking/bars/?q={{ user.city|urlencode }}">{{ user.city }}</a>        
+    </div>
+    
+    <div class="buttons">        
+            {% if is_owner %}
+                <div class="psbutton" id="button_manage"><a href="/profile/gallery/manage/"></a></div>
+            {% endif %}
+            <div class="psbutton" id="button_sendmsg"><a href="/bar/{{ bar.id }}/ajax/?op=frequent"></a></div>
+            {% if request.user != None %}
+                {% if request.user != user %}
+                    {% if certainly_not_friend %}
+                        <div class="psbutton" id="button_addznajomy"><a href="/profile/{{ user.id }}/gallery/friendstatus/?op=befriend"></a></div>
+                    {% endif %}
+                    {% if is_friend and not certainly_not_friend %}
+                        <div class="psbutton" id="button_delznajomy"><a href="/profile/{{ user.id }}/gallery/friendstatus/?op=unfriend"></a></div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}            
+    </div>
+</div>
+
+<div id="photos_box">
+    <div class="adgallery">
+        <div class="box_header_title_fstyle">FOTO</div>
+        <div class="ad-gallery">
+        
+            <div class="ad-image-wrapper">ad-image-wrapper</div>
+            
+            <div class="ad-controls"></div>
+            <div class="ad-nav">
+                <div class="ad-thumbs">
+                    <ul class="ad-thumb-list">
+                        {% for photo in photos %}
+                        <li{# id="k1" #}>
+                            <a href="{{ photo.photo|path }}">
+                                <img src="{{ photo.photo|path:"112," }}" alt="{{ photo.id }}">
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>                
+        </div>
+    </div>
+</div>
+
+{% include "includes/profile.html" %}
+
+<script type="text/javascript">
+    $('.ad-gallery').adGallery({display_next_and_prev:false, display_back_and_forward:false, 
+        callbacks:{
+            afterImageVisible: function() {
+                var phid = $('.ad-image-description span').html();
+                $('.ad-image-description').remove();
+                curPhotoID = phid;
+                $.ajax('/profile/gallery/comments/'+phid+'/', {
+                    success: function(data) {
+                        $('#komentarze .content').html(data);
+                    }
+                })
+            },
+        }});
+</script>
+
+<div class="hard_spacer_1"></div>
+
+{% if not picked_photo %}
+{% else %}
+<div id="komentarze">
+    <div class="top"></div>
+    <div class="content">
+            <div class="box_header_title_fstyle">KOMENTARZE</div>            
+            <div class="entries">
+                {% for comment in picked_photo.comments.all %}
+                <div class="entry">
+                    <div class="avatar"><a href="/profile/{{ comment.commentor.id }}/"><img src="{{ comment.commentor.avatar|path:"avatar:84,84" }}"></a></div>
+                    <div class="nick"><a href="/profile/{{ comment.commentor.id }}/">{{ comment.commentor.login }}</a></div>
+                    <div class="timestamp">{{ comment.made_on|date:"d.n.Y" }}</div>
+                    <div class="content">
+                        {{ comment.content|linebreaksbr }}
+                    </div>
+                </div>
+                <div class="separator"></div>
+                {% endfor %}
+            </div>                
+            {% if request.user != None %}
+            <div id="odpowiedz_box">
+                <div class="title">Odpowiedz</div>
+                <form action="/profile/gallery/comment/{{ picked_photo.id }}/" method="post" id="comment_form">
+                    <textarea name="content" onclick="if (this.value == '{{ default_comment_text }}') this.value=''">{{ default_comment_text }}</textarea>                       
+                    <button class="send" onclick="$('#comment_form').attr('action', '/profile/gallery/comment/'+curPhotoID+'/')[0].submit()"></button>
+                </form>
+            </div>
+            {% else %}
+                <div class="comment_needs_to_login">Musisz być zalogowany/a by pisać komentarze<br style="float: none;"><a href="/login/">ZALOGUJ SIĘ</a></div>
+            {% endif %}    </div>
+    <div class="bottom"></div>
+</div>
+{% endif %}
+{% if err_comment_too_fast %}
+    <script type="text/javascript">
+        $(function() {
+            alert('Musi upłynąć przynajmniej 15 sekund od dodania poprzedniego komentarza!');
+        });
+    </script>
+{% endif %}
+{% endblock %}
