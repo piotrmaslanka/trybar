@@ -42,7 +42,9 @@ def now(request):
 
         if rt in (RT_AVATAR_ADDED, ):
             stuff = ()
-        elif rt in (RT_PRIVPHOTO_ADDED, RT_COMMENT_PRIVGAL, RT_BECAME_FAMILIAR,
+        elif rt in (RT_PRIVPHOTO_ADDED, RT_COMMENT_PRIVGAL):
+            stuff = (AccountPhoto.objects.get(id=an.arg1), )
+        elif rt in (RT_BECAME_FAMILIAR,
                     RT_UNBECAME_FAMILIAR):
             stuff = (Account.objects.get(id=an.arg1), )
         elif rt in (RT_COMMENT_BAR, RT_IS_FREQUENTER, RT_NOT_FREQUENTER, RT_ADDED_BAR):

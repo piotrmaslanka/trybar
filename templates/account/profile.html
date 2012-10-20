@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div id="buttons">
-			<img id="b_gal" src="/media/gfx/profil/b_gal.png" onmouseover='img_hover("b_gal", "_h");' onmouseout='img_hover("b_gal", "");' onclick="window.location='/building/'">
+			<img id="b_gal" src="/media/gfx/profil/b_gal.png" onmouseover='img_hover("b_gal", "_h");' onmouseout='img_hover("b_gal", "");' onclick="window.location='/profile/{{ account.id }}/gallery/'">
             {% if request.user != None %}
                 {% if request.user != account %}
         			<img id="b_msgto" src="/media/gfx/profil/b_msgto.png" onmouseover='img_hover("b_msgto", "_h");' onmouseout='img_hover("b_msgto", "");' onclick='msg_to("{{ account.login }}");'>

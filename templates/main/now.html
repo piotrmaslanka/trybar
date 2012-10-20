@@ -31,12 +31,12 @@
                         <td></td>
                     {% endif %}
                     {% if an.report_type == RT_PRIVPHOTO_ADDED %}
-                        <td>NotImplemented</td>
-                        <td>NotImplemented</td>
+                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> dodał zdjęcie do swojej prywatnej galerii</td>
+                        <td></td>
                     {% endif %}
                     {% if an.report_type == RT_COMMENT_PRIVGAL %}
-                        <td>NotImplemented</td>
-                        <td>NotImplemented</td>
+                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> skomentował zdjęcie użytkownika <a href="/profile/{{ arg1.account.id }}/">{{ arg1.account.login }}</a></td>
+                        <td><a href="/profile/{{ arg1.account.id }}/"><img src="{{ arg1.account.avatar|path:"avatar:84,84" }}"></a></td>
                     {% endif %}
                     {% if an.report_type == RT_BECAME_FAMILIAR %}
                         <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> został znajomym użytkownika <a href="/profile/{{ arg1.id }}/">{{ arg1.login }}</a></td>

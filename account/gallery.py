@@ -12,6 +12,7 @@ from trybar.account import must_be_logged, standard_profile_page_dict
 from trybar.account.models import Account, Familiar, AccountPhoto, AccountPhotoComment
 from trybar.main.models import News
 from trybar.scoring import score_for, ACCOUNT_PHOTO_ADDED, ranking_dirty, ACCOUNT_PHOTO_COMMENT_ADDED
+from trybar.accnews import accnews_for, RT_PRIVPHOTO_ADDED, RT_COMMENT_PRIVGAL
 from trybar.photo.upload import upload_as, RES_ACCOUNT_PHOTO
 
 DEFAULT_COMMENT_TEXT = u'Tutaj wpiść treść komentarza...'
@@ -40,6 +41,7 @@ def manage(request):
               b = AccountPhoto(photo=pic, account=request.user)
               b.save()
               score_for(request.user, ACCOUNT_PHOTO_ADDED, b)
+              accnews_for(request.user, RT_PRIVPHOTO_ADDED, b)
               del form
     try:
         form
@@ -75,6 +77,7 @@ def ajax_push_comment(request, uphid):
     apc = AccountPhotoComment(photo=ph, content=content, commentor=request.user)
     apc.save()
     score_for(request.user, ACCOUNT_PHOTO_COMMENT_ADDED, apc)
+    accnews_for(request.user, RT_COMMENT_PRIVGAL, ph)
 
     return redirect('/profile/%s/gallery/' % (ph.account.id, ))
 

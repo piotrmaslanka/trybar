@@ -4,8 +4,8 @@ from django.db import models
 from trybar.account.models import Account
 
 RT_AVATAR_ADDED = 0			#									-	dodano avatar
-RT_PRIVPHOTO_ADDED = 1		# arg1:<some private photo thingy>	-	dodano zdjecie prywatne
-RT_COMMENT_PRIVGAL = 2		# arg1:Target Account 				-	skomentowano prywatna galerie
+RT_PRIVPHOTO_ADDED = 1		# arg1:AccountPhoto 	-	dodano zdjecie prywatne
+RT_COMMENT_PRIVGAL = 2		# arg1:AccountPhoto 				-	skomentowano prywatna galerie
 RT_COMMENT_BAR = 3			# arg1:Target Bar 					-	skomentowano bar
 RT_IS_FREQUENTER = 4		# arg1:Target Bar 					-	user jest bywalcem
 RT_NOT_FREQUENTER = 5		# arg1:Target Bar 					-	user nie jest bywalcem

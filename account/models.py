@@ -133,6 +133,9 @@ def delete_accountphoto(sender, instance, **kwargs):
         from trybar.scoring.models import AccountPhotoAdded
         try:
             k = AccountPhotoAdded.objects.get(accountphoto=instance)
+            from trybar.accnews.models import AccNews, RT_PRIVPHOTO_ADDED, RT_COMMENT_PRIVGAL
+            AccNews.objects.filter(report_type=RT_COMMENT_PRIVAL).filter(arg1=instance.id).delete()
+            AccNews.objects.filter(report_type=RT_PRIVPHOTO_ADDED).filter(arg1=instance.id).delete()
             c = instance.account.meta
             c.score -= k.score
             c.save()

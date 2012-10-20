@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"get_familiar_entry_for"
+			],
+			[
+				"fami",
+				"familiar_entry"
+			],
+			[
+				"famili",
+				"familiar_entry"
+			],
+			[
 				"Acc",
 				"AccountPhoto"
 			],
@@ -135,15 +147,7 @@
 			"file": "account/gallery.py",
 			"settings":
 			{
-				"buffer_size": 6105,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "scoring/__init__.py",
-			"settings":
-			{
-				"buffer_size": 2884,
+				"buffer_size": 7951,
 				"line_ending": "Windows"
 			}
 		},
@@ -151,15 +155,15 @@
 			"file": "templates/account/view_user_gallery.html",
 			"settings":
 			{
-				"buffer_size": 5158,
+				"buffer_size": 5685,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "urls.py",
+			"file": "templates/includes/profile.html",
 			"settings":
 			{
-				"buffer_size": 4746,
+				"buffer_size": 1882,
 				"line_ending": "Windows"
 			}
 		},
@@ -167,7 +171,47 @@
 			"file": "account/models.py",
 			"settings":
 			{
-				"buffer_size": 6854,
+				"buffer_size": 8310,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "urls.py",
+			"settings":
+			{
+				"buffer_size": 4970,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "accnews/__init__.py",
+			"settings":
+			{
+				"buffer_size": 677,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/main/now.html",
+			"settings":
+			{
+				"buffer_size": 7305,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "main/views.py",
+			"settings":
+			{
+				"buffer_size": 3669,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/account/profile.html",
+			"settings":
+			{
+				"buffer_size": 3713,
 				"line_ending": "Windows"
 			}
 		}
@@ -196,16 +240,18 @@
 	},
 	"file_history":
 	[
-		"/D/projects/trybar/templates/account/manage_gallery.html",
+		"/D/projects/trybar/account/views.py",
+		"/D/projects/trybar/account/models.py",
+		"/D/projects/trybar/templates/account/profile.html",
+		"/D/projects/trybar/photo/upload.py",
+		"/D/projects/trybar/account/gallery.py",
+		"/D/projects/trybar/urls.py",
 		"/D/projects/trybar/templates/account/view_user_gallery.html",
+		"/D/projects/trybar/scoring/__init__.py",
+		"/D/projects/trybar/templates/account/manage_gallery.html",
 		"/D/projects/trybar/scoring/models.py",
 		"/D/projects/trybar/photo/models.py",
-		"/D/projects/trybar/account/models.py",
-		"/D/projects/trybar/scoring/__init__.py",
-		"/D/projects/trybar/urls.py",
-		"/D/projects/trybar/account/gallery.py",
 		"/D/projects/trybar/media/css/view_user_gallery.css",
-		"/D/projects/trybar/photo/upload.py",
 		"/D/projects/trybar/templates/includes/profile.html",
 		"/D/projects/trybar/media/css/sub/my_account.css",
 		"/D/projects/trybar/templates/base.html",
@@ -269,7 +315,6 @@
 		"/D/projects/trybar/templates/account/view_message_familiar.html",
 		"/D/projects/trybar/templates/account/send_message.html",
 		"/D/projects/trybar/templates/account/register.html",
-		"/D/projects/trybar/templates/account/profile.html",
 		"/D/projects/trybar/templates/account/passremind_email",
 		"/D/projects/trybar/templates/account/passremind.html",
 		"/D/projects/trybar/templates/account/login.html",
@@ -312,7 +357,6 @@
 		"/C/Users/Henrietta/Desktop/logic.php",
 		"/D/projects/trybar/media/css/contact_form.css",
 		"/D/projects/trybar/media/css/birthday.css",
-		"/D/projects/trybar/account/views.py",
 		"/D/projects/trybar/media/css/now.css",
 		"/D/Dokumenty/ADR/RXSC27.adr",
 		"/D/projects/trybar/media/css/gp_add_photo.css",
@@ -404,7 +448,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -412,15 +456,15 @@
 					"file": "account/gallery.py",
 					"settings":
 					{
-						"buffer_size": 6105,
+						"buffer_size": 7951,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3414,
-								3414
+								1470,
+								1470
 							]
 						],
 						"settings":
@@ -429,33 +473,6 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 12.0,
-						"translation.y": 1866.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "scoring/__init__.py",
-					"settings":
-					{
-						"buffer_size": 2884,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								335,
-								362
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
 						"translation.x": 0.0,
 						"translation.y": 552.0,
 						"zoom_level": 1.0
@@ -463,19 +480,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "templates/account/view_user_gallery.html",
 					"settings":
 					{
-						"buffer_size": 5158,
+						"buffer_size": 5685,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2800,
-								2800
+								1171,
+								1171
 							]
 						],
 						"settings":
@@ -485,25 +502,81 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1380.0,
+						"translation.y": 414.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "urls.py",
+					"buffer": 2,
+					"file": "templates/includes/profile.html",
 					"settings":
 					{
-						"buffer_size": 4746,
+						"buffer_size": 1882,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2200,
-								2200
+								1333,
+								1333
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "account/models.py",
+					"settings":
+					{
+						"buffer_size": 8310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6236,
+								6236
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2829.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "urls.py",
+					"settings":
+					{
+						"buffer_size": 4970,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -519,19 +592,74 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "account/models.py",
+					"buffer": 5,
+					"file": "accnews/__init__.py",
 					"settings":
 					{
-						"buffer_size": 6854,
+						"buffer_size": 677,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4832,
-								4832
+								511,
+								511
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "templates/main/now.html",
+					"settings":
+					{
+						"buffer_size": 7305,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1920,
+								1920
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 414.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "main/views.py",
+					"settings":
+					{
+						"buffer_size": 3669,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1852,
+								1852
 							]
 						],
 						"settings":
@@ -541,7 +669,33 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2280.0,
+						"translation.y": 690.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "templates/account/profile.html",
+					"settings":
+					{
+						"buffer_size": 3713,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1653,
+								1653
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 759.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
