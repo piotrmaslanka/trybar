@@ -10,12 +10,6 @@ from trybar.accnews.models import *
 from trybar.photo.templatetags.photo import path
 
 def index(request):
-
-    force_to_what_is_trybar = True
-    if 'seen_whatis' in request.session: force_to_what_is_trybar = False
-    if 'force_whatis' in request.COOKIES: force_to_what_is_trybar = False
-    if force_to_what_is_trybar: return redirect('/what_is_trybar/')
-
     news = News.objects.all()[:3]
 
     top_3_bars = Bar.objects.filter(meta__mark_count__gt=2).order_by('meta__rank')[:3] 
