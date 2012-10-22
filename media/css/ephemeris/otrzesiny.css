@@ -182,9 +182,6 @@
                     .ad-gallery .ad-image-wrapper .ad-loader {
                       position: absolute;
                       z-index: 10;
-                      top: 48%;
-                      left: 48%;
-                      border: 1px solid #CCC;
                     }
                     .ad-gallery .ad-image-wrapper .ad-next {
                       position: absolute;
@@ -306,7 +303,7 @@
                     }
                       .ad-gallery .ad-thumbs .ad-thumb-list {
                         float: left;
-                        height: 9000px;
+                        height: 19000px;
                         list-style: none;
                       }
                         .ad-gallery .ad-thumbs li {
@@ -327,9 +324,10 @@
                             }
                 /* Can't do display none, since Opera won't load the images then */
                 .ad-preloads {
+                  z-index: -1000;
                   position: absolute;
-                  left: -9000px;
-                  top: -9000px;
+                  left: -19000px;
+                  top: -19000px;
                 }        
         
         

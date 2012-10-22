@@ -9,7 +9,7 @@
  */
 (function($) {
   $.fn.adGallery = function(options) {
-    var defaults = { loader_image: 'loader.gif',
+    var defaults = { loader_image: '/media/gfx/gallery_placeholder.jpg',  // not a loader to be exact
                      start_at_index: 0,
                      description_wrapper: false,
                      thumb_opacity: 0.7,
@@ -250,11 +250,15 @@
       $(document.body).append(this.preloads);
     },
     loading: function(bool) {
-      if(bool) {
+      if ($('.ad-thumb-list li').length == 0) {
+        this.loader.show();
+      }
+      return;
+      /*if(bool) {      HXD
         this.loader.show();
       } else {
         this.loader.hide();
-      };
+      };*/
     },
     addAnimation: function(name, fn) {
       if($.isFunction(fn)) {
@@ -280,12 +284,12 @@
           if(!context.isImageLoaded(thumb[0])) {
             thumb.load(
               function() {
-                thumb_wrapper_height += this.parentNode.parentNode.offsetHeight;
+                thumb_wrapper_height += this.parentNode.parentNode.offsetHeight + 8; // HDX: Please mind the margin
                 thumbs_loaded++;
               }
             );
           } else{
-            thumb_wrapper_height += thumb[0].parentNode.parentNode.offsetHeight;
+            thumb_wrapper_height += thumb[0].parentNode.parentNode.offsetHeight + 8; // HDX: Please mind the margin
             thumbs_loaded++;
           };
           link.addClass('ad-thumb'+ i);
@@ -334,7 +338,7 @@
       // Wait until all thumbs are loaded, and then set the height of the ul - HXD
       var inter = setInterval(
         function() {
-            return;
+            return;  // HXD: Actually a vital part of this script. Prevents further junk from executing.
           if(thumb_count == thumbs_loaded) {
             thumb_wrapper_height -= 100;
             var list = context.nav.find('.ad-thumb-list');
@@ -555,7 +559,11 @@
           link.append(img);
           img_container.append(link);
         } else {
-          img_container.append(img);
+          // HXD START
+          var equiv = $('<a href="'+image.image+'" rel="lightbox"></a>');
+          equiv.append(img);
+          img_container.append(equiv);
+          // HXD STOP
         }
         this.image_wrapper.prepend(img_container);
         var size = this._getContainedImageSize(image.size.width, image.size.height);
@@ -720,14 +728,9 @@
       
       // grab height of all our elements
       var can_limit_top = true;
-      try {
-      lis = thumb[0].parentNode.parentNode.children;
-      var allh = 0;
-      for (var li=0;li<lis.length;li++) allh += $(lis[li]).height();
-      } catch(err) {
-        can_limit_top = false;
-      }
-      allh += 30;
+      allh = $('.ad-thumb-list').height();
+      var tasth = $('.ad-nav').height();
+      if (allh < tasth) allh = tasth;
      
       var top = -$(thumb[0].parentNode).position().top;
       top += (this.nav_display_height / 2) - (thumb[0].offsetHeight / 2);

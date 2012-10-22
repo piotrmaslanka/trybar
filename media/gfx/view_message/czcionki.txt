@@ -1,5 +1,0 @@
-Teksty nad kresk¹: #ffcc00 pogrubione (oprócz daty)
-
-Kreska taka sama jak w skrzynce odbiorczej
-
-Teksty pod kresk¹: #987606 normalne

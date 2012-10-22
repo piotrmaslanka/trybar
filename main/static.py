@@ -64,6 +64,10 @@ def birthday(request):
     return render('main/birthday.html', request, afterparty=afterp, promo_bary=rootbars)
 
 def http404(request):
-    return render('http_errors/404.html', request)    
+    antwort = render('http_errors/404.html', request)    
+    antwort.status_code = 404
+    return antwort
 def http500(request):
-    return render('http_errors/500.html', request)
+    antwort = render('http_errors/500.html', request)
+    antwort.status_code = 500
+    return antwort
