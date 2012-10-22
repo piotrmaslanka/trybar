@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/ranking.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+{% endblock %}
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
+{% block body %}
+    <div id="header">
+        <div class="left">{{ user.login }} JEST STAŁYM BYWALCEM W</div>
+        <div class="bottom"></div>            
+    </div>
+
+    <div id="leftbox">
+        {% if request.user != None %}
+            {% include "includes/profile.html" %}
+        {% endif %}
+
+        {% include "includes/news.html" %}            
+    </div>
+    <div id="rankingbox">
+            <div class="header">
+                <div class="b_toplokale"></div>
+                <div class="b_nazwalokalu">Nazwa lokalu</div>
+                <div>Średnia ocen</div>
+            </div>
+            {% for bar in page.object_list %}
+            <div class="entry">
+                <div class="position"></div>
+                <div class="imgbox bar"><a href="/bar/{{ bar.bar.slugname }}/"><img src="{{ bar.bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
+                <div class="description">
+                    <div class="name"><a href="/bar/{{ bar.bar.slugname }}/">{{ bar.bar.name }}</a></div>
+                    <div class="descr"><a href="/bar/{{ bar.bar.slugname }}/">{{ bar.bar.city }}</a></div>
+                    <div class="average"><a href="/bar/{{ bar.bar.slugname }}/">
+                        {% if bar.bar.meta.avg == None %}Brak{% else %}{{ bar.bar.meta.avg|round_float:"2" }}{% endif %}</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        <div class="dropbar">
+                {% if page.has_previous %}
+                    <div class="left"><a href="/profile/{{ user.id }}/frequenter_at/{{ page.previous_page_number }}/" class="gba"></a></div>
+                {% endif %}
+                <div class="center">
+                    {% for page_n in page_iter %}
+                        {% if page_n == page.number %}
+                            <div class="ico_c"><a class="gba" href="/profile/{{ user.id }}/frequenter_at/{{ page_n }}/">{{ page_n }}</a></div>
+                        {% else %}
+                            <div class="ico_o"><a class="gba" href="/profile/{{ user.id }}/frequenter_at/{{ page_n }}/">{{ page_n }}</a></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if page.has_next %}
+                    <div class="right"><a href="/profile/{{ user.id }}/frequenter_at/{{ page.next_page_number }}/" class="gba"></a></div>
+                {% endif %}
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+{% endblock %}
