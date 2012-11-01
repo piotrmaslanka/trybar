@@ -36,3 +36,4 @@ class AdBanner(models.Model):
 	def was_clicked(self):
 		"""Increments times_clicked. Saves this instance"""
 		self.times_clicked += 1
+		self.save()

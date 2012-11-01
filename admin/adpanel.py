@@ -44,6 +44,11 @@ def view_banners(request):
                 ab = AdBanner(target_page=target_page, link=form.cleaned_data['link'],
                               photo=photo)
                 ab.save()
+
+            # null all banners
+            for banner in AdBanner.objects.all():
+                banner.times_viewed = 0
+                banner.save()
                      
     return render_to_response('admin/adpanel.html', {'banners': banners,
 													 'form': form})
