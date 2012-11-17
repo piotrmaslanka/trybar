@@ -4,40 +4,8 @@
 		"selected_items":
 		[
 			[
-				"get",
-				"get_familiar_entry_for"
-			],
-			[
-				"fami",
-				"familiar_entry"
-			],
-			[
-				"famili",
-				"familiar_entry"
-			],
-			[
-				"Acc",
-				"AccountPhoto"
-			],
-			[
-				"pi",
-				"picked_photo"
-			],
-			[
-				"AccountPhoto",
-				"AccountPhotoComment"
-			],
-			[
-				"AccountPh",
-				"AccountPhotoCommentAdded"
-			],
-			[
-				"must_be",
-				"must_be_logged"
-			],
-			[
-				"m",
-				"must_be_admin"
+				"comm",
+				"comment_too_fast"
 			],
 			[
 				"openhou",
@@ -144,34 +112,18 @@
 	"buffers":
 	[
 		{
-			"file": "account/gallery.py",
+			"file": "barevent/view.py",
 			"settings":
 			{
-				"buffer_size": 7951,
+				"buffer_size": 6204,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "templates/account/view_user_gallery.html",
+			"file": "templates/barevent/event.html",
 			"settings":
 			{
-				"buffer_size": 5685,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/includes/profile.html",
-			"settings":
-			{
-				"buffer_size": 1882,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "account/models.py",
-			"settings":
-			{
-				"buffer_size": 8310,
+				"buffer_size": 9605,
 				"line_ending": "Windows"
 			}
 		},
@@ -179,23 +131,7 @@
 			"file": "urls.py",
 			"settings":
 			{
-				"buffer_size": 4970,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "accnews/__init__.py",
-			"settings":
-			{
-				"buffer_size": 677,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/main/now.html",
-			"settings":
-			{
-				"buffer_size": 7305,
+				"buffer_size": 5324,
 				"line_ending": "Windows"
 			}
 		},
@@ -203,15 +139,15 @@
 			"file": "main/views.py",
 			"settings":
 			{
-				"buffer_size": 3669,
+				"buffer_size": 3295,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "templates/account/profile.html",
+			"file": "templates/main/now.html",
 			"settings":
 			{
-				"buffer_size": 3713,
+				"buffer_size": 7165,
 				"line_ending": "Windows"
 			}
 		}
@@ -240,33 +176,40 @@
 	},
 	"file_history":
 	[
-		"/D/projects/trybar/account/views.py",
-		"/D/projects/trybar/account/models.py",
-		"/D/projects/trybar/templates/account/profile.html",
-		"/D/projects/trybar/photo/upload.py",
-		"/D/projects/trybar/account/gallery.py",
-		"/D/projects/trybar/urls.py",
-		"/D/projects/trybar/templates/account/view_user_gallery.html",
 		"/D/projects/trybar/scoring/__init__.py",
-		"/D/projects/trybar/templates/account/manage_gallery.html",
-		"/D/projects/trybar/scoring/models.py",
-		"/D/projects/trybar/photo/models.py",
-		"/D/projects/trybar/media/css/view_user_gallery.css",
-		"/D/projects/trybar/templates/includes/profile.html",
-		"/D/projects/trybar/media/css/sub/my_account.css",
 		"/D/projects/trybar/templates/base.html",
+		"/D/projects/trybar/scoring/models.py",
+		"/D/projects/trybar/accnews/__init__.py",
+		"/D/projects/trybar/main/news.py",
+		"/D/projects/trybar/accnews/models.py",
+		"/D/projects/trybar/media/css/barevent.css",
+		"/D/projects/trybar/barevent/models.py",
+		"/D/projects/trybar/templates/main/now.html",
+		"/D/projects/trybar/main/views.py",
+		"/D/Dokumenty/Politechnika/JAiO/Lab4/JAO-sprawozdanie-4.tex",
+		"/D/projects/trybar/urls.py",
+		"/D/projects/trybar/templates/bar/bar.html",
+		"/D/projects/trybar/photo/templatetags/photo.py",
+		"/D/projects/trybar/photo/upload.py",
+		"/D/projects/trybar/photo/models.py",
+		"/D/projects/trybar/bar/models.py",
+		"/D/Dokumenty/Politechnika/JAiO/Projekt2.tex",
+		"/D/projects/anabel/swig/swig_python.sh",
+		"/D/projects/trybar/admin/adpanel.py",
+		"/D/projects/trybar/adverts/models.py",
 		"/D/projects/trybar/settings.py",
-		"/D/projects/trybar/templates/admin/otrzesiny.html",
+		"/D/projects/trybar/media/css/view_user_gallery.css",
+		"/D/projects/anabel/swig/anabel.i",
+		"/D/projects/trybar/templates/account/view_user_gallery.html",
+		"/D/projects/trybar/account/gallery.py",
+		"/D/Dokumenty/ADR/MR208SC33.txt",
+		"/D/projects/trybar/templates/includes/profile.html",
 		"/D/projects/trybar/main/models.py",
-		"/D/projects/trybar/admin/ephemeris.py",
-		"/D/projects/trybar/templates/ephemeris/otrzesiny.html",
-		"/D/projects/trybar/media/css/ephemeris/otrzesiny.css",
-		"/D/projects/trybar/main/ephemeris.py",
 		"/D/projects/anabel/tools/testgen.py",
 		"/D/mirabelka/0/0",
+		"/D/projects/trybar/account/models.py",
 		"/D/Dokumenty/Politechnika/JAiO/Projekt1.tex",
 		"/D/Dokumenty/ADR/SC13.adr",
-		"/D/projects/trybar/templates/bar/bar.html",
 		"/D/projects/trybar/templates/http_errors/500.html",
 		"/D/projects/trybar/media/css/http_errors.css",
 		"/D/projects/trybar/main/static.py",
@@ -276,7 +219,6 @@
 		"/D/projects/trybar/media/css/ranking.css",
 		"/D/projects/trybar/templates/bar/bar_manage_list.html",
 		"/D/projects/trybar/lista płaczu.txt",
-		"/D/projects/trybar/main/news.py",
 		"/D/projects/trybar/bar/ajax.py",
 		"/D/projects/trybar/templates/main/news.html",
 		"/D/projects/trybar/bar/manage_bar.py",
@@ -286,11 +228,7 @@
 		"/D/projects/trybar/account/messages.py",
 		"/D/projects/trybar/media/js/profil.js",
 		"/D/projects/trybar/account/edit_profile.py",
-		"/D/projects/trybar/accnews/models.py",
-		"/D/projects/trybar/accnews/__init__.py",
 		"/D/projects/trybar/account/__init__.py",
-		"/D/projects/trybar/bar/models.py",
-		"/D/projects/trybar/templates/main/now.html",
 		"/D/projects/trybar/ranking/bars.py",
 		"/C/Users/Henrietta/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/D/projects/trybar/admin/__init__.py",
@@ -306,15 +244,14 @@
 		"/D/projects/trybar/templates/account/bars.html",
 		"/D/projects/trybar/adverts/click.py",
 		"/D/projects/trybar/adverts/templatetags/ads.py",
-		"/D/projects/trybar/adverts/models.py",
 		"/D/projects/trybar/templates/admin/adpanel.html",
-		"/D/projects/trybar/admin/adpanel.py",
 		"/D/projects/trybar/admin/models.py",
 		"/D/projects/trybar/account/middleware.py",
 		"/D/projects/trybar/templates/account/view_message_message.html",
 		"/D/projects/trybar/templates/account/view_message_familiar.html",
 		"/D/projects/trybar/templates/account/send_message.html",
 		"/D/projects/trybar/templates/account/register.html",
+		"/D/projects/trybar/templates/account/profile.html",
 		"/D/projects/trybar/templates/account/passremind_email",
 		"/D/projects/trybar/templates/account/passremind.html",
 		"/D/projects/trybar/templates/account/login.html",
@@ -335,7 +272,6 @@
 		"/C/Users/Henrietta/Desktop/migrate.py",
 		"/D/projects/trybar/core/__init__.py",
 		"/D/projects/trybar/cron/actions.py",
-		"/D/projects/trybar/main/views.py",
 		"/D/Dokumenty/ADR/RX910-S840.adr",
 		"/D/projects/trybar/templates/account/activation_email",
 		"/D/projects/trybar/media/js/shoutbox.js",
@@ -344,6 +280,7 @@
 		"/D/projects/trybar/media/css/sub/contest.css",
 		"/D/projects/trybar/media/css/profil.css",
 		"/D/projects/trybar/media/css/sub/news.css",
+		"/D/projects/trybar/media/css/sub/my_account.css",
 		"/D/projects/trybar/media/css/bar_add_photo.css",
 		"/D/projects/trybar/media/css/edit_profile.css",
 		"/D/projects/trybar/media/css/gpinfo.css",
@@ -357,6 +294,7 @@
 		"/C/Users/Henrietta/Desktop/logic.php",
 		"/D/projects/trybar/media/css/contact_form.css",
 		"/D/projects/trybar/media/css/birthday.css",
+		"/D/projects/trybar/account/views.py",
 		"/D/projects/trybar/media/css/now.css",
 		"/D/Dokumenty/ADR/RXSC27.adr",
 		"/D/projects/trybar/media/css/gp_add_photo.css",
@@ -365,9 +303,7 @@
 		"/D/Dokumenty/ADR/S20herc.adr",
 		"/D/projects/trybar/media/css/view_message.css",
 		"/D/projects/webapps/bellum/landarmy/models.py",
-		"/D/projects/webapps/bellum/common/models.py",
-		"/D/projects/webapps/bellum/bellum/common/models.py",
-		"/D/projects/webapps/bellum/settings.py"
+		"/D/projects/webapps/bellum/common/models.py"
 	],
 	"find":
 	{
@@ -385,8 +321,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"\n            ",
-			"bar_",
+			"BarPhoto",
+			"frequenter",
+			"galeria_gosci_i_bywalcow",
+			"imprezy_box",
+			"imprezy_box\n",
 			"()\n",
 			"elif",
 			"RT_BARPHOTO_ADDED",
@@ -424,12 +363,14 @@
 			"pack"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
-			"user_",
+			"interested",
+			"intr_i_partner",
+			"plakat_box",
 			".rankingbox",
 			"/media/",
 			"media/",
@@ -448,23 +389,23 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "account/gallery.py",
+					"file": "barevent/view.py",
 					"settings":
 					{
-						"buffer_size": 7951,
+						"buffer_size": 6204,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1470,
-								1470
+								3418,
+								3418
 							]
 						],
 						"settings":
@@ -474,25 +415,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 552.0,
+						"translation.y": 1640.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "templates/account/view_user_gallery.html",
+					"file": "templates/barevent/event.html",
 					"settings":
 					{
-						"buffer_size": 5685,
+						"buffer_size": 9605,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1171,
-								1171
+								8372,
+								8372
 							]
 						],
 						"settings":
@@ -502,53 +443,53 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 414.0,
+						"translation.y": 4197.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "templates/includes/profile.html",
+					"file": "urls.py",
 					"settings":
 					{
-						"buffer_size": 1882,
+						"buffer_size": 5324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1333,
-								1333
+								4013,
+								4013
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 840.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "account/models.py",
+					"file": "main/views.py",
 					"settings":
 					{
-						"buffer_size": 8310,
+						"buffer_size": 3295,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6236,
-								6236
+								2537,
+								2537
 							]
 						],
 						"settings":
@@ -558,80 +499,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2829.0,
+						"translation.y": 780.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "urls.py",
-					"settings":
-					{
-						"buffer_size": 4970,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 345.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "accnews/__init__.py",
-					"settings":
-					{
-						"buffer_size": 677,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								511,
-								511
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "templates/main/now.html",
 					"settings":
 					{
-						"buffer_size": 7305,
+						"buffer_size": 7165,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1920,
-								1920
+								4880,
+								4880
 							]
 						],
 						"settings":
@@ -641,61 +527,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 414.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "main/views.py",
-					"settings":
-					{
-						"buffer_size": 3669,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1852,
-								1852
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 690.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "templates/account/profile.html",
-					"settings":
-					{
-						"buffer_size": 3713,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1653,
-								1653
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 759.0,
+						"translation.y": 1136.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

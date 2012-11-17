@@ -23,8 +23,8 @@
         color: white;
     }
     #centerbox .header .ln2 {
-        font-size: 60px;
-        font-weight;
+        font-size: 76px;
+        font-weight: bold;
         color: #ffcc00;
     }
     #centerbox .header .ln3 {
@@ -38,12 +38,12 @@
     }
     #centerbox .header .ln5 {
         color: white;
-        font-size: 47.21px;
+        font-size: 70px;
     }
     #centerbox .header .ln6 {
         color: #ffcc00;
         font-weight: bold;
-        font-size: 47.21px;
+        font-size: 70px;
     }
     #centerbox .header .ln7 {
         width: 100px;
@@ -51,7 +51,7 @@
     }
     #centerbox .header .ln8 { 
         color: white;
-        font-size: 43.78px;
+        font-size: 42px;
     }
 #centerbox .ln9 {
     color: white;
@@ -62,55 +62,65 @@
     font-size: 40.54px;
 }
 #centerbox .ln11 {
-    font-size: 44.21px;
+    font-size: 24px;
     color: white;
 }
 #centerbox .ln12 {
-    font-size: 44.21px;
-    color: #ffcc00;
-    font-weight: bold;
+    font-size: 28px;
+    color: white;
     text-decoration: none;
 }
-    #centerbox .ln12:hover { text-decoration: underline; }
 #centerbox .ln13 {
-    font-size: 43px;
+    font-size: 32px;
     color: white;
 }
 #centerbox .ln14 {
-    font-size: 43px;
-    font-weight: bold;
-    color: #ffcc00;
-}
-#centerbox .ln15 {
-    font-size: 43px;
+    font-size: 48px;
     color: white;
 }
+#centerbox .ln15 {
+    width: 100px;
+    height: 40px;
+    display: block;
+}
 #centerbox .ln16 {
-    font-size: 29.5px;
+    font-size: 28px;
     color: white;
 }
 #centerbox .ln17 {
-    font-size: 29.5px;
+    font-size: 28px;
     color: #ffcc00;
+    font-weight: bold;
 }
 #centerbox .ln18 {
-    font-size: 12.25px;
+    font-size: 33px;
     color: white;
 }
 #centerbox .ln19 {
-    width: 100px;
-    height: 60px;
+    font-size: 32px;
+    color: #ffcc00;
+    font-weight: bold;
+}
+#centerbox .ln20 {
+    font-size: 40px;
+    color: white;
+}
+#centerbox .ln21 {
+    font-size: 50px;
+    color: white;
 }
 #centerbox .sphdr {
-    width: 280px;
+    width: 560px;
     display: inline-block;
     text-align: center;
     font-size: 16px;    
     color: white;
+    margin-bottom: 20px;
 }
-#centerbox > a { text-decoration: none; }
+#centerbox > a { text-decoration: none; margin-left: 10px; margin-right: 10px;}
 .rankingbox {
     width: 560px;
+    margin-bottom: 30px;
 }    
     .rankingbox > .header {
         color: #FFD100;

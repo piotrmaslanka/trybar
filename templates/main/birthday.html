@@ -18,11 +18,10 @@
 
     <div id="centerbox">
         <div class="header">
-            <div class="ln1">Z OKAZJI PIERWSZYCH URODZIN PORTALU</div>
-            <div class="ln2">12 PAŹDZIERNIKA</div>
-            <div><span class="ln3">PIWO 50%</span> <span class="ln4">TAŃSZE</span></div>
-            <div><span class="ln5">W CAŁYM</span> <span class="ln6">JAROSŁAWIU</span></div>
-            <div class="ln7"></div>
+            <div class="ln1">Z OKAZJI ZBLIŻAJĄCYCH SIĘ ANDRZEJEK</div>
+            <div class="ln2">23 LISTOPADA</div>
+            <div><span class="ln3">PIZZA 30%</span> <span class="ln4">TAŃSZA</span></div>
+            <div><span class="ln5">W</span> <span class="ln6">JAROSŁAWIU</span></div>
             <div class="ln8">PROMOCJA DOSTĘPNA W</div>
         </div>
         <div class="rankingbox">
@@ -42,28 +41,21 @@
             </div>
             {% endfor %}
         </div>
-        <div><span class="ln9">AFTERPARTY - </span><span class="ln10">START 21:00</span></div>
-        <div class="rankingbox">
-            {% for bar in afterparty %}
-            <div class="entry">
-                <div class="imgbox bar"><a href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
-                <div class="description">
-                    <div class="name"><a href="/bar/{{ bar.slugname }}/">{{ bar.name }}</a></div>
-                    <div class="descr"><a href="/bar/{{ bar.slugname }}/">{{ bar.description|word_slice:":10" }}</a></div>
-                    <div class="average"><a href="/bar/{{ bar.slugname }}/">{{ bar.meta.avg|round_float:"2" }}</a></div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>        
-        <div><span class="ln11">ZAREJESTRUJ SIĘ </span><a class="ln12" href="/login/register/">TUTAJ</a></div>
-        <div><span class="ln13">A OTRZYMASZ </span><span class="ln14">15%</span><span class="ln15"> ZNIŻKI</span></div>
-        <div><span class="ln16">NA ALKOHOL W </span><span class="ln17">CARMEL CLUB CAFFE</span></div>
-        <span class="ln18">INSTRUKCJE W ZWIĄZKU Z PROMOCJĄ OTRZYMASZ MAILEM KILKA DNI PRZED URODZINAMI</span>
-        <div class="ln19"></div>
-        <div class="sphdr">SPONSORZY</div><div class="sphdr">PARTNERZY</div>
-        <a href="http://zubrzycki.osk.info.pl/" target="_blank">
-            <img src="/media/gfx/birthday/zubrzycki.png">
-        </a>
+    
+        <div class="ln11">PROMOCJA JEST MOŻLIWA DO ZREALIZOWANIA</div>
+        <div class="ln12">TYLKO I WYŁĄCZNIE WEWNĄTRZ LOKALI</div>
+        <div class="ln13">OZNACZA TO, ŻE PIZZA NA DOWÓZ</div>
+        <div class="ln14">KOSZTUJE NORMALNIE</div>
+
+        <div class="ln15"></div>
+
+        <div><span class="ln16">W PRZYPADKU LOKALI</span> <span class="ln17">DA SALVATORE</span></div>
+        <div><span class="ln18">PROMOCJI</span> <span class="ln19">PIZZA -30%</span> <span class="ln18">NIE MOŻNA</span></div>
+        <div><span class="ln20">ŁĄCZYĆ Z WEWNĘTRZNYMI</span></div>
+        <div><span class="ln21">PROMOCJAMI LOKALU</span></div>
+
+        <div class="ln15"></div>
+        <div class="sphdr">PARTNERZY</div>
         <a href="http://sklepgoblina.pl/" target="_blank">
             <img src="/media/gfx/birthday/sklepgoblina.png">
         </a>

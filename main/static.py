@@ -51,17 +51,14 @@ def regulamin(request):
 
 def birthday(request):
     rootbars = [Bar.objects.filter(slugname='alibi'), 
-                Bar.objects.filter(slugname='billkros'),
-                Bar.objects.filter(slugname='capone'),
                 Bar.objects.filter(slugname='corleone'),
-                Bar.objects.filter(slugname='joker')]
+                Bar.objects.filter(slugname='billkros'),
+                Bar.objects.filter(slugname='da-salvatore-pub'),
+                Bar.objects.filter(slugname='da-salvadore'),
+                Bar.objects.filter(slugname='trattoria')]
     rootbars = reduce(lambda x,y:x+y, map(list, rootbars), [])
 
-    afterp = [Bar.objects.filter(slugname='carmel-club-caffe'),
-              Bar.objects.filter(slugname='joker')]
-    afterp = reduce(lambda x,y:x+y, map(list, afterp), [])
-
-    return render('main/birthday.html', request, afterparty=afterp, promo_bary=rootbars)
+    return render('main/birthday.html', request, promo_bary=rootbars)
 
 def http404(request):
     antwort = render('http_errors/404.html', request)    
