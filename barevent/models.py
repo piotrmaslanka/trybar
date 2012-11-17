@@ -1,33 +1,36 @@
 # coding=UTF-8
 from __future__ import division
 from django.db import models
-from django.core.validators import MinLengthValidator, RegexValidator
 from datetime import datetime
 from collections import defaultdict
 from hashlib import sha1
 from trybar.account.models import Account
 from trybar.bar.models import Bar
 from trybar.photo.models import Photo
-from trybar.photo.upload import upload_as, RES_EVENT_LOGO, RES_EVENT_PHOTO
+from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_PHOTO, RES_EVENT_PARTNER
 
 class Event(models.Model):
-    name = models.CharField(max_length=40, verbose_name=u'Nazwa baru')
+    name = models.CharField(max_length=40, verbose_name=u'Nazwa imprezy')
     description = models.TextField(verbose_name=u'Opis')
+
+    miniature = models.ForeignKey(Photo, related_name='DONTCARE1', default=None, null=True)
+
+    slugname = models.SlugField(verbose_name=u'Nazwa URL')
 
     bar = models.ForeignKey(Bar, related_name='events')
     owner = models.ForeignKey(Account, related_name='events_owned')
 
+    entry_cost = models.DecimalField(max_digits=4, decimal_places=2)
+    age_limit = models.IntegerField(null=True, default=None)
+    performers = models.TextField()
+    extra_info = models.TextField()
+
     happens_on = models.DateTimeField()
     
-    logo = models.ForeignKey(Photo)
+    poster = models.ForeignKey(Photo, null=True, default=None, related_name='DONTCARE2')
 
-    def delete(self):
-        self.marks.delete()         # Delete all marks
-        self.metadata.delete()   # Delete metadata
-        super(Event, self).delete()   # Delete self
-    
-# Marks are from 1 to 10, as is. Zero is not allowed. Use NULL if you need to signal "no mark"
-EVENT_MARKS_COUNT = 1
+# Marks are from 0 to 8, as is. Zero is not allowed. Use NULL if you need to signal "no mark"
+EVENT_MARKS_COUNT = 9
    
 class EventMeta(models.Model):    
     """This table contains data about a bar that will frequently change"""
@@ -37,7 +40,15 @@ class EventMeta(models.Model):
     mark_count = models.IntegerField(default=0)
     avg = models.FloatField(default=None, null=True)        # average from avg_o*
 
-    avg_o0 = models.IntegerField(default=None, null=True)   # Wystrój wnętrza
+    avg_o0 = models.IntegerField(default=None, null=True)   # Muzyka
+    avg_o1 = models.IntegerField(default=None, null=True)   # Występy
+    avg_o2 = models.IntegerField(default=None, null=True)   # Bezpieczeństwo
+    avg_o3 = models.IntegerField(default=None, null=True)   # Tłok
+    avg_o4 = models.IntegerField(default=None, null=True)   # Klimat
+    avg_o5 = models.IntegerField(default=None, null=True)   # Zabawa
+    avg_o6 = models.IntegerField(default=None, null=True)   # Reklama
+    avg_o7 = models.IntegerField(default=None, null=True)   # Dod. atrakcje
+    avg_o8 = models.IntegerField(default=None, null=True)   # Prowadzący
     
     def recalculate_single_category(self, cat_id):
         """Recalculates single category. CAN BE DEPRECATED/REMOVED/RECODED. Saves instance."""
@@ -55,7 +66,7 @@ class EventMeta(models.Model):
             
         vsum = 0
         vcnt = 0
-        for mark in [self.__dict__['avg_o'+str(x)] for x in xrange(0, 14)]:
+        for mark in [self.__dict__['avg_o'+str(x)] for x in xrange(0, EVENT_MARKS_COUNT)]:
             if mark != None:
                 vsum += mark
                 vcnt += 1
@@ -72,7 +83,15 @@ class SingleEventMark(models.Model):
     event = models.ForeignKey(Event, related_name='marks')
     account = models.ForeignKey(Account, related_name='event_marks_issued')
     
-    o0 = models.IntegerField(default=None, null=True)
+    o0 = models.IntegerField(default=None, null=True)   # Muzyka
+    o1 = models.IntegerField(default=None, null=True)   # Występy
+    o2 = models.IntegerField(default=None, null=True)   # Bezpieczeństwo
+    o3 = models.IntegerField(default=None, null=True)   # Tłok
+    o4 = models.IntegerField(default=None, null=True)   # Klimat
+    o5 = models.IntegerField(default=None, null=True)   # Zabawa
+    o6 = models.IntegerField(default=None, null=True)   # Reklama
+    o7 = models.IntegerField(default=None, null=True)   # Dod. atrakcje
+    o8 = models.IntegerField(default=None, null=True)   # Prowadzący
 
 class EventPhoto(models.Model):
     event = models.ForeignKey(Event, related_name='photos')
@@ -86,3 +105,33 @@ class EventPhoto(models.Model):
         b = EventPhoto(event=event, photo=pic)
         b.save()
         return b
+
+class Partner(models.Model):
+    event = models.ForeignKey(Event, related_name='partners')
+    website = models.CharField(max_length=255)        
+    photo = models.ForeignKey(Photo)
+
+    cache_photo_height = models.IntegerField(default=None, null=True)
+
+    def delete(self):
+        self.photo.delete()
+        super(Partner, self).delete()
+
+class InterestedUser(models.Model):
+    account = models.ForeignKey(Account, related_name='events_interested_in')
+    event = models.ForeignKey(Event, related_name='interested_users')
+
+class EventAbuse(models.Model):
+    event = models.ForeignKey(Event, related_name='abuses')
+    account = models.ForeignKey(Account, related_name='event_abuses_reported')
+    reported = models.DateTimeField(default=datetime.now)
+    description = models.TextField(blank=True)
+    
+class EventComment(models.Model):
+    event = models.ForeignKey(Event, related_name='comments')
+    account = models.ForeignKey(Account, related_name='event_comments_made')
+    content = models.TextField()
+    made_on = models.DateTimeField(default=datetime.now)
+    
+    class Meta:
+        ordering = ['-made_on']    

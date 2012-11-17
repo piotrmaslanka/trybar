@@ -31,6 +31,7 @@ BAR_OPEN_HOURS_TO = [ ('', 'Nieznane'),
 
 class Bar(models.Model):
     frontpage_type_display = models.BooleanField(default=False, verbose_name=u'Adres bezpośrednio z /')
+        # DEPRECATED ^
 
     name = models.CharField(max_length=40, verbose_name=u'Nazwa baru')
     street = models.CharField(max_length=50, verbose_name=u'Ulica')
@@ -99,7 +100,7 @@ BAR_MARKS_COUNT = 14
 #12 Czystość
 #13 Tłok    
 
-# Marks are from 1 to 10, as is. Zero is not allowed. Use NULL if you need to signal "no mark"
+# Marks are from 0 to 13, as is. Zero is not allowed. Use NULL if you need to signal "no mark"
     
 class BarMeta(models.Model):    
     """This table contains data about a bar that will frequently change"""
@@ -234,7 +235,7 @@ class BarFrequenter(models.Model):
     
 class BarAbuse(models.Model):
     bar = models.ForeignKey(Bar, related_name='abuses')
-    account = models.ForeignKey(Account, related_name='abuses_reported')
+    account = models.ForeignKey(Account, related_name='bar_abuses_reported')
     reported = models.DateTimeField(default=datetime.now)
     description = models.TextField(blank=True)
     

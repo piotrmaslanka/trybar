@@ -50,6 +50,10 @@
                         <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> skomentował bar <a href="/bar/{{ arg1.slugname }}/">{{ arg1.name }}</a></td>
                         <td><a href="/bar/{{ arg1.slugname }}/"><img src="{{ arg1.get_representative_photo|path:"barphoto:84,84" }}"></a></td>
                     {% endif %}
+                    {% if an.report_type == RT_COMMENT_EVENT %}
+                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> skomentował wydarzenie <a href="/bar/{{ arg1.bar.slugname }}/{{ arg1.slugname }}/">{{ arg1.name }}</a></td>
+                        <td><a href="/bar/{{ arg1.bar.slugname }}/{{ arg1.slugname }}/"><img src="{{ arg1.miniature|path:"eventmini:84,84" }}"></a></td>
+                    {% endif %}
                     {% if an.report_type == RT_IS_FREQUENTER %}
                         <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> został stałym bywalcem w <a href="/bar/{{ arg1.slugname }}/">{{ arg1.name }}</a></td>
                         <td><a href="/bar/{{ arg1.slugname }}/"><img src="{{ arg1.get_representative_photo|path:"barphoto:84,84" }}"></a></td>
@@ -64,23 +68,15 @@
                     {% endif %}
                     {% if an.report_type == RT_ADDED_EVENT %}
                         <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> dodał nowe wydarzenie w barze <a href="/bar/{{ arg1.bar.slugname }}/">{{ arg1.bar.name }}</a></td>
-                        <td><a href="#"><img src="{{ arg1.logo|path:"eventlogo:84,84" }}"></a></td>
+                        <td><a href="#"><img src="{{ arg1.miniature|path:"eventmini:84,84" }}"></a></td>
                     {% endif %}
-                    {% if an.report_type == RT_WILL_GO_EVENT %}
-                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> weźmie udział w wydarzeniu <a href="#"{{ arg1.name }}</a></td>
-                        <td><a href="#"><img src="{{ arg1.logo|path:"eventlogo:84,84" }}"></a></td>
+                    {% if an.report_type == RT_INTRSTD_IN_EVENT %}
+                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> interesuje się wydarzeniem <a href="/bar/{{ arg1.bar.slugname }}/{{ arg1.slugname }}/">{{ arg1.name }}</a></td>
+                        <td><a href="#"><img src="{{ arg1.miniature|path:"eventmini:84,84" }}"></a></td>
                     {% endif %}
-                    {% if an.report_type == RT_WONT_GO_EVENT %}
-                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> nie weźmie udziału w wydarzeniu <a href="#"{{ arg1.name }}</a></td>
-                        <td><a href="#"><img src="{{ arg1.logo|path:"eventlogo:84,84" }}"></a></td>
-                    {% endif %}
-                    {% if an.report_type == RT_WAS_ON_EVENT %}
-                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> wziął udział w wydarzeniu <a href="#"{{ arg1.name }}</a></td>
-                        <td><a href="#"><img src="{{ arg1.logo|path:"eventlogo:84,84" }}"></a></td>
-                    {% endif %}
-                    {% if an.report_type == RT_WASNT_ON_EVENT %}
-                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> nie wziął udziału w wydarzeniu <a href="#"{{ arg1.name }}</a></td>
-                        <td><a href="#"><img src="{{ arg1.logo|path:"eventlogo:84,84" }}"></a></td>
+                    {% if an.report_type == RT_NOT_INTRSTD_IN_EVENT %}
+                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> nie interesuje się wydarzeniem <a href="/bar/{{ arg1.bar.slugname }}/{{ arg1.slugname }}/">{{ arg1.name }}</a></td>
+                        <td><a href="#"><img src="{{ arg1.miniature|path:"eventmini:84,84" }}"></a></td>
                     {% endif %}
                     {% if an.report_type == RT_BARPHOTO_ADDED %}
                         <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> dodał nowe zdjęcie do baru <a href="/bar/{{ arg2.bar.slugname }}/">{{ arg2.bar.name }}</a></td>

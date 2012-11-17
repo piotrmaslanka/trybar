@@ -10,12 +10,16 @@ RES_BAR_LOGO = ((84, 84),)                 # res ident: barlogo
 RES_BAR_GUEST = ((112, None), (84, 84), (137, 97))     # res ident: barguest
 RES_PRIZES = ((84, 84), )                   # res ident: prize
 
-RES_EVENT_LOGO = ((84, 84), (222, 124), )   # res ident: eventlogo
 RES_EVENT_PHOTO = ((112, None), (84, 84))   # res ident: eventphoto
 
 RES_ACCOUNT_PHOTO = ((112, None), (84, 84), (137, 97)) # res ident: accphoto
 
 RES_BANNER = ((980, 150), ) # res ident: banner
+
+RES_EVENT_POSTER = ((233, None), )  # res ident: eventposter
+RES_EVENT_PARTNER = ((176, None), ) # res ident: eventpartner
+
+RES_EVENT_MINIATURE = ((222, 124), )  # res ident: eventmini
 
 def upload_as(ufo, resolutions):
     """@type ufo: UploadedFile

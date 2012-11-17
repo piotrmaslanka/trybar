@@ -63,6 +63,8 @@ urlpatterns = patterns('trybar',
     url(r'^bar/(?P<slugname>.+?)/frequenters/$', 'bar.bar.frequenters'),
     url(r'^bar/(?P<slugname>.+?)/manage/$', 'bar.manage_bar.view'),
     url(r'^bar/(?P<slugname>.+?)/manage/op/$', 'bar.manage_bar.op'),
+    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/op/$', 'barevent.view.op'),
+    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/$', 'barevent.view.view_event'),
     url(r'^bar/(?P<slugname>.+?)/$', 'bar.bar.view'),
     # Actions for cron
     url(r'^admin/cron/regenerate_bar_ranking/', 'cron.actions.regenerate_bar_ranking'),

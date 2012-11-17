@@ -5,15 +5,15 @@
 {% block title %}TryBAR: {{ bar.name }}{% endblock %}
 {% block ad %}{{ 3|html_ad }}{% endblock %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="/media/css/bar.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/barevent.css">
     <link rel="stylesheet" type="text/css" href="/media/css/tooltip.css">
-	<script src="/media/js/jquery.selectBox.min.js"></script>
-	<script src="/media/js/form_highlighter.js"></script>	
-	<script src="/media/js/adgallery.js"></script>	
-	<script src="/media/js/tooltip.js"></script>	
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>   
+    <script src="/media/js/adgallery.js"></script>  
+    <script src="/media/js/tooltip.js"></script>    
     <script type="text/javascript">
-        function mark(bar_id, category_id, val) {
-            $.ajax('/bar/'+bar_id+'/ajax/?op=mark&o='+category_id+'&val='+val,
+        function mark(category_id, val) {
+            $.ajax('/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=mark&o='+category_id+'&val='+val,
                    {dataType: 'json',
                     success: function(data) {
                         if (data[0] == null) data[0] = '??';
@@ -26,10 +26,10 @@
                     }
                    })
         }
-        function abuse(bar_id) {
+        function abuse() {
             var reason = prompt("Podaj powód zgłoszenia", "");
             if (reason == null) return;
-            $.ajax('/bar/'+bar_id+'/ajax/?op=abuse', {
+            $.ajax('/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=abuse', {
                 data: {'description': reason},
                 type: 'POST',
                 success:function() {
@@ -41,43 +41,40 @@
 {% endblock %}
 
 {% block body %}
-<div id="bar_header">
-    <div id="bar_logo">
-        {% if bar.logo != None %}
-            <img src="{{ bar.logo|path:"barlogo:84,84" }}" alt="Logo baru">
-        {% endif %}
-        <div class="title">
-            {{ bar.name }}
-        </div>
+<div id="event_header">
+    <a class="zobacz_lokal" href="/bar/{{ event.bar.slugname }}/"></a>
+    <div class="title">
+        <div class="name">{{ event.name }}</div>
+        <div class="date">{{ event.happens_on|date:"d/m l" }}</div>
     </div>
     
     <div class="sep"></div>
     
     <div class="address">
-        {{ bar.street }}<br class="nflt">
-        <a href="/ranking/bars/?q={{ bar.city|urlencode }}">{{ bar.city }}</a>
+        {{ event.bar.street }}<br class="nflt">
+        <a href="/ranking/bars/?q={{ event.bar.city|urlencode }}">{{ event.bar.city }}</a>
     </div>
     
     <div class="buttons">        
-        {% if logged_in %}
-            <div class="psbutton" id="button_dodajzdjecie"><a href="/bar/{{ bar.slugname }}/add_photo/"></a></div>
-            <div class="psbutton" id="button_{% if is_frequenter %}nie{% endif %}bywalec">
-                <a href="/bar/{{ bar.id }}/ajax/?op=frequent"></a>
+        {% if request.user != None %}
+            <div class="psbutton" id="button_dodajzdjecie"><a href="#"></a></div>
+            <div class="psbutton" id="button_{% if is_interested %}nie{% endif %}interested">
+                <a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=interested"></a>
             </div>
-            <div class="psbutton" id="button_naduzycie"><a onclick="abuse({{ bar.id }})"></a></div>
+            <div class="psbutton" id="button_naduzycie"><a onclick="abuse()"></a></div>
         {% endif %}
     </div>
 </div>
 
 
-<div id="imprezy_box">
-    <div class="box_header_title_fstyle">IMPREZY</div>
+<div id="plakat_box">
+    <div class="box_header_title_fstyle">PLAKAT</div>
         {% for event in events %}
             <div class="impreza">
-            <a href="#"><img src="{{ event.miniature|path:"eventmini:222,124" }}"></a>
+            <a href="#"><img src="{{ event.logo|path:"222,124" }}"></a>
                 <div class="opis">
                     <div class="left">{{ event.name }}</div>
-                    <div class="right"><a href="/bar/{{ bar.slugname }}/{{ event.slugname }}/">Więcej</a></div>
+                    <div class="right"><a href="#">Więcej</a></div>
                 </div>
             </div>        
         {% endfor %}
@@ -94,7 +91,7 @@
             <div class="ad-nav">
                 <div class="ad-thumbs">
                     <ul class="ad-thumb-list">
-                        {% for photo in bar.photos.all %}
+                        {% for photo in event.photos.all %}
                         <li{# id="k1" #}>
                             <a href="{{ photo.photo|path }}">
                                 <img src="{{ photo.photo|path:"112," }}">
@@ -116,107 +113,47 @@
 
 <div id="informacje_box">
     <div class="box_header_title_fstyle">INFORMACJE</div>
-    <div class="szpalta">
-        <span class="title">Akceptowalność kart płatniczych</span><br>
-        <span class="content">{{ bar.accepts_credit_cards|hThreeway:"Brak informacji" }}</span><br>
+    <div class="szpalta szp1">
+        <span class="title">Wstęp</span><br>
+        <span class="content">{% if event.entry_cost == 0 %}DARMOWY{% else %}{{ event.entry_cost }} zł{% endif %}</span><br>
         <br>
-        <span class="title">Dostępność sieci Wi-Fi</span><br>
-        <span class="content">{{ bar.wifi|hThreeway:"Brak informacji" }}</span><br>
+        <span class="title">Limit wiekowy</span><br>
+        <span class="content">{% if event.age_limit == 0%}BRAK{% else %}{{ event.age_limit }}+{% endif %}</span><br>
         <br>
-        <span class="title">Przystosowanie dla osób niepełnosprawnych</span><br>
-        <span class="content">{{ bar.handicapped|hThreeway:"Brak informacji" }}</span><br>
+        <span class="title">Start</span><br>
+        <span class="content">{{ event.happens_on|date:"H:i" }}</span><br>
         <br>
         
     </div>
     <div class="separator"></div>
-    <div class="szpalta">
-        <span class="title">Strona internetowa</span><br>
-        {% if bar.website %}
-            <a class="content" target="_blank" href="http://{{ bar.website }}">{{ bar.website }}</a><br>
-        {% else %}
-            Brak informacji
-        {% endif %}
-        <br>
-        <span class="title">Godziny otwarcia</span><br>
-        <span class="content">PON.-PIĄ. - 
-            {% if unknown_mf %}
-                Brak informacji
-            {% else %}
-                {% if bar.openhours_5_f == None %}??{% else %}{{ bar.openhours_5_f }}{% endif %}
-                 -
-                {% if bar.openhours_5_t == None %}??{% else %}{{ bar.openhours_5_t }}{% endif %}
-            {% endif %}
-        </span><br>
-        <span class="content">SOB. - 
-            {% if bar.is_closed_sat %}
-                ZAMKNIĘTE
-            {% else %}
-                {% if unknown_sat %}
-                    Brak informacji
-                {% else %}
-                    {% if bar.openhours_sat_f == None %}??{% else %}{{ bar.openhours_sat_f }}{% endif %}
-                     -
-                    {% if bar.openhours_sat_t == None %}??{% else %}{{ bar.openhours_sat_t }}{% endif %}
-                {% endif %}
-            {% endif %}
-        </span><br>
-        <span class="content">NIE. - 
-            {% if bar.is_closed_sun %}
-                ZAMKNIĘTE
-            {% else %}
-                {% if unknown_sun %}
-                    Brak informacji
-                {% else %}
-                    {% if bar.openhours_sun_f == None %}??{% else %}{{ bar.openhours_sun_f }}{% endif %}
-                     -
-                    {% if bar.openhours_sun_t == None %}??{% else %}{{ bar.openhours_sun_t }}{% endif %}
-                {% endif %}
-            {% endif %}
+    <div class="szpalta szp2">
+        <span class="title">Występuje</span><br>
+        <span class="content">
+            {{ event.performers|linebreaksbr }}
+        </span><br><br>
+        <span class="title">Informacje dodatkowe</span><br>
+        <span class="content">
+            {{ event.extra_info|linebreaksbr }}
         </span><br>
 
     </div>
-    <div class="separator"></div>
-    <div class="szpalta">
-        <span class="title">Dostępne rozrywki</span><br>
-        {% if bar.is_games %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_gry.png" alt="Gry" onmouseover="tip.show('Gry')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_darts %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_dart.png" alt="Dart"  onmouseover="tip.show('Dart')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_karaoke %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_karaoke.png" alt="Karaoke"  onmouseover="tip.show('Karaoke')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_dancing %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_dancefloor.png" alt="Dancefloor"  onmouseover="tip.show('Dancefloor')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_billard %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_billard.png" alt="Billard"  onmouseover="tip.show('Billard')" onmouseout="tip.hide()">
-        {% endif %}
-        {% if bar.is_tv %}
-            <img class="rozrywki" src="/media/gfx/bar/roz_tv.png" alt="Tv"  onmouseover="tip.show('Tv')" onmouseout="tip.hide()">
-        {% endif %}
-    </div>            
 </div>
 
-<div class="hard_spacer_1"></div>
-
-<div class="galeria_gosci_i_bywalcow">
-    <div class="box_header_title_fstyle">GALERIA GOŚCI</div>
+<div class="intr_i_partner">
+    <div class="box_header_title_fstyle">PARTNERZY</div>
     <div class="elements">
 <!--        <div class="elem"><a href="#"><img src="CHANGEME/bar_guest_avatar.jpg"></a></div> -->
     </div>
-    <div class="moar"><a href="/building/">Więcej ››</a></div>
 </div>
 
-<div class="galeria_gosci_i_bywalcow bywalcy">
-    <div class="box_header_title_fstyle">STALI BYWALCY</div>
+<div class="intr_i_partner bywalcy">
+    <div class="box_header_title_fstyle">ZAINTERESOWANI</div>
     <div class="elements">
-        {% for frequenter in frequenters %}
-        <div class="elem" onmouseover="tip.show('{{ frequenter.account.login }}')" onmouseout="tip.hide()"><a href="/profile/{{ frequenter.account.id }}/"><img src="{{ frequenter.account.avatar|path:"avatar:84,84" }}"></a></div>
+        {% for interested in interesteds %}
+        <div class="elem" onmouseover="tip.show('{{ interested.account.login }}')" onmouseout="tip.hide()"><a href="/profile/{{ interested.account.id }}/"><img src="{{ interested.account.avatar|path:"avatar:84,84" }}"></a></div>
         {% endfor %}
     </div>
-    <div class="moar"><a href="/bar/{{ bar.slugname }}/frequenters/">Więcej ››</a></div>
+    <div class="moar"><a href="#">Więcej ››</a></div>
 </div>
 
 <div id="oceny">
@@ -233,7 +170,7 @@
             {% if logged_in %}
             <div class="arrow">
                 <ul>
-                    <li class="bg1"><a class="gba" onclick="mark({{ bar.id }}, {{ id }}, 'Z')">Brak oceny</a></li>
+                    <li class="bg1"><a class="gba" onclick="mark({{ id }}, 'Z')">Brak oceny</a></li>
                     {% for i in l10r %}
                     <li class="bg{% cycle '2' '1' %}"><a class="gba" onclick="mark({{ bar.id }}, {{ id }}, {{ i }})">{{ i }}</a></li>
                     {% endfor %}
@@ -251,7 +188,7 @@
 <div id="opis">
     <div class="box_header_title_fstyle">OPIS</div>
     <div class="content">
-        {{ bar.description }}
+        {{ event.description|linebreaksbr }}
     </div>
 </div>
 
@@ -263,7 +200,7 @@
     <div class="content">
         <div class="box_header_title_fstyle">KOMENTARZE</div>            
         <div class="entries">
-            {% for comment in bar.comments.all %}
+            {% for comment in event.comments.all %}
             <div class="entry">
                 <div class="avatar"><a href="/profile/{{ comment.account.id }}/"><img src="{{ comment.account.avatar|path:"avatar:84,84" }}"></a></div>
                 <div class="nick"><a href="/profile/{{ comment.account.id }}/">{{ comment.account.login }}</a></div>
@@ -275,10 +212,10 @@
             <div class="separator"></div>
             {% endfor %}
         </div>                
-        {% if logged_in %}
+        {% if request.user != None %}
         <div id="odpowiedz_box">
             <div class="title">Odpowiedz</div>
-            <form action="/bar/{{ bar.id }}/ajax/?op=comment" method="post" id="comment_form">
+            <form action="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=comment" method="post" id="comment_form">
                 <textarea name="content" onclick="if (this.value == '{{ default_comment_text }}') this.value=''">{{ default_comment_text }}</textarea>                       
                 <button class="send" onclick="$('#comment_form')[0].submit()"></button>
             </form>
