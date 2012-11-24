@@ -52,7 +52,6 @@ def regulamin(request):
 def birthday(request):
     rootbars = [Bar.objects.filter(slugname='alibi'), 
                 Bar.objects.filter(slugname='corleone'),
-                Bar.objects.filter(slugname='billkros'),
                 Bar.objects.filter(slugname='da-salvatore-pub'),
                 Bar.objects.filter(slugname='da-salvadore'),
                 Bar.objects.filter(slugname='trattoria')]
