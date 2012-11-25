@@ -346,10 +346,10 @@
             
     #informacje_box {
         float: left;
-        width: 566px;
+        width: 562px;
         padding: 10px 0px 10px 0px;
         height: 200px;
-        background: url('/media/gfx/bar/bg_info.png');
+        background: url('/media/gfx/barevent/tlo_informacje.png');
         position: relative;
     }
         #informacje_box .box_header_title_fstyle {
@@ -385,10 +385,10 @@
     
     .intr_i_partner {
         width: 179px;
-        height: 610px;
+        height: 615px;
         float: right;
         padding: 10px 10px 10px 10px;
-        background: url('/media/gfx/bar/bg_gallery.png');
+        background: url('/media/gfx/barevent/tlo_zainteresowani.png');
         text-align: center;
         position: relative;
     }

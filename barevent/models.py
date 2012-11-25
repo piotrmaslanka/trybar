@@ -20,7 +20,7 @@ class Event(models.Model):
     bar = models.ForeignKey(Bar, related_name='events')
     owner = models.ForeignKey(Account, related_name='events_owned')
 
-    entry_cost = models.DecimalField(max_digits=4, decimal_places=2)
+    entry_cost = models.DecimalField(max_digits=4, decimal_places=2, default=0)
     age_limit = models.IntegerField(null=True, default=None)
     performers = models.TextField()
     extra_info = models.TextField()

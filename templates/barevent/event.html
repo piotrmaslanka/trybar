@@ -118,7 +118,7 @@
         <span class="content">{% if event.entry_cost == 0 %}DARMOWY{% else %}{{ event.entry_cost }} zł{% endif %}</span><br>
         <br>
         <span class="title">Limit wiekowy</span><br>
-        <span class="content">{% if event.age_limit == 0%}BRAK{% else %}{{ event.age_limit }}+{% endif %}</span><br>
+        <span class="content">{% if event.age_limit == None %}BRAK{% else %}{{ event.age_limit }}+{% endif %}</span><br>
         <br>
         <span class="title">Start</span><br>
         <span class="content">{{ event.happens_on|date:"H:i" }}</span><br>
