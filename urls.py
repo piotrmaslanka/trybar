@@ -2,6 +2,10 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 
 urlpatterns = patterns('trybar',
+    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/manage/$', 'barevent.manage_event.view'),
+    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/op/$', 'barevent.view.op'),
+
+    
     url(r'^$', 'main.views.index'),
     url(r'^admin/otrzesiny/$', 'admin.ephemeris.add_otrzesiny_photo'),
     url(r'^otrzesiny/$', 'main.ephemeris.otrzesiny'),
@@ -64,7 +68,7 @@ urlpatterns = patterns('trybar',
     url(r'^bar/(?P<slugname>.+?)/manage/$', 'bar.manage_bar.view'),
     url(r'^bar/(?P<slugname>.+?)/add_event/$', 'barevent.add_event.view'),
     url(r'^bar/(?P<slugname>.+?)/manage/op/$', 'bar.manage_bar.op'),
-    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/op/$', 'barevent.view.op'),
+    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/manage/op/$', 'barevent.manage_event.op'),
     url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/$', 'barevent.view.view_event'),
     url(r'^bar/(?P<slugname>.+?)/$', 'bar.bar.view'),
     # Actions for cron

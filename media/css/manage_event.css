@@ -1,0 +1,75 @@
+#gallerybox {
+    float: right;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    width: 462px;
+    
+    font-size: 12px;
+    color: #d3a702;
+}
+    #save_button {
+        margin: 0 0 0 0;
+        border: none;
+        cursor: pointer;
+        
+        width: 97px;
+        height: 40px;
+        background: url('/media/gfx/manage_bar/zapisz.png');
+    }
+
+    #scroll_top {
+        width: 462px;
+        height: 55px;
+        background: url('/media/gfx/manage_bar/strzalka_gora.png');
+    }
+        #scroll_top:hover {
+            background: url('/media/gfx/manage_bar/strzalka_gora_p.png');
+        }
+    #scroll_bot {
+        width: 462px;
+        height: 55px;
+        background: url('/media/gfx/manage_bar/strzalka_dol.png');
+    }
+        #scroll_bot:hover {
+            background: url('/media/gfx/manage_bar/strzalka_dol_p.png');
+        }
+
+
+    #gallerybox .photo_sliding_window {
+        overflow: hidden;
+        width: 450px;
+        height: 1224px;
+    }
+
+    #gallerybox .photo {
+        height: 194px;
+        padding: 5px 0px 5px 0px;
+        text-align: center;
+    }
+        #gallerybox .photo img {
+            width: 274px;
+            height: 194px;
+            float: left;
+        }
+
+    #gallerybox .photo .make_main {
+        width: 117px;
+        display: inline-block;
+        margin-top: 30px;
+        height: 23px;
+        background: url('/media/gfx/manage_bar/glowne.png') no-repeat;
+    }
+        #gallerybox .photo .make_main:hover {
+            background: url('/media/gfx/manage_bar/glowne_p.png') no-repeat;       
+        }
+    #gallerybox .photo .delete {
+        margin-top: 50px;
+        width: 55px;
+        display: inline-block;
+        height: 23px;
+        background: url('/media/gfx/manage_bar/usun.png') no-repeat;
+    }    
+        #gallerybox .photo .delete:hover {
+            background: url('/media/gfx/manage_bar/usun_p.png') no-repeat;   
+        }

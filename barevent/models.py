@@ -32,12 +32,12 @@ class Event(models.Model):
     bar = models.ForeignKey(Bar, related_name='events')
     owner = models.ForeignKey(Account, related_name='events_owned')
 
-    entry_cost = models.DecimalField(max_digits=4, decimal_places=2, default=0)
-    age_limit = models.IntegerField(null=True, default=None)
-    extra_info = models.TextField()
+    entry_cost = models.DecimalField(max_digits=4, decimal_places=2, default=0, verbose_name=u'Koszt wstępu')
+    age_limit = models.IntegerField(null=True, default=None, verbose_name=u'Limit wieku')
+    extra_info = models.TextField(verbose_name=u'Informacje dodatkowe')
 
-    happens_on = models.DateField()
-    starts_on = models.CharField(max_length='5', blank=True)
+    happens_on = models.DateField(verbose_name=u'Data startu')
+    starts_on = models.CharField(max_length='5', blank=True, verbose_name=u'Czas startu')
     
     poster = models.ForeignKey(Photo, null=True, default=None, related_name='DONTCARE2')
 
