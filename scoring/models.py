@@ -2,7 +2,7 @@ from datetime import datetime
 from django.db import models
 from trybar.account.models import Account, AccountPhoto, AccountPhotoComment
 from trybar.bar.models import Bar, BarPhoto, BarComment
-from trybar.barevent.models import EventComment
+from trybar.barevent.models import EventComment, Event, EventPhoto
 from trybar.main.models import NewsComment
 
 class Scoring(models.Model):
@@ -33,6 +33,12 @@ class NewsCommentAdded(Scoring):
 
 class BarEventCommentAdded(Scoring):
     eventcomment = models.ForeignKey(EventComment)
+
+class BarEventAdded(Scoring):
+    event = models.ForeignKey(Event)
+
+class BarEventPhotoAdded(Scoring):
+    eventphoto = models.ForeignKey(EventPhoto)
 
 class Manual(Scoring):
     reason = models.TextField()

@@ -9,6 +9,18 @@ from trybar.bar.models import Bar
 from trybar.photo.models import Photo
 from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_PHOTO, RES_EVENT_PARTNER
 
+STARTING_AT = [ ('', 'Nieznane'),
+ ('05:00', '05:00'), ('05:30', '05:30'), ('06:00', '06:00'), ('06:30', '06:30'),
+ ('07:00', '07:00'), ('07:30', '07:30'), ('08:00', '08:00'), ('08:30', '08:30'),
+ ('09:00', '09:00'), ('09:30', '09:30'), ('10:00', '10:00'), ('10:30', '10:30'),
+ ('11:00', '11:00'), ('11:30', '11:30'), ('12:00', '12:00'), ('12:30', '12:30'),
+ ('13:00', '13:00'), ('13:30', '13:30'), ('14:00', '14:00'), ('14:30', '14:30'),
+ ('15:00', '15:00'), ('15:30', '15:30'), ('16:00', '16:00'), ('16:30', '16:30'),
+ ('17:00', '17:00'), ('17:30', '17:30'), ('18:00', '18:00'), ('18:30', '18:30'),
+ ('19:00', '19:00'), ('19:30', '19:30'), ('20:00', '20:00'), ('20:30', '20:30'),
+ ('21:00', '21:00'), ('21:30', '21:30'), ('22:00', '22:00'), ('22:30', '22:30'),
+ ('23:00', '23:00'), ('23:30', '23:30')]
+
 class Event(models.Model):
     name = models.CharField(max_length=40, verbose_name=u'Nazwa imprezy')
     description = models.TextField(verbose_name=u'Opis')
@@ -22,12 +34,17 @@ class Event(models.Model):
 
     entry_cost = models.DecimalField(max_digits=4, decimal_places=2, default=0)
     age_limit = models.IntegerField(null=True, default=None)
-    performers = models.TextField()
     extra_info = models.TextField()
 
-    happens_on = models.DateTimeField()
+    happens_on = models.DateField()
+    starts_on = models.CharField(max_length='5', blank=True)
     
     poster = models.ForeignKey(Photo, null=True, default=None, related_name='DONTCARE2')
+
+class EventArtist(models.Model):
+    event = models.ForeignKey(Event, related_name='artists')
+    name = models.CharField(max_length=80)
+    profile = models.CharField(max_length=100, blank=True, null=True, default=None)
 
 # Marks are from 0 to 8, as is. Zero is not allowed. Use NULL if you need to signal "no mark"
 EVENT_MARKS_COUNT = 9

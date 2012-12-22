@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+{% load ads %}
+
+{% block head %}
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>  
+    <link rel="stylesheet" type="text/css" href="/media/css/add_event.css">
+{% endblock %}
+
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        DODAWANIE IMPREZY
+    </div>
+    
+    <form action="/bar/{{ bar.slugname }}/add_event/" method="post" enctype="multipart/form-data">
+    <div class="infobox">
+        <div class="bold">
+            Dodawanie lokali sprawia, że nasz spis jest bardziej bogaty i dokładny, dzięki czemu możesz mieć satysfakcję z tego, że przyczyniasz się do rozbudowy portalu, a także ułatwiasz innym użytkownikom planowanie weekendowych wypadów.
+        </div>
+        
+            <br><br>
+        
+            Bezpośrednimi korzyściami płynącymi z dodawania lokali są punkty przyznawane każdorazowo automatycznie. Za dodanie jednego lokalu otrzymujesz 10 punktów, a za każde jedno zdjęcie w galerii lokalu 20 punktów. Dzięki zdobywanym punktom możesz piąć się w rankingu użytkowników oraz walczyć o ciekawe nagrody. Więcej o nagrodach <a href="/building/">tutaj</a>.
+    </div>
+    <table class="formtab">
+        <tr><td></td><td colspan="2" class="tbcenter">
+            Wypełnij poniższe pola aby dodać nową imprezę:
+        </td></tr>
+        <tr><td></td><td colspan="2" class="tbcenter bold">
+            Informacje główne
+        </td></tr>
+        {% for error in form.non_field_errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Nazwa imprezy<span class="star">*</span>:</td>
+            <td class="field">{{ form.name }}</td>
+            <td class="alert">{% if form.name.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.name.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Data<span class="star">*</span>:</td>
+            <td class="field">{{ form.date }}</td>
+            <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.date.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Miasto<span class="star">*</span>:</td>
+            <td class="field">{{ form.city }}</td>
+            <td class="alert">{% if form.city.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.city.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Ulica<span class="star">*</span>:</td>
+            <td class="field">{{ form.street }}</td>
+            <td class="alert">{% if form.street.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.street.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Województwo<span class="star">*</span>:</td>
+            <td class="field">{{ form.voivodeship }}</td>
+            <td class="alert">{% if form.voivodeship.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.voivodeship.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Opis:</td>
+            <td class="field nobg">{{ form.description }}</td>
+            <td class="alert">{% if form.description.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.description.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    
+    <div id="subshade_container">
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Wstęp</span>
+        
+        <div id="wstepbox">
+            Cena: <div class="cbox">{{ form.entry }}</div> zł
+        </div>
+
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Czy na imprezę mają wstęp tylko i wyłącznie osoby pełnoletnie?</span>
+        <div class="yes_no_boxes">
+            {% for radio in form.only_adults %}
+                {% if forloop.first %}<div class="left_subbox">{% endif %}
+                    {{ radio.tag }} {{ radio.choice_label }}
+                {% if forloop.first %}</div>{% endif %}
+            {% endfor %}
+        </div>
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Godziny otwarcia</span>
+        <table id="opening_hours_t">
+            <tr>
+                <td class="label">Start</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.start_at }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Artyści</span>
+        <div class="longdescript">
+            Możesz wklejać linki profili artystów ze strony
+            <a href="http://www.trybit.pl/">www.trybit.pl</a> tak aby użytkownicy przeglądający stronę imprezy mogli zapoznać się z wykonawcami
+        </div>
+        <table class="formtab nomleft">
+            <tr><td colspan="3" class="spc"></td></tr>
+            <tr>
+                <td class="label">Artysta 1: </td>
+                <td class="field">{{ form.artist_1 }}</td>
+                <td class="alert">{% if form.artist_1.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.artist_1.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="label">Link: </td>
+                <td class="field">{{ form.profile_1 }}</td>
+                <td class="alert">{% if form.profile_1.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.profile_1.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}            
+            <tr><td colspan="3" class="spc"></td></tr>
+            <tr>
+                <td class="label">Artysta 2: </td>
+                <td class="field">{{ form.artist_2 }}</td>
+                <td class="alert">{% if form.artist_2.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.artist_2.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="label">Link: </td>
+                <td class="field">{{ form.profile_2 }}</td>
+                <td class="alert">{% if form.profile_2.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.profile_2.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}            
+            <tr><td colspan="3" class="spc"></td></tr>
+            <tr>
+                <td class="label">Artysta 3: </td>
+                <td class="field">{{ form.artist_3 }}</td>
+                <td class="alert">{% if form.artist_3.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.artist_3.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="label">Link: </td>
+                <td class="field">{{ form.profile_3 }}</td>
+                <td class="alert">{% if form.profile_3.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.profile_3.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+            <tr><td colspan="3" class="spc"></td></tr>
+          <tr>
+                <td class="label">Artysta 4: </td>
+                <td class="field">{{ form.artist_4 }}</td>
+                <td class="alert">{% if form.artist_4.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.artist_4.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="label">Link: </td>
+                <td class="field">{{ form.profile_4 }}</td>
+                <td class="alert">{% if form.profile_4.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.profile_4.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}    
+            <tr><td colspan="3" class="spc"></td></tr>
+          <tr>
+                <td class="label">Artysta 5: </td>
+                <td class="field">{{ form.artist_5 }}</td>
+                <td class="alert">{% if form.artist_5.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.artist_5.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="label">Link: </td>
+                <td class="field">{{ form.profile_5 }}</td>
+                <td class="alert">{% if form.profile_5.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.profile_5.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %} 
+        </table>
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Atrakcje imprezy (maks. 150 znaków)</span>
+        <table class="formtab">
+            <tr>
+                <td class="label">Opis:</td>
+                <td class="field nobg">{{ form.extra_info }}</td>
+                <td class="alert">{% if form.extra_info.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.extra_info.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="subshade_shade"></div>
+        <input type="submit" value="" id="submit_button">
+        <div class="subshare_subdescript">
+            <span class="star">*</span>Wypełnij wszystkie obowiązkowe pola
+        </div>
+    </div>
+    </form>
+    
+</div>
+
+    <script type="text/javascript">
+        $(function() { 
+            $("#wojewodztwo").selectbox({width: 278});
+            $(".godzina").selectbox({width: 88});
+            $('#send_photo_box_input_button').click(function(e) { $("#id_picture").click(); })
+            $('#id_picture').change(function(e) { $("#send_photo_box_input_path input").val($("#id_picture").val()); })
+            $('.formtab input[type="text"]').focus(highlight_input);
+            $('.formtab input[type="text"]').blur(unhighlight_input);
+        });
+    </script>
+{% endblock %}

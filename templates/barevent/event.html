@@ -129,7 +129,14 @@
     <div class="szpalta szp2">
         <span class="title">Występuje</span><br>
         <span class="content">
-            {{ event.performers|linebreaksbr }}
+            {% for artist in event.artists.all %}
+                {% if profile != None %}
+                    <a href="{{ artist.profile }}">{{ artist.name }}</a>
+                {% else %}
+                    {{ artist.name }}
+                {% endif %}
+                <br>
+            {% endfor %}
         </span><br><br>
         <span class="title">Informacje dodatkowe</span><br>
         <span class="content">

@@ -8,6 +8,8 @@ NEWS_COMMENT_ADDED = 3
 ACCOUNT_PHOTO_ADDED = 4
 ACCOUNT_PHOTO_COMMENT_ADDED = 5
 BAR_EVENT_COMMENT_ADDED = 6
+BAR_EVENT_ADDED = 7
+BAR_EVENT_PHOTO_ADDED = 8
 
 standard_pointing = {
 	BAR_ADDED: 5,
@@ -17,6 +19,8 @@ standard_pointing = {
 	ACCOUNT_PHOTO_ADDED: 3,
 	ACCOUNT_PHOTO_COMMENT_ADDED: 1,	
 	BAR_EVENT_COMMENT_ADDED: 1,
+	BAR_EVENT_ADDED: 10,
+	BAR_EVENT_PHOTO_ADDED: 5,
 }
 
 def recalculate_score_for(account):
@@ -36,6 +40,10 @@ def recalculate_score_for(account):
 	for s in AccountPhotoCommentAdded.objects.filter(account=account):
 		score += s.score
 	for s in BarEventCommentAdded.objects.filter(account=account):
+		score += s.score
+	for s in BarEventAdded.objects.filter(account=account):
+		score += s.score
+	for s in BarEventPhotoAdded.objects.filter(account=account):
 		score += s.score
 	for s in Manual.objects.filter(account=account):
 		score += s.score
@@ -63,6 +71,10 @@ def last_monthly_score_for(account):
 		score += s.score
 	for s in BarEventCommentAdded.objects.filter(account=account).filter(scored_on__gt=sm):
 		score += s.score
+	for s in BarEventAdded.objects.filter(account=account).filter(scored_on__gt=sm):
+		score += s.score
+	for s in BarEventPhotoAdded.objects.filter(account=account).filter(scored_on__gt=sm):
+		score += s.score
 	for s in Manual.objects.filter(account=account).filter(scored_on__gt=sm):
 		score += s.score
 
@@ -85,6 +97,10 @@ def score_for(account, scoretype, *args, **kwargs):
 		AccountPhotoCommentAdded(comment=args[0], **kwargs).save()
 	elif scoretype == BAR_EVENT_COMMENT_ADDED:
 		BarEventCommentAdded(eventcomment=args[0], **kwargs).save()
+	elif scoretype == BAR_EVENT_ADDED:
+		BarEventAdded(event=args[0], **kwargs).save()
+	elif scoretype == BAR_EVENT_PHOTO_ADDED:
+		BarEventPhotoAdded(eventphoto=args[0], **kwargs).save()
 
 	ranking_dirty()
 
