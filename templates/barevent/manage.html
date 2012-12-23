@@ -6,8 +6,7 @@
 {% block head %}
     <script src="/media/js/jquery.selectBox.min.js"></script>
     <script src="/media/js/form_highlighter.js"></script>  
-    <link rel="stylesheet" type="text/css" href="/media/css/manage_bar.css">
-    <link rel="stylesheet" type="text/css" href="/media/css/add_bar.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/manage_event.css">
     {% if more_photos_than_6 %}
         <script type="text/javascript">
             var allow_animation = true;
@@ -81,128 +80,73 @@
     
     <div id="subshade_container">
         <div class="subshade_shade"></div>
-        <span class="subshade_descript">Czy lokal akceptuje płatność przez kartę płatniczą?</span>
-        <div class="yes_no_boxes">
-            {% for radio in form.accepts_credit_cards %}
-                {% if forloop.first %}<div class="left_subbox">{% endif %}
-                    {{ radio.tag }} {{ radio.choice_label }}
-                {% if forloop.first %}</div>{% endif %}
-            {% endfor %}
-        </div>
-        <div class="subshade_shade"></div>
-        <span class="subshade_descript">Czy w lokalu dostępna jest sieć Wi-Fi?</span>
-        <div class="yes_no_boxes">
-            {% for radio in form.wifi %}
-                {% if forloop.first %}<div class="left_subbox">{% endif %}
-                    {{ radio.tag }} {{ radio.choice_label }}
-                {% if forloop.first %}</div>{% endif %}
-            {% endfor %}
-        </div>
-        <div class="subshade_shade"></div>
-        <span class="subshade_descript">Czy lokal jest dostosowany dla osób niepełnosprawnych?</span>
-        <div class="yes_no_boxes">
-            {% for radio in form.handicapped %}
-                {% if forloop.first %}<div class="left_subbox">{% endif %}
-                    {{ radio.tag }} {{ radio.choice_label }}
-                {% if forloop.first %}</div>{% endif %}
-            {% endfor %}
-        </div>
-        <div class="subshade_shade"></div>
-        <span class="subshade_descript">Adres internetowy lokalu</span>
+        <span class="subshade_descript">Koszt wstępu</span>
         <div class="textbox_box">
-            http:// <div class="textbox_input_field">{{ form.website }}</div>
+            <div class="textbox_input_field">{{ form.entry_cost }}</div> 0 zł
         </div>
         <div class="subshade_shade"></div>
-        <span class="subshade_descript">Godziny otwarcia</span>
-        <table id="opening_hours_t">
-            <tr>
-                <td class="label">Pon.-Pt.</td>
-                <td class="hf">od: </td>
-                <td class="inputbox">{{ form.openhours_5_f }}</td>
-                <td class="hf">do: </td>
-                <td class="inputbox">{{ form.openhours_5_t }}</td>
-            </tr>
-            <tr>
-                <td class="label">Sob.</td>
-                <td class="hf">od: </td>
-                <td class="inputbox">{{ form.openhours_sat_f }}</td>
-                <td class="hf">do: </td>
-                <td class="inputbox">{{ form.openhours_sat_t }}</td>
-                <td>{{ form.is_closed_sat }}</td>
-                <td>nieczynne</td>
-            </tr>
-            <tr>
-                <td class="label">Nie.</td>
-                <td class="hf">od: </td>
-                <td class="inputbox">{{ form.openhours_sun_f }}</td>
-                <td class="hf">do: </td>
-                <td class="inputbox">{{ form.openhours_sun_t }}</td>
-                <td>{{ form.is_closed_sun }}</td>
-                <td>nieczynne</td>
-            </tr>
-        </table>
+        <span class="subshade_descript">Czy wstęp tylko dla pełnoletnich?</span>
+        <div class="yes_no_boxes">
+            {% for radio in form.only_adults %}
+                {% if forloop.first %}<div class="left_subbox">{% endif %}
+                    {{ radio.tag }} {{ radio.choice_label }}
+                {% if forloop.first %}</div>{% endif %}
+            {% endfor %}
+        </div>
         <div class="subshade_shade"></div>
-        <span class="subshade_descript">Rozrywki dostępne w lokalu</span>
-        <table id="enterts_t">  
-            <tr>
-                <td>
-                    <img src="/media/gfx/add_bar/ikona_dancefloor.png" alt="dancefloor">
-                    <div class="sel">
-                    {{ form.is_dancing }} Dancefloor
-                    </div>
-                </td>
-                <td>
-                    <img src="/media/gfx/add_bar/ikona_dart.png" alt="dart">
-                    <div class="sel">
-                    {{ form.is_darts }} Dart
-                    </div>
-                </td>
-                <td>
-                    <img src="/media/gfx/add_bar/ikona_gry.png" alt="gry">
-                    <div class="sel">
-                    {{ form.is_games }} Gry
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="/media/gfx/add_bar/ikona_karaoke.png" alt="karaoke">
-                    <div class="sel">
-                    {{ form.is_karaoke }} Karaoke
-                    </div>
-                </td>
-                <td>
-                    <img src="/media/gfx/add_bar/ikona_tv.png" alt="tv">
-                    <div class="sel">
-                    {{ form.is_tv }} Tv
-                    </div>
-                </td>
-                <td>
-                    <img src="/media/gfx/add_bar/ikona_billard.png" alt="billard">
-                    <div class="sel">
-                    {{ form.is_billard }} Billard
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <div class="subshade_shade"></div>
-        <span class="subshade_descript">Dodaj zdjęcie</span>
-        <div id="send_photo_box">
-            <div id="send_photo_container">
-                {{ form.picture }}
-                <div id="send_photo_box_input_path">
-                    <input type="text" readonly>
+        <span class="subshade_descript">Ustaw plakat</span>
+        <div class="send_photo_box">
+            <div class="send_photo_container">
+                {{ form.poster }}
+                <div class="send_photo_box_input_path">
+                    <input type="text" id="poster_input" readonly>
                 </div>
-                <input type="button" id="send_photo_box_input_button">
+                <input type="button" class="send_photo_box_input_button" id="poster_button">
             </div>
         </div>
         <div class="subshare_subdescript">
-            {% for error in form.picture.errors %}
+            {% for error in form.poster.errors %}
                 <span class="error">{{ error }}</span><br>
             {% endfor %}
             Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
             Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
         </div>
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Dodaj partnera</span>
+        <div class="send_photo_box">
+            <div class="send_photo_container">
+                {{ form.partner }}
+                <div class="send_photo_box_input_path">
+                    <input type="text" id="partner_input" readonly>
+                </div>
+                <input type="button" class="send_photo_box_input_button" id="partner_button">
+            </div>
+        </div>
+        <div class="subshare_subdescript">
+            {% for error in form.partner.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+            Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
+            Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
+        </div>        
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Ustaw plakat</span>
+        <div class="send_photo_box">
+            <div class="send_photo_container">
+                {{ form.photo }}
+                <div class="send_photo_box_input_path">
+                    <input type="text" id="photo_input" readonly>
+                </div>
+                <input type="button" class="send_photo_box_input_button" id="photo_button">
+            </div>
+        </div>
+        <div class="subshare_subdescript">
+            {% for error in form.photo.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+            Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
+            Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
+        </div>        
         <div class="subshade_shade"></div>
         <input type="submit" value="" id="save_button">
         <div class="subshare_subdescript">
@@ -215,8 +159,15 @@
         $(function() { 
             $("#wojewodztwo").selectbox({width: 278});
             $(".godzina").selectbox({width: 88});
-            $('#send_photo_box_input_button').click(function(e) { $("#id_picture").click(); })
-            $('#id_picture').change(function(e) { $("#send_photo_box_input_path input").val($("#id_picture").val()); })
+            $('#poster_button').click(function(e) { $("#id_poster").click(); })
+            $('#id_poster').change(function(e) { $("#poster_input").val($("#id_poster").val()); })
+            
+            $('#photo_button').click(function(e) { $("#id_photo").click(); })
+            $('#id_photo').change(function(e) { $("#photo_input").val($("#id_photo").val()); })
+
+            $('#partner_button').click(function(e) { $("#id_partner").click(); })
+            $('#id_partner').change(function(e) { $("#partner_input").val($("#id_partner").val()); })
+
             $('.formtab input[type="text"]').focus(highlight_input);
             $('.formtab input[type="text"]').blur(unhighlight_input);
         {% if more_photos_than_6 %}

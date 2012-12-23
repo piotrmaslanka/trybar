@@ -20,9 +20,11 @@ class EditEventForm(forms.ModelForm):
         exclude = ('name', 'name', 'miniature', 'slugname', 'bar',
                    'owner')
 
-    # Following has to be called "poster" - and by extension have id of "id_poster"
-    # Do not change, ON PAIN OF HUNTING CROSS-REFERENCES. You have been warned.
+    only_adults = forms.BooleanField(widget=forms.RadioSelect(choices=YES_NO_CHOICES))
+
     poster = forms.ImageField(required=False)
+    partner = forms.ImageField(required=False)
+    photo = forms.ImageField(required=False)
 
     def clean_poster(self):
         pict = self.cleaned_data['poster']
@@ -30,6 +32,9 @@ class EditEventForm(forms.ModelForm):
             if pict.size > 1024*1024:
                 raise forms.ValidationError(u'Rozmiar pliku przekracza 1 MB')
         return pict
+
+    def preclean(self):
+      self.cleaned_data['age_limit'] = 18 if self.cleaned_data['only_adults'] else 0
 
 @must_be_logged
 def view(request, slugname, evtname):
@@ -42,8 +47,9 @@ def view(request, slugname, evtname):
         return HttpResponse(status=403)
 
     if request.method == 'POST':
-        form = EditEventForm(request.POST, request.FILES, instance=event)
+        form = EditEventForm(request.POST, request.FILES, instance=event, initial={'age_limit': event.age_limit == 18})
         if form.is_valid():
+            form.preclean()
             form.instance.save()
 
             if form.cleaned_data['poster'] != None:     # user submits a new poster
@@ -56,7 +62,7 @@ def view(request, slugname, evtname):
     try:
         form
     except:
-        form = EditEventForm(instance=event)
+        form = EditEventForm(instance=event, initial={'age_limit': event.age_limit == 18})
 
     more_photos_than_6 = event.photos.count() > 6
 

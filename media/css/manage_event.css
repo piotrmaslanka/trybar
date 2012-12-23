@@ -1,3 +1,375 @@
+#form_box {     /* form box, header included */
+    width: 960px;
+    margin-left: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+    #form_box .header {
+        font-size: 12px;
+        color: #ffcc00;
+        font-weight: bold;
+        width: 960px;
+        line-height: 18px;
+        
+        border-bottom: 1px solid rgb(101, 70, 16);
+    }
+    
+    #form_box .infobox {
+        float: right;
+        margin-left: 10px;
+        margin-top: 15px;
+    
+        width: 267px;
+        height: 250px;
+        
+        background: url('/media/gfx/add_bar/infobox.png');
+        
+        padding: 30px 30px 30px 30px;
+        
+        font-size: 12px;
+        color: #d3a702;
+    }
+    
+    #form_box .infobox .bold {
+        font-weight: bold;
+    }
+        #form_box .infobox a {
+            color: #d3a702;
+        }
+
+    #form_box .formtab {
+        width: 600;
+        margin-top: 15px;
+        margin-left: 30px;  
+        border-spacing: 0px;
+        margin-bottom: 20px;
+    }
+    
+        #form_box .formtab .button {
+            margin-top: 20px;
+            color: #815e10;
+            font-size: 11px;
+            
+        }
+
+            #form_box .formtab .button .submit {
+                width: 111px;
+                height: 40px;
+                background: url('../gfx/register/register.png');
+                border: none;
+                padding: 0 0 0 0;               
+                cursor: pointer;
+            }
+    
+        #form_box .formtab .regu_k {
+            height: 40px;
+            line-height: 40px;
+            font-size: 11px;
+            color: #815e10;
+        }
+            #form_box .formtab .regu_k a {
+                color: #815e10;
+            }
+            #form_box .formtab .regu_k input {
+                display: inline;
+            }
+    
+        #form_box .formtab .fail_field {
+            font-size: 10px;
+            color: red;
+            font-weight: bold;
+            height: 12px;
+            line-height: 12px;
+            
+            padding-bottom: 6px;
+        }
+    
+    
+        #form_box .formtab .label {
+            height: 37px;
+            
+            font-size: 11px;
+            line-height: 37px;
+            color: #d3a702;
+
+            font-weight: bold;
+            padding-right: 10px;
+            border: none;
+            padding: 3px 3px 3px 0px;       
+
+            text-align: right;
+        }
+            #form_box .formtab .label .star {
+                color: white;
+            }
+        #form_box .formtab .field {
+            height: 36px;
+            width: 287px;
+            border: none;
+            background: url('../gfx/field.png') no-repeat;
+            margin: 3px 0px 3px 0px;
+            padding: 0 0 0 0;
+        }
+            #form_box .formtab .nobg { background: none !important; }
+            #form_box .formtab .field input {
+                display: block;
+                background-color: transparent;
+                
+                padding: 0 0 0 0;
+                margin: 3px 10px 3px 10px;
+                
+                width: 267px;
+                border: none;
+                height: 30px;
+                
+                color: white;                
+            }
+            #form_box .formtab .field textarea {
+                    width: 277px;
+                    height: 124px;
+                    color: white;
+                    border: none;
+                    padding: 4px 4px 4px 4px;
+                    background: url('/media/gfx/add_bar/opis.png') no-repeat;
+            }
+
+        #form_box .formtab .alert {
+            height: 37px;
+            border: none;
+            padding: 3px 0px 3px 0px;
+        }
+            #form_box .formtab .alert .sign {
+                padding-left: 10px;
+                height: 37px;
+                width: 58px;
+                background: url('../gfx/warning.png') right no-repeat;
+            }
+            
+            
+#subshade_container {
+    margin-left: 65px;
+}
+    .subshade_shade {
+        width: 462px;
+        height: 19px;
+        background: url('../gfx/add_bar/sepshade.png');
+    }
+    .subshade_descript {    /* just specifies the descripting text */
+        font-size: 13px;
+        color: #d3a702;    
+    }
+    
+    .yes_no_boxes { /* radiobuttons yes/no */
+        color: #ffcc00;
+    }
+        .left_subbox {
+            margin-top: 10px;
+            width: 80px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    .textbox_box {
+        color: #ffcc00;
+        margin: 10px 0px 10px 10px;
+    }
+        .textbox_input_field {
+            display: inline-block;
+            height: 36px;
+            width: 287px;
+            border: none;
+            background: url('../gfx/field.png') no-repeat;
+            margin: 3px 0px 3px 0px;
+            padding: 0 0 0 0;            
+        }
+            .textbox_input_field input {
+                display: block;
+                background-color: transparent;
+                
+                padding: 0 0 0 0;
+                margin: 3px 10px 3px 10px;
+                
+                width: 267px;
+                border: none;
+                height: 30px;
+                
+                color: white;                
+            }
+    #opening_hours_t {
+        border-collapse: separate;
+        border-spacing: 5px;
+        color: #ffcc00;    
+        font-size: 11px;  
+        margin-bottom: 10px;
+    }
+        #opening_hours_t td {
+            border-spacing: 0;
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+        }
+        #opening_hours_t .label {
+            text-align: right;
+            line-height: 34px;
+            padding-right: 10px;
+            height: 34px;
+        }
+        #opening_hours_t .hf {
+            padding-left: 20px;
+        }
+        #opening_hours_t .inputbox {
+            width: 95px;
+            height: 34px;
+            background: url('../gfx/add_bar/textfield_hour.png');            
+        }
+    #enterts_t {
+        color: #ffcc00;    
+        font-size: 11px;   
+    }
+        #enterts_t td {
+            width: 122px;
+            height: 150px;
+            text-align: center;
+            line-height: 20px;
+        }
+        #enterts_t input { vertical-align: bottom; }
+            
+    .send_photo_box {
+    }
+    
+        .send_photo_container {
+            width: 400px;
+            height: 36px;
+            position: relative;
+        }
+            .send_photo_container * {
+                border: none;
+                padding: 0 0 0 0;
+                margin: 0 0 0 0;
+            }
+            #id_poster {
+                opacity: 0;
+                width: 394px;
+                height: 40px;
+                z-index: -1;
+            }
+            #id_partner {
+                opacity: 0;
+                width: 394px;
+                height: 40px;
+                z-index: -1;
+            }
+            #id_photo {
+                opacity: 0;
+                width: 394px;
+                height: 40px;
+                z-index: -1;
+            }
+            .send_photo_box_input_path {
+                position: absolute;
+                left: 0px;
+                top: 2px;
+                width: 287px;
+                height: 36px;
+                background: url('../gfx/field.png');
+                z-index: 0;
+            }
+                .send_photo_box_input_path input {
+                    display: block;
+                    background-color: transparent;
+                    
+                    margin: 3px 10px 3px 10px !important;
+                    
+                    width: 267px;
+                    height: 30px;
+                    
+                    color: white;                
+                }            
+            .send_photo_box_input_button {
+                position: absolute;
+                right: 0;
+                width: 84px;
+                height: 36px;
+                cursor: pointer;
+                background: url('/media/gfx/add_bar/file_browse.png');
+                z-index: 0;
+            }
+    #submit_button {
+        margin: 0 0 0 0;
+        border: none;
+        cursor: pointer;
+        
+        width: 97px;
+        height: 40px;
+        background: url('../gfx/add_bar/submit.png');
+    }
+    .subshare_subdescript {
+        margin-left: 30px;
+        color: #86650a;
+        font-size: 12px;
+        width: 260px;
+        margin-top: 20px;
+    }
+        .subshare_subdescript .error {
+            color: red;
+        }
+    
+/* selectBox specific CSS-es */
+.jquery-selectbox {
+    position: relative;
+    height: 30px;
+    line-height: 20px;
+    z-index: 0;
+    display: inline-block;
+    font-size: 13px;
+    color: white;
+    padding: 0 0 0 5px;
+}
+.jquery-selectbox.selecthover {
+    border-color: #9F7627;
+    z-index: 700;
+}   
+.jquery-selectbox .jquery-selectbox-currentItem {
+    padding: 3px 0px 0px 3px;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+}
+
+.jquery-selectbox .jquery-selectbox-list {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    color: #434142;
+    width: 100%;
+    max-height: 120px;
+    overflow-x: hidden;
+    background-color: #d1b85e;
+    overflow-y: auto;
+    z-index: 1000;
+    border: 1px solid #70540a;
+}
+.jquery-selectbox .jquery-selectbox-moreButton {
+    /*
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    */
+    float: right;
+    background: url("../gfx/register/selectbox_arrow.png");
+    width: 29px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.jquery-selectbox .jquery-selectbox-item.listelementhover {
+    color: #434142;
+    background-color: #7f6a35;
+}
+.jquery-selectbox .jquery-selectbox-item {
+    display: block;
+    cursor: default;
+}
 #gallerybox {
     float: right;
     margin-left: 10px;
