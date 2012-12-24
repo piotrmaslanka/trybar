@@ -3,9 +3,9 @@ from django.conf import settings
 
 urlpatterns = patterns('trybar',
     url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/manage/$', 'barevent.manage_event.view'),
-    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/op/$', 'barevent.view.op'),
+    url(r'^bar/(?P<slugname>.+?)/(?P<evtname>.+?)/op/$', 'barevent.manage_event.op'),
 
-    
+
     url(r'^$', 'main.views.index'),
     url(r'^admin/otrzesiny/$', 'admin.ephemeris.add_otrzesiny_photo'),
     url(r'^otrzesiny/$', 'main.ephemeris.otrzesiny'),

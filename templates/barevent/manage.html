@@ -42,14 +42,10 @@
         {% endif %}
         <div class="photo_sliding_window">
             <div class="all_photos">
-                {% for barphoto in bar.photos.all %}
+                {% for eventphoto in event.photos.all %}
                 <div class="photo">
-                    <img src="{{ barphoto.photo|path:"barphoto:137,97" }}">
-                    {% if barphoto.photo != rep_photo %}
-                        <span onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/op/?op=make_main&bpid={{ barphoto.id }}'" class
-                        ="make_main"></span><br>
-                    {% endif %}
-                    <span onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/op/?op=delete&bpid={{ barphoto.id }}'" class="delete"></span>        
+                    <img src="{{ eventphoto.photo|path:"barphoto:137,97" }}">
+                    <span onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/op/?op=delete_photo&pid={{ eventphoto.id }}'" class="delete"></span>        
                 </div>
                 {% endfor %}
             </div>
@@ -58,28 +54,38 @@
             <div id="scroll_bot"></div>
         {% endif %}
     </div>
-    <table class="formtab">
-        {% for error in form.non_field_errors %}
-        <tr>
-            <td></td>
-            <td class="fail_field" colspan="2">{{ error }}</td>
-        </tr>
-        {% endfor %}
-        <tr>
-            <td class="label">Opis:</td>
-            <td class="field nobg">{{ form.description }}</td>
-            <td class="alert">{% if form.description.errors %}<div class="sign"></div>{% endif %}</td>
-        </tr>
-        {% for error in form.description.errors %}
-        <tr>
-            <td></td>
-            <td class="fail_field" colspan="2">{{ error }}</td>
-        </tr>
-        {% endfor %}
-    </table>
     
     <div id="subshade_container">
         <div class="subshade_shade"></div>
+        <span class="subshade_descript">Ogólny opis imprezy:</span>
+        <table class="formtab">
+            <tr>
+                <td class="label"></td>
+                <td class="field nobg">{{ form.description }}</td>
+                <td class="alert">{% if form.description.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.description.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+        </table>        
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Atrakcje imprezy (maks. 150 znaków)</span>
+        <table class="formtab">
+            <tr>
+                <td class="label"></td>
+                <td class="field nobg">{{ form.extra_info }}</td>
+                <td class="alert">{% if form.extra_info.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.extra_info.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+        </table>        <div class="subshade_shade"></div>
         <span class="subshade_descript">Koszt wstępu</span>
         <div class="textbox_box">
             <div class="textbox_input_field">{{ form.entry_cost }}</div> 0 zł
@@ -93,6 +99,16 @@
                 {% if forloop.first %}</div>{% endif %}
             {% endfor %}
         </div>
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Data rozpoczęcia</span>
+        <div class="textbox_box">
+            <div class="textbox_input_field">{{ form.happens_on }}</div>
+        </div>
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Czas rozpoczęcia</span>
+        <div class="textbox_box">
+            <div class="textbox_input_field">{{ form.starts_on }}</div>
+        </div>                
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Ustaw plakat</span>
         <div class="send_photo_box">
@@ -111,6 +127,9 @@
             Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
             Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
         </div>
+        {% if current_poster %}
+        <img style="margin-left: 30px;" src="{{ current_poster|path:"eventposter:233," }}">
+        {% endif %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Dodaj partnera</span>
         <div class="send_photo_box">
@@ -119,9 +138,10 @@
                 <div class="send_photo_box_input_path">
                     <input type="text" id="partner_input" readonly>
                 </div>
-                <input type="button" class="send_photo_box_input_button" id="partner_button">
-            </div>
+                        <input type="button" class="send_photo_box_input_button" id="partner_button">
         </div>
+        <span class="subshade_descript">URL strony partnera</span><br>
+            <div class="textbox_input_field">{{ form.partner_url }}</div>
         <div class="subshare_subdescript">
             {% for error in form.partner.errors %}
                 <span class="error">{{ error }}</span><br>
@@ -130,7 +150,7 @@
             Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
         </div>        
         <div class="subshade_shade"></div>
-        <span class="subshade_descript">Ustaw plakat</span>
+        <span class="subshade_descript">Dodaj zdjęcie</span>
         <div class="send_photo_box">
             <div class="send_photo_container">
                 {{ form.photo }}

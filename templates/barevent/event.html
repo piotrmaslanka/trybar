@@ -69,15 +69,9 @@
 
 <div id="plakat_box">
     <div class="box_header_title_fstyle">PLAKAT</div>
-        {% for event in events %}
-            <div class="impreza">
-            <a href="#"><img src="{{ event.logo|path:"222,124" }}"></a>
-                <div class="opis">
-                    <div class="left">{{ event.name }}</div>
-                    <div class="right"><a href="#">Więcej</a></div>
-                </div>
-            </div>        
-        {% endfor %}
+        {% if event.poster %}
+            <img src="{{ event.poster|path:"eventposter:233," }}">
+        {% endif %}
 </div>
 
 <div id="photos_box">
@@ -146,10 +140,12 @@
     </div>
 </div>
 
-<div class="intr_i_partner">
+<div class="partner">
     <div class="box_header_title_fstyle">PARTNERZY</div>
     <div class="elements">
-<!--        <div class="elem"><a href="#"><img src="CHANGEME/bar_guest_avatar.jpg"></a></div> -->
+        {% for partner in event.partners.all %}
+            <div class="elem"><a href="{{ partner.website }}"><img src="{{ partner.photo|path:"eventpartner:176," }}"></a></div>
+        {% endfor %}
     </div>
 </div>
 

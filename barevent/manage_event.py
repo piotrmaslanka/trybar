@@ -13,17 +13,19 @@ from trybar.admin import is_admin
 from django.core.paginator import Paginator
 from trybar.main.models import News
 from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_MINIATURE, RES_EVENT_PHOTO, RES_EVENT_PARTNER
+from trybar.scoring import BAR_EVENT_PHOTO_ADDED, score_for
 
 class EditEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ('name', 'name', 'miniature', 'slugname', 'bar',
-                   'owner')
+        exclude = ('name', 'miniature', 'slugname', 'bar',
+                   'owner', 'poster', 'age_limit')
 
-    only_adults = forms.BooleanField(widget=forms.RadioSelect(choices=YES_NO_CHOICES))
+    only_adults = forms.BooleanField(widget=forms.RadioSelect(choices=((0, u'Nie'), (1, u'Tak'))))
 
     poster = forms.ImageField(required=False)
     partner = forms.ImageField(required=False)
+    partner_url = forms.URLField(required=False)
     photo = forms.ImageField(required=False)
 
     def clean_poster(self):
@@ -32,9 +34,6 @@ class EditEventForm(forms.ModelForm):
             if pict.size > 1024*1024:
                 raise forms.ValidationError(u'Rozmiar pliku przekracza 1 MB')
         return pict
-
-    def preclean(self):
-      self.cleaned_data['age_limit'] = 18 if self.cleaned_data['only_adults'] else 0
 
 @must_be_logged
 def view(request, slugname, evtname):
@@ -47,64 +46,79 @@ def view(request, slugname, evtname):
         return HttpResponse(status=403)
 
     if request.method == 'POST':
-        form = EditEventForm(request.POST, request.FILES, instance=event, initial={'age_limit': event.age_limit == 18})
+        form = EditEventForm(request.POST, request.FILES, instance=event, initial={'only_adults': int(event.age_limit == 18)})
         if form.is_valid():
-            form.preclean()
+            form.instance.age_limit = 18 if form['only_adults'] else 0
             form.instance.save()
 
-            if form.cleaned_data['poster'] != None:     # user submits a new poster
+            if form.cleaned_data['poster'] != None:     # user submits a new poster            
                 if event.poster != None:    # there's an existing poster - pwn it
-                  event.poster.delete()
+                  # if you do event.poster.delete() shits comes down on you hard
+                  poster = event.poster
                   event.poster = None
+                  event.save()
+
+                  poster.delete()
 
                 event.poster = upload_as(form.cleaned_data['poster'], RES_EVENT_POSTER)
                 event.save()
+
+            if form.cleaned_data['photo'] != None:
+              ep = EventPhoto.craft(form.cleaned_data['photo'], event)
+              score_for(request.user, BAR_EVENT_PHOTO_ADDED, ep)
+
+            if form.cleaned_data['partner'] != None:
+              Partner.craft(form.cleaned_data['partner'], event, form.cleaned_data['partner_url'])
+
+        else:
+          x = form.as_p()
+          return HttpResponse(form.as_p().encode('utf8'))
     try:
         form
     except:
-        form = EditEventForm(instance=event, initial={'age_limit': event.age_limit == 18})
+        form = EditEventForm(instance=event, initial={'only_adults': int(event.age_limit == 18)})
 
     more_photos_than_6 = event.photos.count() > 6
 
-    return render('barevent/manage.html', request, form=form, event=event, more_photos_than_6=more_photos_than_6)
+    return render('barevent/manage.html', request, form=form, event=event, 
+            more_photos_than_6=more_photos_than_6, current_poster=event.poster)
 
 @must_be_logged
-def op(request, slugname):
+def op(request, slugname, evtname):
     try:
-        bar = Bar.objects.get(slugname=slugname)
-    except Bar.DoesNotExist:
-        return HttpResponse(status=404)
+        event = Event.objects.filter(bar__slugname=slugname).get(slugname=evtname)
+    except Event.DoesNotExist:
+        raise Http404
 
-    if (bar.owner != request.user) and (not is_admin(request)):
+    if (event.owner != request.user) and (not is_admin(request)):
         return HttpResponse(status=403)
 
     if 'op' not in request.GET: return HttpResponse(status=400)
-    if request.GET['op'] == 'make_main':
-      if not 'bpid' in request.GET: return HttpResponse(status=400)
+
+    if request.GET['op'] == 'delete_photo':
+      if not 'pid' in request.GET: return HttpResponse(status=400)
       try:
-        bp = BarPhoto.objects.get(id=int(request.GET['bpid']))
-      except BarPhoto.DoesNotExist:
+        bp = EventPhoto.objects.get(id=int(request.GET['pid']))
+      except EventPhoto.DoesNotExist:
         return HttpResponse(status=404)
       except:
         return HttpResponse(status=400)
-      if bp.bar != bar: return HttpResponse(status=403)
-      for barphoto in bar.photos.all():
-        barphoto.representative = False
-        barphoto.save()
-      bp.representative = True
-      bp.save()
-      return redirect('/bar/%s/manage/' % (slugname, ))
-    elif request.GET['op'] == 'delete':
-      if not 'bpid' in request.GET: return HttpResponse(status=400)
+
+      if bp.event != event: return HttpResponse(status=403)
+
+      bp.delete()
+      return redirect('/bar/%s/%s/manage/' % (slugname, evtname))
+    elif request.GET['op'] == 'delete_partner':
+      if not 'pid' in request.GET: return HttpResponse(status=400)
       try:
-        bp = BarPhoto.objects.get(id=int(request.GET['bpid']))
-      except BarPhoto.DoesNotExist:
-        return HttpResponse(status=404)
+        bp = Partner.objects.get(id=int(request.GET['pid']))
       except:
-        return HttpResponse(status=400)
-      if bp.bar != bar: return HttpResponse(status=403)
+        return HttpResponse(status=404)
+
+      if bp.event != event: return HttpResponse(status=403)
+
       bp.photo.delete()
       bp.delete()
-      return redirect('/bar/%s/' % (slugname, ))
+      return redirect('/bar/%s/%s/manage/' % (slugname, evtname))
     else:
       return HttpResponse(status=400)

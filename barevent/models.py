@@ -32,7 +32,7 @@ class Event(models.Model):
     bar = models.ForeignKey(Bar, related_name='events')
     owner = models.ForeignKey(Account, related_name='events_owned')
 
-    entry_cost = models.DecimalField(max_digits=4, decimal_places=2, default=0, verbose_name=u'Koszt wstępu')
+    entry_cost = models.DecimalField(max_digits=4, decimal_places=2, default=0, verbose_name=u'Koszt wstepu')
     age_limit = models.IntegerField(null=True, default=None, verbose_name=u'Limit wieku')
     extra_info = models.TextField(verbose_name=u'Informacje dodatkowe')
 
@@ -115,9 +115,9 @@ class EventPhoto(models.Model):
     photo = models.ForeignKey(Photo)
 
     @staticmethod
-    def craft(ufo, bar):
+    def craft(ufo, event):
         """@type ufo: UploadedFileObject from a PictureField
-        @type bar: bound Event instance"""
+        @type event: bound Event instance"""
         pic = upload_as(ufo, RES_EVENT_PHOTO)
         b = EventPhoto(event=event, photo=pic)
         b.save()
@@ -129,6 +129,14 @@ class Partner(models.Model):
     photo = models.ForeignKey(Photo)
 
     cache_photo_height = models.IntegerField(default=None, null=True)
+
+    @staticmethod 
+    def craft(ufo, event, url):
+        pic = upload_as(ufo, RES_EVENT_PARTNER)
+        b = Partner(event=event, website=url, photo=pic)
+        b.save()
+        return b
+
 
     def delete(self):
         self.photo.delete()

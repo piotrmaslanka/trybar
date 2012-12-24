@@ -121,50 +121,9 @@
         #plakat_box .box_header_title_fstyle { /* using it to do a pre-padding so that it aligns with photo box on the left */
             margin-bottom: 4px;
         }
-        #plakat_box .impreza {
-            margin-bottom: 15px;
-            width: 222px;
-            height: 124px;
-            margin-left: 15px;
-            margin-right: 15px;
-            position: relative;
-        }
-            #plakat_box .impreza img {
-                width: 222px;
-                height: 124px;
-                display: block;
-                border: none;
+            #plakat_box img {
+                margin-left: 10px;
             }
-                #plakat_box .impreza img a {
-                }
-            #plakat_box .impreza .opis {
-                position: absolute;
-                bottom: 0px; left: 0px;
-                width: 222px;
-                height: 40px;
-                background: url('/media/gfx/bar/bg_imprname.png');
-                z-index: 1;
-            }
-                #plakat_box .impreza .opis .left {
-                    height: 40px;
-                    line-height: 40px;
-                    color: #fae281;
-                    margin-left: 5px;
-                    float: left;
-                }
-                #plakat_box .impreza .opis .right {
-                    height: 40px;
-                    line-height: 40px;
-                    float: right;
-                    margin-right: 5px;
-                }
-                    #plakat_box .impreza .opis .right a {
-                        color: #fae281;
-                        text-decoration: none;
-                        font-weight: bold;
-                        font-size: 12px;
-                    }
-                        #plakat_box .impreza .opis .right a:hover { text-decoration: underline; }
         
         #photos_box {
             float: left;
@@ -383,6 +342,27 @@
         }
     .hard_spacer_1 { height: 10px; width: 960px; clear: both; }
     
+    .partner {
+        width: 179px;
+        height: 615px;
+        float: right;
+        padding: 10px 10px 10px 10px;
+        background: url('/media/gfx/barevent/tlo_zainteresowani.png');
+        text-align: center;
+        position: relative;       
+    }
+
+    .partner .elem {
+        display: inline-block;
+        width: 176px;
+        margin: 5px 1px 5px 2px;
+        border: none;
+    }
+    .partner .elem a {
+        text-decoration: none;
+    }
+    
+
     .intr_i_partner {
         width: 179px;
         height: 615px;

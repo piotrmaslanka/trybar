@@ -10,7 +10,7 @@ RES_BAR_LOGO = ((84, 84),)                 # res ident: barlogo
 RES_BAR_GUEST = ((112, None), (84, 84), (137, 97))     # res ident: barguest
 RES_PRIZES = ((84, 84), )                   # res ident: prize
 
-RES_EVENT_PHOTO = ((112, None), (84, 84))   # res ident: eventphoto
+RES_EVENT_PHOTO = ((112, None), (84, 84), (137, 97))   # res ident: eventphoto
 
 RES_ACCOUNT_PHOTO = ((112, None), (84, 84), (137, 97)) # res ident: accphoto
 
