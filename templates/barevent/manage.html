@@ -140,6 +140,13 @@
                 </div>
                         <input type="button" class="send_photo_box_input_button" id="partner_button">
         </div>
+        {% for partner in event.partners.all %}
+        <img src="{{ partner.photo|path:"eventpartner:176," }}" style="margin-top: 10px;"><br>
+        <span class="pfollowup">
+        URL: <a href="{{ partner.website }}">{{ partner.website }}</a><br>
+        <a href="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/op/?op=delete_partner&pid={{ partner.id }}">Kasuj</a></span><br>
+        {% endfor %}
+
         <span class="subshade_descript">URL strony partnera</span><br>
             <div class="textbox_input_field">{{ form.partner_url }}</div>
         <div class="subshare_subdescript">

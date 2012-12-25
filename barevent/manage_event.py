@@ -116,8 +116,6 @@ def op(request, slugname, evtname):
         return HttpResponse(status=404)
 
       if bp.event != event: return HttpResponse(status=403)
-
-      bp.photo.delete()
       bp.delete()
       return redirect('/bar/%s/%s/manage/' % (slugname, evtname))
     else:

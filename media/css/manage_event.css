@@ -313,6 +313,9 @@
             color: red;
         }
     
+        .pfollowup { color: #86650a; }
+        .pfollowup a { color: white; text-decoration: none; }
+
 /* selectBox specific CSS-es */
 .jquery-selectbox {
     position: relative;
