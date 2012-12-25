@@ -70,9 +70,6 @@ def view(request, slugname, evtname):
             if form.cleaned_data['partner'] != None:
               Partner.craft(form.cleaned_data['partner'], event, form.cleaned_data['partner_url'])
 
-        else:
-          x = form.as_p()
-          return HttpResponse(form.as_p().encode('utf8'))
     try:
         form
     except:

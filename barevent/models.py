@@ -23,7 +23,7 @@ STARTING_AT = [ ('', 'Nieznane'),
 
 class Event(models.Model):
     name = models.CharField(max_length=40, verbose_name=u'Nazwa imprezy')
-    description = models.TextField(verbose_name=u'Opis')
+    description = models.TextField(verbose_name=u'Opis', blank=True)
 
     miniature = models.ForeignKey(Photo, related_name='DONTCARE1', default=None, null=True)
 
@@ -34,7 +34,7 @@ class Event(models.Model):
 
     entry_cost = models.DecimalField(max_digits=4, decimal_places=2, default=0, verbose_name=u'Koszt wstepu')
     age_limit = models.IntegerField(null=True, default=None, verbose_name=u'Limit wieku')
-    extra_info = models.TextField(verbose_name=u'Informacje dodatkowe')
+    extra_info = models.TextField(verbose_name=u'Informacje dodatkowe', blank=True)
 
     happens_on = models.DateField(verbose_name=u'Data startu')
     starts_on = models.CharField(max_length='5', blank=True, verbose_name=u'Czas startu')

@@ -1,13 +1,25 @@
+Dodawanie imprezy
+
+- jedno pole "Data" zamień na 3 pola "DD", "MM" i "RR" jako listy rozwijalne (wszystko wciąż w jednym i tym samym wierszu)
+
+
 Strona lokalu
+- miniaturka lokalu powinna się generować na podstawie pierwszego zdjęcia dodanego do galerii imprezy lub na podstawie zdjęcia, które zostanie ustawione jako zdjęcie główne w formularzu zarządzania imprezą
 
-- lista z ocenami musi znikać po wybraniu którejś wartości podczas oceniania lokalu lub dać ją po lewej stronie strzałki
-- dodać możliwość obejrzenia zdjęcia w oryginalnych wymiarach
+Strona imprezy
 
-Dodawanie lokali
+- dodaj placeholder dla miniatury plakatu w obszarze "PLAKAT" na stronie imprezy (placeholder w załączniku)
+- przycisk "Jestem zainteresowany/a" przekierowuje na pustą stronę
+- przycisk "Dodaj zdjęcie" nie wywołuje żadnego efektu
+- nie można oceniać imprezy
+- przycisk "Wyślij" po napisaniu komentarza przekierowuje na pustą stronę
+- informacja dotycząca startu imprezy się nie wyświetla
+- kliknięcie w miniaturkę dodanego plakatu wyświetla go w większych rozmiarach jak to ma miejsce ze zwykłymi zdjęciami
+- miniaturki partnerów powinny być konwertowane na kolory w skali szarości i podświetlać się na oryginalny kolor po najechaniu na nie kursorem
 
-- w dropdownie województw w formularzu rejestracji pozycje odsunąć od lewej krawędzi
+Zarządzanie imprezą
 
-Po za tym
-
-Wstępnie dowiedz się jak działa logowanie przez FB i jakiego nakładu pracy to wymaga.
-
+- dodaj przycisk "PODGLĄD" obok przycisku "ZAPISZ", który ma przekierowywać na stronę edytowanej imprezy (przycisk w załączniku)
+- pola "Ogólny opis imprezy:" i "Atrakcje imprezy (maks. 150 znaków)" nie są obowiązkowe
+- strona się krzaczy gdy przy pytaniu "Czy wstęp tylko dla pełnoletnich?" opcję "Nie"
+- dodaj przycisk "Zdjęcie główne", które ustawia wybrane zdjęcie jako zdjęcie główne (generowana jest z niego miniaturka imprezy)

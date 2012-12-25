@@ -448,3 +448,8 @@
         #gallerybox .photo .delete:hover {
             background: url('/media/gfx/manage_bar/usun_p.png') no-repeat;   
         }
+        .subshade_error {
+        font-size: 10px;
+        color: red;
+        font-weight: bold;
+    }

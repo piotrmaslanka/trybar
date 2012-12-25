@@ -90,6 +90,9 @@
         <div class="textbox_box">
             <div class="textbox_input_field">{{ form.entry_cost }}</div> 0 zł
         </div>
+        {% for error in form.entry_cost.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Czy wstęp tylko dla pełnoletnich?</span>
         <div class="yes_no_boxes">
@@ -104,11 +107,17 @@
         <div class="textbox_box">
             <div class="textbox_input_field">{{ form.happens_on }}</div>
         </div>
+        {% for error in form.happens_on.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Czas rozpoczęcia</span>
         <div class="textbox_box">
             <div class="textbox_input_field">{{ form.starts_on }}</div>
         </div>                
+        {% for error in form.starts_on.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Ustaw plakat</span>
         <div class="send_photo_box">

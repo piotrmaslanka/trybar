@@ -17,7 +17,7 @@
     </div>
     
     <form action="/bar/{{ bar.slugname }}/add_event/" method="post" enctype="multipart/form-data">
-    <div class="infobox">
+    <!--<div class="infobox">
         <div class="bold">
             Dodawanie lokali sprawia, że nasz spis jest bardziej bogaty i dokładny, dzięki czemu możesz mieć satysfakcję z tego, że przyczyniasz się do rozbudowy portalu, a także ułatwiasz innym użytkownikom planowanie weekendowych wypadów.
         </div>
@@ -25,7 +25,7 @@
             <br><br>
         
             Bezpośrednimi korzyściami płynącymi z dodawania lokali są punkty przyznawane każdorazowo automatycznie. Za dodanie jednego lokalu otrzymujesz 10 punktów, a za każde jedno zdjęcie w galerii lokalu 20 punktów. Dzięki zdobywanym punktom możesz piąć się w rankingu użytkowników oraz walczyć o ciekawe nagrody. Więcej o nagrodach <a href="/building/">tutaj</a>.
-    </div>
+    </div>-->
     <table class="formtab">
         <tr><td></td><td colspan="2" class="tbcenter">
             Wypełnij poniższe pola aby dodać nową imprezę:
@@ -62,39 +62,6 @@
         </tr>
         {% endfor %}
         <tr>
-            <td class="label">Miasto<span class="star">*</span>:</td>
-            <td class="field">{{ form.city }}</td>
-            <td class="alert">{% if form.city.errors %}<div class="sign"></div>{% endif %}</td>
-        </tr>
-        {% for error in form.city.errors %}
-        <tr>
-            <td></td>
-            <td class="fail_field" colspan="2">{{ error }}</td>
-        </tr>
-        {% endfor %}
-        <tr>
-            <td class="label">Ulica<span class="star">*</span>:</td>
-            <td class="field">{{ form.street }}</td>
-            <td class="alert">{% if form.street.errors %}<div class="sign"></div>{% endif %}</td>
-        </tr>
-        {% for error in form.street.errors %}
-        <tr>
-            <td></td>
-            <td class="fail_field" colspan="2">{{ error }}</td>
-        </tr>
-        {% endfor %}
-        <tr>
-            <td class="label">Województwo<span class="star">*</span>:</td>
-            <td class="field">{{ form.voivodeship }}</td>
-            <td class="alert">{% if form.voivodeship.errors %}<div class="sign"></div>{% endif %}</td>
-        </tr>
-        {% for error in form.voivodeship.errors %}
-        <tr>
-            <td></td>
-            <td class="fail_field" colspan="2">{{ error }}</td>
-        </tr>
-        {% endfor %}
-        <tr>
             <td class="label">Opis:</td>
             <td class="field nobg">{{ form.description }}</td>
             <td class="alert">{% if form.description.errors %}<div class="sign"></div>{% endif %}</td>
@@ -112,9 +79,22 @@
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Wstęp</span>
         
+        {% for error in form.description.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        {% for error in form.description.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+
         <div id="wstepbox">
             Cena: <div class="cbox">{{ form.entry }}</div> zł
         </div>
+        {% for error in form.entry.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
 
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Czy na imprezę mają wstęp tylko i wyłącznie osoby pełnoletnie?</span>
@@ -125,6 +105,9 @@
                 {% if forloop.first %}</div>{% endif %}
             {% endfor %}
         </div>
+        {% for error in form.only_adults.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Godziny otwarcia</span>
         <table id="opening_hours_t">
@@ -136,6 +119,9 @@
                 <td></td>
             </tr>
         </table>
+        {% for error in form.start_at.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Artyści</span>
         <div class="longdescript">

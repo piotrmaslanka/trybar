@@ -16,12 +16,6 @@ class AddEventForm(forms.Form):
     name = forms.CharField(max_length=40)
     date = forms.DateField(error_messages={'required':u'Pole wymagane', 'invalid':u'Wpisz poprawną datę. Format to ROK-MIESIĄC-DZIEŃ'})
 
-    street = forms.CharField(max_length=40)
-    city = forms.CharField(max_length=50)
-    voivodeship = forms.ChoiceField(choices=VOIVODESHIP_CHOICES, 
-                                    widget=forms.Select(attrs={'class':'selectbox', 
-                                                               'id':'wojewodztwo'}))
-
     description = forms.CharField(required=False, widget=forms.Textarea())
     extra_info = forms.CharField(required=False, widget=forms.Textarea())
 

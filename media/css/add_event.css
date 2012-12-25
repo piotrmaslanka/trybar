@@ -54,17 +54,9 @@
         #form_box .formtab .tbcenter {
             text-align: center;
             color: #FC0;
-            font-size: 13px;
+            font-size: 12px;
             line-height: 40px;
         }
-
-        #form_box .formtab .tbcenter {
-            text-align: center;
-            color: #FC0;
-            font-size: 13px;
-            line-height: 40px;
-        }
-
 
         #form_box .formtab .button {
             margin-top: 20px;
@@ -356,7 +348,14 @@
     }
         .subshare_subdescript .error {
             color: red;
+
         }
+        .subshade_error {
+        font-size: 10px;
+        color: red;
+        font-weight: bold;
+    }
+
     
 
 /* selectBox specific CSS-es */

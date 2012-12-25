@@ -89,6 +89,9 @@
                 {% if forloop.first %}</div>{% endif %}
             {% endfor %}
         </div>
+        {% for error in form.accepts_credit_cards.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Czy w lokalu dostępna jest sieć Wi-Fi?</span>
         <div class="yes_no_boxes">
@@ -98,6 +101,9 @@
                 {% if forloop.first %}</div>{% endif %}
             {% endfor %}
         </div>
+        {% for error in form.wifi.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Czy lokal jest dostosowany dla osób niepełnosprawnych?</span>
         <div class="yes_no_boxes">
@@ -107,11 +113,17 @@
                 {% if forloop.first %}</div>{% endif %}
             {% endfor %}
         </div>
+        {% for error in form.handicapped.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Adres internetowy lokalu</span>
         <div class="textbox_box">
             http:// <div class="textbox_input_field">{{ form.website }}</div>
         </div>
+        {% for error in form.website.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Godziny otwarcia</span>
         <table id="opening_hours_t">
