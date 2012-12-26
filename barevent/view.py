@@ -7,6 +7,7 @@ from trybar.barevent.models import Event, EVENT_MARKS_COUNT, SingleEventMark, In
                                    EventComment, EventAbuse
 from django.http import Http404, HttpResponse
 from trybar.main.models import News
+import json
 from trybar.accnews import RT_INTRSTD_IN_EVENT, RT_NOT_INTRSTD_IN_EVENT, accnews_for, RT_COMMENT_EVENT
 from trybar.scoring import BAR_EVENT_COMMENT_ADDED, score_for
 
@@ -44,7 +45,7 @@ def op(request, slugname, evtname):
             
         try:
             sbm = SingleEventMark.objects.filter(event=event).get(account=request.user)
-        except SingleBarMark.DoesNotExist:
+        except SingleEventMark.DoesNotExist:
             sbm = SingleEventMark(event=event, account=request.user)
             
             meta.mark_count += 1
@@ -126,9 +127,9 @@ def view_event(request, slugname, evtname):
         if request.user == None: raise Exception
         usermark = event.marks.get(account=request.user)
     except:
-        usermark = dict((('o'+str(x), None) for x in xrange(0, 14)))
+        usermark = dict((('o'+str(x), None) for x in xrange(0, EVENT_MARKS_COUNT)))
     else:
-        usermark = dict((('o'+str(x), usermark.__dict__['o'+str(x)]) for x in xrange(0, 14)))   
+        usermark = dict((('o'+str(x), usermark.__dict__['o'+str(x)]) for x in xrange(0, EVENT_MARKS_COUNT)))   
 
     avgmark = event.metadata
 

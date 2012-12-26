@@ -21,7 +21,7 @@ class EditEventForm(forms.ModelForm):
         exclude = ('name', 'miniature', 'slugname', 'bar',
                    'owner', 'poster', 'age_limit')
 
-    only_adults = forms.BooleanField(widget=forms.RadioSelect(choices=((0, u'Nie'), (1, u'Tak'))))
+    only_adults = forms.BooleanField(widget=forms.RadioSelect(choices=((False, u'Nie'), (True, u'Tak'))), required=False)
 
     poster = forms.ImageField(required=False)
     partner = forms.ImageField(required=False)
@@ -46,9 +46,9 @@ def view(request, slugname, evtname):
         return HttpResponse(status=403)
 
     if request.method == 'POST':
-        form = EditEventForm(request.POST, request.FILES, instance=event, initial={'only_adults': int(event.age_limit == 18)})
+        form = EditEventForm(request.POST, request.FILES, instance=event, initial={'only_adults': event.age_limit == 18})
         if form.is_valid():
-            form.instance.age_limit = 18 if form['only_adults'] else 0
+            form.instance.age_limit = 18 if form.cleaned_data['only_adults'] else 0
             form.instance.save()
 
             if form.cleaned_data['poster'] != None:     # user submits a new poster            
@@ -73,7 +73,7 @@ def view(request, slugname, evtname):
     try:
         form
     except:
-        form = EditEventForm(instance=event, initial={'only_adults': int(event.age_limit == 18)})
+        form = EditEventForm(instance=event, initial={'only_adults': event.age_limit == 18})
 
     more_photos_than_6 = event.photos.count() > 6
 

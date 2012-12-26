@@ -52,7 +52,11 @@
         {% endfor %}
         <tr>
             <td class="label">Data<span class="star">*</span>:</td>
-            <td class="field">{{ form.date }}</td>
+            <td class="field data_positions">
+                <div class="inputbox" style="display: inline-block;">{{ form.date_dd }}</div>
+                <div class="inputbox" style="display: inline-block;">{{ form.date_mm }}</div>
+                <div class="inputbox" style="display: inline-block;">{{ form.date_rr }}</div>
+            </td>
             <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
         </tr>
         {% for error in form.date.errors %}
@@ -273,7 +277,8 @@
     <script type="text/javascript">
         $(function() { 
             $("#wojewodztwo").selectbox({width: 278});
-            $(".godzina").selectbox({width: 88});
+            $("#opening_hours_t .godzina").selectbox({width: 88});
+            $(".data_positions .godzina").selectbox({width: 87});
             $('#send_photo_box_input_button').click(function(e) { $("#id_picture").click(); })
             $('#id_picture').change(function(e) { $("#send_photo_box_input_path input").val($("#id_picture").val()); })
             $('.formtab input[type="text"]').focus(highlight_input);

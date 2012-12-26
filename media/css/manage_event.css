@@ -453,3 +453,12 @@
         color: red;
         font-weight: bold;
     }
+
+
+#przejdz_do_eventu {
+    width: 97px;
+    height: 40px;
+    background: url('/media/gfx/manage_event/button_podglad.png') no-repeat;
+    cursor: pointer;
+    border: none;
+}

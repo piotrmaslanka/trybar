@@ -66,11 +66,14 @@
     </div>
 </div>
 
-
 <div id="plakat_box">
     <div class="box_header_title_fstyle">PLAKAT</div>
-        {% if event.poster %}
+        {% if event.poster != None %}
+        <a href="{{ event.poster|path:"eventposter:" }}" rel="lightbox">
             <img src="{{ event.poster|path:"eventposter:233," }}">
+        </a>
+        {% else %}
+            <img src="{{ event.poster|path:"eventposter:233," }}">  {# will be None #}
         {% endif %}
 </div>
 
@@ -112,10 +115,10 @@
         <span class="content">{% if event.entry_cost == 0 %}DARMOWY{% else %}{{ event.entry_cost }} zł{% endif %}</span><br>
         <br>
         <span class="title">Limit wiekowy</span><br>
-        <span class="content">{% if event.age_limit == None %}BRAK{% else %}{{ event.age_limit }}+{% endif %}</span><br>
+        <span class="content">{% if event.age_limit == None %}BRAK{% elif event.age_limit == 0 %}BRAK{% else %}18+{% endif %}</span><br>
         <br>
         <span class="title">Start</span><br>
-        <span class="content">{{ event.happens_on|date:"H:i" }}</span><br>
+        <span class="content">{{ event.starts_on }}</span><br>
         <br>
         
     </div>
@@ -170,12 +173,12 @@
         <tr class="bg{% cycle '1' '2' %}">                    
             <td class="caption" onmouseover="tip.show('{{ description }}')" onmouseout="tip.hide()">{{ name }}</td>
             <td class="arrow">
-            {% if logged_in %}
+            {% if request.user != None %}
             <div class="arrow">
                 <ul>
                     <li class="bg1"><a class="gba" onclick="mark({{ id }}, 'Z')">Brak oceny</a></li>
                     {% for i in l10r %}
-                    <li class="bg{% cycle '2' '1' %}"><a class="gba" onclick="mark({{ bar.id }}, {{ id }}, {{ i }})">{{ i }}</a></li>
+                    <li class="bg{% cycle '2' '1' %}"><a class="gba" onclick="mark({{ id }}, {{ i }})">{{ i }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
