@@ -362,6 +362,15 @@
         text-decoration: none;
     }
     
+        .partner img { 
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+            background-color: gray;
+        }
+        .partner img:hover { 
+            opacity: 1;
+            filter: alpha(opacity=1);
+         }
 
     .intr_i_partner {
         width: 179px;

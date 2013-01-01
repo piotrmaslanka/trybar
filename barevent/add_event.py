@@ -106,7 +106,7 @@ def view(request, slugname):
             # Start constructing the 'thing'
 
 
-            e = Event(bar=bar, owner=request.user,
+            e = Event(bar=bar, owner=request.user, name=data['name'],
                       description=data['description'], slugname=slugname,
                       entry_cost=data['entry'], age_limit=18 if data['only_adults'] else None,
                       extra_info=data['extra_info'], happens_on=form.get_start_date(),

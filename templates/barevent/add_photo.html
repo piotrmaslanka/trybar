@@ -19,11 +19,11 @@
 {% block body %}
 <div id="form_box">
     <div class="header">
-        DODAJ ZDJĘCIE DO LOKALU
+        DODAJ ZDJĘCIE DO WYDARZENIA
     </div>
 
     <div id="eform">
-        <form action="/bar/{{ bar.slugname }}/add_photo/" method="post" enctype="multipart/form-data">
+        <form action="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/add_photo/" method="post" enctype="multipart/form-data">
             <table class="formtab">
                 {% for error in form.non_field_errors %}        {# error referring to the entire form #}
                 <tr>

@@ -45,6 +45,8 @@
                 {% for eventphoto in event.photos.all %}
                 <div class="photo">
                     <img src="{{ eventphoto.photo|path:"barphoto:137,97" }}">
+                        <span onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/op/?op=make_main&pid={{ eventphoto.id }}'" class
+                        ="make_main"></span><br>
                     <span onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/op/?op=delete_photo&pid={{ eventphoto.id }}'" class="delete"></span>        
                 </div>
                 {% endfor %}

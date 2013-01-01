@@ -57,7 +57,7 @@
     
     <div class="buttons">        
         {% if request.user != None %}
-            <div class="psbutton" id="button_dodajzdjecie"><a href="#"></a></div>
+            <div class="psbutton" id="button_dodajzdjecie"><a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/add_photo/"></a></div>
             <div class="psbutton" id="button_{% if is_interested %}nie{% endif %}interested">
                 <a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=interested"></a>
             </div>

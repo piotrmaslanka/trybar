@@ -7,7 +7,7 @@ from hashlib import sha1
 from trybar.account.models import Account
 from trybar.bar.models import Bar
 from trybar.photo.models import Photo
-from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_PHOTO, RES_EVENT_PARTNER
+from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_PHOTO, RES_EVENT_PARTNER, RES_EVENT_MINIATURE
 
 STARTING_AT = [ ('', 'Nieznane'),
  ('05:00', '05:00'), ('05:30', '05:30'), ('06:00', '06:00'), ('06:30', '06:30'),
@@ -52,7 +52,7 @@ EVENT_MARKS_COUNT = 9
 class EventMeta(models.Model):    
     """This table contains data about a bar that will frequently change"""
     event = models.OneToOneField(Event, related_name='metadata')
-    
+
     # Average marks
     mark_count = models.IntegerField(default=0)
     avg = models.FloatField(default=None, null=True)        # average from avg_o*
@@ -123,6 +123,16 @@ class EventPhoto(models.Model):
         b.save()
         return b
 
+    def mark_as_mini(self):
+        evt = self.event
+
+        tdt = evt.miniature
+
+        evt.miniature = upload_as(self.photo.as_ufo(), RES_EVENT_MINIATURE)
+        evt.save()
+
+        if tdt != None: tdt.delete()
+
 class Partner(models.Model):
     event = models.ForeignKey(Event, related_name='partners')
     website = models.CharField(max_length=255)        
@@ -132,11 +142,10 @@ class Partner(models.Model):
 
     @staticmethod 
     def craft(ufo, event, url):
-        pic = upload_as(ufo, RES_EVENT_PARTNER)
+        pic = upload_as(ufo, RES_EVENT_PARTNER)        
         b = Partner(event=event, website=url, photo=pic)
         b.save()
         return b
-
 
     def delete(self):
         self.photo.delete()

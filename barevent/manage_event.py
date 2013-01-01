@@ -3,7 +3,7 @@ from django import forms
 from django.shortcuts import redirect
 from trybar.core import render
 from trybar.account import must_be_logged, standard_profile_page_dict
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from trybar.bar.models import Bar, BAR_OPEN_HOURS_FROM, BAR_OPEN_HOURS_TO, BarMeta, BarPhoto
 from trybar.barevent.models import Event, EventPhoto, Partner
 from trybar.core.fixtures import VOIVODESHIP_CHOICES, YES_NO_CHOICES
@@ -67,7 +67,10 @@ def view(request, slugname, evtname):
               ep = EventPhoto.craft(form.cleaned_data['photo'], event)
               score_for(request.user, BAR_EVENT_PHOTO_ADDED, ep)
 
-            if form.cleaned_data['partner'] != None:
+              if len(event.photos.all()) == 1:
+                ep.mark_as_mini()
+
+            if form.cleaned_data['partner'] != None:              
               Partner.craft(form.cleaned_data['partner'], event, form.cleaned_data['partner_url'])
 
     try:
@@ -82,6 +85,7 @@ def view(request, slugname, evtname):
 
 @must_be_logged
 def op(request, slugname, evtname):
+
     try:
         event = Event.objects.filter(bar__slugname=slugname).get(slugname=evtname)
     except Event.DoesNotExist:
@@ -115,5 +119,14 @@ def op(request, slugname, evtname):
       if bp.event != event: return HttpResponse(status=403)
       bp.delete()
       return redirect('/bar/%s/%s/manage/' % (slugname, evtname))
+    elif request.GET['op'] == 'make_main':
+      if not 'pid' in request.GET: return HttpResponse(status=400)
+      try:
+        bp = EventPhoto.objects.get(id=int(request.GET['pid']))
+      except EventPhoto.DoesNotExist:
+        return HttpResponse(status=404)
+      except:
+        bp.mark_as_mini()
+        return redirect('/bar/%s/%s/manage/' % (slugname, evtname))
     else:
       return HttpResponse(status=400)

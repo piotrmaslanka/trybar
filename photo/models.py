@@ -28,6 +28,10 @@ def delete_photo(sender, instance, **kwargs):
 class Photo(models.Model):
     created_on = models.DateTimeField(default=datetime.now)    
     
+    def as_ufo(self):
+        """Returns native self as uploaded filelike object"""
+        return open(UPLOAD_ROOT+self.path_to(), 'rb')
+
     def path_to(self, *resolution):
         """Returns relative path to file with given resolution. It may not exist, depending on type of this photo.
         Invoke like:
