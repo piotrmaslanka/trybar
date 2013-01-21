@@ -51,10 +51,9 @@ def regulamin(request):
 
 def birthday(request):
     rootbars = [Bar.objects.filter(slugname='alibi'), 
+                Bar.objects.filter(slugname='billkros'),
                 Bar.objects.filter(slugname='corleone'),
-                Bar.objects.filter(slugname='da-salvatore-pub'),
-                Bar.objects.filter(slugname='da-salvadore'),
-                Bar.objects.filter(slugname='trattoria')]
+                Bar.objects.filter(slugname='da-salvatore-pub')]
     rootbars = reduce(lambda x,y:x+y, map(list, rootbars), [])
 
     return render('main/birthday.html', request, promo_bary=rootbars)
