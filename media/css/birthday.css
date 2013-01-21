@@ -39,7 +39,60 @@
     #centerbox .header .ln5 {
         color: white;
         font-weight: bold;
-        font-size: 120px;
+        font-size: 113px;
+    }
+    #centerbox .ln6 {
+        font-size: 65px;
+        color: white;    
+    }
+    #centerbox .ln7 {
+        font-size: 65px;
+        color: #ffcc00;    
+    }
+    #centerbox .ln8 {
+        font-size: 51px;
+        color: #ffcc00;    
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+    #centerbox .ln9 {
+        font-size: 51px;
+        color: white;    
+    }
+    #centerbox .ln10 {
+        font-weight: bold;
+        font-size: 51px;
+        color: #ffcc00;    
+    }
+    #centerbox .ln11 {
+        font-size: 51px;
+        color: white;    
+    }        
+
+    #centerbox .ln12 {
+        font-size: 33px;
+        color: #ffcc00;    
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+    #centerbox .ln13 {
+        font-size: 33px;
+        color: white;    
+    }
+    #centerbox .ln14 {
+        font-weight: bold;
+        font-size: 33px;
+        color: #ffcc00;    
+    }
+    #centerbox .ln15 {
+        font-size: 33px;
+        color: white;    
+    }            
+    #centerbox .ln16 {
+        margin-top: 10px;
+        font-size: 15px;
+        margin-bottom: 5px;
+        color: white;
     }
 #centerbox .sphdr {
     width: 560px;
