@@ -69,7 +69,7 @@ class Bar(models.Model):
     logo = models.ForeignKey(Photo, default=None, null=True)
 
     def delete(self):
-        self.marks.delete()         # Delete all marks
+        self.marks.all().delete()         # Delete all marks
         self.metadata.delete()   # Delete metadata
         super(Bar, self).delete()   # Delete self
     
