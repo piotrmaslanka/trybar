@@ -20,9 +20,9 @@ RR = (('2013', '2013'), ('2014', '2014'))
 class AddEventForm(forms.Form):
     name = forms.CharField(max_length=40)
 
-    date_dd = forms.ChoiceField(choices=DD, required=False, widget=forms.Select(attrs={'class':'godzina'}))
-    date_mm = forms.ChoiceField(choices=MM, required=False, widget=forms.Select(attrs={'class':'godzina'}))
-    date_rr = forms.ChoiceField(choices=RR, required=False, widget=forms.Select(attrs={'class':'godzina'}))
+    happens_on_d = forms.ChoiceField(choices=DD, required=False, widget=forms.Select(attrs={'class':'godzina'}))
+    happens_on_m = forms.ChoiceField(choices=MM, required=False, widget=forms.Select(attrs={'class':'godzina'}))
+    happens_on_y = forms.ChoiceField(choices=RR, required=False, widget=forms.Select(attrs={'class':'godzina'}))
 
     description = forms.CharField(required=False, widget=forms.Textarea())
     extra_info = forms.CharField(required=False, widget=forms.Textarea())
@@ -72,7 +72,7 @@ class AddEventForm(forms.Form):
             return forms.ValidationError(u'Niepoprawna data rozpoczęcia')
 
     def get_start_date(self):
-        return date(int(self.cleaned_data['date_rr']), int(self.cleaned_data['date_mm']), int(self.cleaned_data['date_dd']))
+        return date(int(self.cleaned_data['happens_on_y']), int(self.cleaned_data['happens_on_m']), int(self.cleaned_data['happens_on_d']))
 
 @must_be_logged
 def view(request, slugname):
@@ -108,8 +108,8 @@ def view(request, slugname):
             e = Event(bar=bar, owner=request.user, name=data['name'],
                       description=data['description'], slugname=slugname,
                       entry_cost=data['entry'], age_limit=18 if data['only_adults'] else None,
-                      extra_info=data['extra_info'], happens_on_y=data['date_rr'],
-                      happens_on_m=data['date_mm'], happens_on_d=data['date_dd'],
+                      extra_info=data['extra_info'], happens_on_y=data['happens_on_y'],
+                      happens_on_m=data['happens_on_m'], happens_on_d=data['happens_on_d'],
                       starts_on=data['start_at'])
 
             e.save()

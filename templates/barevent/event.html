@@ -53,7 +53,7 @@
                 {{ event.name }}
             {% endif %}
         </div>
-        <div class="date">{{ event.happens_on|date:"d/m l" }}</div>
+        <div class="date">{{ event.happens_on_d }}/{{ event.happens_on_m }} {{ event.happens_on_y }}</div>
     </div>
     
     <div class="sep"></div>

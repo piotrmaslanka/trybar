@@ -50,15 +50,41 @@
             <td class="fail_field" colspan="2">{{ error }}</td>
         </tr>
         {% endfor %}
+
         <tr>
             <td class="label">Data<span class="star">*</span>:</td>
-            <td class="field data_positions">
-                <div class="inputbox" style="display: inline-block;">{{ form.date_dd }}</div>
-                <div class="inputbox" style="display: inline-block;">{{ form.date_mm }}</div>
-                <div class="inputbox" style="display: inline-block;">{{ form.date_rr }}</div>
-            </td>
+            <td class="data_positions"><div class="maly_textbox">{{ form.happens_on_d }}</div></td>
             <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
         </tr>
+        {% for error in form.happens_on_d.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Data<span class="star">*</span>:</td>
+            <td class="data_positions"><div class="maly_textbox">{{ form.happens_on_m }}</div></td>
+            <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.happens_on_m.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="label">Data<span class="star">*</span>:</td>
+            <td class="data_positions"><div class="maly_textbox">{{ form.happens_on_y }}</div></td>
+            <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
+        </tr>
+        {% for error in form.happens_on_y.errors %}
+        <tr>
+            <td></td>
+            <td class="fail_field" colspan="2">{{ error }}</td>
+        </tr>
+        {% endfor %}
+
         {% for error in form.date.errors %}
         <tr>
             <td></td>

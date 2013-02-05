@@ -1,3 +1,18 @@
+.maly_textbox {
+    display: inline-block;
+    width: 95px;
+    height: 34px;
+    background: url('/media/gfx/add_bar/textfield_hour.png');  
+}
+    .maly_textbox input {
+        margin: 3px 3px 3px 3px;
+        width: 89px;
+        height: 28px;
+        background: transparent;
+        color: white;
+        text-align: center;
+        border: none;
+    }
 #form_box {     /* form box, header included */
     width: 960px;
     margin-left: 20px;
@@ -169,6 +184,10 @@
             display: inline-block;
             margin-bottom: 10px;
         }
+    .textbox_box_small {
+        color: #ffcc00;
+        margin: 10px 0px 10px 10px;
+    }        
     .textbox_box {
         color: #ffcc00;
         margin: 10px 0px 10px 10px;

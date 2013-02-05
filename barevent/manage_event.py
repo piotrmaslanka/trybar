@@ -21,6 +21,13 @@ class EditEventForm(forms.ModelForm):
         exclude = ('name', 'miniature', 'slugname', 'bar',
                    'owner', 'poster', 'age_limit')
 
+    happens_on_d = forms.ChoiceField(choices=DD, required=False, widget=forms.Select(attrs={'class':'godzina'}))
+    happens_on_m = forms.ChoiceField(choices=MM, required=False, widget=forms.Select(attrs={'class':'godzina'}))
+    happens_on_y = forms.ChoiceField(choices=RR, required=False, widget=forms.Select(attrs={'class':'godzina'}))
+
+    start_at = forms.ChoiceField(choices=BAR_OPEN_HOURS_FROM, required=False,
+                                 widget=forms.Select(attrs={'class':'godzina'}))
+
     only_adults = forms.BooleanField(widget=forms.RadioSelect(choices=((False, u'Nie'), (True, u'Tak'))), required=False)
 
     poster = forms.ImageField(required=False)
@@ -32,8 +39,31 @@ class EditEventForm(forms.ModelForm):
         pict = self.cleaned_data['poster']
         if pict != None:
             if pict.size > 1024*1024:
-                raise forms.ValidationError(u'Rozmiar pliku przekracza 1 MB')
+              raise forms.ValidationError(u'Rozmiar pliku przekracza 1 MB')
         return pict
+
+    def clean_happens_on_y(self):
+        if int(self.cleaned_data['happens_on_y']) == 0:
+            raise forms.ValidationError(u'Wybierz rok')
+        return self.cleaned_data['happens_on_y']
+
+    def clean_happens_on_m(self):
+        if int(self.cleaned_data['happens_on_m']) == 0:
+            raise forms.ValidationError(u'Wybierz miesiąc')
+        return self.cleaned_data['happens_on_m']
+
+    def clean_happens_on_d(self):
+        if int(self.cleaned_data['happens_on_d']) == 0:
+            raise forms.ValidationError(u'Wybierz dzień')
+        return self.cleaned_data['happens_on_d']
+
+    def clean(self):
+      cleaned_data = super(EditEventForm, self).clean()
+      try:
+          date(int(self.cleaned_data['happens_on_y']), int(self.cleaned_data['happens_on_m']), int(self.cleaned_data['happens_on_d']))
+      except ValueError:
+          return forms.ValidationError(u'Niepoprawna data rozpoczęcia')
+      return cleaned_data
 
 @must_be_logged
 def view(request, slugname, evtname):

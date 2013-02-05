@@ -89,7 +89,7 @@
             {% endfor %}
         </table>        <div class="subshade_shade"></div>
         <span class="subshade_descript">Koszt wstępu</span>
-        <div class="textbox_box">
+        <div class="textbox_box_small">
             <div class="textbox_input_field">{{ form.entry_cost }}</div> 0 zł
         </div>
         {% for error in form.entry_cost.errors %}
@@ -104,22 +104,55 @@
                 {% if forloop.first %}</div>{% endif %}
             {% endfor %}
         </div>
+
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Data rozpoczęcia</span>
-        <div class="textbox_box">
-            <div class="textbox_input_field">{{ form.happens_on }}</div>
-        </div>
-        {% for error in form.happens_on.errors %}
+        {% for error in form.happens_on_y.errors %}
             <div class="subshade_error">{{ error }}</div>
         {% endfor %}
-        <div class="subshade_shade"></div>
-        <span class="subshade_descript">Czas rozpoczęcia</span>
-        <div class="textbox_box">
-            <div class="textbox_input_field">{{ form.starts_on }}</div>
-        </div>                
-        {% for error in form.starts_on.errors %}
+        {% for error in form.happens_on_m.errors %}
             <div class="subshade_error">{{ error }}</div>
         {% endfor %}
+        {% for error in form.happens_on_d.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+        {% for error in form.start_at.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+        <table id="opening_hours_t">
+            <tr>
+                <td class="label">Rok</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.happens_on_y }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label">Miesiąc</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.happens_on_m }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label">Dzień</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.happens_on_d }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label">Czas</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.start_at }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>            
+        </table>
+        {% for error in form.start_at.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Ustaw plakat</span>
         <div class="send_photo_box">
