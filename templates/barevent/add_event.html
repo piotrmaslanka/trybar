@@ -89,6 +89,7 @@
             <td class="fail_field" colspan="2">{{ error }}</td>
         </tr>
         {% endfor %}
+
         {% for error in form.description.errors %}
             <div class="subshade_error">{{ error }}</div>
         {% endfor %}
@@ -101,7 +102,7 @@
         {% endfor %}
 
         <div class="subshade_shade"></div>
-        <span class="subshade_descript">Czy na imprezę mają wstęp tylko i wyłącznie osoby pełnoletnie?</span>
+        <span class="subshade_descript">Czy na imprezę mają wstęp tylko i wyłącznie osoby pełnoletnie?<span class="star">*</span></span>
         <div class="yes_no_boxes">
             {% for radio in form.only_adults %}
                 {% if forloop.first %}<div class="left_subbox">{% endif %}

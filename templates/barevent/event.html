@@ -44,7 +44,15 @@
 <div id="event_header">
     <a class="zobacz_lokal" href="/bar/{{ event.bar.slugname }}/"></a>
     <div class="title">
-        <div class="name">{{ event.name }}</div>
+        <div class="name">
+            {% if event.name|length > 20 %}
+                <span class="smaller">
+                    {{ event.name }}
+                </span>
+            {% else %}
+                {{ event.name }}
+            {% endif %}
+        </div>
         <div class="date">{{ event.happens_on|date:"d/m l" }}</div>
     </div>
     
@@ -61,7 +69,7 @@
             <div class="psbutton" id="button_{% if is_interested %}nie{% endif %}interested">
                 <a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=interested"></a>
             </div>
-            <div class="psbutton" id="button_naduzycie"><a onclick="abuse()"></a></div>
+            <!-- <div class="psbutton" id="button_naduzycie"><a onclick="abuse()"></a></div> -->
         {% endif %}
     </div>
 </div>

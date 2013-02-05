@@ -36,7 +36,9 @@ class Event(models.Model):
     age_limit = models.IntegerField(null=True, default=None, verbose_name=u'Limit wieku')
     extra_info = models.TextField(verbose_name=u'Informacje dodatkowe', blank=True)
 
-    happens_on = models.DateField(verbose_name=u'Data startu')
+    happens_on_y = models.IntegerField(verbose_name=u'Data startu')
+    happens_on_m = models.IntegerField(verbose_name=u'Data startu')
+    happens_on_d = models.IntegerField(verbose_name=u'Data startu')
     starts_on = models.CharField(max_length='5', blank=True, verbose_name=u'Czas startu')
     
     poster = models.ForeignKey(Photo, null=True, default=None, related_name='DONTCARE2')

@@ -64,7 +64,7 @@
             <div class="psbutton" id="button_{% if is_frequenter %}nie{% endif %}bywalec">
                 <a href="/bar/{{ bar.id }}/ajax/?op=frequent"></a>
             </div>
-            <div class="psbutton" id="button_naduzycie"><a onclick="abuse({{ bar.id }})"></a></div>
+            <div class="psbutton" id="button_impreze"><a href="/bar/{{ bar.slugname }}/add_event/"></a></div>
         {% endif %}
     </div>
 </div>
@@ -74,9 +74,17 @@
     <div class="box_header_title_fstyle">IMPREZY</div>
         {% for event in events %}
             <div class="impreza">
-            <a href="#"><img src="{{ event.miniature|path:"eventmini:222,124" }}"></a>
+            <a href="/bar/{{ bar.slugname }}/{{ event.slugname }}/"><img src="{{ event.miniature|path:"eventmini:222,124" }}"></a>
                 <div class="opis">
-                    <div class="left">{{ event.name }}</div>
+                    <div class="left">
+                        <a href="/bar/{{ bar.slugname }}/{{ event.slugname }}/">
+                        {% if event.name|length > 20 %}
+                            {{ event.name|truncatechars:17 }}...
+                        {% else %}
+                            {{ event.name|truncatechars:17 }}
+                        {% endif %}
+                        </a>
+                    </div>
                     <div class="right"><a href="/bar/{{ bar.slugname }}/{{ event.slugname }}/">Więcej</a></div>
                 </div>
             </div>        

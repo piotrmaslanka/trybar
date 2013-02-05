@@ -80,8 +80,13 @@ def view(request, slugname, evtname):
 
     more_photos_than_6 = event.photos.count() > 6
 
+
+    # check if can manage
+    can_manage = (event.owner == request.user) or ()
+
     return render('barevent/manage.html', request, form=form, event=event, 
-            more_photos_than_6=more_photos_than_6, current_poster=event.poster)
+            more_photos_than_6=more_photos_than_6, current_poster=event.poster,
+            can_manage=can_manage)
 
 @must_be_logged
 def op(request, slugname, evtname):

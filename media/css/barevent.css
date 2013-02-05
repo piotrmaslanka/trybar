@@ -38,6 +38,9 @@
         #event_header .title .name {
             font-size: 22px;
         }
+            #event_header .title .name .smaller {
+                font-size: 18px;
+            }
         #event_header .title .date {
             font-size: 14px;
         }
@@ -75,7 +78,7 @@
         #event_header .buttons > * { display: inline-block; }
    
         #event_header #button_naduzycie {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 114px;
             height: 36px;
             background: url('/media/gfx/bar/button_naduzycie.png') no-repeat;            
@@ -83,8 +86,9 @@
             #event_header #button_naduzycie:hover {
                 background: url('/media/gfx/bar/button_naduzycie_p.png') no-repeat;
             }
+
         #event_header #button_interested {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 190px;
             height: 37px;
             background: url('/media/gfx/barevent/zainteresowany.png') no-repeat;
@@ -93,7 +97,7 @@
                 background: url('/media/gfx/barevent/zainteresowany_p.png') no-repeat;
             }
         #event_header #button_nieinterested {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 190px;
             height: 37px;
             background: url('/media/gfx/barevent/nie_zainteresowany.png') no-repeat;
@@ -102,7 +106,7 @@
                 background: url('/media/gfx/barevent/nie_zainteresowany_p.png') no-repeat;
             }
         #event_header #button_dodajzdjecie {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 102px;
             height: 36px;
             background: url('/media/gfx/bar/button_dodaj.png') no-repeat;
