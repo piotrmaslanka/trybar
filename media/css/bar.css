@@ -60,7 +60,7 @@
     }
    
         #bar_header #button_naduzycie {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 114px;
             height: 36px;
             background: url('/media/gfx/bar/button_naduzycie.png') no-repeat;            
@@ -69,7 +69,7 @@
                 background: url('/media/gfx/bar/button_naduzycie_p.png') no-repeat;
             }
         #bar_header #button_bywalec {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 189px;
             height: 36px;
             background: url('/media/gfx/bar/button_bywalec.png') no-repeat;
@@ -78,7 +78,7 @@
                 background: url('/media/gfx/bar/button_bywalec_p.png') no-repeat;
             }
         #bar_header #button_niebywalec {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 189px;
             height: 36px;
             background: url('/media/gfx/bar/button_niebywalec.png') no-repeat;
@@ -87,7 +87,7 @@
                 background: url('/media/gfx/bar/button_niebywalec_p.png') no-repeat;
             }
         #bar_header #button_dodajzdjecie {
-            margin-right: 10px;
+            margin-right: 7px;
             width: 102px;
             height: 36px;
             background: url('/media/gfx/bar/button_dodaj.png') no-repeat;
