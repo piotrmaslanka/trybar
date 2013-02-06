@@ -8,6 +8,9 @@ from trybar.bar.models import Bar
 from trybar.main.models import News
 from django.core.paginator import Paginator
 
+def events(request, uid, page=None):
+    raise NotImplementedError
+
 def bars(request, uid, page=None):
     try:
         page_c = int(page)
