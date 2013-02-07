@@ -77,6 +77,16 @@
     }
         #event_header .buttons > * { display: inline-block; }
    
+        #event_header #button_zarzadzaj {
+            margin-right: 7px;
+            width: 79px;
+            height: 36px;
+            background: url('/media/gfx/barevent/zarzadzaj.png') no-repeat;            
+        }
+            #event_header #button_zarzadzaj:hover {
+                background: url('/media/gfx/barevent/zarzadzaj_p.png') no-repeat;
+            }
+
         #event_header #button_naduzycie {
             margin-right: 7px;
             width: 114px;

@@ -61,10 +61,10 @@
     <div class="buttons">        
         {% if logged_in %}
             <div class="psbutton" id="button_dodajzdjecie"><a href="/bar/{{ bar.slugname }}/add_photo/"></a></div>
+            <div class="psbutton" id="button_impreze"><a href="/bar/{{ bar.slugname }}/add_event/"></a></div>
             <div class="psbutton" id="button_{% if is_frequenter %}nie{% endif %}bywalec">
                 <a href="/bar/{{ bar.id }}/ajax/?op=frequent"></a>
             </div>
-            <div class="psbutton" id="button_impreze"><a href="/bar/{{ bar.slugname }}/add_event/"></a></div>
         {% endif %}
     </div>
 </div>

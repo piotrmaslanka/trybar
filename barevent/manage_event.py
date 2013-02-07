@@ -15,6 +15,8 @@ from trybar.main.models import News
 from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_MINIATURE, RES_EVENT_PHOTO, RES_EVENT_PARTNER
 from trybar.scoring import BAR_EVENT_PHOTO_ADDED, score_for
 
+from trybar.barevent.add_event import DD, MM, RR
+
 class EditEventForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -165,3 +167,33 @@ def op(request, slugname, evtname):
         return redirect('/bar/%s/%s/manage/' % (slugname, evtname))
     else:
       return HttpResponse(status=400)
+
+
+
+@must_be_logged
+def list_of_events(request, page=1):
+    try:
+        page_c = int(page)
+    except:
+        page_c = 1
+
+    p = Paginator(request.user.events_owned.order_by('name'), 10)
+    page = p.page(page_c)
+
+    spdict = standard_profile_page_dict(request) if request.user != None else {}
+
+    page_c = p.num_pages
+
+    if page_c < 4:
+        page_start = 1
+    else:
+        page_start = page_c - 2
+
+    if page_c > (p.num_pages-3):
+        page_end = p.num_pages
+    else:
+        page_end = page_c + 2
+
+    return render('barevent/event_manage_list.html', request, page=page,
+                                              page_iter=range(page_start, page_end+1),
+                                              newsbar=News.get_news_for_sidebar(), **spdict)

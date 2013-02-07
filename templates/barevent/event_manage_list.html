@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load ads %}
+{% load core %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/ranking.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/news.css">
+{% endblock %}
+{% block ad %}{{ 7|html_ad }}{% endblock %}
+
+{% block body %}
+    <div id="header">
+        <div class="left">ZARZĄDZANIE IMPREZAMI</div>
+        <div class="bottom"></div>            
+    </div>
+
+    <div id="leftbox">
+        {% if request.user != None %}
+            {% include "includes/profile.html" %}
+        {% endif %}
+
+        {% include "includes/news.html" %}            
+    </div>
+    <div id="rankingbox">
+        <div class="header">
+            <div class="b_toplokale"></div>
+            <div class="b_nazwalokalu">Nazwa imprezy</div>
+            <div></div>
+        </div>
+        {% for event in page.object_list %}
+        <div class="entry">
+            <div class="position"></div>
+            <div class="imgbox bar"><a href="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/"><img src="{{ event.bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
+            <div class="description">
+                <div class="name"><a href="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/">{{ event.name }}</a></div>
+                <div class="descr"><a href="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/">{{ event.description|word_slice:":15" }}</a></div>
+                <div class="average"><div class="manage_button"><a href="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/" class="gba"></a></div></div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="dropbar">
+                {% if page.has_previous %}
+                    <div class="left"><a href="/profile/events/{{ page.previous_page_number }}/" class="gba"></a></div>
+                {% endif %}
+                <div class="center">
+                    {% for page_n in page_iter %}
+                        {% if page_n == page.number %}
+                            <div class="ico_c"><a class="gba" href="/profile/events/{{ page_n }}/">{{ page_n }}</a></div>
+                        {% else %}
+                            <div class="ico_o"><a class="gba" href="/profile/events/{{ page_n }}/">{{ page_n }}</a></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% if page.has_next %}
+                    <div class="right"><a href="/profile/events/{{ page.next_page_number }}/" class="gba"></a></div>
+                {% endif %}
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+{% endblock %}

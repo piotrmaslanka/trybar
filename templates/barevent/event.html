@@ -69,6 +69,9 @@
             <div class="psbutton" id="button_{% if is_interested %}nie{% endif %}interested">
                 <a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=interested"></a>
             </div>
+            {% if can_manage %}
+            <div class="psbutton" id="button_zarzadzaj"><a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/manage/"></a></div>            
+            {% endif %}
             <!-- <div class="psbutton" id="button_naduzycie"><a onclick="abuse()"></a></div> -->
         {% endif %}
     </div>

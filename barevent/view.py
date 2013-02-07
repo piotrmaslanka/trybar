@@ -8,6 +8,7 @@ from trybar.barevent.models import Event, EVENT_MARKS_COUNT, SingleEventMark, In
 from django.http import Http404, HttpResponse
 from trybar.main.models import News
 import json
+from trybar.admin import is_admin
 from trybar.accnews import RT_INTRSTD_IN_EVENT, RT_NOT_INTRSTD_IN_EVENT, accnews_for, RT_COMMENT_EVENT
 from trybar.scoring import BAR_EVENT_COMMENT_ADDED, score_for
 
@@ -155,7 +156,10 @@ def view_event(request, slugname, evtname):
     else:
         comment_too_fast = False
 
+    can_manage = (request.user == event.owner) or is_admin(request)
+
 
     return render('barevent/event.html', request, event=event, is_interested=is_interested, CATEGORY_INFO=category_info,
+                                                  can_manage=can_manage,
                                                   l10r=range(1, 11), interesteds=interesteds, comment_too_fast=comment_too_fast)
 
