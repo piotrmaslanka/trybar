@@ -1,5 +1,6 @@
 /* Generic purpose stuff */
 .gclear { clear: both; }
+.bold { font-weight: bold; } 
 .gba { width: 100%; height: 100%; display: block; }
 .nflt { float: none !important; } 
 

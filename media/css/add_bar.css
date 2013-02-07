@@ -150,6 +150,11 @@
 #subshade_container {
     margin-left: 65px;
 }
+
+    .subshade_error {
+        font-size: 12px;
+        color: red;
+    }
     .subshade_shade {
         width: 462px;
         height: 19px;

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load photo %}
+{% load core %}
+{% load humanize %}
+{% load ads %}
+
+{% block head %}
+    <script type="text/javascript" src="/media/js/shoutbox.js"></script>
+    <script type="text/javascript" src="/media/js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/bar_add_photo.css">
+    <script src="/media/js/form_highlighter.js"></script>      
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/my_account.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/sub/shoutbox.css">
+{% endblock %}
+
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        DODAJ ZDJĘCIE DO WYDARZENIA
+    </div>
+
+    <div id="eform">
+        <form action="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/add_photo/" method="post" enctype="multipart/form-data">
+            <table class="formtab">
+                {% for error in form.non_field_errors %}        {# error referring to the entire form #}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}    
+                <tr>
+                    <td class="label"></td>
+                    <td class="field" id="add_picture_descr">Dodaj zdjęcie</td>
+                    <td class="alert"></td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        <div class="fopen_container">{{ form.picture }}
+                            <div class="box"></div>
+                        </div>
+                    </td>
+                    <td class="field"><input type="button" id="send_photo_box_input"></td>
+                    <td class="alert">{% if form.picture.errors %}<div class="sign"></div>{% endif %}</td>
+                </tr>
+                {% for error in form.picture.errors %}
+                <tr>
+                    <td></td>
+                    <td class="fail_field" colspan="2">{{ error }}</td>
+                </tr>
+                {% endfor %}                
+                <tr>
+                    <td></td>
+                    <td class="descr_field" colspan="2">Zdjęcie nie może zajmować więcej jak 1 MB</td>
+                </tr>
+            </table>      
+            <div id="save_that_container">
+                <input type="button" onclick="$('form')[0].submit();">
+            </div>   
+        </form>
+    </div>
+
+    
+    <div id="left_panel">
+        {% include "includes/profile.html" %}    
+        {% include "includes/shoutbox.html" %}
+    </div>
+
+    <div style="clear: both;"></div>
+
+<script type="text/javascript">
+    $(function(){$(".selectbox").selectbox({width:278});});
+    if (!($.browser.msie))
+        $('.fopen_container .box').click(function(e) { $("#id_picture").click(); })
+    $('#id_picture').change(function(e) { $("#send_photo_box_input").val($("#id_picture").val()); });
+    </script>
+</script>
+{% endblock %}

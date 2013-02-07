@@ -15,10 +15,10 @@ RT_EVENTPHOTO_ADDED = 7		# arg1:Target EventPhoto, arg2:Target Event
 RT_BARPHOTO_ADDED = 8		# arg1:Target BarPhoto, arg2: Target Bar
 							# dodano zdjecie do baru
 RT_COMMENT_EVENT = 9		# arg1:Target Event 				-	skomentowano impreze
-RT_WILL_GO_EVENT = 10		# arg1:Target Event 				-	zaznaczyl ze idzie na impreze
-RT_WONT_GO_EVENT = 11		# arg1:Target Event 				-	zaznaczyl ze nie idzie na impreze
-RT_WAS_ON_EVENT	= 12		# arg1:Target Event 				-	zaznaczyl ze byl na imprezie
-RT_WASNT_ON_EVENT = 13		# arg1:Target Event 				-	zaznaczyl ze nie byl na imprezie												
+RT_INTRSTD_IN_EVENT = 10	# arg1:Target Event 				-	zaznaczyl ze interesuje go impreza
+RT_NOT_INTRSTD_IN_EVENT = 11# arg1:Target Event 				-	zaznaczyl ze nie interesuje go impreza
+# UNUSED = 12
+# UNUSED = 13
 RT_ADDED_BAR = 14			# arg1:Target Bar 					-	dodano bar
 RT_BECAME_FAMILIAR = 15		# arg1:Target Account 				-	zawarł znajomość z 
 RT_UNBECAME_FAMILIAR = 16	# arg1:Target Account 				-	zerwano znajomość z

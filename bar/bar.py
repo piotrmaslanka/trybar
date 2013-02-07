@@ -131,7 +131,7 @@ def view(request, slugname):
     l10r = range(1, 11)
     
     
-    events = bar.events.order_by('happens_on')[:3]
+    events = bar.events.order_by('happens_on_y', 'happens_on_m', 'happens_on_d')[:3]
     frequenters = bar.frequenters.order_by('?')[:6]
 
     # Check if frequenter

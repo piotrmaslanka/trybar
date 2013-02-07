@@ -59,15 +59,6 @@
         margin-bottom: 12px;
     }
    
-        #bar_header #button_naduzycie {
-            margin-right: 7px;
-            width: 114px;
-            height: 36px;
-            background: url('/media/gfx/bar/button_naduzycie.png') no-repeat;            
-        }
-            #bar_header #button_naduzycie:hover {
-                background: url('/media/gfx/bar/button_naduzycie_p.png') no-repeat;
-            }
         #bar_header #button_bywalec {
             margin-right: 7px;
             width: 189px;
@@ -95,6 +86,15 @@
             #bar_header #button_dodajzdjecie:hover {
                 background: url('/media/gfx/bar/button_dodaj_p.png') no-repeat;
             }
+        #bar_header #button_impreze {
+            margin-right: 7px;
+            width: 102px;
+            height: 36px;
+            background: url('/media/gfx/bar/button_dodaj_i.png') no-repeat;
+        }
+            #bar_header #button_impreze:hover {
+                background: url('/media/gfx/bar/button_dodaj_i_p.png') no-repeat;
+            }            
     #imprezy_box {
         margin-top: 10px;
         width: 252px;
@@ -137,6 +137,10 @@
                     margin-left: 5px;
                     float: left;
                 }
+                    #imprezy_box .impreza .opis .left a {
+                        color: #fae281;
+                        text-decoration: none;
+                    }
                 #imprezy_box .impreza .opis .right {
                     height: 40px;
                     line-height: 40px;

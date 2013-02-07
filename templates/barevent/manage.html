@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load ads %}
+{% load photo %}
+{% load core %}
+
+{% block head %}
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>  
+    <link rel="stylesheet" type="text/css" href="/media/css/manage_event.css">
+    {% if more_photos_than_6 %}
+        <script type="text/javascript">
+            var allow_animation = true;
+            function scrollup() {
+                if (!allow_animation) return;
+                if (parseInt($('.all_photos').height())+parseInt($('.all_photos').css('margin-top')) == 1224) return;
+                $('.all_photos').animate({marginTop: '-=204px'}, 300, function() { allow_animation = true;});
+                allow_animation = false;
+            }
+            function scrolldown() {
+                if (!allow_animation) return;
+                if ($('.all_photos').css('margin-top') == '0px') return;
+                $('.all_photos').animate({marginTop: '+=204px'}, 300, function() { allow_animation = true;});
+                allow_animation = false;
+            }
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+
+
+{% block body %}
+<div id="form_box">
+    <div class="header">
+        ZARZĄDZANIE WYDARZENIEM
+    </div>
+    
+    <form action="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/" method="post" enctype="multipart/form-data">
+    <div id="gallerybox">
+        {% if more_photos_than_6 %}
+            <div id="scroll_top"></div>
+        {% endif %}
+        <div class="photo_sliding_window">
+            <div class="all_photos">
+                {% for eventphoto in event.photos.all %}
+                <div class="photo">
+                    <img src="{{ eventphoto.photo|path:"barphoto:137,97" }}">
+                        <span onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/op/?op=make_main&pid={{ eventphoto.id }}'" class
+                        ="make_main"></span><br>
+                    <span onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/op/?op=delete_photo&pid={{ eventphoto.id }}'" class="delete"></span>        
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% if more_photos_than_6 %}
+            <div id="scroll_bot"></div>
+        {% endif %}
+    </div>
+    
+    <div id="subshade_container">
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Ogólny opis imprezy:</span>
+        <table class="formtab">
+            <tr>
+                <td class="label"></td>
+                <td class="field nobg">{{ form.description }}</td>
+                <td class="alert">{% if form.description.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.description.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+        </table>        
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Atrakcje imprezy (maks. 150 znaków)</span>
+        <table class="formtab">
+            <tr>
+                <td class="label"></td>
+                <td class="field nobg">{{ form.extra_info }}</td>
+                <td class="alert">{% if form.extra_info.errors %}<div class="sign"></div>{% endif %}</td>
+            </tr>
+            {% for error in form.extra_info.errors %}
+            <tr>
+                <td></td>
+                <td class="fail_field" colspan="2">{{ error }}</td>
+            </tr>
+            {% endfor %}
+        </table>        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Koszt wstępu</span>
+        <div class="textbox_box_small">
+            <div class="textbox_input_field">{{ form.entry_cost }}</div> 0 zł
+        </div>
+        {% for error in form.entry_cost.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Czy wstęp tylko dla pełnoletnich?</span>
+        <div class="yes_no_boxes">
+            {% for radio in form.only_adults %}
+                {% if forloop.first %}<div class="left_subbox">{% endif %}
+                    {{ radio.tag }} {{ radio.choice_label }}
+                {% if forloop.first %}</div>{% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Data rozpoczęcia</span>
+        {% for error in form.happens_on_y.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+        {% for error in form.happens_on_m.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+        {% for error in form.happens_on_d.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+        {% for error in form.start_at.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+        <table id="opening_hours_t">
+            <tr>
+                <td class="label">Rok</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.happens_on_y }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label">Miesiąc</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.happens_on_m }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label">Dzień</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.happens_on_d }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label">Czas</td>
+                <td class="hf"></td>
+                <td class="inputbox">{{ form.start_at }}</td>
+                <td class="hf"></td>
+                <td></td>
+            </tr>            
+        </table>
+        {% for error in form.start_at.errors %}
+            <div class="subshade_error">{{ error }}</div>
+        {% endfor %}
+
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Ustaw plakat</span>
+        <div class="send_photo_box">
+            <div class="send_photo_container">
+                {{ form.poster }}
+                <div class="send_photo_box_input_path">
+                    <input type="text" id="poster_input" readonly>
+                </div>
+                <input type="button" class="send_photo_box_input_button" id="poster_button">
+            </div>
+        </div>
+        <div class="subshare_subdescript">
+            {% for error in form.poster.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+            Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
+            Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
+        </div>
+        {% if current_poster %}
+        <img style="margin-left: 30px;" src="{{ current_poster|path:"eventposter:233," }}">
+        {% endif %}
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Dodaj partnera</span>
+        <div class="send_photo_box">
+            <div class="send_photo_container">
+                {{ form.partner }}
+                <div class="send_photo_box_input_path">
+                    <input type="text" id="partner_input" readonly>
+                </div>
+                        <input type="button" class="send_photo_box_input_button" id="partner_button">
+        </div>
+        {% for partner in event.partners.all %}
+        <img src="{{ partner.photo|path:"eventpartner:176," }}" style="margin-top: 10px;"><br>
+        <span class="pfollowup">
+        URL: <a href="{{ partner.website }}">{{ partner.website }}</a><br>
+        <a href="/bar/{{ event.bar.slugname }}/{{ event.slugname }}/manage/op/?op=delete_partner&pid={{ partner.id }}">Kasuj</a></span><br>
+        {% endfor %}
+
+        <span class="subshade_descript">URL strony partnera</span><br>
+            <div class="textbox_input_field">{{ form.partner_url }}</div>
+        <div class="subshare_subdescript">
+            {% for error in form.partner.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+            Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
+            Więcej zdjęć można dodać bezpośrednio na stronie lokalu lub na stronie zarządzania lokalami
+        </div>        
+        <div class="subshade_shade"></div>
+        <span class="subshade_descript">Dodaj zdjęcie</span>
+        <div class="send_photo_box">
+            <div class="send_photo_container">
+                {{ form.photo }}
+                <div class="send_photo_box_input_path">
+                    <input type="text" id="photo_input" readonly>
+                </div>
+                <input type="button" class="send_photo_box_input_button" id="photo_button">
+            </div>
+        </div>
+        <div class="subshare_subdescript">
+            {% for error in form.photo.errors %}
+                <span class="error">{{ error }}</span><br>
+            {% endfor %}
+            Zdjęcie nie może zajmować więcej jak 1 MB<br><br>
+        </div>        
+        <div class="subshade_shade"></div>
+        <input type="submit" value="" id="save_button">
+        <input type="button" onclick="window.location='/bar/{{ event.bar.slugname }}/{{ event.slugname }}/'" id="przejdz_do_eventu"></div>
+        <div class="subshare_subdescript">
+            <span class="star">*</span>Wypełnij wszystkie obowiązkowe pola
+        </div>
+    </div>
+    </form>    
+</div>
+    <script type="text/javascript">
+        $(function() { 
+            $("#wojewodztwo").selectbox({width: 278});
+            $(".godzina").selectbox({width: 88});
+            $('#poster_button').click(function(e) { $("#id_poster").click(); })
+            $('#id_poster').change(function(e) { $("#poster_input").val($("#id_poster").val()); })
+            
+            $('#photo_button').click(function(e) { $("#id_photo").click(); })
+            $('#id_photo').change(function(e) { $("#photo_input").val($("#id_photo").val()); })
+
+            $('#partner_button').click(function(e) { $("#id_partner").click(); })
+            $('#id_partner').change(function(e) { $("#partner_input").val($("#id_partner").val()); })
+
+            $('.formtab input[type="text"]').focus(highlight_input);
+            $('.formtab input[type="text"]').blur(unhighlight_input);
+        {% if more_photos_than_6 %}
+            $('#scroll_top').click(scrollup);
+            $('#scroll_bot').click(scrolldown);
+        {% endif %}
+        });
+    </script>
+{% endblock %}

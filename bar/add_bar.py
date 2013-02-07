@@ -1,21 +1,12 @@
 # coding=UTF-8
 from django import forms
 from django.shortcuts import redirect
-from trybar.core import render
+from trybar.core import render, slugify
 from trybar.account import must_be_logged
 from trybar.bar.models import Bar, BAR_OPEN_HOURS_FROM, BAR_OPEN_HOURS_TO, BarMeta, BarPhoto
 from trybar.core.fixtures import VOIVODESHIP_CHOICES, YES_NO_CHOICES
 from trybar.scoring import score_for, BAR_ADDED, BAR_PHOTO_ADDED
 from trybar.accnews import accnews_for, RT_ADDED_BAR
-
-def slugify(name):
-    POLISH_DIACRITIC_LOOKUP = {u'Ą':u'A', u'ą':u'a', u'Ć':u'C', u'ć':u'c', u'Ę':u'E', u'ę':u'e', u'Ż':u'Z', u'ż':u'z',
-                             u'Ź':u'Z', u'ź':u'z', u'Ó':u'O', u'ó':u'o', u'Ł':u'l', u'ł':u'l', u'Ś':u'S', u'ś':u's',
-                             u'Ń':u'N', u'ń':u'n'}      
-    for fr, t in POLISH_DIACRITIC_LOOKUP.iteritems():
-        name = name.replace(fr, t)
-    from django.template.defaultfilters import slugify as _slugify
-    return _slugify(name)
 
 class AddBarForm(forms.Form):
     name = forms.CharField(max_length=40)
@@ -96,7 +87,7 @@ class AddBarForm(forms.Form):
             return cleaned_data
 
         if (b.street == street) and (b.city == city) and (b.voivodeship == voivodeship):
-            raise forms.ValidationError('Ten bar już istnieje')
+            raise forms.ValidationError(u'Ten bar już istnieje')
         else:
             return cleaned_data
 

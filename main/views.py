@@ -43,8 +43,7 @@ def now(request):
             stuff = (Account.objects.get(id=an.arg1), )
         elif rt in (RT_COMMENT_BAR, RT_IS_FREQUENTER, RT_NOT_FREQUENTER, RT_ADDED_BAR):
             stuff = (Bar.objects.get(id=an.arg1), )
-        elif rt in (RT_ADDED_EVENT, RT_COMMENT_EVENT, RT_WILL_GO_EVENT, RT_WONT_GO_EVENT, 
-                    RT_WAS_ON_EVENT, RT_WASNT_ON_EVENT, ):
+        elif rt in (RT_ADDED_EVENT, RT_COMMENT_EVENT, RT_INTRSTD_IN_EVENT, RT_NOT_INTRSTD_IN_EVENT):
             stuff = (Event.objects.get(id=an.arg1), )
         elif rt in (RT_BARPHOTO_ADDED, ):
             stuff = (BarPhoto(id=an.arg1), Bar(id=an.arg2))
@@ -60,7 +59,7 @@ def now(request):
         elif len(stuff) == 2:
             entries.append((an, stuff[0], stuff[1]))
         else:
-            raise Exception, '[Should never happen] You sick fuck'
+            raise Exception, 'Should never happen'
 
     return render('main/now.html', request, accnew_items=entries,
                                             newsbar=News.get_news_for_sidebar(),
@@ -69,7 +68,6 @@ RT_COMMENT_PRIVGAL = RT_COMMENT_PRIVGAL, RT_COMMENT_BAR= RT_COMMENT_BAR,
 RT_IS_FREQUENTER = RT_IS_FREQUENTER, RT_NOT_FREQUENTER= RT_NOT_FREQUENTER,
 RT_ADDED_EVENT = RT_ADDED_EVENT, RT_EVENTPHOTO_ADDED = RT_EVENTPHOTO_ADDED,
 RT_BARPHOTO_ADDED = RT_BARPHOTO_ADDED, RT_COMMENT_EVENT = RT_COMMENT_EVENT,
-RT_WILL_GO_EVENT= RT_WILL_GO_EVENT, RT_WONT_GO_EVENT= RT_WONT_GO_EVENT, 
-RT_WAS_ON_EVENT = RT_WAS_ON_EVENT, RT_WASNT_ON_EVENT = RT_WASNT_ON_EVENT,
+RT_INTRSTD_IN_EVENT=RT_INTRSTD_IN_EVENT, RT_NOT_INTRSTD_IN_EVENT=RT_NOT_INTRSTD_IN_EVENT,
 RT_ADDED_BAR = RT_ADDED_BAR, RT_BECAME_FAMILIAR= RT_BECAME_FAMILIAR,
 RT_UNBECAME_FAMILIAR = RT_UNBECAME_FAMILIAR, **spdict)

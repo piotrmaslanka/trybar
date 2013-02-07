@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% load core %}
+{% load photo %}
+{% load ads %}
+{% block title %}TryBAR: {{ bar.name }}{% endblock %}
+{% block ad %}{{ 3|html_ad }}{% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/media/css/barevent.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/tooltip.css">
+    <script src="/media/js/jquery.selectBox.min.js"></script>
+    <script src="/media/js/form_highlighter.js"></script>   
+    <script src="/media/js/adgallery.js"></script>  
+    <script src="/media/js/tooltip.js"></script>    
+    <script type="text/javascript">
+        function mark(category_id, val) {
+            $.ajax('/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=mark&o='+category_id+'&val='+val,
+                   {dataType: 'json',
+                    success: function(data) {
+                        if (data[0] == null) data[0] = '??';
+                        $('#a_avg').html(Math.round(data[0]*100)/100);
+                        $('#a_votecount').html(data[1]);
+                        if (data[2] == null) data[2] = '??';
+                        $('#a_cur_'+category_id).html(data[2]);                       
+                        if (data[3] == null) data[3] = '??';
+                        $('#a_avg_'+category_id).html(data[3]);                       
+                    }
+                   })
+        }
+        function abuse() {
+            var reason = prompt("Podaj powód zgłoszenia", "");
+            if (reason == null) return;
+            $.ajax('/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=abuse', {
+                data: {'description': reason},
+                type: 'POST',
+                success:function() {
+                    alert('Zgłoszono nadużycie');
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+<div id="event_header">
+    <a class="zobacz_lokal" href="/bar/{{ event.bar.slugname }}/"></a>
+    <div class="title">
+        <div class="name">
+            {% if event.name|length > 20 %}
+                <span class="smaller">
+                    {{ event.name }}
+                </span>
+            {% else %}
+                {{ event.name }}
+            {% endif %}
+        </div>
+        <div class="date">{{ event.happens_on_d }}/{{ event.happens_on_m }} {{ event.happens_on_y }}</div>
+    </div>
+    
+    <div class="sep"></div>
+    
+    <div class="address">
+        {{ event.bar.street }}<br class="nflt">
+        <a href="/ranking/bars/?q={{ event.bar.city|urlencode }}">{{ event.bar.city }}</a>
+    </div>
+    
+    <div class="buttons">        
+        {% if request.user != None %}
+            <div class="psbutton" id="button_dodajzdjecie"><a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/add_photo/"></a></div>
+            <div class="psbutton" id="button_{% if is_interested %}nie{% endif %}interested">
+                <a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=interested"></a>
+            </div>
+            {% if can_manage %}
+            <div class="psbutton" id="button_zarzadzaj"><a href="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/manage/"></a></div>            
+            {% endif %}
+            <!-- <div class="psbutton" id="button_naduzycie"><a onclick="abuse()"></a></div> -->
+        {% endif %}
+    </div>
+</div>
+
+<div id="plakat_box">
+    <div class="box_header_title_fstyle">PLAKAT</div>
+        {% if event.poster != None %}
+        <a href="{{ event.poster|path:"eventposter:" }}" rel="lightbox">
+            <img src="{{ event.poster|path:"eventposter:233," }}">
+        </a>
+        {% else %}
+            <img src="{{ event.poster|path:"eventposter:233," }}">  {# will be None #}
+        {% endif %}
+</div>
+
+<div id="photos_box">
+    <div class="adgallery">
+        <div class="box_header_title_fstyle">FOTO</div>
+        <div class="ad-gallery">
+        
+            <div class="ad-image-wrapper">ad-image-wrapper</div>
+            
+            <div class="ad-controls"></div>
+            <div class="ad-nav">
+                <div class="ad-thumbs">
+                    <ul class="ad-thumb-list">
+                        {% for photo in event.photos.all %}
+                        <li{# id="k1" #}>
+                            <a href="{{ photo.photo|path }}">
+                                <img src="{{ photo.photo|path:"112," }}">
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>                
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.ad-gallery').adGallery({display_next_and_prev:false, display_back_and_forward:false});
+</script>
+
+<div class="hard_spacer_1"></div>
+
+<div id="informacje_box">
+    <div class="box_header_title_fstyle">INFORMACJE</div>
+    <div class="szpalta szp1">
+        <span class="title">Wstęp</span><br>
+        <span class="content">{% if event.entry_cost == 0 %}DARMOWY{% else %}{{ event.entry_cost }} zł{% endif %}</span><br>
+        <br>
+        <span class="title">Limit wiekowy</span><br>
+        <span class="content">{% if event.age_limit == None %}BRAK{% elif event.age_limit == 0 %}BRAK{% else %}18+{% endif %}</span><br>
+        <br>
+        <span class="title">Start</span><br>
+        <span class="content">{{ event.starts_on }}</span><br>
+        <br>
+        
+    </div>
+    <div class="separator"></div>
+    <div class="szpalta szp2">
+        <span class="title">Występuje</span><br>
+        <span class="content">
+            {% for artist in event.artists.all %}
+                {% if profile != None %}
+                    <a href="{{ artist.profile }}">{{ artist.name }}</a>
+                {% else %}
+                    {{ artist.name }}
+                {% endif %}
+                <br>
+            {% endfor %}
+        </span><br><br>
+        <span class="title">Informacje dodatkowe</span><br>
+        <span class="content">
+            {{ event.extra_info|linebreaksbr }}
+        </span><br>
+
+    </div>
+</div>
+
+<div class="partner">
+    <div class="box_header_title_fstyle">PARTNERZY</div>
+    <div class="elements">
+        {% for partner in event.partners.all %}
+            <div class="elem"><a href="{{ partner.website }}"><img src="{{ partner.photo|path:"eventpartner:176," }}"></a></div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="intr_i_partner bywalcy">
+    <div class="box_header_title_fstyle">ZAINTERESOWANI</div>
+    <div class="elements">
+        {% for interested in interesteds %}
+        <div class="elem" onmouseover="tip.show('{{ interested.account.login }}')" onmouseout="tip.hide()"><a href="/profile/{{ interested.account.id }}/"><img src="{{ interested.account.avatar|path:"avatar:84,84" }}"></a></div>
+        {% endfor %}
+    </div>
+    <div class="moar"><a href="#">Więcej ››</a></div>
+</div>
+
+<div id="oceny">
+    <div class="box_header_title_fstyle">OCENY</div>
+    <div class="average">
+        Średnia ocena: <span class="v" id="a_avg">{% if bar.meta.avg == None %}??{% else %}{{ bar.meta.avg|round_float:"2" }}{% endif %}</span><br>
+        Liczba głosów: <span class="v" id="a_votecount">{{ bar.meta.mark_count }}</span>
+    </div>
+    <table class="list">
+        {% for id, name, description, usermark, avgmark in CATEGORY_INFO %}
+        <tr class="bg{% cycle '1' '2' %}">                    
+            <td class="caption" onmouseover="tip.show('{{ description }}')" onmouseout="tip.hide()">{{ name }}</td>
+            <td class="arrow">
+            {% if request.user != None %}
+            <div class="arrow">
+                <ul>
+                    <li class="bg1"><a class="gba" onclick="mark({{ id }}, 'Z')">Brak oceny</a></li>
+                    {% for i in l10r %}
+                    <li class="bg{% cycle '2' '1' %}"><a class="gba" onclick="mark({{ id }}, {{ i }})">{{ i }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            </td>
+            <td class="current" id="a_cur_{{ id }}">{% if usermark == None %}??{% else %}{{ usermark }}{% endif %}</td>
+            <td class="average" id="a_avg_{{ id }}">{% if avgmark == None %}??{% else %}{{ avgmark }}{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div id="opis">
+    <div class="box_header_title_fstyle">OPIS</div>
+    <div class="content">
+        {{ event.description|linebreaksbr }}
+    </div>
+</div>
+
+<div class="hard_spacer_1"></div>
+
+
+<div id="komentarze">
+    <div class="top"></div>
+    <div class="content">
+        <div class="box_header_title_fstyle">KOMENTARZE</div>            
+        <div class="entries">
+            {% for comment in event.comments.all %}
+            <div class="entry">
+                <div class="avatar"><a href="/profile/{{ comment.account.id }}/"><img src="{{ comment.account.avatar|path:"avatar:84,84" }}"></a></div>
+                <div class="nick"><a href="/profile/{{ comment.account.id }}/">{{ comment.account.login }}</a></div>
+                <div class="timestamp">{{ comment.made_on|date:"d.n.Y" }}</div>
+                <div class="content">
+                    {{ comment.content|linebreaksbr }}
+                </div>
+            </div>
+            <div class="separator"></div>
+            {% endfor %}
+        </div>                
+        {% if request.user != None %}
+        <div id="odpowiedz_box">
+            <div class="title">Odpowiedz</div>
+            <form action="/bar/{{ event.bar.slugname|urlencode }}/{{ event.slugname|urlencode }}/op/?op=comment" method="post" id="comment_form">
+                <textarea name="content" onclick="if (this.value == '{{ default_comment_text }}') this.value=''">{{ default_comment_text }}</textarea>                       
+                <button class="send" onclick="$('#comment_form')[0].submit()"></button>
+            </form>
+        </div>
+        {% else %}
+            <div class="comment_needs_to_login">Musisz być zalogowany/a by pisać komentarze<br style="float: none;"><a href="/login/">ZALOGUJ SIĘ</a></div>
+        {% endif %}
+    </div>
+    <div class="bottom"></div>
+</div>
+{% if comment_too_fast %}
+    <script type="text/javascript">
+        $(function() {
+            alert('Musi upłynąć przynajmniej 15 sekund od dodania poprzedniego komentarza!');
+        });
+    </script>
+{% endif %}
+{% endblock %}

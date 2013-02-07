@@ -7,7 +7,8 @@ from hashlib import sha1
 import os
 
 POSSIBLE_RESOLUTIONS = ((130, 130), (84, 84), (112, None), 
-                        (222, 124), (137, 97), (980, 150), ())  
+                        (222, 124), (137, 97), (980, 150), 
+                        (233, None), (176, None), ())  
     # empty means 'native'
     # single None means 'any value to keep aspect ratio'
 
@@ -27,6 +28,10 @@ def delete_photo(sender, instance, **kwargs):
 class Photo(models.Model):
     created_on = models.DateTimeField(default=datetime.now)    
     
+    def as_ufo(self):
+        """Returns native self as uploaded filelike object"""
+        return open(UPLOAD_ROOT+self.path_to(), 'rb')
+
     def path_to(self, *resolution):
         """Returns relative path to file with given resolution. It may not exist, depending on type of this photo.
         Invoke like:

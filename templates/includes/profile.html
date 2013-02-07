@@ -14,6 +14,7 @@
             <div><a href="/profile/{{ request.user.id }}/familiars/">Znajomi: </a><span><a href="/profile/{{ request.user.id }}/familiars/">{{ profile_familiars }}</a></span></div>
             <div><a href="/profile/messages/">Poczta: </a><span><a href="/profile/messages/">{{ profile_messages }}</a></span></div>
             <div><a href="/profile/{{ request.user.id }}/bars/">Lokale: </a><span><a href="/profile/{{ request.user.id }}/bars/">{{ profile_bars }}</a></span></div>
+            <div><a href="/profile/events/">Wydarzenia: </a><span><a href="/profile/events/">{{ profile_events }}</a></span></div>
         </div>
     </div>
     <div class="buttons">
@@ -21,5 +22,6 @@
         <a href="/profile/gallery/manage/"><img id="b_foto" src="/media/gfx/profil/b_foto.png" onmouseover='img_hover("b_foto", "_h");' onmouseout='img_hover("b_foto", "");'></a>
         <a href="/profile/message/send/"><img id="b_msg" src="/media/gfx/profil/b_msg.png" onmouseover='img_hover("b_msg", "_h");' onmouseout='img_hover("b_msg", "");'></a>
         <a href="/profile/bars/"><img id="b_places" src="/media/gfx/profil/b_places.png" onmouseover='img_hover("b_places", "_h");' onmouseout='img_hover("b_places", "");'></a>
+        <a href="/profile/events/"><img id="b_events" src="/media/gfx/profil/b_events.png" onmouseover='img_hover("b_events", "_h");' onmouseout='img_hover("b_events", "");'></a>
     </div>
 </div>  
