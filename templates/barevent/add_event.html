@@ -52,7 +52,7 @@
         {% endfor %}
 
         <tr>
-            <td class="label">Data<span class="star">*</span>:</td>
+            <td class="label">Data (dzień)<span class="star">*</span>:</td>
             <td class="data_positions"><div class="maly_textbox">{{ form.happens_on_d }}</div></td>
             <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
         </tr>
@@ -63,7 +63,7 @@
         </tr>
         {% endfor %}
         <tr>
-            <td class="label">Data<span class="star">*</span>:</td>
+            <td class="label">Data (miesiąc)<span class="star">*</span>:</td>
             <td class="data_positions"><div class="maly_textbox">{{ form.happens_on_m }}</div></td>
             <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
         </tr>
@@ -74,7 +74,7 @@
         </tr>
         {% endfor %}
         <tr>
-            <td class="label">Data<span class="star">*</span>:</td>
+            <td class="label">Data (rok)<span class="star">*</span>:</td>
             <td class="data_positions"><div class="maly_textbox">{{ form.happens_on_y }}</div></td>
             <td class="alert">{% if form.date.errors %}<div class="sign"></div>{% endif %}</td>
         </tr>
