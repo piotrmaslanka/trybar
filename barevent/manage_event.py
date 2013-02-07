@@ -15,6 +15,7 @@ from trybar.main.models import News
 from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_MINIATURE, RES_EVENT_PHOTO, RES_EVENT_PARTNER
 from trybar.scoring import BAR_EVENT_PHOTO_ADDED, score_for
 
+from datetime import date
 from trybar.barevent.add_event import DD, MM, RR
 
 class EditEventForm(forms.ModelForm):
