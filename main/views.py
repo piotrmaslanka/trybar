@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from trybar.core import render
 from trybar.account.models import Account
 from trybar.bar.models import Bar, BarPhoto
+from trybar.barevent.models import Event, EventPhoto
 from trybar.main.models import News
 from trybar.account import must_be_logged, standard_profile_page_dict
 from trybar.barevent.models import Event
@@ -48,7 +49,7 @@ def now(request):
         elif rt in (RT_BARPHOTO_ADDED, ):
             stuff = (BarPhoto(id=an.arg1), Bar(id=an.arg2))
         elif rt in (RT_EVENTPHOTO_ADDED, ):
-            raise NotImplementedError
+            stuff = (EventPhoto(id=an.arg1), Event(id=an.arg2))
         else:
             stuff = ()
 

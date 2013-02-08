@@ -14,6 +14,8 @@ from django.core.paginator import Paginator
 from trybar.main.models import News
 from trybar.photo.upload import upload_as, RES_EVENT_POSTER, RES_EVENT_MINIATURE, RES_EVENT_PHOTO, RES_EVENT_PARTNER
 from trybar.scoring import BAR_EVENT_PHOTO_ADDED, score_for
+from trybar.accnews import accnews_for
+from trybar.accnews.models import RT_EVENTPHOTO_ADDED
 
 from datetime import date
 from trybar.barevent.add_event import DD, MM, RR
@@ -99,6 +101,7 @@ def view(request, slugname, evtname):
             if form.cleaned_data['photo'] != None:
               ep = EventPhoto.craft(form.cleaned_data['photo'], event)
               score_for(request.user, BAR_EVENT_PHOTO_ADDED, ep)
+              accnews_for(request.user, RT_EVENTPHOTO_ADDED, ep, event)
 
               if len(event.photos.all()) == 1:
                 ep.mark_as_mini()

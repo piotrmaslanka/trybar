@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from trybar.bar.models import Bar, BAR_OPEN_HOURS_FROM, BAR_OPEN_HOURS_TO, BarMeta, BarPhoto
 from trybar.core.fixtures import VOIVODESHIP_CHOICES, YES_NO_CHOICES
 from trybar.scoring import score_for, BAR_ADDED, BAR_PHOTO_ADDED
-from trybar.accnews import accnews_for, RT_ADDED_BAR
+from trybar.accnews import accnews_for, RT_ADDED_BAR, RT_BARPHOTO_ADDED
 from trybar.admin import is_admin
 from django.core.paginator import Paginator
 from trybar.main.models import News
@@ -62,7 +62,7 @@ def view(request, slugname):
             if form.cleaned_data['picture'] != None:     # user wants us to submit a photo
                 bp = BarPhoto.craft(form.cleaned_data['picture'], bar)
                 score_for(request.user, BAR_PHOTO_ADDED, bp)
-
+                accnews_for(request.user, RT_BARPHOTO_ADDED, bp, bar)
     try:
         form
     except:

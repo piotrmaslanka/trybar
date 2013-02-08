@@ -6,6 +6,8 @@ from django.http import HttpResponse, Http404
 from trybar.account import must_be_logged, standard_profile_page_dict
 from trybar.barevent.models import Event, EventPhoto
 from trybar.scoring import BAR_EVENT_PHOTO_ADDED, score_for
+from trybar.accnews import accnews_for
+from trybar.accnews.models import RT_EVENTPHOTO_ADDED
 
 class AddPhotoForm(forms.Form):
     # Following has to be called "picture" - and by extensions have id of "id_picture"
@@ -33,6 +35,9 @@ def view(request, slugname, evtname):
             score_for(request.user, BAR_EVENT_PHOTO_ADDED, bp)
             if evt.photos.all().count() == 1:
                 bp.mark_as_mini()
+
+            accnews_for(request.user, RT_EVENTPHOTO_ADDED, bp, evt)
+
             return redirect('/bar/%s/%s/' % (evt.bar.slugname, evt.slugname))
 
     try:

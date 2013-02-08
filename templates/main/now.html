@@ -79,12 +79,12 @@
                         <td><a href="#"><img src="{{ arg1.miniature|path:"eventmini:84,84" }}"></a></td>
                     {% endif %}
                     {% if an.report_type == RT_BARPHOTO_ADDED %}
-                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> dodał nowe zdjęcie do baru <a href="/bar/{{ arg2.bar.slugname }}/">{{ arg2.bar.name }}</a></td>
+                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> dodał nowe zdjęcie do baru <a href="/bar/{{ arg2.slugname }}/">{{ arg2.name }}</a></td>
                         <td><a href="/bar/{{ arg2.slugname }}/"><img src="{{ arg2.get_representative_photo|path:"barphoto:84,84" }}"></a></td>
                     {% endif %}
                     {% if an.report_type == RT_EVENTPHOTO_ADDED %}
-                        <td>NotImplemented</td>
-                        <td>NotImplemented</td>
+                        <td>Użytkownik <a href="/profile/{{ an.who.id }}/">{{ an.who.login }}</a> dodał nowe zdjęcie do wydarzenia <a href="/bar/{{ arg2.bar.slugname }}/{{ arg2.slugname }}/">{{ arg2.name }}</a></td>
+                        <td><a href="/bar/{{ arg2.bar.slugname }}/{{ arg2.slugname }}/"><img src="{{ arg1.photo|path:"eventphoto:84,84" }}"></a></td>
                     {% endif %}
                 </tr>
             </table>
