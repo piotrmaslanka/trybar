@@ -70,8 +70,10 @@ class Bar(models.Model):
     logo = models.ForeignKey(Photo, default=None, null=True)
 
     def delete(self):
+        for p in self.photos.all():
+            p.photo.delete()
         self.marks.all().delete()         # Delete all marks
-        self.metadata.delete()   # Delete metadata
+        self.meta.delete()   # Delete metadata
         super(Bar, self).delete()   # Delete self
     
     def get_representative_photo(self):

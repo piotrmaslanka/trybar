@@ -30,7 +30,7 @@ class EditEventForm(forms.ModelForm):
     happens_on_m = forms.ChoiceField(choices=MM, required=False, widget=forms.Select(attrs={'class':'godzina'}))
     happens_on_y = forms.ChoiceField(choices=RR, required=False, widget=forms.Select(attrs={'class':'godzina'}))
 
-    start_at = forms.ChoiceField(choices=BAR_OPEN_HOURS_FROM, required=False,
+    starts_on = forms.ChoiceField(choices=BAR_OPEN_HOURS_FROM, required=False,
                                  widget=forms.Select(attrs={'class':'godzina'}))
 
     only_adults = forms.BooleanField(widget=forms.RadioSelect(choices=((False, u'Nie'), (True, u'Tak'))), required=False)
@@ -166,7 +166,7 @@ def op(request, slugname, evtname):
         bp = EventPhoto.objects.get(id=int(request.GET['pid']))
       except EventPhoto.DoesNotExist:
         return HttpResponse(status=404)
-      except:
+      else:
         bp.mark_as_mini()
         return redirect('/bar/%s/%s/manage/' % (slugname, evtname))
     else:

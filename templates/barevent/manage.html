@@ -116,7 +116,7 @@
         {% for error in form.happens_on_d.errors %}
             <div class="subshade_error">{{ error }}</div>
         {% endfor %}
-        {% for error in form.start_at.errors %}
+        {% for error in form.starts_on.errors %}
             <div class="subshade_error">{{ error }}</div>
         {% endfor %}
         <table id="opening_hours_t">
@@ -144,14 +144,11 @@
             <tr>
                 <td class="label">Czas</td>
                 <td class="hf"></td>
-                <td class="inputbox">{{ form.start_at }}</td>
+                <td class="inputbox">{{ form.starts_on }}</td>
                 <td class="hf"></td>
                 <td></td>
             </tr>            
         </table>
-        {% for error in form.start_at.errors %}
-            <div class="subshade_error">{{ error }}</div>
-        {% endfor %}
 
         <div class="subshade_shade"></div>
         <span class="subshade_descript">Ustaw plakat</span>
