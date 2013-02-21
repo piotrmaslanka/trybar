@@ -80,6 +80,9 @@ urlpatterns = patterns('trybar',
     url(r'^admin/adpanel/delete/(?P<id>\d+?)/$', 'admin.adpanel.delete'),
     url(r'^admin/adpanel/$', 'admin.adpanel.view_banners'),
 
+    url(r'^admin/barowski_mordulec/(?P<bid>\d+?)/$', 'admin.barowy_mordulec.kill'),
+    url(r'^admin/barowski_mordulec/$', 'admin.barowy_mordulec.view'),
+
     url(r'^(?P<slugname>.+)', 'bar.bar.refer'),
 )
 
