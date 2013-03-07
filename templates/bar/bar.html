@@ -54,8 +54,8 @@
     <div class="sep"></div>
     
     <div class="address">
-        {{ bar.street }}<br class="nflt">
-        <a href="/ranking/bars/?q={{ bar.city|urlencode }}">{{ bar.city }}</a>
+        {{ bar.street }}<br>
+        <a href="/search/bars/?q={{ bar.city|urlencode }}">{{ bar.city }}</a>
     </div>
     
     <div class="buttons">        
@@ -230,6 +230,11 @@
 <div id="oceny">
     <div class="box_header_title_fstyle">OCENY</div>
     <div class="average">
+        {% if request.user == None %}
+            <div id="zaloguj_sie_by_oceniac">
+            ZALOGUJ SIĘ <a href="/login/">TUTAJ</a> BY MÓC OCENIAĆ
+            </div>
+        {% endif %}
         Średnia ocena: <span class="v" id="a_avg">{% if bar.meta.avg == None %}??{% else %}{{ bar.meta.avg|round_float:"2" }}{% endif %}</span><br>
         Liczba głosów: <span class="v" id="a_votecount">{{ bar.meta.mark_count }}</span>
     </div>
@@ -285,7 +290,7 @@
         </div>                
         {% if logged_in %}
         <div id="odpowiedz_box">
-            <div class="title">Odpowiedz</div>
+            <div class="title">Napisz komentarz</div>
             <form action="/bar/{{ bar.id }}/ajax/?op=comment" method="post" id="comment_form">
                 <textarea name="content" onclick="if (this.value == '{{ default_comment_text }}') this.value=''">{{ default_comment_text }}</textarea>                       
                 <button class="send" onclick="$('#comment_form')[0].submit()"></button>

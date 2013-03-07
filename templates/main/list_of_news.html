@@ -16,11 +16,11 @@
         <div class="bottom"></div>            
     </div>
 
-    <div id="recentbox">
+    <div id="recentbox" style="width: 100%;">
         {% for new in news %}
             <div class="first">
             <a class="header" href="/news/{{ new.id }}/">{{ new.title }}</a>
-                <div class="content"><a href="/news/{{ new.id }}/">{{ new.content|word_slice:":5" }} <span class="more">>></span></a></div>
+                <div class="content" style="height: 13px; overflow: hidden;"><a href="/news/{{ new.id }}/">{{ new.content }} <span class="more">>></span></a></div>
             <div class="datetime">{{ new|date:"Y.m.d H:i" }}</div>
         </div>
         {% endfor %}

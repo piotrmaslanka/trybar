@@ -11,7 +11,7 @@
 
         <a class="header" href="/news/{{ news.id }}/">{{ news.title }}</a>
         {% if forloop.first %}
-            <div class="content"><a href="/news/{{ news.id }}/">{{ news.content|word_slice:":5" }} <span class="more">»</span></a></div>
+            <div class="content"><a href="/news/{{ news.id }}/">{{ news.content|word_slice:":10" }} <span class="more">»</span></a></div>
         {% endif %}
         <div class="datetime">{{ news|date:"Y.m.d H:i" }}</div>
     </div>

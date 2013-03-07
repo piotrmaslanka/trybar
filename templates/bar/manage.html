@@ -232,8 +232,8 @@
             $('.formtab input[type="text"]').focus(highlight_input);
             $('.formtab input[type="text"]').blur(unhighlight_input);
         {% if more_photos_than_6 %}
-            $('#scroll_top').click(scrollup);
-            $('#scroll_bot').click(scrolldown);
+            $('#scroll_top').click(scrolldown);
+            $('#scroll_bot').click(scrollup);
         {% endif %}
         });
     </script>

@@ -38,7 +38,7 @@
             <div class="position">{{ bar.meta.rank }}</div>
             <div class="imgbox bar"><a href="/bar/{{ bar.slugname }}/"><img src="{{ bar.get_representative_photo|path:"barphoto:137,97" }}"></a></div>
             <div class="description">
-                <div class="name"><a href="/bar/{{ bar.slugname }}/">{{ bar.name }}</a></div>
+                <div class="name"><a style="color: #ffd100" href="/bar/{{ bar.slugname }}/">{{ bar.name }}</a> - <a href="/search/bars/?q={{ bar.city|urlencode }}">{{ bar.city }}</a></div>
                 <div class="descr"><a href="/bar/{{ bar.slugname }}/">{{ bar.description|word_slice:":15" }}</a></div>
                 <div class="average"><a href="/bar/{{ bar.slugname }}/">{{ bar.meta.avg|round_float:"2" }}</a></div>
             </div>

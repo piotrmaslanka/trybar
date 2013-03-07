@@ -18,8 +18,6 @@ def ranking_bars(request, page=None):
 
     spdict = standard_profile_page_dict(request) if request.user != None else {}
 
-    page_c = p.num_pages
-
     if page_c < 4:
         page_start = 1
     else:

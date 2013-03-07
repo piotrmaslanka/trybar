@@ -144,14 +144,14 @@
 }
 
 #save_that_container {
-    width: 112px;
-    margin-left: 280px;
+    width: 97px;
+    margin-left: 250px;
 }
     #save_that_container input {
         border: none;
-        width: 112px;
-        height: 41px;
-        background: url('/media/gfx/edit_profile/zapisz.png') no-repeat;
+        width: 97px;
+        height: 40px;
+        background: url('/media/gfx/add_bar/submit.png') no-repeat;
     }
 
 /* fucking hacks for id_picture to work */
