@@ -17,6 +17,15 @@
         height: 40px;
         background: url('/media/gfx/manage_bar/zapisz.png');
     }
+    #preview_button {
+        margin: 0 0 0 0;
+        border: none;
+        cursor: pointer;
+        width: 97px;
+        height: 40px;
+        background: url('/media/gfx/manage_bar/button_podglad.png');
+    }
+        #preview_button:hover { background: url('/media/gfx/manage_bar/button_podglad_p.png'); }
 
     #scroll_top {
         width: 462px;
